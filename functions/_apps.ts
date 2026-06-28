@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.0.4",
+      version: "2.0.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.0.4: Bump GPU_MEMORY_UTILIZATION 0.975→0.985 (fix KV cache OOM). v2.0.3: Force re-sync. v2.0.2: Added --kv-cache-dtype-skip-layers sliding_window + --calculate-kv-scales + --kv-offloading-size 24GiB + --quantization compressed-tensors. Renamed to AIM Gemma4 26B-A4B vLLM. v2.0.0: Complete restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
+        `v2.0.5: Reduce MAX_MODEL_LEN 200000→147500 (KV cache OOM fix). v2.0.4: Bump GPU_MEMORY_UTILIZATION 0.975→0.985. v2.0.3: Force re-sync. v2.0.2: Added --kv-cache-dtype-skip-layers sliding_window + --calculate-kv-scales + --kv-offloading-size 24GiB + --quantization compressed-tensors. Renamed to AIM Gemma4 26B-A4B vLLM. v2.0.0: Complete restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
       categories: ["AI", "Developer Tools"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
