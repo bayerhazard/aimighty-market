@@ -35,7 +35,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.0.0",
+      version: "2.0.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "Gemma 4 26B A4B vLLM" },
       description: {
