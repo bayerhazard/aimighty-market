@@ -177,7 +177,7 @@ function buildDetail(manifest: (typeof apps)[0], id: string): Record<string, unk
 }
 
 const CHARTS: Record<string, string> = {
-  // "aimllmgemma4vllm-2.0.0.tgz": "<base64-string>",
+  "aimllmgemma4vllm-2.0.0.tgz": "H4sIAAAAAAAC/+1Za3ObSBb+rl9B1U5VYkaAYHnsSlKOH3Hi+C3H5MnuVkkhRFtKJzRCO8l6Zvfbftj9TfNL9jkNCAkkYTuTqc1UarMq0Y3u0+e+zjndFLzIedT6/RaD2Wp6c3f1Aev67PpP7z4d4Isz3YDPmdPnw2R/4gyH/ZH7J7Z1E9zmD0zFjDP1p+gP4jnKcp4tOcuq+z7n6TL3M54tkoxlvk+m6Yon85w92iGbePGFM5+mPKIpY152H8/nGct9VkZslZHf0ogGomD3PC9Ttnzm8pBlKZnP85gnM5r4Weqy9FGTT/5oSen0vB+cYrqP/Q1PWJaFLOH5g+VxFVNG8zTlYcx9P8h8X+J5ngZ+ICPCN6VPMt6UPvn4Q5jnSboKE5GkPhfpgjxFvk+8PCVMPy+DLPFTl+WRX5LU9/k6p0U6lzmIF6X8YH7vx3S+DsO1NFmFJGWZ+D5rlG/SXlN6k/ob3JKH2Zqkfvx9vH5y90mZ+HzNcjp/4k9zltAoCulakDmNLmVBnq6XLEzDNSWrJZmlbLkUQqg19UVUf/7QpE7/zOIsmPsxmVGzlIYpWYe2tY4I09j3hIJhS18ERKj2exGl1l9TWSRFafl0FV8aF0B/+U2U+UFK8iDL+dNfDdDfFjd+4H9v0+XRX2c0DlMaLuhvs3QtQsrZOlxG/3NOf/37vw3QX8k8SH+PlzTPZzmJ2JJ5rWJ0JfI49Slz2YIm/ptM06U4lmlO5s98KQH6gH25yMVS+mkL+uz7MiB5/EMv65w+8WyVU78r+Pt0I1rQNf1j8MzSMob8LkDMkpzqXvA85+kvK7LkKy+iPKBvrI6j50iaSR7rCi/3l6IUhwFdA5ry+R+Upam/ZIEf5rSFM7AtGPM0y2hGgpR6aU5ZP1KxhPss/+K/r37hGcmSH5fMkgVz/tNf/xc2jQRl/kvOz4T6s+o3b8H7pOp7D6HrHj/Hf7L/+6f7v+3H8Z+G9/3f/O/+7/7v/u/+7/7/Qvy/yP6Poz/98/92f+7/e/dHQ/N7TP8e0f9Hvv8/kP8/mv97998d/T+l/6vY2/v3P9j/3f/d/93/3f/d/3/f/5/H/Z9H3H8p0/63tP/fbP/3f8v+L+X/r+z/7v/u/+7/7v/u/15x/+dR958vYz/O8kjrPX7+A8xYkLEsWFCJ78srci4YrXb5eD4w5StLK6fOjK5nFmBf6FxUXGQ0zkm2XtFiWQsN3e3K1LPyNSD9FTL/U/KG/oG6/8KjLrgJxZ1uJ25nPTnmw53t3jf1PP/2jH9L6B/h+o/If3f//qP3Pz58/zP23x3=//7v//7/+H7P09P8T7P//fDDD///Xf//A2JYHyr4BAAA",
 };
 
 export function getChart(fileName: string): string | undefined {
