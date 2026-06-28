@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.0.6",
+      version: "2.0.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.0.6: Reverted --kv-cache-dtype-skip-layers + --calculate-kv-scales. MAX_MODEL_LEN back to 200000. FP8-only. v2.0.5: Reduce MAX_MODEL_LEN. v2.0.4: Bump GPU_MEMORY_UTILIZATION. v2.0.3: Force re-sync. v2.0.2: Added --kv-offloading-size 24GiB + --quantization compressed-tensors. Renamed to AIM Gemma4 26B-A4B vLLM. v2.0.0: Complete restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
+        `v2.0.7: Removed --kv-offloading-size + --quantization. Clean FP8-only + AWQ at 200k. v2.0.6: Reverted --kv-cache-dtype-skip-layers + --calculate-kv-scales. MAX_MODEL_LEN back to 200000. FP8-only. v2.0.5: Reduce MAX_MODEL_LEN. v2.0.4: Bump GPU_MEMORY_UTILIZATION. v2.0.3: Force re-sync. v2.0.2: Renamed. v2.0.0: Complete restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
       categories: ["AI", "Developer Tools"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
