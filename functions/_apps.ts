@@ -35,9 +35,9 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.0.1",
+      version: "2.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
-      title: { en: "Gemma 4 26B A4B vLLM" },
+      title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: {
         en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows",
       },
@@ -61,7 +61,7 @@ export const apps: AppManifest[] = [
     spec: {
       type: "app",
       entrance: [
-        { name: "aimllmgemma4vllm", title: { en: "Gemma 4 26B A4B vLLM" }, port: 8000, host: "aimllmgemma4vllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimllmgemma4vllm", title: { en: "AIM Gemma4 26B-A4B vLLM" }, port: 8000, host: "aimllmgemma4vllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
