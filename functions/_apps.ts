@@ -382,47 +382,4 @@ Features:
       options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
     },
   },
-  {
-    metadata: {
-      name: "insilo",
-      version: "0.1.49",
-      icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
-      title: { en: "Insilo" },
-      description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio or notes to any cloud." },
-      fullDescription:
-        `**Insilo** is on-premise meeting intelligence for compliance-driven organizations.
-
-**What it does**
-- Records business meetings via a PWA (push-to-record or upload)
-- Transcribes audio locally with OpenAI Whisper
-- Generates structured summaries using a local LLM via the Olares LiteLLM gateway
-- Lets you ask follow-up questions across your entire meeting archive (RAG over pgvector embeddings)
-
-The promise — unlike PLAUD, Otter, Fireflies or similar services, **no audio, transcript, or search index ever leaves your Olares box**.
-
-Designed for law firms, tax consultancies, management consultants and German Mittelstand companies with strict compliance requirements (GDPR, BSI Grundschutz, attorney-client privilege).`,
-      upgradeDescription:
-        `v0.1.49: Category update — moved to Audio. v0.1.48: Dropped legacy TEXT prompt slots, meetings.language default. v0.1.17: UI/UX-Polish + Robustheit.`,
-      categories: ["Audio"],
-      developer: "kaivo.studio",
-      website: "https://kaivo.studio",
-      sourceCode: "https://github.com/ska1walker/insilo",
-      supportArch: ["amd64"],
-      requiredCpu: "2",
-      requiredMemory: "12Gi",
-      requiredDisk: "30Gi",
-      requiredGpu: "0",
-      limitedCpu: "6",
-      limitedMemory: "24Gi",
-    },
-    spec: {
-      type: "app",
-      entrance: [
-        { name: "insilo", title: { en: "Insilo" }, port: 3000, host: "insilo", authLevel: "internal", openMethod: "window" },
-      ],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "2000m", memory: "12Gi", disk: "30Gi" } },
-    },
-  },
 ];
