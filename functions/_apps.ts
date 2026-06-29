@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.1.0",
+      version: "2.1.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,8 +55,8 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.1.0: Fix Helm ownership metadata on ConfigMap — re-enables clean upgrades. v2.0.9: Added ConfigMap for env vars (hot-reloadable). v2.0.8: Pinned to olares-worker (RTX 5090). Dropped kv-offloading + quantization. FP8-only AWQ at 200k. v2.0.7: Removed kv-offloading + quantization. v2.0.6: Reverted skip-layers. v2.0.5: Reduce MAX_MODEL_LEN. v2.0.4: Bump GPU_MEMORY_UTILIZATION. v2.0.3: Force re-sync. v2.0.2: Renamed. v2.0.0: Restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
-      categories: ["AI", "Developer Tools"],
+        `v2.1.1: Category update — moved to LLM Chat. v2.1.0: Fix Helm ownership metadata on ConfigMap — re-enables clean upgrades. v2.0.9: Added ConfigMap for env vars (hot-reloadable). v2.0.8: Pinned to olares-worker (RTX 5090). Dropped kv-offloading + quantization. FP8-only AWQ at 200k. v2.0.7: Removed kv-offloading + quantization. v2.0.6: Reverted skip-layers. v2.0.5: Reduce MAX_MODEL_LEN. v2.0.4: Bump GPU_MEMORY_UTILIZATION. v2.0.3: Force re-sync. v2.0.2: Renamed. v2.0.0: Restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
+      categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -82,7 +82,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.6.2",
+      version: "1.6.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Emb 4B" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -107,8 +107,8 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.6: Fixed rolling update strategy (maxSurge=0, maxUnavailable=1) to prevent pod anti-affinity deadlock on restart. Increased revisionHistoryLimit to 3 for rollback safety. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.6.3: Category update — moved to AI Agents. v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.6: Fixed rolling update strategy (maxSurge=0, maxUnavailable=1) to prevent pod anti-affinity deadlock on restart. Increased revisionHistoryLimit to 3 for rollback safety. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+      categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
       sourceCode: "https://github.com/bayerhazard/aimighty-embedder",
@@ -141,7 +141,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "1.6.3",
+      version: "1.6.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vllm" },
@@ -155,8 +155,8 @@ Disk: 50 GB for model cache`,
 - Prometheus metrics via /metrics
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
+      categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
       sourceCode: "https://github.com/bayerhazard/aimighty-reranker",
@@ -182,7 +182,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.0.1",
+      version: "1.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
@@ -205,8 +205,8 @@ OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ult
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.0.2: Category update — moved to AI Agents. v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
+      categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
       sourceCode: "https://github.com/bayerhazard/aimighty-reranker-cpu",
@@ -232,7 +232,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.0.1",
+      version: "1.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS HQ" },
       description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
@@ -259,8 +259,8 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+      categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
       sourceCode: "https://github.com/bayerhazard/aimighty-voxtral-4b",
@@ -286,7 +286,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   {
     metadata: {
       name: "aimvoxtral4tts",
-      version: "1.0.8",
+      version: "1.0.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-tts/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS" },
       description: { en: "Mistral Voxtral 4B TTS int4 — OpenAI-compatible /v1/audio/speech" },
@@ -314,8 +314,8 @@ Disk: 15 GB (model pre-baked in image)
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.0.5: Upgraded to PyTorch 2.12.1+cu126 (sm_120 support for RTX 5090 Laptop) + torchao 0.17.0. Fixed "no kernel image available" CUDA error.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.0.9: Category update — moved to Audio. v1.0.5: Upgraded to PyTorch 2.12.1+cu126 (sm_120 support for RTX 5090 Laptop) + torchao 0.17.0. Fixed "no kernel image available" CUDA error.`,
+      categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-tts",
       sourceCode: "https://github.com/bayerhazard/aimighty-voxtral-tts",
@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "1.6.5",
+      version: "1.6.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "Qwen36 27B Long Context" },
       description: { en: "Qwen3.6-27B with BeeLLama.cpp + DFlash IQ4_XS + kvarn5 KV + prompt cache — optimized for coding & agentic workflows" },
@@ -358,8 +358,8 @@ Features:
 - top-p 0.95 sampling (Qwen coding recommendation)
 - OpenAI-compatible API at port 8000`,
       upgradeDescription:
-        `v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
-      categories: ["AI", "Developer Tools"],
+        `v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: robust tags, Q Q633: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
+      categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -385,7 +385,7 @@ Features:
   {
     metadata: {
       name: "insilo",
-      version: "0.1.48",
+      version: "0.1.49",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio or notes to any cloud." },
@@ -402,8 +402,8 @@ The promise — unlike PLAUD, Otter, Fireflies or similar services, **no audio, 
 
 Designed for law firms, tax consultancies, management consultants and German Mittelstand companies with strict compliance requirements (GDPR, BSI Grundschutz, attorney-client privilege).`,
       upgradeDescription:
-        `v0.1.48: Dropped legacy TEXT prompt slots, meetings.language default. v0.1.17: UI/UX-Polish + Robustheit.`,
-      categories: ["Productivity", "Utilities"],
+        `v0.1.49: Category update — moved to Audio. v0.1.48: Dropped legacy TEXT prompt slots, meetings.language default. v0.1.17: UI/UX-Polish + Robustheit.`,
+      categories: ["Audio"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
       sourceCode: "https://github.com/ska1walker/insilo",
