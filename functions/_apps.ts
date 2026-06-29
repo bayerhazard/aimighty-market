@@ -182,7 +182,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.0.2",
+      version: "1.0.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
@@ -205,7 +205,7 @@ OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ult
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v1.0.2: Category update — moved to AI Agents. v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
+        `v1.0.3: Fixed deployment title to 'Qwen3 Reranker CPU'. v1.0.2: Category update — moved to AI Agents. v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
@@ -222,7 +222,7 @@ Disk: 10 GB`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimrerqwen3vino", title: { en: "AIM Qwen3 Reranker CPU" }, port: 8080, host: "aimrerqwen3vino", authLevel: "internal", openMethod: "window" },
+        { name: "aimrerqwen3vino", title: { en: "Qwen3 Reranker CPU" }, port: 8080, host: "aimrerqwen3vino", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
