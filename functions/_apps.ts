@@ -341,9 +341,9 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "1.6.7",
+      version: "1.6.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
-      title: { en: "AIM Qwen36-27B KV" },
+      title: { en: "AIM Qwen3.6 27B vLLM" },
       description: { en: "Qwen3.6-27B with BeeLLama.cpp + DFlash IQ4_XS + kvarn5 KV + prompt cache — optimized for coding & agentic workflows" },
       fullDescription:
         `**aimqwen36llama** — Qwen3.6-27B with BeeLLama.cpp + DFlash IQ4_XS + kvarn5 KV + prompt cache.
@@ -358,7 +358,7 @@ Features:
 - top-p 0.95 sampling (Qwen coding recommendation)
 - OpenAI-compatible API at port 8000`,
       upgradeDescription:
-        `v1.6.7: Renamed to 'AIM Qwen36-27B KV'. v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
+        `v1.6.8: Renamed to 'AIM Qwen3.6 27B vLLM', deployment title to 'Qwen3.6 27B'. v1.6.7: Renamed to 'AIM Qwen36-27B KV'. v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -375,7 +375,7 @@ Features:
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen36llama", title: { en: "AIM Qwen3.6 27B KV" }, port: 8000, host: "aimqwen36llama", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen36llama", title: { en: "Qwen3.6 27B" }, port: 8000, host: "aimqwen36llama", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
