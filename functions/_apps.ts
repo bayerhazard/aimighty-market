@@ -286,7 +286,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   {
     metadata: {
       name: "aimvoxtral4tts",
-      version: "1.0.9",
+      version: "1.0.10",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-tts/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS" },
       description: { en: "Mistral Voxtral 4B TTS int4 — OpenAI-compatible /v1/audio/speech" },
@@ -314,7 +314,7 @@ Disk: 15 GB (model pre-baked in image)
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.0.9: Category update — moved to Audio. v1.0.5: Upgraded to PyTorch 2.12.1+cu126 (sm_120 support for RTX 5090 Laptop) + torchao 0.17.0. Fixed "no kernel image available" CUDA error.`,
+        `v1.0.10: Fixed deployment title to 'Voxtral 4B'. v1.0.9: Category update — moved to Audio. v1.0.5: Upgraded to PyTorch 2.12.1+cu126 (sm_120 support for RTX 5090 Laptop) + torchao 0.17.0. Fixed "no kernel image available" CUDA error.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-tts",
@@ -331,7 +331,7 @@ Disk: 15 GB (model pre-baked in image)
     spec: {
       type: "app",
       entrance: [
-        { name: "aimvoxtral4tts", title: { en: "Voxtral TTS Dashboard" }, port: 8080, host: "aimvoxtral4tts", authLevel: "internal", openMethod: "window" },
+        { name: "aimvoxtral4tts", title: { en: "Voxtral 4B" }, port: 8080, host: "aimvoxtral4tts", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
