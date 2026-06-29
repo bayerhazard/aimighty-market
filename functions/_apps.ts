@@ -82,7 +82,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.6.4",
+      version: "1.6.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -107,7 +107,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.3: Category update — moved to AI Agents. v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.6: Fixed rolling update strategy (maxSurge=0, maxUnavailable=1) to prevent pod anti-affinity deadlock on restart. Increased revisionHistoryLimit to 3 for rollback safety. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `v1.6.5: Fixed deployment title to 'Qwen3 Embedding'. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.3: Category update — moved to AI Agents. v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.6: Fixed rolling update strategy (maxSurge=0, maxUnavailable=1) to prevent pod anti-affinity deadlock on restart. Increased revisionHistoryLimit to 3 for rollback safety. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
@@ -124,7 +124,7 @@ Disk: 50 GB for model cache`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimembqwen3vino", title: { en: "AIM Qwen3 Embedding" }, port: 9997, host: "aimembqwen3vino", authLevel: "internal", openMethod: "window" },
+        { name: "aimembqwen3vino", title: { en: "Qwen3 Embedding" }, port: 9997, host: "aimembqwen3vino", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
