@@ -141,7 +141,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "1.6.4",
+      version: "1.6.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vllm" },
@@ -155,7 +155,7 @@ Disk: 50 GB for model cache`,
 - Prometheus metrics via /metrics
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
+        `v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
@@ -172,7 +172,7 @@ Disk: 50 GB for model cache`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimrerqwen3vllm", title: { en: "AIM Qwen3 Reranker" }, port: 8080, host: "aimrerqwen3vllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimrerqwen3vllm", title: { en: "Qwen3 Reranker" }, port: 8080, host: "aimrerqwen3vllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
