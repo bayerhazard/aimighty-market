@@ -182,7 +182,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.0.4",
+      version: "1.0.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
