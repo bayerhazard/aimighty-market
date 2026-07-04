@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.1.2",
+      version: "2.1.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
       description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - DeepSeek reasoning - DRY/repeat-penalty" },
