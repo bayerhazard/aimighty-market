@@ -340,65 +340,11 @@ Disk: 15 GB (model pre-baked in image)
   },
   {
     metadata: {
-      name: "aimqwen36vllm",
-      version: "1.0.0",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36-27bvllm/main/icon.png",
-      title: { en: "AIM Qwen3.6 27B vLLM" },
-      description: { en: "Qwen3.6-27B NVFP4 + MTP Speculative Decoding via vLLM 0.24 on RTX 5090 Blackwell" },
-      fullDescription:
-        `Qwen3.6-27B – Text-LLM mit NVFP4-Quantisierung und MTP Speculative Decoding auf vLLM 0.24.
-
-**Modell**
-sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP (NVFP4 W4A16 + FP8 Attention, ~20 GB).
-MTP Speculative Decoding built-in (1 speculative token, 1 MTP layer).
-200K Token Kontext. Hybrid linear/full attention (Mamba-style, 48 linear + 16 full attention layers).
-
-**Inference Engine**
-vLLM v0.24.0 mit FlashInfer backend. CUDA 12.9 (RTX 5090 Blackwell SM12.0).
-FP8 KV-Cache. Modelopt quantization (NVFP4+FP8 mixed). GPU VRAM: ~18-22 GB.
-
-**API**
-OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
-Tool Calling via --enable-auto-tool-choice.
-Reasoning via --reasoning-parser qwen3.
-
-**Resource Usage**
-GPU: ~18-22 GB VRAM (RTX 5090, 24 GB total)
-RAM: 24-40 GB
-Disk: 50 GB (Model-Download ~20 GB + Cache)
-CPU: 4-16 Kerne`,
-      upgradeDescription:
-        "v1.0.0: Initial release. Qwen3.6-27B NVFP4 + MTP (1 speculative token) via vLLM 0.24.0. Hybrid linear/full attention (Mamba-style). FP8 KV cache. 200k context.",
-      categories: ["LLM Chat"],
-      developer: "Aimighty",
-      website: "https://github.com/bayerhazard/aimighty-llmqwen36-27bvllm",
-      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36-27bvllm",
-      supportArch: ["amd64"],
-      requiredCpu: "4",
-      requiredMemory: "24Gi",
-      requiredDisk: "50Gi",
-      requiredGpu: "1",
-      limitedCpu: "16",
-      limitedMemory: "40Gi",
-      apiTimeout: 0,
-    },
-    spec: {
-      type: "app",
-      entrance: [
-        { name: "aimqwen36vllm", title: { en: "AIM Qwen3.6 27B vLLM" }, port: 8000, host: "aimqwen36vllm", authLevel: "internal", openMethod: "window" },
-      ],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "4", memory: "24Gi", disk: "50Gi" } },
-    },
-  },
-  {
-    metadata: {
       name: "aimqwen36llama",
-      version: "2.2.2",
+      version: "2.2.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
-      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - cache-ram 0 - budget 4096 - temp 0.4" },
+      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - parallel 2 - cache-ram 2048" },
       fullDescription:
         `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash IQ4_XS (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
@@ -408,21 +354,26 @@ Optimized for coding and agentic workflows on Olares One.
 **Draft**: Anbeeld/Qwen3.6-27B-DFlash-IQ4_XS (1.0 GB, IQ4_XS quantization)
 **Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.3.2
 
-**Server-side Flags (v2.2.2):**
+**Server-side Flags (v2.2.5):**
 - --reasoning on --reasoning-budget 4096
 - --reasoning-loop-guard force-close
 - --reasoning-loop-interventions 2
 - --ctx-checkpoints 8
 - --ctx-size 200000 --threads 12
+- --parallel 2 (ConfigMap-variabel)
+- --cache-ram 2048 (ConfigMap-variabel, Prompt-Caching aktiv)
 - --flash-attn on --jinja --no-mmap --mlock
 - --batch-size 2048 -ub 512
 - Custom 6-patch chat template (Q1-Q6: preserve_thinking, developer role, robust thinking tags, tool envelope unwrap, verbose instructions)
 
-**Performance (RTX 5090 Blackwell, 24 GiB):**
-- HTML Space Invaders (2000 tok): ~105 tok/s
-- Creative Poem (2000 tok): ~64 tok/s`,
+**Performance (RTX 5090 Blackwell, 24 GiB, --parallel 2):**
+- HTML Space Invaders (2000 tok): ~101 tok/s
+- Creative Poem (2000 tok): ~60 tok/s
+- Parallel Stress (2 concurrent): 1.46x combined throughput
+- Needle Haystack: 96% (24/25)
+- Agentic Tool-Calling: 100% (9/9)`,
       upgradeDescription:
-        `v2.1.0: Reduced reasoning-loop-min-tokens 512→128 (fixes Q4 token corruption via forced over-reasoning). v2.0.0: Cleanup - removed reasoning-budget-message, min-tokens 256→512, removed unused coder model. v1.8.0: DeepSeek-format unlimited reasoning (--reasoning-format deepseek). DRY repetition penalty (--dry-multiplier 1.5, --dry-allowed-length 3). Repeat-penalty 1.05 to suppress loops. Reasoning-loop-interventions 2. v1.7.6: --reasoning off → on zurück (Qualität). Subagenten nutzen Gemma statt Qwen für Tool-Calls (via OpenCode Config). v1.7.5: (übersprungen). v1.7.4: Reasoning-Budget 1024 → 512. v1.7.3: Fix --reasoning-loop-min-coverage 384 → 256 (CrashLoop). v1.7.2: Updated store description (Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV). v1.7.1: Reasoning-Budget 4096 → 1024, Reasoning-Loop-Min-Tokens 512 → 256 (reduziert Reasoning-Overhead bei Tool-Calling — fix für SchemaError Missing content). v1.7.0: Prompt-Cache reaktiviert (--cache-ram -1, --cache-reuse 256), temp 0.3 → 0.6, ctx-checkpoints 8 → 4, threads 16 (hardcodiert). v1.6.9: Renamed to 'AIM Qwen3.6 27B Beellama'. Parameter-Optimierung: temp 0.6 → 0.3, Reasoning-Budget 4096 gesetzt, Threads 16 → 12. v1.6.8: Renamed to 'AIM Qwen3.6 27B vLLM', deployment title to 'Qwen3.6 27B'. v1.6.7: Renamed to 'AIM Qwen36-27B KV'. v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
+        `v2.2.5: --parallel 2 + --cache-ram 2048 (ConfigMap-variabel). Benchmark: 101 tok/s coding, 60 tok/s poetry, Parallel-Stress 1.46x, Needle 96%, Agentic 100%. v2.1.0: Reduced reasoning-loop-min-tokens 512→128 (fixes Q4 token corruption via forced over-reasoning). v2.0.0: Cleanup - removed reasoning-budget-message, min-tokens 256→512, removed unused coder model. v1.8.0: DeepSeek-format unlimited reasoning (--reasoning-format deepseek). DRY repetition penalty (--dry-multiplier 1.5, --dry-allowed-length 3). Repeat-penalty 1.05 to suppress loops. Reasoning-loop-interventions 2. v1.7.6: --reasoning off → on zurück (Qualität). Subagenten nutzen Gemma statt Qwen für Tool-Calls (via OpenCode Config). v1.7.5: (übersprungen). v1.7.4: Reasoning-Budget 1024 → 512. v1.7.3: Fix --reasoning-loop-min-coverage 384 → 256 (CrashLoop). v1.7.2: Updated store description (Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV). v1.7.1: Reasoning-Budget 4096 → 1024, Reasoning-Loop-Min-Tokens 512 → 256 (reduziert Reasoning-Overhead bei Tool-Calling — fix für SchemaError Missing content). v1.7.0: Prompt-Cache reaktiviert (--cache-ram -1, --cache-reuse 256), temp 0.3 → 0.6, ctx-checkpoints 8 → 4, threads 16 (hardcodiert). v1.6.9: Renamed to 'AIM Qwen3.6 27B Beellama'. Parameter-Optimierung: temp 0.6 → 0.3, Reasoning-Budget 4096 gesetzt, Threads 16 → 12. v1.6.8: Renamed to 'AIM Qwen3.6 27B vLLM', deployment title to 'Qwen3.6 27B'. v1.6.7: Renamed to 'AIM Qwen36-27B KV'. v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
