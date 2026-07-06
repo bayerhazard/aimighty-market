@@ -340,6 +340,60 @@ Disk: 15 GB (model pre-baked in image)
   },
   {
     metadata: {
+      name: "aimqwen36vllm",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36-27bvllm/main/icon.png",
+      title: { en: "AIM Qwen3.6 27B vLLM" },
+      description: { en: "Qwen3.6-27B NVFP4 + MTP Speculative Decoding via vLLM 0.24 on RTX 5090 Blackwell" },
+      fullDescription:
+        `Qwen3.6-27B – Text-LLM mit NVFP4-Quantisierung und MTP Speculative Decoding auf vLLM 0.24.
+
+**Modell**
+sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP (NVFP4 W4A16 + FP8 Attention, ~20 GB).
+MTP Speculative Decoding built-in (1 speculative token, 1 MTP layer).
+200K Token Kontext. Hybrid linear/full attention (Mamba-style, 48 linear + 16 full attention layers).
+
+**Inference Engine**
+vLLM v0.24.0 mit FlashInfer backend. CUDA 12.9 (RTX 5090 Blackwell SM12.0).
+FP8 KV-Cache. Modelopt quantization (NVFP4+FP8 mixed). GPU VRAM: ~18-22 GB.
+
+**API**
+OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
+Tool Calling via --enable-auto-tool-choice.
+Reasoning via --reasoning-parser qwen3.
+
+**Resource Usage**
+GPU: ~18-22 GB VRAM (RTX 5090, 24 GB total)
+RAM: 24-40 GB
+Disk: 50 GB (Model-Download ~20 GB + Cache)
+CPU: 4-16 Kerne`,
+      upgradeDescription:
+        "v1.0.0: Initial release. Qwen3.6-27B NVFP4 + MTP (1 speculative token) via vLLM 0.24.0. Hybrid linear/full attention (Mamba-style). FP8 KV cache. 200k context.",
+      categories: ["LLM Chat"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen36-27bvllm",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36-27bvllm",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "50Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen36vllm", title: { en: "AIM Qwen3.6 27B vLLM" }, port: 8000, host: "aimqwen36vllm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "24Gi", disk: "50Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimqwen36llama",
       version: "2.2.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
