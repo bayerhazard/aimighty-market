@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.2.6",
+      version: "2.3.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
       description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - parallel 2 - cache-ram 2048" },
@@ -354,17 +354,17 @@ Optimized for coding and agentic workflows on Olares One.
 **Draft**: Anbeeld/Qwen3.6-27B-DFlash-IQ4_XS (1.0 GB, IQ4_XS quantization)
 **Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.3.2
 
-**Server-side Flags (v2.2.6):**
+**Server-side Flags (v2.3.0):**
 - --reasoning on --reasoning-budget 4096
 - --reasoning-loop-guard force-close
 - --reasoning-loop-interventions 2
 - --ctx-checkpoints 8
-- --ctx-size 200000 --threads 12
+- --ctx-size 200000 --threads 16
 - --parallel 2 (ConfigMap-variabel)
 - --cache-ram 2048 (ConfigMap-variabel, Prompt-Caching aktiv)
 - --flash-attn on --jinja --no-mmap --mlock
 - --batch-size 2048 -ub 512
-- Custom 6-patch chat template (Q1-Q6: preserve_thinking, developer role, robust thinking tags, tool envelope unwrap, verbose instructions)
+- check-auth: command ["true"] (immune to app-service webhook overwrite)
 
 **Performance (RTX 5090 Blackwell, 24 GiB, --parallel 2):**
 - HTML Space Invaders (2000 tok): ~101 tok/s
@@ -373,7 +373,7 @@ Optimized for coding and agentic workflows on Olares One.
 - Needle Haystack: 96% (24/25)
 - Agentic Tool-Calling: 100% (9/9)`,
       upgradeDescription:
-        `v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem (blocked 27B model on 1 GiB), check-auth args -it→-t 120, removed CUDA_DEVICE_MEMORY_LIMIT (exceeded 24 GB VRAM). v2.2.5: --parallel 2 + --cache-ram 2048 (ConfigMap-variabel). Benchmark: 101 tok/s coding, 60 tok/s poetry, Parallel-Stress 1.46x, Needle 96%, Agentic 100%. v2.1.0: Reduced reasoning-loop-min-tokens 512→128 (fixes Q4 token corruption via forced over-reasoning). v2.0.0: Cleanup - removed reasoning-budget-message, min-tokens 256→512, removed unused coder model. v1.8.0: DeepSeek-format unlimited reasoning (--reasoning-format deepseek). DRY repetition penalty (--dry-multiplier 1.5, --dry-allowed-length 3). Repeat-penalty 1.05 to suppress loops. Reasoning-loop-interventions 2. v1.7.6: --reasoning off → on zurück (Qualität). Subagenten nutzen Gemma statt Qwen für Tool-Calls (via OpenCode Config). v1.7.5: (übersprungen). v1.7.4: Reasoning-Budget 1024 → 512. v1.7.3: Fix --reasoning-loop-min-coverage 384 → 256 (CrashLoop). v1.7.2: Updated store description (Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV). v1.7.1: Reasoning-Budget 4096 → 1024, Reasoning-Loop-Min-Tokens 512 → 256 (reduziert Reasoning-Overhead bei Tool-Calling — fix für SchemaError Missing content). v1.7.0: Prompt-Cache reaktiviert (--cache-ram -1, --cache-reuse 256), temp 0.3 → 0.6, ctx-checkpoints 8 → 4, threads 16 (hardcodiert). v1.6.9: Renamed to 'AIM Qwen3.6 27B Beellama'. Parameter-Optimierung: temp 0.6 → 0.3, Reasoning-Budget 4096 gesetzt, Threads 16 → 12. v1.6.8: Renamed to 'AIM Qwen3.6 27B vLLM', deployment title to 'Qwen3.6 27B'. v1.6.7: Renamed to 'AIM Qwen36-27B KV'. v1.6.6: Category update — moved to LLM Chat. v1.6.5: Fix Olares chartrepo compatibility — base64-encode chat template to avoid Go template collision in values.yaml. v1.6.4: Fix Olares chartrepo compatibility — inline chat template in values.yaml instead of .Files.Get. v1.6.3: Version bump to force Olares re-sync. v1.6.2: Version bump to sync with Olares. Added base64 decoding of chat template before use. Increased ctx-checkpoints to 32. v1.6.0: Gist-Template (custom_pub_chat_template_qwen36) mit 6 agentic Patches (Q1: preserve_thinking=true, Q2: developer role, Q3: string args error, Q4: robust thinking tags, Q5: tool envelope unwrap, Q6: verbose instructions) — Chart refactored: template via files/ + .Files.Get. v1.5.0: Chat-Template Fix + --cache-ram 0 (stabilisiert). v1.3.5: Fresh base64 encoding.`,
+                 `v2.3.0: Fix Olares Webhook compat — check-auth uses command:["true"] so app-service webhook patch is harmless. v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem, check-auth args -it→-t 120, removed CUDA_DEVICE_MEMORY_LIMIT. v2.2.5: --parallel 2 + --cache-ram 2048. v2.0.0: Cleanup — removed reasoning-budget-message, min-tokens 256→512.
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
