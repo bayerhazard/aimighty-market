@@ -397,4 +397,61 @@ Optimized for coding and agentic workflows on Olares One.
       options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aimhermeswebui",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/hermes-webui-olares/main/icon.png",
+      title: { en: "Hermes Web UI" },
+      description: { en: "Full-parity web UI for Hermes Agent — chat, sessions, memory, skills, cron, profiles, workspaces" },
+      fullDescription:
+        `**Hermes Web UI** — the full Hermes Agent experience in your browser, installable as a Mac/desktop app (PWA).
+
+**Full CLI parity** — everything you can do from the Hermes terminal:
+- Chat with streaming, reasoning display, tool-call cards, approvals
+- Sessions: create, resume, search, pin, archive, projects, export (incl. CLI sessions from the shared store)
+- Memory: view and edit MEMORY.md / USER.md inline
+- Skills: list, preview, create, edit, delete
+- Tasks: cron jobs — view, create, edit, run, pause/resume, run history
+- Profiles, workspaces with file browser, todos, themes
+
+**Zero-touch architecture**
+Runs as a second, additive agent instance on the *same* HERMES_HOME as your existing Hermes Agent app (official two-container model of hermes-webui). Hermes Agent, its gateway, and Olares itself remain completely untouched. Cron ticking stays with the running gateway — no duplicate job execution. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
+
+**Access**
+Protected by Olares SSO (internal). Set an additional app password (and passkeys) in the app settings for defense in depth.
+
+**Notes**
+- Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
+- Sessions are owner-bound: sessions created in Dashboard/CLI/messaging frontends appear read-only; WebUI sessions are fully editable here.
+- Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
+      upgradeDescription:
+        `v1.0.0: Initial release. hermes-webui 0.50.43 (nesquena/hermes-webui, MIT) running in-process on the shared HERMES_HOME of the Hermes Agent app — full CLI parity with zero changes to Hermes Agent. Version-matched agent source via init container from the running gateway image.`,
+      categories: ["AI"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/hermes-webui-olares",
+      sourceCode: "https://github.com/bayerhazard/hermes-webui-olares",
+      supportArch: ["amd64"],
+      requiredCpu: "1",
+      requiredMemory: "2Gi",
+      requiredDisk: "5Gi",
+      requiredGpu: "0",
+      limitedCpu: "4",
+      limitedMemory: "8Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimhermeswebui", title: { en: "Hermes Web UI" }, port: 8787, host: "aimhermeswebui", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "1", memory: "2Gi", disk: "5Gi" } },
+      envs: [
+        { envName: "HERMES_WEBUI_PASSWORD", required: false, type: "password", editable: true, applyOnChange: true, description: "Optional app-level password for the Web UI (in addition to Olares SSO). Recommended when exposing beyond LAN." },
+        { envName: "HERMES_WEBUI_DEFAULT_MODEL", required: false, default: "Agent", type: "string", editable: true, applyOnChange: true, description: "Default model name used for new chats (must match a model your Hermes provider key can access, e.g. 'Agent')." },
+      ],
+    },
+  },
 ];
