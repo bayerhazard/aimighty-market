@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimhermeswebui",
-      version: "1.0.2",
+      version: "1.0.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/hermes-webui-olares/main/icon.png",
       title: { en: "Hermes Web UI" },
       description: { en: "Full-parity web UI for Hermes Agent — chat, sessions, memory, skills, cron, profiles, workspaces" },
@@ -426,7 +426,7 @@ Protected by Olares SSO (internal). Set an additional app password (and passkeys
 - Sessions are owner-bound: sessions created in Dashboard/CLI/messaging frontends appear read-only; WebUI sessions are fully editable here.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.0.2: Fixed olares dependency constraint to >=1.12.6-0 (mandatory for apiVersion v3). v1.0.1: Migrated OlaresManifest to apiVersion v3 / CfgFileVersion 0.12.0. v1.0.0: Initial release — hermes-webui 0.50.43 in-process on the shared HERMES_HOME, zero changes to Hermes Agent.`,
+        `v1.0.3: v3 workload convention — replicas sourced from values.workloads.aimhermeswebui.replicaCount. v1.0.2: Fixed olares dependency constraint to >=1.12.6-0. v1.0.1: Migrated OlaresManifest to apiVersion v3 / CfgFileVersion 0.12.0. v1.0.0: Initial release — hermes-webui 0.50.43 in-process on the shared HERMES_HOME, zero changes to Hermes Agent.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/hermes-webui-olares",
