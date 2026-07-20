@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.3.1",
+      version: "1.3.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with chat, sessions, memory, skills, cron, profiles, workspaces" },
@@ -431,7 +431,7 @@ Protected by Olares SSO (internal). Set an additional app password in the app se
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.3.1: Relay-inspired inbox background colors (pure white light / #121212 dark), simplified settings — Theme now drives Skin automatically (Light→Wings Light, Dark→Wings Dark), removed redundant toggles (RTL, TTS auto-read, token usage, quota chip, API redact, sidebar density, busy placeholder hint, new-chat-on-workspace-switch, external-sessions toggle), external sessions now follow UI mode (Advanced on / Basic off), section descriptions removed from all settings submenus.`,
+        `v1.3.2: same as v1.3.1 — Relay-inspired inbox background colors (pure white light / #121212 dark), simplified settings — Theme now drives Skin automatically (Light→Wings Light, Dark→Wings Dark), removed redundant toggles (RTL, TTS auto-read, token usage, quota chip, API redact, sidebar density, busy placeholder hint, new-chat-on-workspace-switch, external-sessions toggle), external sessions now follow UI mode (Advanced on / Basic off), section descriptions removed from all settings submenus. Re-deployed with a unique image tag (1.3.2) so the correct build is served.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
