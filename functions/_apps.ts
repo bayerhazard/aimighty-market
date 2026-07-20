@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.2.0",
+      version: "1.3.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with chat, sessions, memory, skills, cron, profiles, workspaces" },
@@ -431,7 +431,7 @@ Protected by Olares SSO (internal). Set an additional app password in the app se
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.2.0: Mobile viewports always show the lean Basic scope (Advanced stays a desktop preference). Empty-state suggestion buttons are now opt-in (hidden by default).`,
+        `v1.3.0: Redesigned run activity — one calm Activity Line per answer (live actions swap in place, thinking shimmers; settled turns collapse to a single summary line). Subtle, high-quality transitions throughout.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
