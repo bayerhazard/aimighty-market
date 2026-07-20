@@ -399,13 +399,13 @@ Optimized for coding and agentic workflows on Olares One.
   },
   {
     metadata: {
-      name: "aimhermeswebui",
-      version: "1.0.4",
-      icon: "https://raw.githubusercontent.com/bayerhazard/hermes-webui-olares/main/icon.png",
-      title: { en: "Hermes Web UI" },
-      description: { en: "Full-parity web UI for Hermes Agent — chat, sessions, memory, skills, cron, profiles, workspaces" },
+      name: "wings",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
+      title: { en: "Wings for Hermes" },
+      description: { en: "Wings for Hermes — AI Agent Web UI with chat, sessions, memory, skills, cron, profiles, workspaces" },
       fullDescription:
-        `**Hermes Web UI** — the full Hermes Agent experience in your browser, installable as a Mac/desktop app (PWA).
+        `**Wings for Hermes** — the full Hermes Agent experience in your browser, installable as a Mac/desktop app (PWA). Forked from hermes-webui with a Wings-branded interface, custom themes, and server-side gzip.
 
 **Full CLI parity** — everything you can do from the Hermes terminal:
 - Chat with streaming, reasoning display, tool-call cards, approvals
@@ -415,22 +415,24 @@ Optimized for coding and agentic workflows on Olares One.
 - Tasks: cron jobs — view, create, edit, run, pause/resume, run history
 - Profiles, workspaces with file browser, todos, themes
 
+**Wings branding**
+Custom navy/gold/neon themes, Wings light & dark palettes, PWA manifest, en+de locales.
+
 **Zero-touch architecture**
-Runs as a second, additive agent instance on the *same* HERMES_HOME as your existing Hermes Agent app (official two-container model of hermes-webui). Hermes Agent, its gateway, and Olares itself remain completely untouched. Cron ticking stays with the running gateway — no duplicate job execution. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
+Runs as a second, additive agent instance on the *same* HERMES_HOME as your existing Hermes Agent app (official two-container model). Hermes Agent, its gateway, and Olares remain untouched. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
 
 **Access**
-Protected by Olares SSO (internal). Set an additional app password (and passkeys) in the app settings for defense in depth.
+Protected by Olares SSO (internal). Set an additional app password in the app settings for defense in depth.
 
 **Notes**
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
-- Sessions are owner-bound: sessions created in Dashboard/CLI/messaging frontends appear read-only; WebUI sessions are fully editable here.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.0.4: Fixed applications.app.bytetrade.io/owner label (must be the Olares user, not the app name). v1.0.3: v3 workload convention. v1.0.2: Fixed olares dependency constraint to >=1.12.6-0. v1.0.1: Migrated OlaresManifest to apiVersion v3 / CfgFileVersion 0.12.0. v1.0.0: Initial release — hermes-webui 0.50.43 in-process on the shared HERMES_HOME, zero changes to Hermes Agent.`,
+        `v1.0.0: Initial release — Wings for Hermes (fork of hermes-webui 0.50.43). Wings branding, custom themes (wings-light/dark/neon), en+de locales, and server-side gzip compression on the app shell.`,
       categories: ["AI"],
       developer: "Aimighty",
-      website: "https://github.com/bayerhazard/hermes-webui-olares",
-      sourceCode: "https://github.com/bayerhazard/hermes-webui-olares",
+      website: "https://github.com/bayerhazard/wings-for-hermes",
+      sourceCode: "https://github.com/bayerhazard/wings-for-hermes",
       supportArch: ["amd64"],
       requiredCpu: "1",
       requiredMemory: "2Gi",
@@ -443,7 +445,7 @@ Protected by Olares SSO (internal). Set an additional app password (and passkeys
     spec: {
       type: "app",
       entrance: [
-        { name: "aimhermeswebui", title: { en: "Hermes Web UI" }, port: 8787, host: "aimhermeswebui", authLevel: "internal", openMethod: "window" },
+        { name: "wings", title: { en: "Wings for Hermes" }, port: 8787, host: "wings", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
