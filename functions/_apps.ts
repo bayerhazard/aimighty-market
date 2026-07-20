@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.0.0",
+      version: "1.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with chat, sessions, memory, skills, cron, profiles, workspaces" },
@@ -418,6 +418,9 @@ Optimized for coding and agentic workflows on Olares One.
 **Wings branding**
 Custom navy/gold/neon themes, Wings light & dark palettes, PWA manifest, en+de locales.
 
+**Two interface modes**
+Basic (default) keeps the surface lean — chat, tasks, skills, core settings. Advanced unlocks the full workbench (kanban, memory, workspaces, profiles, insights, logs, providers, extensions, terminal, sharing). Switch in Settings → Preferences.
+
 **Zero-touch architecture**
 Runs as a second, additive agent instance on the *same* HERMES_HOME as your existing Hermes Agent app (official two-container model). Hermes Agent, its gateway, and Olares remain untouched. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
 
@@ -428,7 +431,7 @@ Protected by Olares SSO (internal). Set an additional app password in the app se
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.0.0: Initial release — Wings for Hermes (fork of hermes-webui 0.50.43). Wings branding, custom themes (wings-light/dark/neon), en+de locales, and server-side gzip compression on the app shell.`,
+        `v1.1.0: Interface modes — Basic (lean, classic Wings scope: chat, tasks, skills, core settings) and Advanced (full workbench). Switch in Settings → Preferences; default is Basic. Also fixes two JS syntax errors from the initial rebrand that broke the UI in browsers.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
