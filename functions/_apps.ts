@@ -400,10 +400,10 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.4.0",
+      version: "1.4.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
-      description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, two interface modes, curated skins" },
+      description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
       fullDescription:
         `**Wings for Hermes** — the full Hermes Agent experience in your browser, installable as a Mac/desktop app (PWA). Forked from hermes-webui with a Wings-branded interface, custom themes, and server-side gzip.
 
@@ -431,7 +431,7 @@ Protected by Olares SSO (internal). Set an additional app password in the app se
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.4.0: Premium redesign — new status pill (context ring + model switcher) in the header, a calmer chat-first Basic mode (no icon rail; memory, insights and settings live in the sidebar footer), a refined composer with a larger send action and voice input that sends automatically when recording ends, generated documents downloadable right from the chat, native dropdowns replaced by quiet fields, and a curated skin set: Default, Midnight (dark blue) and Neon. Note: Tasks and Skills now live in Advanced mode.`,
+        `v1.4.1: Dark theme refinements — anthrazit backgrounds (lighter sidebar, chat and composer), accent color removed from borders and dividers, attachment icon replaced with plus, memory icon replaced with database, sidebar date grouping removed (flat session list), session text darker in dark mode, top app bar removed (status pill moved to sidebar header), placeholder changed to "Wie kann ich helfen?".`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
