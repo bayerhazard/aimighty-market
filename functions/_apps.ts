@@ -399,6 +399,67 @@ Optimized for coding and agentic workflows on Olares One.
   },
   {
     metadata: {
+      name: "aimqwen3635ba3b",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
+      title: { en: "AIM Qwen3.6 35B A3B" },
+      description: { en: "Qwen3.6-35B-A3B MoE (~3B aktiv) — spiritbuun buun-llama-cpp — MTP Spec Decoding — turbo4 KV" },
+      fullDescription:
+        `Qwen3.6-35B-A3B MoE (~3B aktive Parameter) via spiritbuun buun-llama-cpp.
+
+**Model**
+unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q3_K_XL (Q3_K_XL, ~16 GB, 35B MoE, ~3B aktiv).
+Built-in MTP Speculative Decoding (kein separater Drafter).
+200K Token Kontext.
+
+**Inference Engine**
+docker.io/aamsellem/buun-llama-cpp:87c351d2 (spiritbuun Fork).
+turbo4 KV-Cache (fork-only). MTP spec decoding mit 3 spekulativen Tokens.
+--reasoning off. --flash-attn on.
+
+**Performance (RTX 5090 Blackwell)**
+- Coding (2000 tok): ~229 tok/s
+- Poetry (2000 tok): ~121 tok/s
+- Needle Haystack: 100% (25/25)
+- Tool-Calling: 100% (9/9)
+
+**API**
+OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
+Tool Calling via built-in Qwen3 jinja template.
+
+**Resource Usage**
+GPU: ~16 GB VRAM belegt (RTX 5090, 24 GB total)
+RAM: 24-40 GB
+Disk: 25 GB (Model-Download ~16 GB)`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Qwen3.6-35B-A3B MoE via spiritbuun buun-llama-cpp.
+MTP Spec Decoding (built-in), turbo4 KV Cache, --reasoning off.
+Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
+      categories: ["LLM Chat"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "25Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 3600,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen3635ba3b", title: { en: "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635ba3b", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "24Gi", disk: "25Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "wings",
       version: "1.4.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
