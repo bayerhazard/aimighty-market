@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.1.4",
+      version: "1.1.5",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B - llama.cpp mit MTP - Turbo4 KV" },
