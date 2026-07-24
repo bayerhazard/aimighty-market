@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.4.6: Wings-native gauge card — Relay-style context ring + model/token display.`,
+        `v1.4.7: Auto-detect Hermes Agent home path — no manual configuration needed. hermesagent dependency declared. UID/GID auto-detected.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -459,36 +459,30 @@ Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
   {
     metadata: {
       name: "wings",
-      version: "1.4.6",
+      version: "1.4.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
       fullDescription:
-        `**Wings for Hermes** — the full Hermes Agent experience in your browser, installable as a Mac/desktop app (PWA). Forked from hermes-webui with a Wings-branded interface, custom themes, and server-side gzip.
+        `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
 **Full CLI parity** — everything you can do from the Hermes terminal:
 - Chat with streaming, reasoning display, tool-call cards, approvals
-- Sessions: create, resume, search, pin, archive, projects, export (incl. CLI sessions from the shared store)
+- Sessions: create, resume, search, pin, archive, projects, export
 - Memory: view and edit MEMORY.md / USER.md inline
 - Skills: list, preview, create, edit, delete
 - Tasks: cron jobs — view, create, edit, run, pause/resume, run history
 - Profiles, workspaces with file browser, todos, themes
 
-**Wings branding**
-Custom navy/gold/neon themes, Wings light & dark palettes, PWA manifest, en+de locales.
+**Shared-state architecture**
+Runs on the *same* HERMES_HOME as your Hermes Agent app. Sessions, memory, auth, and config are shared.
 
-**Two interface modes**
-Basic (default) keeps the surface lean — chat, tasks, skills, core settings. Advanced unlocks the full workbench (kanban, memory, workspaces, profiles, insights, logs, providers, extensions, terminal, sharing). Switch in Settings → Preferences.
+**Auto-detection**
+Automatically finds your Hermes Agent home directory on startup — no manual configuration needed.
 
-**Zero-touch architecture**
-Runs as a second, additive agent instance on the *same* HERMES_HOME as your existing Hermes Agent app (official two-container model). Hermes Agent, its gateway, and Olares remain untouched. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
-
-**Access**
-Protected by Olares SSO (internal). Set an additional app password in the app settings for defense in depth.
-
-**Notes**
+**Requirements**
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
-- Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
+- Upstream project: https://github.com/nesquena/hermes-webui (MIT)``,
       upgradeDescription:
         `v1.4.2: Fix titlebar removal (display:none!important), memory icon replaced with database SVG, basic-mode message stats hidden, composer focus highlight disabled, active session highlight disabled.`,
       categories: ["AI"],
