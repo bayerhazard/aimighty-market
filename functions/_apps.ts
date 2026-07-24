@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635ba3b",
-      version: "1.0.4",
+      version: "1.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE (~3B aktiv) — spiritbuun buun-llama-cpp — MTP Spec Decoding — turbo4 KV" },
@@ -432,12 +432,10 @@ GPU: ~16 GB VRAM belegt (RTX 5090, 24 GB total)
 RAM: 24-40 GB
 Disk: 25 GB (Model-Download ~16 GB)`,
       upgradeDescription:
-        `v1.0.4: Fix Olares dependency to >=1.12.6-0 for V3 compatibility.
-v1.0.3: Conversion to V3 OlaresManifest format (olaresManifest.version 0.12.0, apiVersion v3).
-v1.0.2: Fix OlaresManifest structure — fullDescription/developer/supportArch unter spec: verschoben.
-v1.0.1: Chart fix — OlaresManifest.yaml in chart package aufgenommen.
-v1.0.0: Initial release — Qwen3.6-35B-A3B MoE via spiritbuun buun-llama-cpp.
-MTP Spec Decoding (built-in), turbo4 KV Cache, --reasoning off.
+        `v1.1.0: Fresh version — OlaresManifest V3 format, Olares dep >=1.12.6-0.
+Image: aamsellem/buun-llama-cpp:87c351d2.
+Model: unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q3_K_XL.
+MTP spec decoding, turbo4 KV, --reasoning off.
 Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
