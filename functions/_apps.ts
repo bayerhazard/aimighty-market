@@ -455,7 +455,7 @@ v1.1.3: New description + llama.cpp icon.`,
   {
     metadata: {
       name: "wings",
-      version: "1.6.0",
+      version: "1.7.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
@@ -480,7 +480,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.4.7: Auto-detect Hermes Agent home path — no manual configuration needed. hermesagent dependency declared. UID/GID auto-detected.`,
+        `v1.7.0: Sidebar session timestamps hidden by default (hover to show). Avatar customization in Settings (initial + color). TPS moved to message footer. Chat layout refinements.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
