@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.4.8: Force re-sync to clear stale chartrepo state.`,
+        `v1.4.9: Fix dependency type — hermesagent dependency uses 'application' not 'app'.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -459,7 +459,7 @@ Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
   {
     metadata: {
       name: "wings",
-      version: "1.4.8",
+      version: "1.4.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
