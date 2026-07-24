@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.5.6: Smart timeout (suppress toast during active stream), dark-mode dialog bg, remove redundant tooltip title.`,
+        `v1.6.0: Gauge-Tooltip removed, Smart Download-Card for file creation, Avatar concept (user right-aligned, hermes left-aligned), neutral chatbubble backgrounds (no accent colors).`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -455,7 +455,7 @@ v1.1.3: New description + llama.cpp icon.`,
   {
     metadata: {
       name: "wings",
-      version: "1.5.6",
+      version: "1.6.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
