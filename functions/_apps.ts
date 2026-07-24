@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.3.6",
+      version: "2.3.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
       description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - parallel 1 - cache-ram 0" },
@@ -395,65 +395,6 @@ Optimized for coding and agentic workflows on Olares One.
       permission: [],
       middleware: [],
       options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
-    },
-  },
-  {
-    metadata: {
-      name: "aimqwen3635ba3b",
-      version: "1.1.3",
-      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
-      title: { en: "AIM Qwen3.6 35B A3B" },
-      description: { en: "Qwen3.6-35B-A3B - llama.cpp mit MTP - Turbo4 KV" },
-      fullDescription:
-        `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
-with only ~3B active parameters per token. Served via llama.cpp
-(spiritbuun buun-llama-cpp fork) on NVIDIA RTX 5090.
-
-**Key Parameters**
-- Spec Decoding: Built-in MTP (3 speculative tokens, no drafter needed)
-- KV Cache: turbo4 (spiritbuun fork, 4-bit)
-- Context: 200,000 tokens
-- Reasoning: off
-- Flash Attention: on
-- GPU: full offload (-ngl all), 16 of 24 GB VRAM used
-
-**Performance (RTX 5090 Blackwell, 24 GB)**
-- Coding (2000 tok): ~230 tok/s
-- Poetry (2000 tok): ~184 tok/s
-- Needle Haystack: 100% (25/25)
-- Tool-Calling: 100% (9/9)
-
-**API**
-OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
-Tool Calling via built-in Qwen3 jinja template.`,
-      upgradeDescription:
-        `v1.1.1: Fix V3 lint error — HF_TOKEN via envs declaration statt OLARES_USER_* in template.
-v1.1.0: Fresh version — OlaresManifest V3 format, Olares dep >=1.12.6-0.
-Image: aamsellem/buun-llama-cpp:87c351d2.
-Model: unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q3_K_XL.
-MTP spec decoding, turbo4 KV, --reasoning off.
-Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
-      categories: ["LLM Chat"],
-      developer: "Aimighty",
-      website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
-      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
-      supportArch: ["amd64"],
-      requiredCpu: "4",
-      requiredMemory: "24Gi",
-      requiredDisk: "25Gi",
-      requiredGpu: "1",
-      limitedCpu: "16",
-      limitedMemory: "40Gi",
-      apiTimeout: 3600,
-    },
-    spec: {
-      type: "app",
-      entrance: [
-        { name: "aimqwen3635ba3b", title: { en: "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635ba3b", authLevel: "internal", openMethod: "window" },
-      ],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "4", memory: "24Gi", disk: "25Gi" } },
     },
   },
   {
