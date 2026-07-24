@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.4.4: Empty-state title "Wings for Hermes", placeholder "Wie kann ich helfen?", running timer disabled, jump button removed, settings reordered.`,
+        `v1.4.5: Fix Service Worker cache — Wings version token added to cache name and asset URLs to force complete cache bust on every Wings update.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -464,7 +464,7 @@ Benchmark: Coding 229 tok/s, Poetry 121 tok/s, Needle 100%, Tool-Calling 100%.`,
   {
     metadata: {
       name: "wings",
-      version: "1.4.4",
+      version: "1.4.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
