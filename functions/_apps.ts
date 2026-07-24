@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.1.2: Fixed deployment title to 'Gemma4 26B-A4B'. v2.1.1: Category update — moved to LLM Chat. v2.1.0: Fix Helm ownership metadata on ConfigMap — re-enables clean upgrades. v2.0.9: Added ConfigMap for env vars (hot-reloadable). v2.0.8: Pinned to olares-worker (RTX 5090). Dropped kv-offloading + quantization. FP8-only AWQ at 200k. v2.0.7: Removed kv-offloading + quantization. v2.0.6: Reverted skip-layers. v2.0.5: Reduce MAX_MODEL_LEN. v2.0.4: Bump GPU_MEMORY_UTILIZATION. v2.0.3: Force re-sync. v2.0.2: Renamed. v2.0.0: Restructure. Renamed from aimllmgemma4vision to aimllmgemma4vllm. Switched from bg-digitalservices/Gemma-4-26B-A4B-it-NVFP4 to cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 with MTP speculative decoding. New image vllm/vllm-openai:v0.23.0. Added triton_attn backend, fp8 KV cache, gemma4 tool calling. Removed NVFP4 patches (gemma4.py, fused_moe_layer.py).`,
+        `v1.4.3: Fix CSS cache issue — override rules moved to inline <style> block in HTML. Titlebar hidden, composer focus glow disabled, active session highlight disabled, basic-mode stats hidden.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.4.2",
+      version: "1.4.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
