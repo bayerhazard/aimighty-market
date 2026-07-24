@@ -455,7 +455,7 @@ v1.1.3: New description + llama.cpp icon.`,
   {
     metadata: {
       name: "wings",
-      version: "1.7.1",
+      version: "1.7.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
@@ -480,7 +480,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.7.1: SW cache invalidation fix (stale assets no longer served after deploy). Context menu cleanup: removed Share, Copy Link, Duplicate. Renamed: Move to Project → "Projekt zuordnen", Archive → "Archivieren", Delete → "Löschen".`,
+        `v1.7.2: Forced hash bump to trigger Olares market-deployment re-sync.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
