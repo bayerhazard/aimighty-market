@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635ba3b",
-      version: "1.1.1",
+      version: "1.1.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE (~3B aktiv) — spiritbuun buun-llama-cpp — MTP Spec Decoding — turbo4 KV" },
