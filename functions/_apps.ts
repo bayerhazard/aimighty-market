@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.5.1: AImighty logo, subtitle removed, footer search wider, icons swapped, project plus hidden in basic, gauge flush, ring always visible.`,
+        `v1.5.2: Fix project-create-btn hidden in basic, AImighty logo as PNG, sidebar footer spacer removed.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.5.1",
+      version: "1.5.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
