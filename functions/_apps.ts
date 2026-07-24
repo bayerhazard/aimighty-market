@@ -482,9 +482,9 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 
 **Requirements**
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
-- Upstream project: https://github.com/nesquena/hermes-webui (MIT)``,
+- Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.4.2: Fix titlebar removal (display:none!important), memory icon replaced with database SVG, basic-mode message stats hidden, composer focus highlight disabled, active session highlight disabled.`,
+        `v1.4.7: Auto-detect Hermes Agent home path — no manual configuration needed. hermesagent dependency declared. UID/GID auto-detected.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
