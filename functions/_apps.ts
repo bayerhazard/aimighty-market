@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.4.3: Fix CSS cache issue — override rules moved to inline <style> block in HTML. Titlebar hidden, composer focus glow disabled, active session highlight disabled, basic-mode stats hidden.`,
+        `v1.4.4: Empty-state title "Wings for Hermes", placeholder "Wie kann ich helfen?", running timer disabled, jump button removed, settings reordered.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "wings",
-      version: "1.4.3",
+      version: "1.4.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
