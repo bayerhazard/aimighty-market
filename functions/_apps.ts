@@ -400,36 +400,32 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635ba3b",
-      version: "1.1.2",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
+      version: "1.1.3",
+      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
-      description: { en: "Qwen3.6-35B-A3B MoE (~3B aktiv) — spiritbuun buun-llama-cpp — MTP Spec Decoding — turbo4 KV" },
+      description: { en: "Qwen3.6-35B-A3B - llama.cpp mit MTP - Turbo4 KV" },
       fullDescription:
-        `Qwen3.6-35B-A3B MoE (~3B aktive Parameter) via spiritbuun buun-llama-cpp.
+        `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
+with only ~3B active parameters per token. Served via llama.cpp
+(spiritbuun buun-llama-cpp fork) on NVIDIA RTX 5090.
 
-**Model**
-unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q3_K_XL (Q3_K_XL, ~16 GB, 35B MoE, ~3B aktiv).
-Built-in MTP Speculative Decoding (kein separater Drafter).
-200K Token Kontext.
+**Key Parameters**
+- Spec Decoding: Built-in MTP (3 speculative tokens, no drafter needed)
+- KV Cache: turbo4 (spiritbuun fork, 4-bit)
+- Context: 200,000 tokens
+- Reasoning: off
+- Flash Attention: on
+- GPU: full offload (-ngl all), 16 of 24 GB VRAM used
 
-**Inference Engine**
-docker.io/aamsellem/buun-llama-cpp:87c351d2 (spiritbuun Fork).
-turbo4 KV-Cache (fork-only). MTP spec decoding mit 3 spekulativen Tokens.
---reasoning off. --flash-attn on.
-
-**Performance (RTX 5090 Blackwell)**
-- Coding (2000 tok): ~229 tok/s
-- Poetry (2000 tok): ~121 tok/s
+**Performance (RTX 5090 Blackwell, 24 GB)**
+- Coding (2000 tok): ~230 tok/s
+- Poetry (2000 tok): ~184 tok/s
 - Needle Haystack: 100% (25/25)
 - Tool-Calling: 100% (9/9)
 
 **API**
-OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
-Tool Calling via built-in Qwen3 jinja template.
-
-**Resource Usage**
-GPU: ~16 GB VRAM belegt (RTX 5090, 24 GB total)
-RAM: 24-40 GB
+OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
+Tool Calling via built-in Qwen3 jinja template.`,
 Disk: 25 GB (Model-Download ~16 GB)`,
       upgradeDescription:
         `v1.1.1: Fix V3 lint error — HF_TOKEN via envs declaration statt OLARES_USER_* in template.
