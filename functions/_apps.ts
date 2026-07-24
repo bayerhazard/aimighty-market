@@ -82,7 +82,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.6.5",
+      version: "1.6.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
