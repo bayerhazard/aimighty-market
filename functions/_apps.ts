@@ -426,7 +426,6 @@ with only ~3B active parameters per token. Served via llama.cpp
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.`,
-Disk: 25 GB (Model-Download ~16 GB)`,
       upgradeDescription:
         `v1.1.1: Fix V3 lint error — HF_TOKEN via envs declaration statt OLARES_USER_* in template.
 v1.1.0: Fresh version — OlaresManifest V3 format, Olares dep >=1.12.6-0.
