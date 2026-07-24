@@ -400,7 +400,7 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635ba3b",
-      version: "1.1.0",
+      version: "1.1.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE (~3B aktiv) — spiritbuun buun-llama-cpp — MTP Spec Decoding — turbo4 KV" },
@@ -432,7 +432,8 @@ GPU: ~16 GB VRAM belegt (RTX 5090, 24 GB total)
 RAM: 24-40 GB
 Disk: 25 GB (Model-Download ~16 GB)`,
       upgradeDescription:
-        `v1.1.0: Fresh version — OlaresManifest V3 format, Olares dep >=1.12.6-0.
+        `v1.1.1: Fix V3 lint error — HF_TOKEN via envs declaration statt OLARES_USER_* in template.
+v1.1.0: Fresh version — OlaresManifest V3 format, Olares dep >=1.12.6-0.
 Image: aamsellem/buun-llama-cpp:87c351d2.
 Model: unsloth/Qwen3.6-35B-A3B-MTP-GGUF:UD-Q3_K_XL.
 MTP spec decoding, turbo4 KV, --reasoning off.
