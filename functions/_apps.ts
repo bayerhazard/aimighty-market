@@ -341,18 +341,18 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.4.7",
+      version: "2.5.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
-      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - parallel 2 - cache-ram -1" },
+      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash Q4_K_M - kvarn4 KV - parallel 2 - cache-ram -1" },
       fullDescription:
-        `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash IQ4_XS (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
+        `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
 Optimized for coding and agentic workflows on Olares One.
 
-**Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (7.6 GB, Q4_K_XL quantization)
-**Draft**: Anbeeld/Qwen3.6-27B-DFlash-IQ4_XS (1.0 GB, IQ4_XS quantization)
-**Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.4.1
+**Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, Q4_K_XL quantization)
+**Draft**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
+**Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.4.1 (--spec-type draft-dflash)
 
 **Server-side Flags (v2.4.0):**
 - --reasoning on --reasoning-budget 4096
@@ -373,7 +373,7 @@ Optimized for coding and agentic workflows on Olares One.
 - Needle Haystack: 96% (24/25)
 - Agentic Tool-Calling: 100% (9/9)`,
      upgradeDescription:
-                   `v2.4.7: Removed olares dependency — apiVersion=v1 with olaresManifest.version 0.11.0 bypasses dependency requirement. v2.4.6: Force re-sync #5 — chartrepo cached old broken chart, force fresh fetch. v2.4.5: Fix dependency version constraint for apiVersion=v1 (>=1.12.3-0,<1.12.6). v2.4.4: Force re-sync #4 — hash matched again, sync skipped. v2.4.3: Force re-sync #3 — hash matched, sync skipped. v2.4.2: Force re-sync #2 — chartrepo timed out during hydration. v2.4.1: Force re-sync — fixed chartrepo cache stale state preventing installation. v2.4.0: HAMi GPU allocation fix — removed runtimeClassName: nvidia (bypassed HAMi, caused "No compatible compute resources" error). beellama.cpp v0.3.2 → v0.4.1 (native KVarN + DFlash CUDA kernels, reduced checkpoint stalls). Threads 12→16, cache-ram 0→-1 (prompt cache reaktiviert), parallel 1→2 (2x throughput). v2.3.3: Revert --parallel 2→1, --cache-ram 2048→0 (prompt cache aus — OOM-Risiko bei 2x 200k). Sauberes Release basierend auf v2.3.0 (check-auth command:["true"]). v2.3.0: Fix Olares Webhook compat — check-auth uses command:["true"] so app-service webhook patch is harmless. v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem, check-auth args -it→-t 120, removed CUDA_DEVICE_MEMORY_LIMIT. v2.2.5: --parallel 2 + --cache-ram 2048. v2.0.0: Cleanup — removed reasoning-budget-message, min-tokens 256→512.`,
+                   `v2.5.0: Fix beellama v0.4.x compat — --spec-type draft-dflash, fork-private --spec-dflash-cross-ctx entfernt (in v0.4.0 abgeschafft, verursachte CrashLoop). Fix OlaresManifest v3 Struktur (fullDescription/versionName unter spec:). Fix values.yaml olaresEnv Default (helm nil pointer). DFlash-Drafter IQ4_XS → Q4_K_M (upstream dflash architecture). apiTimeout 3600. v2.4.7: Removed olares dependency — apiVersion=v1 with olaresManifest.version 0.11.0. v2.4.0: HAMi GPU allocation fix — removed runtimeClassName: nvidia. beellama.cpp v0.3.2 → v0.4.1 (native KVarN + DFlash CUDA kernels). Threads 16, cache-ram -1 (prompt cache reaktiviert), parallel 1→2 (2x throughput). v2.3.3: Revert --parallel 2→1, --cache-ram 2048→0 (OOM-Risiko bei 2x 200k). v2.3.0: check-auth command:["true"] (Webhook compat). v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem. v2.0.0: Cleanup — reasoning-budget-message entfernt.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
