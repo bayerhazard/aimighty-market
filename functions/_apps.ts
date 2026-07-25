@@ -455,10 +455,10 @@ v1.1.3: New description + llama.cpp icon.`,
   {
     metadata: {
       name: "wings",
-      version: "1.7.7",
+      version: "1.7.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
-      description: { en: "Wings for Hermes — AI Agent Web UI with premium redesign, refined dark theme, curated skins" },
+      description: { en: "Wings for Hermes — AI Agent Web UI with theme overhaul, merged Skin into Theme, and SW cache fix" },
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -480,7 +480,8 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.7.7: Re-deploy: fix market source sync (chartrepo was not ready during initial 1.7.6 sync).
+        `v1.7.8: Theme overhaul — merged Skin into unified Theme (Hell, Dunkel, Neon, System). Fixed theme picker always showing "Hell" (localStorage key mismatch: pre-paint wrote wings-theme but panels.js reads hermes-theme). Fixed Service Worker cache serving stale assets (bumped cache suffix w172→w173, included .git for unique WEBUI_VERSION).
+v1.7.7: Re-deploy: fix market source sync (chartrepo was not ready during initial 1.7.6 sync).
 v1.7.6: Re-deploy: force Olares hash re-sync after chartrepo timeout on v1.7.5.
 v1.7.5: Re-deploy: force Olares hash re-sync after chartrepo timeout on v1.7.4.
 v1.7.4: Three chat rendering fixes: msg-foot always visible (opacity:1), tool/thinking cards render individually (no collapsed Worklog group), added _italic_ / __bold__ / ___bold+italic___ underscore emphasis support in renderMd.
