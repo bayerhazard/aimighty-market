@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.4.1",
+      version: "2.4.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
       description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash IQ4_XS - kvarn4 KV - parallel 2 - cache-ram -1" },
@@ -373,7 +373,7 @@ Optimized for coding and agentic workflows on Olares One.
 - Needle Haystack: 96% (24/25)
 - Agentic Tool-Calling: 100% (9/9)`,
      upgradeDescription:
-                  `v2.4.1: Force re-sync — fixed chartrepo cache stale state preventing installation. v2.4.0: HAMi GPU allocation fix — removed runtimeClassName: nvidia (bypassed HAMi, caused "No compatible compute resources" error). beellama.cpp v0.3.2 → v0.4.1 (native KVarN + DFlash CUDA kernels, reduced checkpoint stalls). Threads 12→16, cache-ram 0→-1 (prompt cache reaktiviert), parallel 1→2 (2x throughput). v2.3.3: Revert --parallel 2→1, --cache-ram 2048→0 (prompt cache aus — OOM-Risiko bei 2x 200k). Sauberes Release basierend auf v2.3.0 (check-auth command:["true"]). v2.3.0: Fix Olares Webhook compat — check-auth uses command:["true"] so app-service webhook patch is harmless. v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem, check-auth args -it→-t 120, removed CUDA_DEVICE_MEMORY_LIMIT. v2.2.5: --parallel 2 + --cache-ram 2048. v2.0.0: Cleanup — removed reasoning-budget-message, min-tokens 256→512.`,
+                  `v2.4.2: Force re-sync #2 — chartrepo timed out during hydration. v2.4.1: Force re-sync — fixed chartrepo cache stale state preventing installation. v2.4.0: HAMi GPU allocation fix — removed runtimeClassName: nvidia (bypassed HAMi, caused "No compatible compute resources" error). beellama.cpp v0.3.2 → v0.4.1 (native KVarN + DFlash CUDA kernels, reduced checkpoint stalls). Threads 12→16, cache-ram 0→-1 (prompt cache reaktiviert), parallel 1→2 (2x throughput). v2.3.3: Revert --parallel 2→1, --cache-ram 2048→0 (prompt cache aus — OOM-Risiko bei 2x 200k). Sauberes Release basierend auf v2.3.0 (check-auth command:["true"]). v2.3.0: Fix Olares Webhook compat — check-auth uses command:["true"] so app-service webhook patch is harmless. v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem, check-auth args -it→-t 120, removed CUDA_DEVICE_MEMORY_LIMIT. v2.2.5: --parallel 2 + --cache-ram 2048. v2.0.0: Cleanup — removed reasoning-budget-message, min-tokens 256→512.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
