@@ -455,10 +455,10 @@ v1.1.3: New description + llama.cpp icon.`,
   {
     metadata: {
       name: "wings",
-      version: "1.7.9",
+      version: "1.7.10",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
-      description: { en: "Wings for Hermes — AI Agent Web UI with agent source fix, auto-install, and theme overhaul" },
+      description: { en: "Wings for Hermes — AI Agent Web UI with Hermes gateway connection fix" },
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -480,7 +480,8 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.7.9: Fixed agent source discovery — added HERMES_WEBUI_AGENT_DIR and HERMES_WEBUI_AUTO_INSTALL env vars. The WebUI now explicitly finds the hermes-agent source code and auto-installs dependencies.
+        `v1.7.10: Fixed Hermes gateway connection — added HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY env vars. The WebUI now connects to the Hermes agent gateway for model listing, session loading, and chat.
+v1.7.9: Fixed agent source discovery — added HERMES_WEBUI_AGENT_DIR and HERMES_WEBUI_AUTO_INSTALL env vars. The WebUI now explicitly finds the hermes-agent source code and auto-installs dependencies.
 v1.7.8: Theme overhaul — merged Skin into unified Theme (Hell, Dunkel, Neon, System). Fixed theme picker always showing "Hell" (localStorage key mismatch: pre-paint wrote wings-theme but panels.js reads hermes-theme). Fixed Service Worker cache serving stale assets (bumped cache suffix w172→w173, included .git for unique WEBUI_VERSION).
 v1.7.7: Re-deploy: fix market source sync (chartrepo was not ready during initial 1.7.6 sync).
 v1.7.6: Re-deploy: force Olares hash re-sync after chartrepo timeout on v1.7.5.
