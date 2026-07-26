@@ -344,34 +344,36 @@ Disk: 15 GB (model pre-baked in image)
       version: "3.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B - Q4_K_XL + DFlash + turbo4 KV + Vision - Agent-Optimized" },
+      description: { en: "Qwen3.6-27B beellama - Q4_K_XL + DFlash Q4_K_M + q4_0 KV - 200K ctx - Agent-Optimized" },
       fullDescription:
-        `Qwen3.6-27B (dense, 27B) — DFlash + turbo4 KV + Vision on NVIDIA RTX 5090 (24 GiB VRAM).
+        `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
+
+Optimized for agentic workflows on Olares One.
 
 **Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, Q4_K_XL quantization)
-**Drafter**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
-**Engine**: Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026)
-Compiled with CUDA 13.1 + SSL + GGML_CUDA_FA_ALL_QUANTS (169+36 FlashAttention pairs).
+**Draft**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
+**Engine**: ghcr.io/anbild/beellama.cpp:server-cuda-preview-v0.4.1 (--spec-type draft-dflash)
 
-**Spec Decoding**: DFlash with adaptive profit-controller (100% acceptance rate)
-**Vision**: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input, ~555ms)
-**KV Cache**: q4_0 K / turbo4 V (spiritbuun fork, ALL_QUANTS build)
-**Context**: 200K tokens (full native context)
-**Reasoning**: OFF (Agent-optimized — reliable tool-calls from max_tokens=256)
+**Server-side Flags (v3.1.0):**
+- --reasoning off (Agent-optimized — reliable tool-calls from max_tokens=256)
+- --ctx-size 200000 --threads 16
+- --parallel 1 (draft-dflash multi-slot workaround)
+- --cache-ram -1 (Prompt-Caching aktiviert)
+- --cache-type-k/v q4_0 (kvarn4 incompatible with draft-dflash, Bug #93)
+- --spec-type draft-dflash --fit off
+- --flash-attn on --jinja --no-mmap --mlock
+- --batch-size 2048 -ub 512
+- CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi requirement)
+- Custom agentic chat template (multi-turn tool-call fix)
 
 **Performance (RTX 5090 Blackwell, 24 GiB):**
-- Text Generation: ~100+ tok/s (DFlash 100% acceptance)
+- DFlash Acceptance: 100% (26/26)
+- Text Generation: ~100 tok/s
 - Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
-- Vision: ~555ms swap overhead, correct image analysis
-- VRAM: ~23 GB / 24.5 GB
-
-**API**: OpenAI-compatible at port 8000.
-Tool Calling via built-in Qwen3 jinja template.
-Vision via image_url in content array.
-For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
+- Needle Haystack: 96% (24/25)`,
       upgradeDescription:
-        `v3.1.0: Performance + ctx restore. DFlash (100% acceptance) statt MTP (74%). turbo4 V statt q4_0 V (Rebuild mit GGML_CUDA_FA_ALL_QUANTS=ON, 169+36 FA pairs). ctx 160K→200K. Non-MTP Q4_K_XL (17.6 GB). DFlash-Drafter zurueck. Vision bleibt (mmproj-gpu-swap). v3.0.x: Unified Stack mit spiritbuun (MTP+Vision, aber -29% Performance und -40K ctx).`,
-      categories: ["LLM Chat", "Vision"],
+        `v3.1.0: Reasoning OFF (Agent-optimiert — zuverlaessige Tool-Calls ab max_tokens=256). Alle 9 Reasoning-Flags entfernt. Sonst identisch zu v2.5.1: DFlash 100%, Q4_K_XL, q4_0 KV, 200K ctx, beellama v0.4.1, custom chat-template.`,
+      categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
