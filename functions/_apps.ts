@@ -403,10 +403,10 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.1.5",
-      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      version: "1.1.6",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
-      description: { en: "Qwen3.6-35B-A3B - llama.cpp mit MTP - Turbo4 KV" },
+      description: { en: "Qwen3.6-35B-A3B MTP Vision on llama.cpp (buun fork) with turbo4 KV cache" },
       fullDescription:
         `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
 with only ~3B active parameters per token. Served via llama.cpp
