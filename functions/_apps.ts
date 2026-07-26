@@ -341,23 +341,26 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.0.3",
+      version: "3.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B - UD-Q4_K_XL MTP + Vision - Agent-Optimized" },
+      description: { en: "Qwen3.6-27B - Q4_K_XL + DFlash + turbo4 KV + Vision - Agent-Optimized" },
       fullDescription:
-        `Qwen3.6-27B (dense, 27B) — Unified Agent Stack with spiritbuun buun-llama-cpp.
+        `Qwen3.6-27B (dense, 27B) — DFlash + turbo4 KV + Vision on NVIDIA RTX 5090 (24 GiB VRAM).
 
-**Model**: unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL (17.9 GB, MTP head built-in)
-**Engine**: Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026), CUDA 13.1 + SSL
-**Spec Decoding**: Built-in MTP (3 speculative tokens, no separate drafter needed)
+**Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, Q4_K_XL quantization)
+**Drafter**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
+**Engine**: Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026)
+Compiled with CUDA 13.1 + SSL + GGML_CUDA_FA_ALL_QUANTS (169+36 FlashAttention pairs).
+
+**Spec Decoding**: DFlash with adaptive profit-controller (100% acceptance rate)
 **Vision**: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input, ~555ms)
-**KV Cache**: q4_0 K / turbo4 V (spiritbuun fork)
-**Context**: 160K tokens (reduced from 200K for Vision VRAM headroom)
+**KV Cache**: q4_0 K / turbo4 V (spiritbuun fork, ALL_QUANTS build)
+**Context**: 200K tokens (full native context)
 **Reasoning**: OFF (Agent-optimized — reliable tool-calls from max_tokens=256)
 
 **Performance (RTX 5090 Blackwell, 24 GiB):**
-- Text Generation: ~250-300 tok/s (MTP 1.4-2x speedup on dense models)
+- Text Generation: ~100+ tok/s (DFlash 100% acceptance)
 - Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
 - Vision: ~555ms swap overhead, correct image analysis
 - VRAM: ~23 GB / 24.5 GB
@@ -367,7 +370,7 @@ Tool Calling via built-in Qwen3 jinja template.
 Vision via image_url in content array.
 For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
       upgradeDescription:
-        `v3.0.0: Unified Agent Stack mit spiritbuun (wie aimqwen3635bllama v1.4.0). Wechsel von beellama+DFlash zu spiritbuun+MTP (built-in, kein Drafter). UD-Q4_K_XL mit MTP head. Vision aktiviert (mmproj-gpu-swap). Reasoning OFF (Agent-optimiert). ctx 200K→160K. KV q4_0→q4_0 K / turbo4 V. Fresh Binary (CUDA 13.1 + SSL). Custom chat-template entfernt (built-in --jinja).`,
+        `v3.1.0: Performance + ctx restore. DFlash (100% acceptance) statt MTP (74%). turbo4 V statt q4_0 V (Rebuild mit GGML_CUDA_FA_ALL_QUANTS=ON, 169+36 FA pairs). ctx 160K→200K. Non-MTP Q4_K_XL (17.6 GB). DFlash-Drafter zurueck. Vision bleibt (mmproj-gpu-swap). v3.0.x: Unified Stack mit spiritbuun (MTP+Vision, aber -29% Performance und -40K ctx).`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
