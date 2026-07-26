@@ -403,10 +403,10 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.3.1",
+      version: "1.4.0",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { "en-US": "AIM Qwen3.6 35B A3B" },
-      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP - Reasoning - Fresh Build" },
+      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP + Vision - Agent-Optimized" },
       fullDescription:
         `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
 with only ~3B active parameters per token. Served via llama.cpp
@@ -415,25 +415,28 @@ with only ~3B active parameters per token. Served via llama.cpp
 **Key Parameters**
 - Quant: UD-IQ4_XS (4-bit, ~18 GB) — superior quality vs Q3
 - Spec Decoding: Built-in MTP (3 speculative tokens, no drafter needed)
-- KV Cache: turbo4 (spiritbuun fork, 4-bit)
+- Vision: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input)
+- KV Cache: q8_0 K / turbo4 V (spiritbuun fork)
 - Context: 200,000 tokens
-- Reasoning: ON (budget 4096) — thinking blocks before answers
+- Reasoning: OFF (Agent-optimized — reliable tool-calls, longer sessions)
 - Flash Attention: on
-- GPU: full offload (-ngl all), 20.5 of 24 GB VRAM used
+- GPU: full offload (-ngl all), 19.9 of 24 GB VRAM used
 - Sampling: temp=0.6, top-p=0.95, top-k=20 (Qwen3.6 precise coding)
 
 **Performance (RTX 5090 Blackwell, 24 GB)**
-- Coding (2000 tok, reasoning on): ~201 tok/s
-- MTP Acceptance: 67.6% (up from 48.1% with Q3_K_XL)
-- Needle Haystack: 100% (25/25)
-- Tool-Calling: 100% (9/9)
+- Text Generation: ~275 tok/s (88.5% MTP acceptance)
+- Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
+- Vision: ~555ms swap overhead, correct image analysis
+- VRAM: 19.9 GB / 24.5 GB (81%)
 
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
-Tool Calling via built-in Qwen3 jinja template.`,
-      upgradeDescription: { "en-US": "v1.3.1: Fresh llama-server build from buun-llama-cpp master (Jul 25). CUDA 13.1, sm_120. +10% gen speed, +210% prompt processing." },
-      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP Spec Decoding - Reasoning" },
-      categories: ["LLM Chat"],
+Tool Calling via built-in Qwen3 jinja template.
+Vision via image_url in content array.
+For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
+      upgradeDescription: { "en-US": "v1.4.0: Vision aktiviert (mmproj-gpu-swap). Reasoning OFF (Agent-optimiert: zuverlaessige Tool-Calls). SSL-Rebuild fuer HTTPS image downloads. 275 tok/s, 88.5% MTP, Tool-Calls ab max_tokens=256." },
+      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP + Vision - Agent-Optimized" },
+      categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
