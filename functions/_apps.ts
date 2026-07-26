@@ -341,10 +341,10 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.1.0",
+      version: "3.2.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B beellama - Q4_K_XL + DFlash Q4_K_M + q4_0 KV - 200K ctx - Agent-Optimized" },
+      description: { en: "Qwen3.6-27B beellama - Q4_K_XL + DFlash Q4_K_M + kvarn4 KV + Vision - Agent-Optimized" },
       fullDescription:
         `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
@@ -372,8 +372,8 @@ Optimized for agentic workflows on Olares One.
 - Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
 - Needle Haystack: 96% (24/25)`,
       upgradeDescription:
-        `v3.1.0: Reasoning OFF (Agent-optimiert — zuverlaessige Tool-Calls ab max_tokens=256). Alle 9 Reasoning-Flags entfernt. Sonst identisch zu v2.5.1: DFlash 100%, Q4_K_XL, q4_0 KV, 200K ctx, beellama v0.4.1, custom chat-template.`,
-      categories: ["LLM Chat"],
+        `v3.2.0: kvarn4 KV wiederherestellt (alte DFlash-Syntax mit v0.3.2 Image). Reasoning OFF. Simple Vision via --no-mmproj-offload (mmproj auf CPU). DFlash 100% acceptance, Q4_K_XL, 200K ctx.`,
+      categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
