@@ -403,10 +403,10 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.1.9",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
-      title: { en: "AIM Qwen3.6 35B A3B" },
-      description: { en: "Qwen3.6-35B-A3B MTP Vision on llama.cpp (buun fork) with turbo4 KV cache" },
+      version: "1.2.0",
+      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      title: { "en-US": "AIM Qwen3.6 35B A3B" },
+      description: { "en-US": "Qwen3.6-35B-A3B - MTP Spec Decoding - turbo4 KV" },
       fullDescription:
         `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
 with only ~3B active parameters per token. Served via llama.cpp
@@ -429,10 +429,8 @@ with only ~3B active parameters per token. Served via llama.cpp
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.`,
-      upgradeDescription:
-        `v1.1.4: Renamed to aimqwen3635bllama (neue ID, kein Cache-Problem mehr).
-v1.1.9: Chart internal version bump (1.1.5→1.1.9) — Sync-Fix.
-v1.1.3: New description + llama.cpp icon.`,
+      upgradeDescription: { "en-US": "v1.2.0: Conversion to V3 OlaresManifest format." },
+      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - MTP Spec Decoding - turbo4 KV" },
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
@@ -449,7 +447,7 @@ v1.1.3: New description + llama.cpp icon.`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen3635bllama", title: { en: "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635bllama", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen3635bllama", title: { "en-US": "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635bllama", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
