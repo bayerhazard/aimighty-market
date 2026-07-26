@@ -341,10 +341,10 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.5.0",
+      version: "2.5.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B Beellama" },
-      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash Q4_K_M - kvarn4 KV - parallel 2 - cache-ram -1" },
+      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash Q4_K_M - q4_0 KV - parallel 1 - prompt cache" },
       fullDescription:
         `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
@@ -354,16 +354,19 @@ Optimized for coding and agentic workflows on Olares One.
 **Draft**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
 **Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.4.1 (--spec-type draft-dflash)
 
-**Server-side Flags (v2.4.0):**
+**Server-side Flags (v2.5.1):**
 - --reasoning on --reasoning-budget 4096
 - --reasoning-loop-guard force-close
 - --reasoning-loop-interventions 2
 - --ctx-checkpoints 8
 - --ctx-size 200000 --threads 16
-- --parallel 2 (2x throughput)
+- --parallel 1 (draft-dflash multi-slot workaround)
 - --cache-ram -1 (Prompt-Caching aktiviert)
+- --cache-type-k/v q4_0 (kvarn4 incompatible with draft-dflash)
+- --spec-type draft-dflash --fit off
 - --flash-attn on --jinja --no-mmap --mlock
 - --batch-size 2048 -ub 512
+- CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi requirement)
 - check-auth: command ["true"] (immune to app-service webhook overwrite)
 
 **Performance (RTX 5090 Blackwell, 24 GiB, --parallel 2):**
@@ -373,7 +376,7 @@ Optimized for coding and agentic workflows on Olares One.
 - Needle Haystack: 96% (24/25)
 - Agentic Tool-Calling: 100% (9/9)`,
      upgradeDescription:
-                   `v2.5.0: Fix beellama v0.4.x compat — --spec-type draft-dflash, fork-private --spec-dflash-cross-ctx entfernt (in v0.4.0 abgeschafft, verursachte CrashLoop). Fix OlaresManifest v3 Struktur (fullDescription/versionName unter spec:). Fix values.yaml olaresEnv Default (helm nil pointer). DFlash-Drafter IQ4_XS → Q4_K_M (upstream dflash architecture). apiTimeout 3600. v2.4.7: Removed olares dependency — apiVersion=v1 with olaresManifest.version 0.11.0. v2.4.0: HAMi GPU allocation fix — removed runtimeClassName: nvidia. beellama.cpp v0.3.2 → v0.4.1 (native KVarN + DFlash CUDA kernels). Threads 16, cache-ram -1 (prompt cache reaktiviert), parallel 1→2 (2x throughput). v2.3.3: Revert --parallel 2→1, --cache-ram 2048→0 (OOM-Risiko bei 2x 200k). v2.3.0: check-auth command:["true"] (Webhook compat). v2.2.6: Fix HAMi compat — removed nvidia.com/gpumem. v2.0.0: Cleanup — reasoning-budget-message entfernt.`,
+                   `v2.5.1: Runtime-Fixes nach Live-Debugging — CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi cudaMalloc cap), parallel 2→1 (v0.4.1 draft-dflash multi-slot Bug), KV kvarn4→q4_0 (kvarn+dflash rollback failure), --fit off. DFlash Acceptance 100% (26/26). v2.5.0: Fix beellama v0.4.x compat — --spec-type draft-dflash, fork-private --spec-dflash-cross-ctx entfernt. Fix OlaresManifest v3 Struktur. Fix values.yaml olaresEnv Default. DFlash-Drafter IQ4_XS → Q4_K_M. apiTimeout 3600. v2.4.0: beellama.cpp v0.3.2 → v0.4.1, HAMi GPU fix, threads 16. v2.3.3: parallel 2→1, cache-ram→0 (OOM). v2.3.0: check-auth command:["true"] (Webhook compat). v2.2.6: removed nvidia.com/gpumem. v2.0.0: Cleanup — reasoning-budget-message entfernt.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
