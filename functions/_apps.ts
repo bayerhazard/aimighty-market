@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.1.6",
+      version: "2.1.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.1.6: deployment.replicas auf .Values.workloads.aimllmgemma4vllm.replicaCount umgestellt (app-service v3-Validation: replicas muss aus values.yaml workloads.<name>.replicaCount stammen, hardcoded "1" abgelehnt). v2.1.5: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v2.1.4: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v2.1.3: runtimeClassName: nvidia + nodeSelector olares-worker entfernt, Chart dem Market hinzugefügt. v2.1.0: Fix Helm ownership metadata on ConfigMap. v2.0.9: ConfigMap für env vars. v2.0.8: FP8-only AWQ at 200k. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0, triton_attn, fp8 KV, gemma4 tool calling.`,
+        `v2.1.7: HF_TOKEN auf .Values.olaresEnv.HF_TOKEN + envs-Sektion (app-service v3: "apiVersion=v3 apps must not use OLARES_USER_* names in chart files"). v2.1.6: replicas via .Values.workloads.aimllmgemma4vllm.replicaCount (v3-Validation). v2.1.5: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v2.1.4: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v2.1.3: runtimeClassName: nvidia + nodeSelector olares-worker entfernt, Chart dem Market hinzugefügt. v2.1.0: Fix Helm ownership metadata on ConfigMap. v2.0.9: ConfigMap für env vars. v2.0.8: FP8-only AWQ at 200k. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0, triton_attn, fp8 KV, gemma4 tool calling.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
