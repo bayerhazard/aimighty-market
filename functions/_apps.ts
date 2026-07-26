@@ -453,7 +453,7 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.7.11",
+      version: "1.7.12",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
@@ -478,7 +478,8 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.7.11: Fixed agent connection — removed HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY that caused the health check to probe a remote gateway (blocked by Olares envoy sidecar). Now runs the agent in-process exactly like hermes-webui. Added WANTED_UID/WANTED_GID for proper file ownership.
+        `v1.7.12: Fixed chat layout — removed CSS conflict between Wings-Premium avatar layout and Classic bubble layout that caused broken message arrangement after refresh. Fixed JS syntax error (unquoted 'wings-light'/'wings-dark' object keys) that crashed the entire boot.js. Added responsive mobile adaptation for avatar layout.
+v1.7.11: Fixed agent connection — removed HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY that caused the health check to probe a remote gateway (blocked by Olares envoy sidecar). Now runs the agent in-process exactly like hermes-webui. Added WANTED_UID/WANTED_GID for proper file ownership.
 v1.7.10: Fixed Hermes gateway connection — added HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY env vars. The WebUI now connects to the Hermes agent gateway for model listing, session loading, and chat.
 v1.7.9: Fixed agent source discovery — added HERMES_WEBUI_AGENT_DIR and HERMES_WEBUI_AUTO_INSTALL env vars. The WebUI now explicitly finds the hermes-agent source code and auto-installs dependencies.
 v1.7.8: Theme overhaul — merged Skin into unified Theme (Hell, Dunkel, Neon, System). Fixed theme picker always showing "Hell" (localStorage key mismatch: pre-paint wrote wings-theme but panels.js reads hermes-theme). Fixed Service Worker cache serving stale assets (bumped cache suffix w172→w173, included .git for unique WEBUI_VERSION).
