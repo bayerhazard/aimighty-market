@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.1.2",
+      version: "2.1.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v1.6.0: Gauge-Tooltip removed, Smart Download-Card for file creation, Avatar concept (user right-aligned, hermes left-aligned), neutral chatbubble backgrounds (no accent colors).`,
+        `v2.1.3: Cluster-Compat-Fixes — runtimeClassName: nvidia entfernt (bypassed Olares-HAMi, "No compatible compute resources"), nodeSelector olares-worker entfernt (Node heißt "olares", Pod war unschedulbar), Chart dem Market hinzugefügt (fehlte → 404), upgradeDescription korrigiert. v2.1.0: Fix Helm ownership metadata on ConfigMap. v2.0.9: ConfigMap für env vars (hot-reload via kubectl edit configmap). v2.0.8: Removed --kv-offloading-size + --quantization. FP8-only AWQ at 200k. v2.0.2: --kv-cache-dtype-skip-layers sliding_window + --calculate-kv-scales. Renamed to "AIM Gemma4 26B-A4B vLLM". v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0, triton_attn, fp8 KV, gemma4 tool calling.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -82,7 +82,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.6.5",
+      version: "1.6.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -107,7 +107,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.6.5: Fixed deployment title to 'Qwen3 Embedding'. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.3: Category update — moved to AI Agents. v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.6: Fixed rolling update strategy (maxSurge=0, maxUnavailable=1) to prevent pod anti-affinity deadlock on restart. Increased revisionHistoryLimit to 3 for rollback safety. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `v1.6.6: Version alignment — Chart/Chart-Manifest/Root-Manifest hatten 1.5.6/1.5.6/1.6.5 (Golden-Rule-Verletzung). Chart wird jetzt sauber aus dem embedding/-Ordner gepackt (vorher Repo-Root gezippt, 460 KB → 6 KB). Keine funktionalen Änderungen. v1.6.5: Fixed deployment title to 'Qwen3 Embedding'. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.3: Category update — moved to AI Agents. v1.6.2: Version bump to sync with Olares. Simplified deployment — removed rollingUpdate strategy (now Recreate), fixed pod anti-affinity deadlock on restart. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
