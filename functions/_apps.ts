@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.1.7",
+      version: "2.1.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 + MTP Speculative Decoding via vLLM — optimized for coding & agentic workflows" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.1.7: HF_TOKEN auf .Values.olaresEnv.HF_TOKEN + envs-Sektion (app-service v3: "apiVersion=v3 apps must not use OLARES_USER_* names in chart files"). v2.1.6: replicas via .Values.workloads.aimllmgemma4vllm.replicaCount (v3-Validation). v2.1.5: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v2.1.4: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v2.1.3: runtimeClassName: nvidia + nodeSelector olares-worker entfernt, Chart dem Market hinzugefügt. v2.1.0: Fix Helm ownership metadata on ConfigMap. v2.0.9: ConfigMap für env vars. v2.0.8: FP8-only AWQ at 200k. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0, triton_attn, fp8 KV, gemma4 tool calling.`,
+        `v2.1.8: accelerator: [{mode: nvidia}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). Install benötigt freie GPU (~22.5 GB VRAM) — nicht parallel zu aimqwen36llama. v2.1.7: HF_TOKEN via .Values.olaresEnv + envs (v3: OLARES_USER_* verboten). v2.1.6: replicas via .Values.workloads (v3-Validation). v2.1.5: Olares-Dependency >=1.12.6-0. v2.1.4: Migrate OlaresManifest v2 → v3. v2.1.3: runtimeClassName + nodeSelector entfernt, Chart dem Market hinzugefügt. v2.1.0: Fix Helm ownership metadata. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -82,7 +82,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.6.9",
+      version: "1.7.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -107,7 +107,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.6.9: deployment.replicas auf .Values.workloads.aimembqwen3vino.replicaCount umgestellt (app-service v3-Validation: replicas muss aus values.yaml workloads.<name>.replicaCount stammen). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
