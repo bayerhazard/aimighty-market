@@ -403,10 +403,10 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.3.0",
+      version: "1.3.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { "en-US": "AIM Qwen3.6 35B A3B" },
-      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP Spec Decoding - Reasoning" },
+      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP - Reasoning - Fresh Build" },
       fullDescription:
         `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
 with only ~3B active parameters per token. Served via llama.cpp
@@ -431,7 +431,7 @@ with only ~3B active parameters per token. Served via llama.cpp
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.`,
-      upgradeDescription: { "en-US": "v1.3.0: Quant-Upgrade Q3_K_XL -> IQ4_XS (4-bit quality). Reasoning ON. Sampling + batch-size tuning. MTP acceptance 48% -> 68%." },
+      upgradeDescription: { "en-US": "v1.3.1: Fresh llama-server build from buun-llama-cpp master (Jul 25). CUDA 13.1, sm_120. +10% gen speed, +210% prompt processing." },
       appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP Spec Decoding - Reasoning" },
       categories: ["LLM Chat"],
       developer: "Aimighty",
