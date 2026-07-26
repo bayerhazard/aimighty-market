@@ -403,34 +403,36 @@ Optimized for coding and agentic workflows on Olares One.
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.2.0",
+      version: "1.3.0",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { "en-US": "AIM Qwen3.6 35B A3B" },
-      description: { "en-US": "Qwen3.6-35B-A3B - MTP Spec Decoding - turbo4 KV" },
+      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP Spec Decoding - Reasoning" },
       fullDescription:
         `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
 with only ~3B active parameters per token. Served via llama.cpp
 (spiritbuun buun-llama-cpp fork) on NVIDIA RTX 5090.
 
 **Key Parameters**
+- Quant: UD-IQ4_XS (4-bit, ~18 GB) — superior quality vs Q3
 - Spec Decoding: Built-in MTP (3 speculative tokens, no drafter needed)
 - KV Cache: turbo4 (spiritbuun fork, 4-bit)
 - Context: 200,000 tokens
-- Reasoning: off
+- Reasoning: ON (budget 4096) — thinking blocks before answers
 - Flash Attention: on
-- GPU: full offload (-ngl all), 16 of 24 GB VRAM used
+- GPU: full offload (-ngl all), 20.5 of 24 GB VRAM used
+- Sampling: temp=0.6, top-p=0.95, top-k=20 (Qwen3.6 precise coding)
 
 **Performance (RTX 5090 Blackwell, 24 GB)**
-- Coding (2000 tok): ~230 tok/s
-- Poetry (2000 tok): ~184 tok/s
+- Coding (2000 tok, reasoning on): ~201 tok/s
+- MTP Acceptance: 67.6% (up from 48.1% with Q3_K_XL)
 - Needle Haystack: 100% (25/25)
 - Tool-Calling: 100% (9/9)
 
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.`,
-      upgradeDescription: { "en-US": "v1.2.0: Conversion to V3 OlaresManifest format." },
-      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - MTP Spec Decoding - turbo4 KV" },
+      upgradeDescription: { "en-US": "v1.3.0: Quant-Upgrade Q3_K_XL -> IQ4_XS (4-bit quality). Reasoning ON. Sampling + batch-size tuning. MTP acceptance 48% -> 68%." },
+      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP Spec Decoding - Reasoning" },
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
