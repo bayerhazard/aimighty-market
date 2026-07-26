@@ -341,7 +341,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.0.1",
+      version: "3.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
       description: { en: "Qwen3.6-27B - UD-Q4_K_XL MTP + Vision - Agent-Optimized" },
