@@ -341,43 +341,34 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.5.1",
+      version: "3.0.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
-      title: { en: "AIM Qwen3.6 27B Beellama" },
-      description: { en: "Qwen3.6-27B beellama - UD-Q4_K_XL - DFlash Q4_K_M - q4_0 KV - parallel 1 - prompt cache" },
+      title: { en: "AIM Qwen3.6 27B" },
+      description: { en: "Qwen3.6-27B - UD-Q4_K_XL MTP + Vision - Agent-Optimized" },
       fullDescription:
-        `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
+        `Qwen3.6-27B (dense, 27B) — Unified Agent Stack with spiritbuun buun-llama-cpp.
 
-Optimized for coding and agentic workflows on Olares One.
+**Model**: unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q4_K_XL (17.9 GB, MTP head built-in)
+**Engine**: Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026), CUDA 13.1 + SSL
+**Spec Decoding**: Built-in MTP (3 speculative tokens, no separate drafter needed)
+**Vision**: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input, ~555ms)
+**KV Cache**: q4_0 K / turbo4 V (spiritbuun fork)
+**Context**: 160K tokens (reduced from 200K for Vision VRAM headroom)
+**Reasoning**: OFF (Agent-optimized — reliable tool-calls from max_tokens=256)
 
-**Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, Q4_K_XL quantization)
-**Draft**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
-**Engine**: ghcr.io/anbeeld/beellama.cpp:server-cuda-preview-v0.4.1 (--spec-type draft-dflash)
+**Performance (RTX 5090 Blackwell, 24 GiB):**
+- Text Generation: ~250-300 tok/s (MTP 1.4-2x speedup on dense models)
+- Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
+- Vision: ~555ms swap overhead, correct image analysis
+- VRAM: ~23 GB / 24.5 GB
 
-**Server-side Flags (v2.5.1):**
-- --reasoning on --reasoning-budget 4096
-- --reasoning-loop-guard force-close
-- --reasoning-loop-interventions 2
-- --ctx-checkpoints 8
-- --ctx-size 200000 --threads 16
-- --parallel 1 (draft-dflash multi-slot workaround)
-- --cache-ram -1 (Prompt-Caching aktiviert)
-- --cache-type-k/v q4_0 (kvarn4 incompatible with draft-dflash)
-- --spec-type draft-dflash --fit off
-- --flash-attn on --jinja --no-mmap --mlock
-- --batch-size 2048 -ub 512
-- CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi requirement)
-- check-auth: command ["true"] (immune to app-service webhook overwrite)
-
-**Performance (RTX 5090 Blackwell, 24 GiB, --parallel 2):**
-- HTML Space Invaders (2000 tok): ~101 tok/s
-- Creative Poem (2000 tok): ~60 tok/s
-- Parallel Stress (2 concurrent): 1.46x combined throughput
-- Needle Haystack: 96% (24/25)
-- Agentic Tool-Calling: 100% (9/9)`,
+**API**: OpenAI-compatible at port 8000.
+Tool Calling via built-in Qwen3 jinja template.
+Vision via image_url in content array.
+For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
       upgradeDescription:
-        `v2.5.1: Runtime-Fixes nach Live-Debugging — CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi cudaMalloc cap), parallel 2→1 (v0.4.1 draft-dflash multi-slot Bug), KV kvarn4→q4_0 (kvarn+dflash rollback failure), --fit off. DFlash Acceptance 100% (26/26). v2.5.0: Fix beellama v0.4.x compat — --spec-type draft-dflash, fork-private --spec-dflash-cross-ctx entfernt. Fix OlaresManifest v3 Struktur. Fix values.yaml olaresEnv Default. DFlash-Drafter IQ4_XS → Q4_K_M. apiTimeout 3600. v2.4.0: beellama.cpp v0.3.2 → v0.4.1, HAMi GPU fix, threads 16. v2.3.3: parallel 2→1, cache-ram→0 (OOM). v2.3.0: check-auth command:["true"] (Webhook compat). v2.2.6: removed nvidia.com/gpumem. v2.0.0: Cleanup — reasoning-budget-message entfernt.`,
-      categories: ["LLM Chat"],
+        `v3.0.0: Unified Agent Stack mit spiritbuun (wie aimqwen3635bllama v1.4.0). Wechsel von beellama+DFlash zu spiritbuun+MTP (built-in, kein Drafter). UD-Q4_K_XL mit MTP head. Vision aktiviert (mmproj-gpu-swap). Reasoning OFF (Agent-optimiert). ctx 200K→160K. KV q4_0→q4_0 K / turbo4 V. Fresh Binary (CUDA 13.1 + SSL). Custom chat-template entfernt (built-in --jinja).`,
+      categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -393,7 +384,7 @@ Optimized for coding and agentic workflows on Olares One.
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen36llama", title: { en: "Qwen3.6 27B" }, port: 8000, host: "aimqwen36llama", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen36llama", title: { en: "AIM Qwen3.6 27B" }, port: 8000, host: "aimqwen36llama", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
