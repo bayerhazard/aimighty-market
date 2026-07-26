@@ -458,7 +458,7 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.7.13",
+      version: "1.8.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
@@ -483,18 +483,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.7.13: Fixed assistant chat layout — tool calls and chat answer now stack vertically (were rendering in one horizontal line). Added flex:1 to assistant-turn-blocks so it fills the width beside the avatar.
-v1.7.12: Fixed chat layout — removed CSS conflict between Wings-Premium avatar layout and Classic bubble layout. Fixed JS syntax error. Added responsive mobile adaptation.
-v1.7.11: Fixed agent connection — removed HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY that caused the health check to probe a remote gateway (blocked by Olares envoy sidecar). Now runs the agent in-process exactly like hermes-webui. Added WANTED_UID/WANTED_GID for proper file ownership.
-v1.7.10: Fixed Hermes gateway connection — added HERMES_API_URL and HERMES_WEBUI_GATEWAY_API_KEY env vars. The WebUI now connects to the Hermes agent gateway for model listing, session loading, and chat.
-v1.7.9: Fixed agent source discovery — added HERMES_WEBUI_AGENT_DIR and HERMES_WEBUI_AUTO_INSTALL env vars. The WebUI now explicitly finds the hermes-agent source code and auto-installs dependencies.
-v1.7.8: Theme overhaul — merged Skin into unified Theme (Hell, Dunkel, Neon, System). Fixed theme picker always showing "Hell" (localStorage key mismatch: pre-paint wrote wings-theme but panels.js reads hermes-theme). Fixed Service Worker cache serving stale assets (bumped cache suffix w172→w173, included .git for unique WEBUI_VERSION).
-v1.7.7: Re-deploy: fix market source sync (chartrepo was not ready during initial 1.7.6 sync).
-v1.7.6: Re-deploy: force Olares hash re-sync after chartrepo timeout on v1.7.5.
-v1.7.5: Re-deploy: force Olares hash re-sync after chartrepo timeout on v1.7.4.
-v1.7.4: Three chat rendering fixes: msg-foot always visible (opacity:1), tool/thinking cards render individually (no collapsed Worklog group), added _italic_ / __bold__ / ___bold+italic___ underscore emphasis support in renderMd.
-v1.7.3: Forced hash bump to retry Olares sync (chartrepo timeout).
-v1.7.2: Mobile input +5px, pill full-width, sidebar -10%, resize handle thinner, context menu cleanup, model text font-weight 400, SW cache invalidation (w170).`,
+        `v1.8.0: Fixed assistant chat layout — tool calls and chat answer now stack vertically (were rendering in one horizontal line).`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
