@@ -341,38 +341,36 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.2.3",
+      version: "2.6.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B beellama - Q4_K_XL + DFlash Q4_K_M + kvarn4 KV + Vision - Agent-Optimized" },
+      description: { en: "Qwen3.6-27B beellama - UD-Q3_K_XL + Spiritbuun DFlash + turbo3 KV + Vision" },
       fullDescription:
-        `Qwen3.6-27B beellama — UD-Q4_K_XL (17.6 GB) + DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
+        `Qwen3.6-27B beellama — UD-Q3_K_XL (14.5 GB) + Spiritbuun DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
 Optimized for agentic workflows on Olares One.
 
-**Model**: unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, Q4_K_XL quantization)
-**Draft**: Anbeeld/Qwen3.6-27B-DFlash-Q4_K_M (1.0 GB, upstream dflash architecture)
-**Engine**: ghcr.io/anbild/beellama.cpp:server-cuda-preview-v0.4.1 (--spec-type draft-dflash)
+**Model**: unsloth/Qwen3.6-27B-UD-Q3_K_XL (14.5 GB, non-MTP)
+**Draft**: spiritbuun/Qwen3.6-27B-DFlash-GGUF:dflash-draft-3.6-q4_k_m (1.0 GB, legacy dflash architecture)
+**Engine**: aamsellem/beellama-cpp:0.1.3-rc1 (custom sm_120 build for RTX 5090 Blackwell)
 
-**Server-side Flags (v3.1.0):**
-- --reasoning off (Agent-optimized — reliable tool-calls from max_tokens=256)
-- --ctx-size 200000 --threads 16
-- --parallel 1 (draft-dflash multi-slot workaround)
-- --cache-ram -1 (Prompt-Caching aktiviert)
-- --cache-type-k/v q4_0 (kvarn4 incompatible with draft-dflash, Bug #93)
-- --spec-type draft-dflash --fit off
+**Server-side Flags (v2.6.0):**
+- --spec-type dflash --spec-dflash-cross-ctx 1024 (legacy DFlash API)
+- --cache-type-k/v turbo3 (Walsh-Hadamard 3-bit, scales linearly with context)
+- --batch-size 2048 --ubatch-size 2048
+- --fit off --cache-ram -1 --ctx-checkpoints 8
 - --flash-attn on --jinja --no-mmap --mlock
-- --batch-size 2048 -ub 512
+- Vision via --mmproj with CPU offload (--no-mmproj-offload)
 - CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi requirement)
 - Custom agentic chat template (multi-turn tool-call fix)
 
-**Performance (RTX 5090 Blackwell, 24 GiB):**
-- DFlash Acceptance: 100% (26/26)
-- Text Generation: ~100 tok/s
-- Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
-- Needle Haystack: 96% (24/25)`,
+**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx):**
+- Warm prompt: ~125 t/s
+- Text Generation: ~44-61 t/s
+- VRAM: ~21 GB (86%) — stable with headroom
+- Vision: active (clip encoder, CPU offload)`,
       upgradeDescription:
-        `v3.2.0: kvarn4 KV wiederherestellt (alte DFlash-Syntax mit v0.3.2 Image). Reasoning OFF. Simple Vision via --no-mmproj-offload (mmproj auf CPU). DFlash 100% acceptance, Q4_K_XL, 200K ctx.`,
+        `v2.6.0: Foundation-Update — aamsellem/beellama-cpp:0.1.3-rc1 (custom sm_120). Q3_K_XL (14.5 GB). Spiritbuun DFlash. turbo3 KV. Vision.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -514,4 +512,4 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 ];
 
 // redeploy timestamp: 1784998158
-// redeploy timestamp: 1784998159
+// redeploy timestamp: 1785135864
