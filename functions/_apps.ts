@@ -22,25 +22,21 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.2.0",
+      version: "2.2.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
-      description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 via vLLM (gemma4 tag) — optimized for coding & agentic workflows" },
+      description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 via vLLM (gemma4-0505-cu130) — optimized for coding & agentic workflows" },
       fullDescription:
         `Gemma 4 26B A4B – Multimodales LLM (Text + Image) mit QAT-AWQ-INT4 Quantisierung auf vLLM.
 
 **Model**
 cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
 200K Token Kontext. Multimodal (Text + Image).
-Ohne MTP Speculative Decoding (gemma4 Docker Tag — transformers zu alt für Assistant Model).
 
 **Inference Engine**
-vLLM gemma4 Tag (CUDA 12.9, RTX 5090 Blackwell SM12.0).
+vLLM gemma4-0505-cu130 Tag (CUDA 13.0, Blackwell SM12.0, Mai 2026).
 fp8 KV-Cache. enforce-eager (torch.compile inkompatibel mit Gemma4 26B MoE).
 GPU VRAM: ~15 GB belegt.
-
-**Performance (RTX 5090 Blackwell)**
-Performance wird beim ersten Run ermittelt.
 
 **API**
 OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
@@ -53,7 +49,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.2.0: vLLM gemma4 tag (CUDA 12.9, transformers mit Gemma4-Support). Ohne Draft-MTP (transformers zu alt für assistant model). enforce-eager (torch.compile inkompatibel mit Gemma4 26B MoE). owner: aimighty fix (GPUBinding). v2.1.8: accelerator: [{mode: nvidia}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). Install benötigt freie GPU (~22.5 GB VRAM) — nicht parallel zu aimqwen36llama. v2.1.7: HF_TOKEN via .Values.olaresEnv + envs (v3: OLARES_USER_* verboten). v2.1.6: replicas via .Values.workloads (v3-Validation). v2.1.5: Olares-Dependency >=1.12.6-0. v2.1.4: Migrate OlaresManifest v2 → v3. v2.1.3: runtimeClassName + nodeSelector entfernt, Chart dem Market hinzugefügt. v2.1.0: Fix Helm ownership metadata. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP spec decoding, vLLM v0.23.0.`,
+        `v2.2.1: gemma4 tag→gemma4-0505-cu130 (Blackwell CUDA 13.0, Mai 2026). Fixes weight_packed MoE Expert-Loading crash. v2.2.0: vLLM gemma4 tag (CUDA 12.9, transformers mit Gemma4-Support). Ohne Draft-MTP. enforce-eager. owner: aimighty fix. v2.1.8: accelerator: [{mode: nvidia}] ergänzt. v2.1.7: HF_TOKEN via .Values.olaresEnv. v2.1.6: replicas via .Values.workloads. v2.1.5: Olares-Dependency >=1.12.6-0. v2.1.4: Migrate OlaresManifest v2 → v3. v2.1.3: runtimeClassName + nodeSelector entfernt. v2.1.0: Fix Helm ownership. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP, vLLM v0.23.0.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
