@@ -341,36 +341,34 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "2.6.0",
+      version: "1.4.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B beellama - UD-Q3_K_XL + Spiritbuun DFlash + turbo3 KV + Vision" },
+      description: { en: "Qwen3.6-27B beellama (Aimighty) - UD-Q3_K_XL + Spiritbuun DFlash + turbo3 KV + Vision" },
       fullDescription:
-        `Qwen3.6-27B beellama — UD-Q3_K_XL (14.5 GB) + Spiritbuun DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
+        `Qwen3.6-27B beellama (Aimighty) — UD-Q3_K_XL (14.5 GB) + Spiritbuun DFlash Q4_K_M (1 GB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
-Optimized for agentic workflows on Olares One.
+Optimized for coding and agentic workflows on Olares One. Based on the proven
+aamsellem/beellama-cpp:0.1.3-rc1 image (custom sm_120 Blackwell build).
 
-**Model**: unsloth/Qwen3.6-27B-UD-Q3_K_XL (14.5 GB, non-MTP)
-**Draft**: spiritbuun/Qwen3.6-27B-DFlash-GGUF:dflash-draft-3.6-q4_k_m (1.0 GB, legacy dflash architecture)
-**Engine**: aamsellem/beellama-cpp:0.1.3-rc1 (custom sm_120 build for RTX 5090 Blackwell)
-
-**Server-side Flags (v2.6.0):**
-- --spec-type dflash --spec-dflash-cross-ctx 1024 (legacy DFlash API)
-- --cache-type-k/v turbo3 (Walsh-Hadamard 3-bit, scales linearly with context)
-- --batch-size 2048 --ubatch-size 2048
-- --fit off --cache-ram -1 --ctx-checkpoints 8
-- --flash-attn on --jinja --no-mmap --mlock
-- Vision via --mmproj with CPU offload (--no-mmproj-offload)
-- CUDA_DEVICE_MEMORY_LIMIT_0=30000m (HAMi requirement)
-- Custom agentic chat template (multi-turn tool-call fix)
+**Model:** unsloth/Qwen3.6-27B-UD-Q3_K_XL (14.5 GB, non-MTP variant)
+**Draft:** spiritbuun dflash-draft-3.6-q4_k_m (1 GB)
+**Engine:** aamsellem/beellama-cpp:0.1.3-rc1 — custom Blackwell sm_120 build
+**KV Cache:** turbo3 (3-bit Walsh-Hadamard rotated, scales linearly with context)
+**Vision:** mmproj-F16 with CPU offload (--no-mmproj-offload)
+**Speculation:** DFlash with --spec-dflash-cross-ctx 1024
+**Context:** 200K tokens with prompt cache
+**Batch:** 2048 / 2048 (equal)
+**Chat Template:** Custom agentic Jinja2 template
+**API:** OpenAI-compatible at port 8000
 
 **Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx):**
 - Warm prompt: ~125 t/s
-- Text Generation: ~44-61 t/s
+- Text generation: ~44-61 t/s
 - VRAM: ~21 GB (86%) — stable with headroom
 - Vision: active (clip encoder, CPU offload)`,
       upgradeDescription:
-        `v2.6.0: Foundation-Update — aamsellem/beellama-cpp:0.1.3-rc1 (custom sm_120). Q3_K_XL (14.5 GB). Spiritbuun DFlash. turbo3 KV. Vision.`,
+        `v1.4.0: Foundation-Release — OlaresManifest v3. aamsellem/beellama-cpp:0.1.3-rc1 (custom sm_120). unsloth Q3_K_XL (14.5 GB). spiritbuun DFlash. turbo3 KV. Vision.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
