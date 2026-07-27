@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.3.0",
+      version: "2.4.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma4 26B-A4B vLLM" },
       description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 via vLLM — optimized for coding & agentic workflows" },
@@ -31,12 +31,19 @@ export const apps: AppManifest[] = [
 
 **Model**
 cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
-200K Token Kontext. Multimodal (Text + Image, kein Video).
+96K Token Kontext. Multimodal (Text + Image, kein Video).
 
 **Inference Engine**
-vLLM v0.23.1rc cu129, SHA-gepinnt (g4080263bb, enthaelt PR #40708 weight_packed-Fix).
-fp8 KV-Cache. enforce-eager (torch.compile inkompatibel mit Gemma4 26B MoE).
-GPU VRAM: ~22.5 GB belegt.
+vLLM v0.23.1rc cu129, SHA-gepinnt (g4080263bb).
+fp8 KV-Cache. CUDAGraphs + torch.compile aktiv.
+MTP Speculative Decoding (3 Tokens, google/gemma-4-26B-A4B-it-assistant).
+GPU VRAM: ~23.0 GB belegt.
+
+**Performance (RTX 5090 Blackwell, MTP Spec-Decoding)**
+- Coding (2000 tok): ~419 tok/s
+- Creative (2000 tok): ~280 tok/s
+- Needle Haystack: 25/25 (100%)
+- Agentic Tool-Calling: 8/8 (100%)
 
 **API**
 OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
@@ -49,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (Model-Download ~15 GB + Cache)
 CPU: 4-16 Kerne`,
       upgradeDescription:
-        `v2.3.0: Voller 200K-Kontext zurueck — der 200k-Crash kam nicht vom KV-Bedarf, sondern vom MM-Video-Profiler (3.5 GiB). Hybride SWA-Amortisation: nur 5 Full-Attention-Layer zahlen Langkontext (~10 KB/Tok fp8), Pool 267k Tokens. TurboQuant evaluiert/verworfen (Build inkompatibel mit Gemma4). cpu-offload nicht noetig. v2.2.2: Olares 1.12.6 Reparatur — Image→SHA-gepinnter cu129-nightly g4080263bb (PR #40708 weight_packed-Fix; gemma4-0505-cu130 war zu alt). KV-Cache-Fix: video:0 im limit-mm-per-prompt, max-num-batched-tokens 8192, gpu-mem-util 0.98. Verifiziert: Pod 2/2, Inference OK. v2.2.1: gemma4 tag→gemma4-0505-cu130 (Blackwell CUDA 13.0, Mai 2026). v2.2.0: vLLM gemma4 tag (CUDA 12.9, transformers mit Gemma4-Support). Ohne Draft-MTP. enforce-eager. owner: aimighty fix. v2.1.8: accelerator: [{mode: nvidia}] ergänzt. v2.1.7: HF_TOKEN via .Values.olaresEnv. v2.1.6: replicas via .Values.workloads. v2.1.5: Olares-Dependency >=1.12.6-0. v2.1.4: Migrate OlaresManifest v2 → v3. v2.1.3: runtimeClassName + nodeSelector entfernt. v2.1.0: Fix Helm ownership. v2.0.0: Restructure — cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 + MTP, vLLM v0.23.0.`,
+        `v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
