@@ -454,6 +454,58 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   },
   {
     metadata: {
+      name: "aimqwen36vllm",
+      version: "1.1.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36vllm/main/icon.png",
+      title: { en: "AIM Qwen3.6 27B vLLM" },
+      description: { en: "Qwen3.6-27B via vLLM — text-only, TurboQuant-KV, MTP, 175K Kontext" },
+      fullDescription:
+        `Qwen3.6-27B auf vLLM — Text-only Modell (drawais/Qwen3.6-27B-AWQ-INT4) ohne Vision-Tower.
+
+**Modell:** drawais/Qwen3.6-27B-AWQ-INT4 (Qwen3_5ForCausalLM, ~17.7 GiB VRAM)
+**Engine:** vllm/vllm-openai cu129-nightly, SHA-gepinnt (g4080263bb)
+**KV-Cache:** TurboQuant 3-bit (turboquant_3bit_nc)
+**Speculative Decoding:** natives MTP (spec=2, Acceptance ~84.6%)
+**Kontext:** 175K Tokens (kein CPU-Offload)
+**Tool-Calling:** qwen3_xml Parser (auto + required)
+**Chat-Template:** Custom agentic Jinja2 (multi-turn tool-call Fix)
+
+**Performance (RTX 5090, 24 GiB):**
+- Decode: ~65 tok/s (MTP spec=2, kein Offload)
+- Prefill: ~325-680 tok/s
+- MTP Acceptance: 84.6% (pos0 93.7%, pos1 75.5%)
+
+**API:** OpenAI-kompatibel Port 8000`,
+      upgradeDescription:
+        `v1.1.0: Text-only Modell (drawais/Qwen3.6-27B-AWQ-INT4) statt cyankiwi/Vision-Variante. Spart ~1.9 GiB (kein Vision-Tower, kein MM-Encoder-Cache). Kontext auf 175K ohne CPU-Offload erhoht. v1.0.2: Coding-optimierte Sampling-Defaults. v1.0.1: Sweet Spot 131k+MTP. v1.0.0: Initialer vLLM-Port.`,
+      categories: ["LLM Chat"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen36vllm",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36vllm",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "50Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 3600,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen36vllm", title: { en: "AIM Qwen3.6 27B vLLM" }, port: 8000, host: "aimqwen36vllm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "24Gi", disk: "50Gi" } },
+      envs: [
+        { envName: "HF_TOKEN", required: false, applyOnChange: true, description: "Hugging Face token for model download" },
+      ],
+    },
+  },
+  {
+    metadata: {
       name: "wings",
       version: "1.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
