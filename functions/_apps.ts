@@ -455,7 +455,7 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "aimqwen36vllm",
-      version: "1.3.0",
+      version: "1.3.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36vllm/main/icon.png",
       title: { en: "AIM Qwen3.6 27B vLLM" },
       description: { en: "Qwen3.6-27B via vLLM — Vision, TurboQuant-3bit-KV, MTP, 150K Kontext" },
@@ -478,7 +478,7 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
 
 **API:** OpenAI-kompatibel Port 8000`,
       upgradeDescription:
-        `v1.3.0: Zielstack nach KV-Dtype-Evaluation: cyankiwi/Vision (drawais-Arch in keinem vLLM registriert), TurboQuant-3bit + Hot-Patch zurueck (fp8 max 30k, k3v4 max 60k, TQ-4bit 0% Acceptance), Mai-Nightly gepinnt (v0.26.0 schrumpft Pool auf 82k). 150K, 54-66 t/s. v1.2.0: fp8-Versuch, verworfen (5x Kontextverlust). v1.1.0: drawais text-only. v1.0.2: Coding-Defaults. v1.0.1: Sweet Spot 131k+MTP. v1.0.0: Initialer Port.`,
+        `v1.3.1: MM-Profiler Size-Hint Fix (Pool 156k statt 70k). v1.3.0: Zielstack nach KV-Dtype-Evaluation: cyankiwi/Vision (drawais-Arch in keinem vLLM registriert), TurboQuant-3bit + Hot-Patch zurueck (fp8 max 30k, k3v4 max 60k, TQ-4bit 0% Acceptance), Mai-Nightly gepinnt (v0.26.0 schrumpft Pool auf 82k). 150K, 54-66 t/s. v1.2.0: fp8-Versuch, verworfen (5x Kontextverlust). v1.1.0: drawais text-only. v1.0.2: Coding-Defaults. v1.0.1: Sweet Spot 131k+MTP. v1.0.0: Initialer Port.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36vllm",
