@@ -342,10 +342,10 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "1.4.2",
+      version: "1.4.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B beellama (Aimighty) - UD-Q4_K_XL + Ardenzard IQ4_XS DFlash + turbo3 KV" },
+      description: { en: "Qwen3.6-27B beellama (Aimighty) - UD-Q4_K_XL + Ardenzard IQ4_XS DFlash + turbo4 KV" },
       fullDescription:
         `Qwen3.6-27B beellama (Aimighty) — UD-Q4_K_XL (17.6 GB) + Ardenzard IQ4_XS DFlash (892 MB) on NVIDIA RTX 5090 (24 GiB VRAM).
 
@@ -355,21 +355,22 @@ aamsellem/beellama-cpp:0.1.3-rc1 image (custom sm_120 Blackwell build).
 **Model:** unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, non-MTP variant)
 **Draft:** Ardenzard IQ4_XS (892 MB)
 **Engine:** aamsellem/beellama-cpp:0.1.3-rc1 — custom Blackwell sm_120 build
-**KV Cache:** turbo3 (3-bit Walsh-Hadamard rotated, scales linearly with context)
-**Vision:** mmproj-F16 with CPU offload (--no-mmproj-offload)
+**KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated; 16.5 KB/token @ 200k = 3.2 GB)
+**Vision:** mmproj-F16 on GPU
 **Speculation:** DFlash with --spec-dflash-cross-ctx 1024
 **Context:** 200K tokens with prompt cache
 **Batch:** 2048 / 512 (processing-optimized)
 **Chat Template:** Custom agentic Jinja2 template (think-disabled)
 **API:** OpenAI-compatible at port 8000
 
-**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx):**
-- Warm prompt: ~130 t/s
-- Text generation: ~44-50 t/s (code burst >200 t/s with DFlash)
-- VRAM: ~20.4 GB (83%) — stable with headroom
-- Vision: active (clip encoder, CPU offload)`,
+**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured):**
+- Decode: ~90 t/s warm (Coding, 512 tok runs)
+- DFlash token acceptance: 37.8%
+- Prefill: ~1.150-1.185 t/s (21k prompt, cold)
+- VRAM: ~21.6 GB (88%) — ~2.5 GB headroom, stable
+- Vision encoder on GPU (clip, verified)`,
       upgradeDescription:
-        `v1.4.2: Re-Release von v1.4.1 (YAML-Einrückungsfix im deployment-Template) — erzwingt chartrepo-Re-Hydration. v1.4.1: Optimierungen nach Benchmark — Q3_K_XL→Q4_K_XL. IQ4_XS DFlash (+19% code t/s). ubatch 2048→512. ctx-checkpoints 8→4. chat-template-kwargs think-disabled.`,
+        `v1.4.3: turbo3→turbo4 KV (4-bit; Acceptance 33.9%→37.8%, Decode ~90 t/s, VRAM 21.6 GB) + Vision auf GPU. v1.4.2: Re-Release von v1.4.1 (YAML-Indent-Fix). v1.4.1: Q3_K_XL→Q4_K_XL, IQ4_XS DFlash, ubatch 512, ctx-checkpoints 4, think-disabled.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
