@@ -342,7 +342,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "1.4.1",
+      version: "1.4.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
       description: { en: "Qwen3.6-27B beellama (Aimighty) - UD-Q4_K_XL + Ardenzard IQ4_XS DFlash + turbo3 KV" },
@@ -369,7 +369,7 @@ aamsellem/beellama-cpp:0.1.3-rc1 image (custom sm_120 Blackwell build).
 - VRAM: ~20.4 GB (83%) — stable with headroom
 - Vision: active (clip encoder, CPU offload)`,
       upgradeDescription:
-        `v1.4.1: Optimierungen nach Benchmark — Q3_K_XL→Q4_K_XL. IQ4_XS DFlash (+19% code t/s). ubatch 2048→512. ctx-checkpoints 8→4. chat-template-kwargs think-disabled.`,
+        `v1.4.2: Re-Release von v1.4.1 (YAML-Einrückungsfix im deployment-Template) — erzwingt chartrepo-Re-Hydration. v1.4.1: Optimierungen nach Benchmark — Q3_K_XL→Q4_K_XL. IQ4_XS DFlash (+19% code t/s). ubatch 2048→512. ctx-checkpoints 8→4. chat-template-kwargs think-disabled.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
