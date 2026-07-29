@@ -345,32 +345,26 @@ Disk: 15 GB (model pre-baked in image)
       version: "1.4.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B beellama (Aimighty) - UD-Q4_K_XL + Ardenzard IQ4_XS DFlash + turbo4 KV" },
+      description: { en: "Qwen3.6-27B Beellama - UD-Q4_K_XL - Ardenzard DFlash - Turbo4 - Vision" },
       fullDescription:
-        `Qwen3.6-27B beellama (Aimighty) — UD-Q4_K_XL (17.6 GB) + Ardenzard IQ4_XS DFlash (892 MB) on NVIDIA RTX 5090 (24 GiB VRAM).
+        `AImighty HQ stack for Qwen3.6-27B optimized for coding and agentic workflows on Olares One.
 
-Optimized for coding and agentic workflows on Olares One. Based on the proven
-aamsellem/beellama-cpp:0.1.3-rc1 image (custom sm_120 Blackwell build).
-
-**Model:** unsloth/Qwen3.6-27B-UD-Q4_K_XL (17.6 GB, non-MTP variant)
-**Draft:** Ardenzard IQ4_XS (892 MB)
-**Engine:** aamsellem/beellama-cpp:0.1.3-rc1 — custom Blackwell sm_120 build
-**KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated; 16.5 KB/token @ 200k = 3.2 GB)
-**Vision:** mmproj-F16 on GPU
+**Model:** unsloth/Qwen3.6-27B-UD-Q4_K_XL
+**Draft:** Ardenzard/Qwen3.6-27B-DFlash-GGUF IQ4_XS
+**Engine:** aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build)
+**KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated)
+**Vision:** mmproj-F16-27B.gguf on GPU
 **Speculation:** DFlash with --spec-dflash-cross-ctx 1024
-**Context:** 200K tokens with prompt cache
+**Context:** 200K tokens with prompt cache (--cache-ram -1)
 **Batch:** 2048 / 512 (processing-optimized)
-**Chat Template:** Custom agentic Jinja2 template (think-disabled)
-**API:** OpenAI-compatible at port 8000
+**Chat Template:** Custom agentic Jinja2 template (multi-turn tool-call fix, developer role support, robust reasoning handling, think-disabled)
 
 **Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured):**
-- Decode: ~90 t/s warm (Coding, 512 tok runs)
-- DFlash token acceptance: 37.8%
-- Prefill: ~1.150-1.185 t/s (21k prompt, cold)
-- VRAM: ~21.6 GB (88%) — ~2.5 GB headroom, stable
-- Vision encoder on GPU (clip, verified)`,
+- Performance Coding: 120 t/s
+- Performance Poetry: 40 t/s
+- Vision encoder on GPU`,
       upgradeDescription:
-        `v1.4.5: cross-ctx 2048→1024 Revert (2048 war gemessene Regression: Decode 79-83 statt ~90 t/s, Acceptance 31.8-36.3% statt 37.8%). ctx-checkpoints 8 bleibt (Multi-Turn-Rollbacks). v1.4.4: cross-ctx 2048 + checkpoints 8. v1.4.3: turbo3→turbo4 KV (4-bit; Acc 33.9→37.8%, ~90 t/s) + Vision GPU.`,
+        `Initial release of Qwen3.6-27B Beellama, the high quality stack for agentic workflows.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
