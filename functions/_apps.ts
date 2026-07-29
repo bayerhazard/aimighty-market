@@ -527,9 +527,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 
 **Requirements**
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
-- Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
-      upgradeDescription:
-        `v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.`,
+  - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
