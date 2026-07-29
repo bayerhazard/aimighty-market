@@ -455,29 +455,30 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "aimqwen36vllm",
-      version: "1.2.0",
+      version: "1.3.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36vllm/main/icon.png",
       title: { en: "AIM Qwen3.6 27B vLLM" },
-      description: { en: "Qwen3.6-27B via vLLM — text-only, fp8-KV, MTP, 131K Kontext" },
+      description: { en: "Qwen3.6-27B via vLLM — Vision, TurboQuant-3bit-KV, MTP, 150K Kontext" },
       fullDescription:
-        `Qwen3.6-27B auf vLLM — Text-only Modell (drawais/Qwen3.6-27B-AWQ-INT4) ohne Vision-Tower.
+        `Qwen3.6-27B auf vLLM — mit Vision (cyankiwi/Qwen3.6-27B-AWQ-INT4, Qwen3_5ForConditionalGeneration).
 
-**Modell:** drawais/Qwen3.6-27B-AWQ-INT4 (Qwen3_5ForCausalLM, ~17.7 GiB VRAM)
-**Engine:** vllm/vllm-openai v0.26.0-cu129 (stabiles Release)
-**KV-Cache:** fp8 — nahezu verlustfrei, kein Hot-Patch noetig
+**Modell:** cyankiwi/Qwen3.6-27B-AWQ-INT4 (~19.4 GiB VRAM, Vision-Tower)
+**Engine:** vllm/vllm-openai cu129-nightly, SHA-gepinnt (g4080263bb) — einziger Build mit ~152K TQ-Pool
+**KV-Cache:** TurboQuant 3-bit (turboquant_3bit_nc) + Start-Hot-Patch (PR #49798)
 **Speculative Decoding:** natives MTP (spec=2, Acceptance ~84.6%)
-**Kontext:** 131K Tokens (kein CPU-Offload)
+**Kontext:** 150K Tokens (Pool 151.9K, kein CPU-Offload)
+**Vision:** 1 Bild/Prompt (--limit-mm-per-prompt image:1, video:0)
 **Tool-Calling:** qwen3_xml Parser (auto + required)
 **Chat-Template:** Custom agentic Jinja2 (multi-turn tool-call Fix)
 
 **Performance (RTX 5090, 24 GiB):**
-- Decode: ~65 tok/s (MTP spec=2, kein Offload)
+- Decode: ~54-66 tok/s (MTP spec=2, kein Offload)
 - Prefill: ~325-680 tok/s
 - MTP Acceptance: 84.6% (pos0 93.7%, pos1 75.5%)
 
 **API:** OpenAI-kompatibel Port 8000`,
       upgradeDescription:
-        `v1.2.0: Schlanker Stack — fp8-KV statt TurboQuant-3bit (nahezu verlustfrei, Kontext 175K -> 131K), Start-Hot-Patch entfernt, Engine auf stabiles Release v0.26.0-cu129 aktualisiert. MTP spec=2 bleibt. v1.1.0: Text-only Modell (drawais) statt cyankiwi/Vision, 175K. v1.0.2: Coding-Sampling-Defaults. v1.0.1: Sweet Spot 131k+MTP. v1.0.0: Initialer vLLM-Port.`,
+        `v1.3.0: Zielstack nach KV-Dtype-Evaluation: cyankiwi/Vision (drawais-Arch in keinem vLLM registriert), TurboQuant-3bit + Hot-Patch zurueck (fp8 max 30k, k3v4 max 60k, TQ-4bit 0% Acceptance), Mai-Nightly gepinnt (v0.26.0 schrumpft Pool auf 82k). 150K, 54-66 t/s. v1.2.0: fp8-Versuch, verworfen (5x Kontextverlust). v1.1.0: drawais text-only. v1.0.2: Coding-Defaults. v1.0.1: Sweet Spot 131k+MTP. v1.0.0: Initialer Port.`,
       categories: ["LLM Chat"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36vllm",
