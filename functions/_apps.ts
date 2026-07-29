@@ -503,11 +503,11 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.9.2",
+      version: "1.9.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.2: Fixed chart image tag (1.9.0→1.9.1), fixed Docker/OCI manifest format for GHCR compatibility with Olares app-service platform validation.",
+      upgradeDescription: "v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -529,7 +529,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
 - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
       upgradeDescription:
-        `v1.8.0: Fixed assistant chat layout — tool calls and chat answer now stack vertically (were rendering in one horizontal line).`,
+        `v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
