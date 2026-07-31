@@ -342,7 +342,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.3.0",
+      version: "3.3.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
       description: { en: "Qwen3.6-27B Beellama - UD-Q4_K_XL - Ardenzard DFlash - Turbo4 - Vision" },
@@ -354,7 +354,7 @@ Disk: 15 GB (model pre-baked in image)
 **Engine:** ghcr.io/anbeeld/beellama.cpp:server-cuda13-v0.3.1 (official, native Blackwell sm_120)
 **KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated)
 **Vision:** mmproj-F16-27B.gguf on GPU
-**Speculation:** DFlash with --spec-dflash-cross-ctx 1024, adaptive draft-depth controller
+**Speculation:** DFlash with --spec-dflash-cross-ctx 1024, fixed draft depth (--no-spec-dm-adaptive --spec-draft-n-max 8)
 **Parallel Slots:** 2 (unified KV, per-request state reset, task isolation)
 **Context:** 200K tokens with prompt cache (--cache-ram -1)
 **Batch:** 2048 / 512 (processing-optimized)
@@ -366,7 +366,8 @@ Disk: 15 GB (model pre-baked in image)
 - VRAM: 23.1 GiB / 24 GiB with 2 slots
 - Vision encoder on GPU`,
       upgradeDescription:
-        `v3.3.0: Engine upgrade aamsellem 0.1.3-rc1 -> official beellama v0.3.1 (server-cuda13, native Blackwell sm_120). Fixes task-switch instability: DFlash multi-slot crash fix (issue #24), adaptive draft-depth controller now resets per-request state, stale drafter KV cleared before tool-call continuations, fused TurboQuant FlashAttention repaired for turbo4. --parallel 2 (unified KV) for task isolation: pausing task A and starting task B no longer carries state between tasks. Rollback: reinstall 3.2.5. Pairs with the LiteLLM expert (thinking off) / expert-thinking (thinking on) endpoint split for agentic workflows.`,
+        `v3.3.1: Stability fix for HAMi GPU OOM restarts. The adaptive draft-depth controller (adaptive dm profit) dynamically reallocated GPU memory at 94% VRAM and overflowed HAMi's allocator (UINT64_MAX OOM) after ~1h runtime, crashing llama-server. Fix: --no-spec-dm-adaptive --spec-draft-n-max 8 (fixed draft depth, no dynamic reallocations). Acceptance tradeoff negligible (first 8 draft tokens carry ~80% of acceptance). Decode/VRAM unchanged.
+v3.3.0: Engine upgrade aamsellem 0.1.3-rc1 -> official beellama v0.3.1 (server-cuda13, native Blackwell sm_120). Fixes task-switch instability: DFlash multi-slot crash fix (issue #24), adaptive draft-depth controller now resets per-request state, stale drafter KV cleared before tool-call continuations, fused TurboQuant FlashAttention repaired for turbo4. --parallel 2 (unified KV) for task isolation: pausing task A and starting task B no longer carries state between tasks. Rollback: reinstall 3.2.5. Pairs with the LiteLLM expert (thinking off) / expert-thinking (thinking on) endpoint split for agentic workflows.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
