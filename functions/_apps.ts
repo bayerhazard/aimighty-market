@@ -556,58 +556,6 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
       ],
     },
   },
-  {
-    metadata: {
-      name: "rewind",
-      version: "1.0.0",
-      icon: "https://raw.githubusercontent.com/bayerhazard/rewind/main/icon.png",
-      title: { en: "Rewind" },
-      description: { en: "Backup supplement — exports settings, databases, system configs" },
-      fullDescription:
-        `Rewind complements the Olares standard backup by exporting what it does NOT cover:
-
-**Layer 1 (Olares standard):** File-level backups of /Data/, /Files/Home/Code/ — encrypted, scheduled, external drive
-**Layer 2 (Rewind):** Config-level exports — settings, DBs, system configs — written to /Data/Backup/
-
-**Exports daily (03:00 UTC):**
-- App settings (env vars, entrances, domains, policies)
-- Network config (reverse proxy, FRP, overlay, hosts-file)
-- VPN config (ACLs, devices, routes, policies)
-- Integration accounts (S3, Dropbox, Drive, Tencent)
-- GPU/Compute settings (accelerators, modes, assignments)
-- Advanced/Developer settings (containerd, env, hardware)
-- Backup/Restore plan definitions
-- PostgreSQL database dumps (compressed, parallel)
-
-**Restore:**
-1. Fresh Olares + standard restore (files)
-2. Rewind UI → select date → restore (settings, DBs)
-
-**No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v1.0.0: Initial release — two-layer backup architecture, native Olares app, daily cron exports, web UI for status/restore.",
-      categories: ["Utilities", "Developer Tools"],
-      developer: "Aimighty",
-      website: "https://github.com/bayerhazard/rewind",
-      sourceCode: "https://github.com/bayerhazard/rewind",
-      supportArch: ["amd64"],
-      requiredCpu: "1",
-      requiredMemory: "512Mi",
-      requiredDisk: "10Gi",
-      requiredGpu: "0",
-      limitedCpu: "2",
-      limitedMemory: "1Gi",
-      apiTimeout: 0,
-    },
-    spec: {
-      type: "app",
-      entrance: [
-        { name: "rewind", title: { en: "Rewind" }, port: 8765, host: "rewind", authLevel: "internal", openMethod: "window" },
-      ],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "1", memory: "512Mi", disk: "10Gi" } },
-    },
-  },
 ];
 
 // redeploy timestamp: 1784998158
