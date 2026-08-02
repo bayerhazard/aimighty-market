@@ -504,11 +504,11 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.9.8",
+      version: "1.9.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.8: Runde 2 (5 Fixes: gateway-terminal-persistence, qwen-reasoning, title-echo, pending-merge, stale-workspace-recovery) + Backlog-Umsetzung (Inline-Timeout-Countdown im Composer, Workspace-Pille Basic Mode, Touch-Target-Audit, Keyboard-Dismissal, Swipe-Navigation). v1.9.7: Runde 1 (9 Fixes: share-media LFI/XSS, ts/tsx MIME, atomic config writes, SSE relay apperror close, scroll preservation, LRU grace, stale approval badge, terminal-error timing/seal, gateway approvals by run ID). v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
+      upgradeDescription: "v1.9.9: Streaming-Fix (sichtbares progressives Rendering bei schnellem lokalen LLM, fade_text_effect default ON). v1.9.8: Runde 2 (5 Fixes) + Backlog-Umsetzung. v1.9.7: Runde 1 (9 Fixes: share-media LFI/XSS, ts/tsx MIME, atomic config writes, SSE relay apperror close, scroll preservation, LRU grace, stale approval badge, terminal-error timing/seal, gateway approvals by run ID). v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
