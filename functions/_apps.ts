@@ -504,11 +504,11 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.9.6",
+      version: "1.9.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
+      upgradeDescription: "v1.9.7: Upstream bugfix port (9 fixes: share-media LFI/XSS, ts/tsx MIME, atomic config writes, SSE relay apperror close, scroll preservation, LRU grace, stale approval badge, terminal-error timing/seal, gateway approvals by run ID). v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
