@@ -608,6 +608,65 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
       options: { resources: { cpu: "1", memory: "512Mi", disk: "10Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aimqwen3ttsvllm",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
+      title: { en: "AIM Qwen3 TTS 1.7B" },
+      description: { en: "Qwen3-TTS-12Hz via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 10 languages" },
+      fullDescription:
+        `**Qwen3-TTS-12Hz-1.7B** — Alibaba's latest open text-to-speech model, served via vLLM-Omni with a full OpenAI-compatible API.
+
+**Model**
+Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (Apache-2.0, commercial use allowed). End-to-end discrete multi-codebook LM architecture at 12 Hz codec rate.
+
+**Inference Engine**
+vLLM-Omni v0.24.0 (stable). OpenAI-compatible /v1/audio/speech + /v1/audio/voices.
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/speech, /v1/models, /v1/audio/voices
+- 9 preset speakers + natural-language style instructions (emotion, speed, tone)
+- 10 languages (ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT)
+- Extreme low-latency streaming (first audio packet after a single character, ~97 ms e2e)
+- Voice cloning via Qwen3-TTS-12Hz-1.7B-Base (switch MODEL_NAME in chart values)
+- Web dashboard for quick testing
+
+**API Example**
+bash
+curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application/json" \\
+  -d '{"model": "qwen3-tts", "input": "Guten Tag!", "voice": "ryan", "language": "German", "instructions": "Sprich fröhlich"}' \\
+  -o output.wav
+
+**Resource Usage**
+GPU: 1× NVIDIA (~5-8 GB VRAM)
+RAM: 8 GB, CPU: 2 cores
+Disk: 20 GB (model cache, HF_HOME)`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.0, OpenAI-compatible /v1/audio/speech, Web Dashboard.`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
+      sourceCode: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "8Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "8",
+      limitedMemory: "16Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen3ttsvllm", title: { en: "Qwen3-TTS Dashboard" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
