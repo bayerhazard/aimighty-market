@@ -142,21 +142,22 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "1.6.5",
+      version: "1.7.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 Reranker" },
-      description: { en: "Qwen3-Reranker-0.6B via vllm" },
+      description: { en: "Qwen3-Reranker-0.6B via vllm (native rerank)" },
       fullDescription:
-        `Aimighty Reranker deploys Qwen3-Reranker-0.6B using vllm on NVIDIA RTX 5090 (Blackwell).
+        `Aimighty Reranker deploys Qwen3-Reranker-0.6B using vLLM on NVIDIA RTX 5090 (Blackwell).
 
 **Features**
-- /v1/rerank endpoint (OpenAI-compatible)
+- /v1/rerank endpoint (native vLLM, Jina/Cohere compatible)
 - Live monitoring dashboard on port 8080
-- FlashInfer attention backend optimized for SM120
+- vLLM v0.26.0-cu129 (pinned, immutable)
 - Prometheus metrics via /metrics
+- 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
+        `v1.7.0: Native vLLM rerank — removed Python rerank-proxy sidecar. vLLM v0.26.0-cu129 with built-in /v1/rerank serving Qwen3-Reranker-0.6B-seq-cls directly. Pinned immutable image tag. Fixed pod owner label (HAMi GPU binding). v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
