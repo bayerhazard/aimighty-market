@@ -184,7 +184,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.0.3",
+      version: "1.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
@@ -195,19 +195,19 @@ Disk: 50 GB for model cache`,
 tomaarsen/Qwen3-Reranker-0.6B-seq-cls — a 600-million-parameter cross-encoder sequence classification model, INT8 quantized via Optimum Intel for efficient CPU inference.
 
 **Inference Engine**
-OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ultra 9 275HX (Meteor Lake) CPU using Redwood/Golden Cove P-Cores.
+OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-intel 2.0.0. Runs on Intel Core Ultra 9 275HX CPU.
 
 **Key Features**
 - Jina/Cohere-compatible API endpoints: /v1/rerank, /rerank, /v1/models, /health
 - Dynamic shapes, async endpoints, and multicore scaling using OpenVINO TBB
-- Automatic model download and OpenVINO conversion on first start
+- Model pre-converted and baked into the image (deterministic, pinned build)
 - Built-in HTML dashboard on root endpoint (/)
 
 **Resource Usage**
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v1.0.3: Fixed deployment title to 'Qwen3 Reranker CPU'. v1.0.2: Category update — moved to AI Agents. v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
+        `v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
