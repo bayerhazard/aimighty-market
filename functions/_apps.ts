@@ -518,7 +518,7 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.12: Kein Hover-Wobble/Scale + kein Tooltip auf Composer-Icons. v1.9.11: Workspace-Icon-Button (Ordner-Symbol neben Anlagen-Plus). v1.9.10: Favicon-Cache-Buster. v1.9.9: Streaming-Fix (sichtbares progressives Rendering bei schnellem lokalen LLM, fade_text_effect default ON). v1.9.8: Runde 2 (5 Fixes) + Backlog-Umsetzung. v1.9.7: Runde 1 (9 Fixes: share-media LFI/XSS, ts/tsx MIME, atomic config writes, SSE relay apperror close, scroll preservation, LRU grace, stale approval badge, terminal-error timing/seal, gateway approvals by run ID). v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
+      upgradeDescription: "v1.3.3: User-Profil-Backup (Anzeigename, Bio, E-Mail, Avatar als Datei).",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -594,7 +594,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 2. Rewind UI → select date → restore (settings, DBs)
 
 **No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v1.3.3: User-Profil-Backup (Anzeigename, Bio, E-Mail, Avatar-Datei).",
+      upgradeDescription: "v1.3.3: User-Profil-Backup (Anzeigename, Bio, E-Mail, Avatar als Datei).",
       categories: ["Utilities", "Developer Tools"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/rewind",
