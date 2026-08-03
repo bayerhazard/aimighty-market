@@ -514,7 +514,7 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
   {
     metadata: {
       name: "wings",
-      version: "1.9.17",
+      version: "1.9.18",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
