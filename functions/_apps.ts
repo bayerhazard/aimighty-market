@@ -569,7 +569,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "1.2.0",
+      version: "1.2.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
       description: { en: "Backup Solution for Olares One" },
@@ -594,7 +594,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 2. Rewind UI → select date → restore (settings, DBs)
 
 **No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v1.2.0: Backup-Pfad /Rewind/<datum>/, Backup mit App-/Kategorie-Auswahl (wie Restore).",
+      upgradeDescription: "v1.2.1: hostPath-Korrektur - Backups direkt unter Rewind/<datum>.",
       categories: ["Utilities", "Developer Tools"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/rewind",
