@@ -402,7 +402,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.4.0",
+      version: "1.4.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { "en-US": "AIM Qwen3.6 35B A3B" },
       description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP + Vision - Agent-Optimized" },
@@ -417,7 +417,7 @@ with only ~3B active parameters per token. Served via llama.cpp
 - Vision: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input)
 - KV Cache: q8_0 K / turbo4 V (spiritbuun fork)
 - Context: 200,000 tokens
-- Reasoning: OFF (Agent-optimized — reliable tool-calls, longer sessions)
+- Reasoning: ON (Deep Reasoning aktiv; per Request via enable_thinking:false deaktivierbar)
 - Flash Attention: on
 - GPU: full offload (-ngl all), 19.9 of 24 GB VRAM used
 - Sampling: temp=0.6, top-p=0.95, top-k=20 (Qwen3.6 precise coding)
@@ -432,8 +432,8 @@ with only ~3B active parameters per token. Served via llama.cpp
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.
 Vision via image_url in content array.
-For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
-      upgradeDescription: { "en-US": "v1.4.0: Vision aktiviert (mmproj-gpu-swap). Reasoning OFF (Agent-optimiert: zuverlaessige Tool-Calls). SSL-Rebuild fuer HTTPS image downloads. 275 tok/s, 88.5% MTP, Tool-Calls ab max_tokens=256." },
+Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {enable_thinking: false}.`,
+      upgradeDescription: { "en-US": "v1.4.1: Reasoning ON (--reasoning on). Deep Reasoning aktiv per Default; per Request via enable_thinking:false deaktivierbar." },
       appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP + Vision - Agent-Optimized" },
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
