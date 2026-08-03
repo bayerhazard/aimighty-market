@@ -83,7 +83,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.7.1",
+      version: "1.8.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -94,13 +94,15 @@ CPU: 4-16 Kerne`,
 Qwen/Qwen3-Embedding-4B — a 4-billion-parameter embedding model from Qwen, INT8 quantized via Optimum Intel for efficient inference on consumer hardware.
 
 **Inference Engine**
-OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ultra iGPU (Arrow Lake-S) with automatic CPU fallback.
+OpenVINO 2026.2.1 + optimum-intel 2.0.0 + Hugging Face Transformers 4.55.4 (gepinnt, reproduzierbar). Runs on Intel Core Ultra iGPU (Arrow Lake-S) with automatic CPU fallback.
 
 **Key Features**
 - OpenAI-compatible API endpoints: /v1/embeddings, /v1/models, /health
-- THROUGHPUT mode with 2 parallel streams
+- THROUGHPUT mode with batched inference (concurrent requests coalesced into one forward pass)
+- Optional query-side instruction (Qwen instruct format) for better retrieval quality
+- Optional Matryoshka dimension reduction (EMBED_DIM 32..2560)
+- Cluster mode (EMBEDDER_MODE=cluster): 2 replicas spread across nodes via pod anti-affinity — uses both node CPUs
 - Async endpoints with race-condition protection
-- Cluster mode (2 pods) or single-node mode selectable at install time
 - Built-in HTML dashboard on root endpoint (/)
 
 **Resource Usage**
@@ -108,7 +110,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `v1.8.0: Performance & quality release (OpenVINO CPU, Modell unverändert INT8): Batch-Aggregator (~1.9x Durchsatz, gemessen), Instruction-Support (Qwen instruct format, +1-5% Retrieval), MRL-Dim (EMBED_DIM 32..2560), Dependencies gepinnt (optimum-intel 2.0.0 statt git@main, transformers 4.55.4, openvino 2026.2.1, torch 2.13.0), OV-Config-Bug gefixt (PERFORMANCE_HINT/NUM_STREAMS wurden ignoriert), CPU_PINNING default YES, neue Envs (INFERENCE_THREADS/MAX_LENGTH/BATCH_WINDOW_MS/INFER_TIMEOUT_SEC/DEFAULT_INSTRUCTION/EMBED_DIM), ECHTER 2-Node-Cluster: EMBEDDER_MODE=cluster rendert jetzt 2 Replicas (anti-affinity, je 1 Worker) statt 2 Worker im selben Pod. v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
@@ -134,7 +136,14 @@ Disk: 50 GB for model cache`,
         { envName: "EMBEDDER_MODE", required: false, default: "cluster", type: "string", editable: true, applyOnChange: true, description: "Deployment mode: 'cluster' = 2 pods across nodes (~48GB RAM), 'single' = 1 pod (~24GB RAM)", options: [{"title": "Cluster mode (2 pods, ~48GB RAM)", "value": "cluster"}, {"title": "Single node (1 pod, ~24GB RAM)", "value": "single"}] },
         { envName: "OV_DEVICE", required: false, default: "CPU", type: "string", editable: true, applyOnChange: true, description: "OpenVINO inference device", options: [{"title": "CPU (recommended)", "value": "CPU"}, {"title": "GPU (requires compatible driver)", "value": "GPU"}] },
         { envName: "PERFORMANCE_HINT", required: false, default: "THROUGHPUT", type: "string", editable: true, applyOnChange: true, description: "OpenVINO performance optimization mode", options: [{"title": "THROUGHPUT (maximize requests/sec)", "value": "THROUGHPUT"}, {"title": "LATENCY (minimize response time)", "value": "LATENCY"}] },
-        { envName: "NUM_STREAMS", required: false, default: "2", type: "int", editable: true, applyOnChange: true, description: "Number of parallel inference streams" },
+        { envName: "NUM_STREAMS", required: false, default: "1", type: "int", editable: true, applyOnChange: true, description: "Number of parallel inference streams (1 recommended — batching handles concurrency)" },
+        { envName: "INFERENCE_THREADS", required: false, default: "8", type: "int", editable: true, applyOnChange: true, description: "OpenVINO CPU inference threads (P-cores on Core Ultra)" },
+        { envName: "CPU_PINNING", required: false, default: "YES", type: "string", editable: true, applyOnChange: true, description: "Pin inference to CPU cores (deterministic scheduling)", options: [{"title": "YES (deterministic)", "value": "YES"}, {"title": "NO (free scheduling)", "value": "NO"}] },
+        { envName: "MAX_LENGTH", required: false, default: "8192", type: "int", editable: true, applyOnChange: true, description: "Max tokens per input text (model supports up to 32768)" },
+        { envName: "EMBED_DIM", required: false, default: "0", type: "int", editable: true, applyOnChange: true, description: "Output embedding dimension; 0 = full (2560), 32..2560 = Matryoshka (MRL) slice" },
+        { envName: "DEFAULT_INSTRUCTION", required: false, default: "", type: "string", editable: true, applyOnChange: true, description: "Optional query-side task instruction (per-request 'instruction' field overrides), e.g. 'Given a web search query, retrieve relevant passages that answer the query'" },
+        { envName: "BATCH_WINDOW_MS", required: false, default: "5", type: "int", editable: true, applyOnChange: true, description: "Coalescing window (ms) for concurrent requests — larger = more batching, higher latency" },
+        { envName: "INFER_TIMEOUT_SEC", required: false, default: "300", type: "int", editable: true, applyOnChange: true, description: "Per-request inference timeout in seconds" },
         { envName: "MODEL_NAME", required: false, default: "aimighty-embedding-4b", type: "string", editable: true, applyOnChange: true, description: "Model name exposed in the OpenAI-compatible API" },
       ],
     },
