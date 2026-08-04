@@ -518,7 +518,7 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.3.7: Gold-Akzent (AImighty-Brand), dunkle Schrift auf Gold-CTAs.",
+      upgradeDescription: "v1.3.8: DB-Backup fuer DB-gestuetzte Apps (LiteLLM) — Erkennung + pg_dump via REWIND_DB_DSN.'",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -569,7 +569,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "1.3.7",
+      version: "1.3.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
       description: { en: "Backup Solution for Olares One" },
@@ -594,7 +594,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 2. Rewind UI → select date → restore (settings, DBs)
 
 **No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v1.3.7: Gold-Akzent (AImighty-Brand), dunkle Schrift auf Gold-CTAs.",
+      upgradeDescription: "v1.3.8: DB-Backup fuer DB-gestuetzte Apps (LiteLLM) — Erkennung + pg_dump via REWIND_DB_DSN.'",
       categories: ["Utilities", "Developer Tools"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/rewind",
