@@ -404,6 +404,55 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
   },
   {
     metadata: {
+      name: "aimvoxtral3asr",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
+      title: { en: "AIM Voxtral Mini 3B ASR" },
+      description: { en: "Voxtral Mini 3B ASR via vLLM — native OpenAI-compatible /v1/audio/transcriptions" },
+      fullDescription:
+        `**Voxtral Mini 3B ASR** — Mistral's compact ASR model, served natively by vLLM with an OpenAI-compatible transcription API.
+
+**Model**
+mistralai/Voxtral-Mini-3B-2507 (BF16, ~6.5 GB weights). Offline transcription, 13 languages.
+
+**API (native, no bridge)**
+POST https://aimvoxtral3asr.<user>.olares.com/v1/audio/transcriptions
+  -F file=@audio.webm -F model=voxtral-mini-3b
+-> {"text": "..."}
+
+**Open WebUI**
+Admin -> Settings -> Audio: STT engine OpenAI, base URL https://aimvoxtral3asr.<user>.olares.com/v1, model voxtral-mini-3b.
+
+**Resource Usage (co-resident with Voxtral 4B TTS-HQ)**
+GPU: 1x NVIDIA (worker node), ~8 GB VRAM at MAX_MODEL_LEN=32768 / GPU_MEMORY_UTILIZATION=0.45. TTS (~11 GiB) + ASR (~8 GiB) ~ 19 GiB total, ~5 GiB headroom on 24 GB.
+RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
+      sourceCode: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "4Gi",
+      requiredDisk: "15Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimvoxtral3asr", title: { en: "Voxtral Mini 3B ASR" }, port: 8000, host: "aimvoxtral3asr", authLevel: "internal" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "4Gi", disk: "15Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimqwen36llama",
       version: "3.3.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
