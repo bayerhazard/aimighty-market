@@ -243,7 +243,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.2.2",
+      version: "1.3.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS HQ" },
       description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
@@ -270,7 +270,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+        `v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
