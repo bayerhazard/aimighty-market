@@ -352,7 +352,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimvoxtral4brealtime",
-      version: "1.0.1",
+      version: "1.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 4B Realtime STT" },
       description: { en: "Voxtral Realtime 4B streaming ASR via vLLM + OpenAI-compatible STT bridge" },
@@ -374,8 +374,7 @@ POST https://aimvoxtral4brealtime.<user>.olares.com/v1/audio/transcriptions
 **Resource Usage (co-resident with Voxtral 4B TTS on worker GPU)**
 GPU: 1x NVIDIA RTX 5090 (worker node), ~10 GB VRAM at MAX_MODEL_LEN=20000 (~27 min audio) / GPU_MEMORY_UTILIZATION=0.42 / CUDA_DEVICE_MEMORY_LIMIT_0=11000m.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
-      upgradeDescription:
-        `v1.0.1: Stable release on Olares One worker GPU. Fixed bytetrade owner label (was app name, broke GPUBinding match), removed the harmful CUDA_DEVICE_MEMORY_LIMIT_0, raised GPU_MEMORY_UTILIZATION to 0.70. Verified end-to-end: MAX_MODEL_LEN=20000 (~27 min audio), ~19 GB VRAM, OpenAI-compatible STT via bridge (~6 s for 21 s audio warm). Note: co-residency with BF16 TTS-HQ (~10.9 GB) on one GPU is not possible (Realtime floor ~14 GB); use int4 TTS (~3.8 GB) or a second GPU. v1.0.0: Initial release.`,
+v1.0.2: Critical fix: --override-generation-config '{"temperature":0.0}' eliminates the vLLM blank-token rut (issue #47614) that stalled all transcriptions. Plus --max-num-batched-tokens 256 (shrinks audio-encoder KV floor), --no-enable-prefix-caching, --max-num-seqs 1, util 0.50 -> ~11.7 GiB VRAM, MAX_MODEL_LEN=20000 (~27 min), stable ~6 s for 21 s audio. Co-resident with Voxtral 4B TTS-HQ (~10.9 GiB) on one 24 GB GPU: ~22.6 GiB total. v1.0.1: Stable release on Olares One worker GPU (owner label fix, CUDA cap removed).`,v1.0.1: Stable release on Olares One worker GPU. Fixed bytetrade owner label (was app name, broke GPUBinding match), removed the harmful CUDA_DEVICE_MEMORY_LIMIT_0, raised GPU_MEMORY_UTILIZATION to 0.70. Verified end-to-end: MAX_MODEL_LEN=20000 (~27 min audio), ~19 GB VRAM, OpenAI-compatible STT via bridge (~6 s for 21 s audio warm). Note: co-residency with BF16 TTS-HQ (~10.9 GB) on one GPU is not possible (Realtime floor ~14 GB); use int4 TTS (~3.8 GB) or a second GPU. v1.0.0: Initial release.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
