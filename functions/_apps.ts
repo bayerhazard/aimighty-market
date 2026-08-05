@@ -352,7 +352,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimvoxtral4brealtime",
-      version: "1.0.5",
+      version: "1.0.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 4B Realtime STT" },
       description: { en: "Voxtral Realtime 4B streaming ASR via vLLM + OpenAI-compatible STT bridge" },
@@ -375,7 +375,7 @@ POST https://aimvoxtral4brealtime.<user>.olares.com/v1/audio/transcriptions
 GPU: 1x NVIDIA RTX 5090 (worker node), ~11.7 GiB VRAM at MAX_MODEL_LEN=20000 (~27 min audio) / GPU_MEMORY_UTILIZATION=0.50.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
       upgradeDescription:
-        `v1.0.5: Fix stt-live container crash: explicit command ["python","live.py"] (args previously replaced the image CMD -> OCI error "exec: --host not found"). v1.0.4: Added LIVE streaming dashboard (Gradio, browser microphone -> streaming transcription via /v1/realtime). Second entrance aimvoxtral4brealtime-live on port 8082. v1.0.3: Added nginx web dashboard (record/upload audio -> transcription, live health status). Entrance moved to port 8080 (dashboard); /v1/* paths still reach the OpenAI-compatible bridge via the nginx proxy, so the Open WebUI STT base URL stays unchanged. v1.0.2: Critical fix: --override-generation-config '{"temperature":0.0}' eliminates the vLLM blank-token rut (issue #47614). Plus --max-num-batched-tokens 256, --no-enable-prefix-caching, --max-num-seqs 1, util 0.50 -> ~11.7 GiB VRAM, MAX_MODEL_LEN=20000 (~27 min), stable ~6 s for 21 s audio. Co-resident with Voxtral 4B TTS-HQ (~10.9 GiB): ~22.6 GiB total. v1.0.1: Stable release on Olares One worker GPU (owner label fix, CUDA cap removed).`,
+        `v1.0.6: Add dedicated Service aimvoxtral4brealtime-live (port 8082) so the live entrance host routes correctly (Olares maps entrance host -> service). v1.0.5: Fix stt-live container crash: explicit command ["python","live.py"] (args previously replaced the image CMD -> OCI error "exec: --host not found"). v1.0.4: Added LIVE streaming dashboard (Gradio, browser microphone -> streaming transcription via /v1/realtime). Second entrance aimvoxtral4brealtime-live on port 8082. v1.0.3: Added nginx web dashboard (record/upload audio -> transcription, live health status). Entrance moved to port 8080 (dashboard); /v1/* paths still reach the OpenAI-compatible bridge via the nginx proxy, so the Open WebUI STT base URL stays unchanged. v1.0.2: Critical fix: --override-generation-config '{"temperature":0.0}' eliminates the vLLM blank-token rut (issue #47614). Plus --max-num-batched-tokens 256, --no-enable-prefix-caching, --max-num-seqs 1, util 0.50 -> ~11.7 GiB VRAM, MAX_MODEL_LEN=20000 (~27 min), stable ~6 s for 21 s audio. Co-resident with Voxtral 4B TTS-HQ (~10.9 GiB): ~22.6 GiB total. v1.0.1: Stable release on Olares One worker GPU (owner label fix, CUDA cap removed).`,
 
 
       categories: ["Audio"],
