@@ -352,7 +352,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimvoxtral4brealtime",
-      version: "1.0.2",
+      version: "1.0.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 4B Realtime STT" },
       description: { en: "Voxtral Realtime 4B streaming ASR via vLLM + OpenAI-compatible STT bridge" },
@@ -375,7 +375,8 @@ POST https://aimvoxtral4brealtime.<user>.olares.com/v1/audio/transcriptions
 GPU: 1x NVIDIA RTX 5090 (worker node), ~11.7 GiB VRAM at MAX_MODEL_LEN=20000 (~27 min audio) / GPU_MEMORY_UTILIZATION=0.50.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
       upgradeDescription:
-        `v1.0.2: Critical fix: --override-generation-config '{"temperature":0.0}' eliminates the vLLM blank-token rut (issue #47614) that stalled all transcriptions. Plus --max-num-batched-tokens 256 (shrinks audio-encoder KV floor), --no-enable-prefix-caching, --max-num-seqs 1, util 0.50 -> ~11.7 GiB VRAM, MAX_MODEL_LEN=20000 (~27 min), stable ~6 s for 21 s audio. Co-resident with Voxtral 4B TTS-HQ (~10.9 GiB) on one 24 GB GPU: ~22.6 GiB total. v1.0.1: Stable release on Olares One worker GPU (owner label fix, CUDA cap removed).`,
+        `v1.0.3: Added nginx web dashboard (record/upload audio -> transcription, live health status). Entrance moved to port 8080 (dashboard); /v1/* paths still reach the OpenAI-compatible bridge via the nginx proxy, so the Open WebUI STT base URL stays unchanged. v1.0.2: Critical fix: --override-generation-config '{"temperature":0.0}' eliminates the vLLM blank-token rut (issue #47614). Plus --max-num-batched-tokens 256, --no-enable-prefix-caching, --max-num-seqs 1, util 0.50 -> ~11.7 GiB VRAM, MAX_MODEL_LEN=20000 (~27 min), stable ~6 s for 21 s audio. Co-resident with Voxtral 4B TTS-HQ (~10.9 GiB): ~22.6 GiB total. v1.0.1: Stable release on Olares One worker GPU (owner label fix, CUDA cap removed).`,
+
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
@@ -392,7 +393,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimvoxtral4brealtime", title: { en: "Voxtral Realtime STT API" }, port: 8001, host: "aimvoxtral4brealtime", authLevel: "internal", openMethod: "window" },
+        { name: "aimvoxtral4brealtime", title: { en: "Voxtral Realtime STT" }, port: 8080, host: "aimvoxtral4brealtime", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
