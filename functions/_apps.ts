@@ -341,8 +341,58 @@ Disk: 15 GB (model pre-baked in image)
   },
   {
     metadata: {
+      name: "aimvoxtral4brealtime",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
+      title: { en: "AIM Voxtral 4B Realtime STT" },
+      description: { en: "Voxtral Realtime 4B streaming ASR via vLLM + OpenAI-compatible STT bridge" },
+      fullDescription:
+        `**Voxtral Realtime 4B** — Mistral's natively streaming ASR model served via vLLM and exposed through an OpenAI-compatible REST API, ready for Open WebUI, Hermes, or any OpenAI STT client.
+
+**Model**
+mistralai/Voxtral-Mini-4B-Realtime-2602 (BF16, Apache 2.0), ~4B params (3.4B LLM + 970M causal audio encoder), 13 languages, <500ms latency, 8.7% FLEURS WER @480ms.
+
+**Architecture**
+- vllm-server (port 8000): vLLM v0.26.0-cu129 serving the Realtime WebSocket /v1/realtime (native streaming protocol)
+- stt-bridge (port 8001): FastAPI sidecar exposing the OpenAI-compatible REST surface; converts any audio (webm/ogg/mp3/m4a/wav/...) via ffmpeg to 16kHz PCM16 and streams it into /v1/realtime
+
+**OpenAI-compatible API**
+POST https://aimvoxtral4brealtime.<user>.olares.com/v1/audio/transcriptions
+  -F file=@audio.webm -F model=voxtral-realtime-4b
+-> {"text": "..."}
+
+**Resource Usage (co-resident with Voxtral 4B TTS on worker GPU)**
+GPU: 1x NVIDIA RTX 5090 (worker node), ~10 GB VRAM at MAX_MODEL_LEN=20000 (~27 min audio) / GPU_MEMORY_UTILIZATION=0.42 / CUDA_DEVICE_MEMORY_LIMIT_0=11000m.
+RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Voxtral Realtime 4B streaming ASR via vLLM v0.26.0-cu129 (WebSocket /v1/realtime) plus FastAPI bridge sidecar exposing an OpenAI-compatible POST /v1/audio/transcriptions endpoint. Tuned for co-residency with Voxtral 4B TTS on the Olares One worker GPU (MAX_MODEL_LEN=20000, GPU_MEMORY_UTILIZATION=0.42, CUDA_DEVICE_MEMORY_LIMIT_0=11000m, ~10 GB VRAM).`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
+      sourceCode: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "4Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimvoxtral4brealtime", title: { en: "Voxtral Realtime STT API" }, port: 8001, host: "aimvoxtral4brealtime", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "4Gi", disk: "20Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimqwen36llama",
-      version: "3.2.4",
+      version: "3.2.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
       description: { en: "Qwen3.6-27B Beellama - UD-Q4_K_XL - Ardenzard DFlash - Turbo4 - Vision" },
@@ -364,7 +414,7 @@ Disk: 15 GB (model pre-baked in image)
 - Performance Poetry: 40 t/s
 - Vision encoder on GPU`,
       upgradeDescription:
-        `Initial release of Qwen3.6-27B Beellama, the high quality stack for agentic workflows.`,
+        `v3.2.5: Reasoning budget raised 2048 -> 8192 tokens plus a graceful budget-exhaustion message for clean thinking-to-answer transitions. Pairs with the LiteLLM expert / expert-thinking endpoint split.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
