@@ -83,7 +83,7 @@ CPU: 4-16 Kerne`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.7.1",
+      version: "1.8.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 Embedding" },
       description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
@@ -94,13 +94,15 @@ CPU: 4-16 Kerne`,
 Qwen/Qwen3-Embedding-4B — a 4-billion-parameter embedding model from Qwen, INT8 quantized via Optimum Intel for efficient inference on consumer hardware.
 
 **Inference Engine**
-OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ultra iGPU (Arrow Lake-S) with automatic CPU fallback.
+OpenVINO 2026.2.1 + optimum-intel 2.0.0 + Hugging Face Transformers 4.55.4 (gepinnt, reproduzierbar). Runs on Intel Core Ultra iGPU (Arrow Lake-S) with automatic CPU fallback.
 
 **Key Features**
 - OpenAI-compatible API endpoints: /v1/embeddings, /v1/models, /health
-- THROUGHPUT mode with 2 parallel streams
+- THROUGHPUT mode with batched inference (concurrent requests coalesced into one forward pass)
+- Optional query-side instruction (Qwen instruct format) for better retrieval quality
+- Optional Matryoshka dimension reduction (EMBED_DIM 32..2560)
+- Cluster mode (EMBEDDER_MODE=cluster): 2 replicas spread across nodes via pod anti-affinity — uses both node CPUs
 - Async endpoints with race-condition protection
-- Cluster mode (2 pods) or single-node mode selectable at install time
 - Built-in HTML dashboard on root endpoint (/)
 
 **Resource Usage**
@@ -108,7 +110,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Template entfernt (Webhook setzt aimighty). v1.8.1: Fix check-auth CrashLoopBackOff (manual check-auth/render-envoy-config/olares-sidecar-init/olares-envoy-sidecar, check-auth command ["true"], awk statt sed). v1.8.0: Performance & quality release (OpenVINO CPU, Modell unverändert INT8): Batch-Aggregator (~1.9x Durchsatz, gemessen), Instruction-Support (Qwen instruct format, +1-5% Retrieval), MRL-Dim (EMBED_DIM 32..2560), Dependencies gepinnt (optimum-intel 2.0.0 statt git@main, transformers 4.55.4, openvino 2026.2.1, torch 2.13.0), OV-Config-Bug gefixt (PERFORMANCE_HINT/NUM_STREAMS wurden ignoriert), CPU_PINNING default YES, neue Envs (INFERENCE_THREADS/MAX_LENGTH/BATCH_WINDOW_MS/INFER_TIMEOUT_SEC/DEFAULT_INSTRUCTION/EMBED_DIM), ECHTER 2-Node-Cluster: EMBEDDER_MODE=cluster rendert jetzt 2 Replicas (anti-affinity, je 1 Worker) statt 2 Worker im selben Pod. v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
@@ -134,7 +136,14 @@ Disk: 50 GB for model cache`,
         { envName: "EMBEDDER_MODE", required: false, default: "cluster", type: "string", editable: true, applyOnChange: true, description: "Deployment mode: 'cluster' = 2 pods across nodes (~48GB RAM), 'single' = 1 pod (~24GB RAM)", options: [{"title": "Cluster mode (2 pods, ~48GB RAM)", "value": "cluster"}, {"title": "Single node (1 pod, ~24GB RAM)", "value": "single"}] },
         { envName: "OV_DEVICE", required: false, default: "CPU", type: "string", editable: true, applyOnChange: true, description: "OpenVINO inference device", options: [{"title": "CPU (recommended)", "value": "CPU"}, {"title": "GPU (requires compatible driver)", "value": "GPU"}] },
         { envName: "PERFORMANCE_HINT", required: false, default: "THROUGHPUT", type: "string", editable: true, applyOnChange: true, description: "OpenVINO performance optimization mode", options: [{"title": "THROUGHPUT (maximize requests/sec)", "value": "THROUGHPUT"}, {"title": "LATENCY (minimize response time)", "value": "LATENCY"}] },
-        { envName: "NUM_STREAMS", required: false, default: "2", type: "int", editable: true, applyOnChange: true, description: "Number of parallel inference streams" },
+        { envName: "NUM_STREAMS", required: false, default: "1", type: "int", editable: true, applyOnChange: true, description: "Number of parallel inference streams (1 recommended — batching handles concurrency)" },
+        { envName: "INFERENCE_THREADS", required: false, default: "8", type: "int", editable: true, applyOnChange: true, description: "OpenVINO CPU inference threads (P-cores on Core Ultra)" },
+        { envName: "CPU_PINNING", required: false, default: "YES", type: "string", editable: true, applyOnChange: true, description: "Pin inference to CPU cores (deterministic scheduling)", options: [{"title": "YES (deterministic)", "value": "YES"}, {"title": "NO (free scheduling)", "value": "NO"}] },
+        { envName: "MAX_LENGTH", required: false, default: "8192", type: "int", editable: true, applyOnChange: true, description: "Max tokens per input text (model supports up to 32768)" },
+        { envName: "EMBED_DIM", required: false, default: "0", type: "int", editable: true, applyOnChange: true, description: "Output embedding dimension; 0 = full (2560), 32..2560 = Matryoshka (MRL) slice" },
+        { envName: "DEFAULT_INSTRUCTION", required: false, default: "", type: "string", editable: true, applyOnChange: true, description: "Optional query-side task instruction (per-request 'instruction' field overrides), e.g. 'Given a web search query, retrieve relevant passages that answer the query'" },
+        { envName: "BATCH_WINDOW_MS", required: false, default: "5", type: "int", editable: true, applyOnChange: true, description: "Coalescing window (ms) for concurrent requests — larger = more batching, higher latency" },
+        { envName: "INFER_TIMEOUT_SEC", required: false, default: "300", type: "int", editable: true, applyOnChange: true, description: "Per-request inference timeout in seconds" },
         { envName: "MODEL_NAME", required: false, default: "aimighty-embedding-4b", type: "string", editable: true, applyOnChange: true, description: "Model name exposed in the OpenAI-compatible API" },
       ],
     },
@@ -142,21 +151,22 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "1.6.5",
+      version: "1.7.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 Reranker" },
-      description: { en: "Qwen3-Reranker-0.6B via vllm" },
+      description: { en: "Qwen3-Reranker-0.6B via vllm (native rerank)" },
       fullDescription:
-        `Aimighty Reranker deploys Qwen3-Reranker-0.6B using vllm on NVIDIA RTX 5090 (Blackwell).
+        `Aimighty Reranker deploys Qwen3-Reranker-0.6B using vLLM on NVIDIA RTX 5090 (Blackwell).
 
 **Features**
-- /v1/rerank endpoint (OpenAI-compatible)
+- /v1/rerank endpoint (native vLLM, Jina/Cohere compatible)
 - Live monitoring dashboard on port 8080
-- FlashInfer attention backend optimized for SM120
+- vLLM v0.26.0-cu129 (pinned, immutable)
 - Prometheus metrics via /metrics
+- 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
+        `v1.7.0: Native vLLM rerank — removed Python rerank-proxy sidecar. vLLM v0.26.0-cu129 with built-in /v1/rerank serving Qwen3-Reranker-0.6B-seq-cls directly. Pinned immutable image tag. Fixed pod owner label (HAMi GPU binding). v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
@@ -183,7 +193,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.0.3",
+      version: "1.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
@@ -194,19 +204,19 @@ Disk: 50 GB for model cache`,
 tomaarsen/Qwen3-Reranker-0.6B-seq-cls — a 600-million-parameter cross-encoder sequence classification model, INT8 quantized via Optimum Intel for efficient CPU inference.
 
 **Inference Engine**
-OpenVINO 2026.0.0+ with Hugging Face Transformers 4.55.4. Runs on Intel Core Ultra 9 275HX (Meteor Lake) CPU using Redwood/Golden Cove P-Cores.
+OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-intel 2.0.0. Runs on Intel Core Ultra 9 275HX CPU.
 
 **Key Features**
 - Jina/Cohere-compatible API endpoints: /v1/rerank, /rerank, /v1/models, /health
 - Dynamic shapes, async endpoints, and multicore scaling using OpenVINO TBB
-- Automatic model download and OpenVINO conversion on first start
+- Model pre-converted and baked into the image (deterministic, pinned build)
 - Built-in HTML dashboard on root endpoint (/)
 
 **Resource Usage**
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v1.0.3: Fixed deployment title to 'Qwen3 Reranker CPU'. v1.0.2: Category update — moved to AI Agents. v1.0.1: Renamed to 'AIM Qwen3 Reranker CPU'. Fixed icon URL. v1.0.0: Initial stable release. Optimized for Intel Core Ultra 9 275HX hybrid architecture. Unlocked CPU limit to 24 cores. Integrated support for iGPU / NPU hardware routing.`,
+        `v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
@@ -233,7 +243,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.0.3",
+      version: "1.0.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS HQ" },
       description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
@@ -260,7 +270,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+        `v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
@@ -392,7 +402,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.2.5",
+      version: "3.3.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
       description: { en: "Qwen3.6-27B Beellama - UD-Q4_K_XL - Ardenzard DFlash - Turbo4 - Vision" },
@@ -405,16 +415,17 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
 **KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated)
 **Vision:** mmproj-F16-27B.gguf on GPU
 **Speculation:** DFlash with --spec-dflash-cross-ctx 1024
+**Parallel Slots:** 1 (single-slot)
 **Context:** 200K tokens with prompt cache (--cache-ram -1)
 **Batch:** 2048 / 512 (processing-optimized)
 **Chat Template:** Custom agentic Jinja2 template (multi-turn tool-call fix, developer role support, robust reasoning handling, think-disabled)
 
 **Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured):**
-- Performance Coding: 120 t/s
-- Performance Poetry: 40 t/s
+- Decode: 81-106 t/s warm (single-slot load)
+- Boot to listening: ~6s (models on disk)
 - Vision encoder on GPU`,
       upgradeDescription:
-        `v3.2.5: Reasoning budget raised 2048 -> 8192 tokens plus a graceful budget-exhaustion message for clean thinking-to-answer transitions. Pairs with the LiteLLM expert / expert-thinking endpoint split.`,
+        `v3.3.3: Rollback to aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build) + --parallel 1. Reverts the v0.3.1 upgrade and HAMi OOM fix from 3.3.x. The v0.3.1 engine introduced HAMi GPU OOM crashes at high VRAM load despite the --no-spec-dm-adaptive workaround; this version returns to the proven 0.1.3-rc1 engine with stable DFlash speculation, task isolation, and no adaptive dm reallocations. Reasoning budget unchanged at 2048.`,
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -441,7 +452,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.4.0",
+      version: "1.4.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { "en-US": "AIM Qwen3.6 35B A3B" },
       description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP + Vision - Agent-Optimized" },
@@ -456,7 +467,7 @@ with only ~3B active parameters per token. Served via llama.cpp
 - Vision: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input)
 - KV Cache: q8_0 K / turbo4 V (spiritbuun fork)
 - Context: 200,000 tokens
-- Reasoning: OFF (Agent-optimized — reliable tool-calls, longer sessions)
+- Reasoning: ON (Deep Reasoning aktiv; per Request via enable_thinking:false deaktivierbar)
 - Flash Attention: on
 - GPU: full offload (-ngl all), 19.9 of 24 GB VRAM used
 - Sampling: temp=0.6, top-p=0.95, top-k=20 (Qwen3.6 precise coding)
@@ -471,8 +482,8 @@ with only ~3B active parameters per token. Served via llama.cpp
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.
 Vision via image_url in content array.
-For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request.`,
-      upgradeDescription: { "en-US": "v1.4.0: Vision aktiviert (mmproj-gpu-swap). Reasoning OFF (Agent-optimiert: zuverlaessige Tool-Calls). SSL-Rebuild fuer HTTPS image downloads. 275 tok/s, 88.5% MTP, Tool-Calls ab max_tokens=256." },
+Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {enable_thinking: false}.`,
+      upgradeDescription: { "en-US": "v1.4.1: Reasoning ON (--reasoning on). Deep Reasoning aktiv per Default; per Request via enable_thinking:false deaktivierbar." },
       appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP + Vision - Agent-Optimized" },
       categories: ["LLM Chat", "Vision"],
       developer: "Aimighty",
@@ -553,11 +564,11 @@ For deep reasoning: set chat_template_kwargs {enable_thinking: true} per request
   {
     metadata: {
       name: "wings",
-      version: "1.9.6",
+      version: "1.9.19",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.6: Docker image tag fix (ghcr '1.9.x' without v prefix). v1.9.5: Code review fixes — removed 7 stale root frontend files, added .dockerignore exclusions, saveSettings debounce lock, removed dead skin code, added i18n settings_saving key, reduced initContainer privileges (removed privileged:true), fixed UID consistency (1024→1000), cleaned dead CSS.",
+      upgradeDescription: "v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.'",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -603,6 +614,117 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
         { envName: "HERMES_WEBUI_PASSWORD", required: false, type: "password", editable: true, applyOnChange: true, description: "Optional app-level password for the Web UI (in addition to Olares SSO). Recommended when exposing beyond LAN." },
         { envName: "HERMES_WEBUI_DEFAULT_MODEL", required: false, default: "Agent", type: "string", editable: true, applyOnChange: true, description: "Default model name used for new chats (must match a model your Hermes provider key can access, e.g. 'Agent')." },
       ],
+    },
+  },
+  {
+    metadata: {
+      name: "rewind",
+      version: "1.3.15",
+      icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
+      title: { en: "Rewind" },
+      description: { en: "Backup Solution for Olares One" },
+      fullDescription:
+        `Rewind complements the Olares standard backup by exporting what it does NOT cover:
+
+**Layer 1 (Olares standard):** File-level backups of /Data/, /Files/Home/Code/ — encrypted, scheduled, external drive
+**Layer 2 (Rewind):** Config-level exports — settings, DBs, system configs — written to /Data/Backup/
+
+**Exports daily (03:00 UTC):**
+- App settings (env vars, entrances, domains, policies)
+- Network config (reverse proxy, FRP, overlay, hosts-file)
+- VPN config (ACLs, devices, routes, policies)
+- Integration accounts (S3, Dropbox, Drive, Tencent)
+- GPU/Compute settings (accelerators, modes, assignments)
+- Advanced/Developer settings (containerd, env, hardware)
+- Backup/Restore plan definitions
+- PostgreSQL database dumps (compressed, parallel)
+
+**Restore:**
+1. Fresh Olares + standard restore (files)
+2. Rewind UI → select date → restore (settings, DBs)
+
+**No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
+      upgradeDescription: "v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.'",
+      categories: ["Utilities", "Developer Tools"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/rewind",
+      sourceCode: "https://github.com/bayerhazard/rewind",
+      supportArch: ["amd64"],
+      requiredCpu: "1",
+      requiredMemory: "512Mi",
+      requiredDisk: "10Gi",
+      requiredGpu: "0",
+      limitedCpu: "2",
+      limitedMemory: "1Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "rewind", title: { en: "Rewind" }, port: 8765, host: "rewind", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "1", memory: "512Mi", disk: "10Gi" } },
+    },
+  },
+  {
+    metadata: {
+      name: "aimqwen3ttsvllm",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
+      title: { en: "AIM Qwen3 TTS 1.7B" },
+      description: { en: "Qwen3-TTS-12Hz via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 10 languages" },
+      fullDescription:
+        `**Qwen3-TTS-12Hz-1.7B** — Alibaba's latest open text-to-speech model, served via vLLM-Omni with a full OpenAI-compatible API.
+
+**Model**
+Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (Apache-2.0, commercial use allowed). End-to-end discrete multi-codebook LM architecture at 12 Hz codec rate.
+
+**Inference Engine**
+vLLM-Omni v0.24.0 (stable). OpenAI-compatible /v1/audio/speech + /v1/audio/voices.
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/speech, /v1/models, /v1/audio/voices
+- 9 preset speakers + natural-language style instructions (emotion, speed, tone)
+- 10 languages (ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT)
+- Extreme low-latency streaming (first audio packet after a single character, ~97 ms e2e)
+- Voice cloning via Qwen3-TTS-12Hz-1.7B-Base (switch MODEL_NAME in chart values)
+- Web dashboard for quick testing
+
+**API Example**
+bash
+curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application/json" \\
+  -d '{"model": "qwen3-tts", "input": "Guten Tag!", "voice": "ryan", "language": "German", "instructions": "Sprich fröhlich"}' \\
+  -o output.wav
+
+**Resource Usage**
+GPU: 1× NVIDIA (~5-8 GB VRAM)
+RAM: 8 GB, CPU: 2 cores
+Disk: 20 GB (model cache, HF_HOME)`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.0, OpenAI-compatible /v1/audio/speech, Web Dashboard.`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
+      sourceCode: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "8Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "8",
+      limitedMemory: "16Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen3ttsvllm", title: { en: "Qwen3-TTS Dashboard" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
     },
   },
 ];
