@@ -352,7 +352,7 @@ Disk: 15 GB (model pre-baked in image)
   {
     metadata: {
       name: "aimvoxtral4brealtime",
-      version: "1.0.0",
+      version: "1.0.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 4B Realtime STT" },
       description: { en: "Voxtral Realtime 4B streaming ASR via vLLM + OpenAI-compatible STT bridge" },
@@ -375,7 +375,7 @@ POST https://aimvoxtral4brealtime.<user>.olares.com/v1/audio/transcriptions
 GPU: 1x NVIDIA RTX 5090 (worker node), ~10 GB VRAM at MAX_MODEL_LEN=20000 (~27 min audio) / GPU_MEMORY_UTILIZATION=0.42 / CUDA_DEVICE_MEMORY_LIMIT_0=11000m.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
       upgradeDescription:
-        `v1.0.0: Initial release — Voxtral Realtime 4B streaming ASR via vLLM v0.26.0-cu129 (WebSocket /v1/realtime) plus FastAPI bridge sidecar exposing an OpenAI-compatible POST /v1/audio/transcriptions endpoint. Tuned for co-residency with Voxtral 4B TTS on the Olares One worker GPU (MAX_MODEL_LEN=20000, GPU_MEMORY_UTILIZATION=0.42, CUDA_DEVICE_MEMORY_LIMIT_0=11000m, ~10 GB VRAM).`,
+        `v1.0.1: Stable release on Olares One worker GPU. Fixed bytetrade owner label (was app name, broke GPUBinding match), removed the harmful CUDA_DEVICE_MEMORY_LIMIT_0, raised GPU_MEMORY_UTILIZATION to 0.70. Verified end-to-end: MAX_MODEL_LEN=20000 (~27 min audio), ~19 GB VRAM, OpenAI-compatible STT via bridge (~6 s for 21 s audio warm). Note: co-residency with BF16 TTS-HQ (~10.9 GB) on one GPU is not possible (Realtime floor ~14 GB); use int4 TTS (~3.8 GB) or a second GPU. v1.0.0: Initial release.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
