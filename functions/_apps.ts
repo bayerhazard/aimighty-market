@@ -405,7 +405,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 20 GB (first-boot model download ~9 GB).`,
   {
     metadata: {
       name: "aimvoxtral3asr",
-      version: "1.0.0",
+      version: "1.0.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral Mini 3B ASR" },
       description: { en: "Voxtral Mini 3B ASR via vLLM — native OpenAI-compatible /v1/audio/transcriptions" },
@@ -427,7 +427,7 @@ Admin -> Settings -> Audio: STT engine OpenAI, base URL https://aimvoxtral3asr.<
 GPU: 1x NVIDIA (worker node), ~8 GB VRAM at MAX_MODEL_LEN=32768 / GPU_MEMORY_UTILIZATION=0.45. TTS (~11 GiB) + ASR (~8 GiB) ~ 19 GiB total, ~5 GiB headroom on 24 GB.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
       upgradeDescription:
-        `v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
+        `v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
