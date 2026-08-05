@@ -243,7 +243,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.2.0",
+      version: "1.2.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS HQ" },
       description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
