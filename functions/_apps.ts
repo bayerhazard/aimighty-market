@@ -616,11 +616,11 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
   {
     metadata: {
       name: "wings",
-      version: "1.9.19",
+      version: "1.9.20",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.'",
+      upgradeDescription: "v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
