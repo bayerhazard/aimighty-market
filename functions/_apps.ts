@@ -455,11 +455,11 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
   {
     metadata: {
       name: "wings",
-      version: "1.9.20",
+      version: "1.9.21",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
+      upgradeDescription: "v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
