@@ -618,6 +618,63 @@ Disk: 20 GB (model cache, HF_HOME)`,
       options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aimqwen3asr",
+      version: "1.0.0",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
+      title: { en: "AIM Qwen3 ASR 1.7B" },
+      description: { en: "Qwen3-ASR-1.7B via vLLM — OpenAI-compatible /v1/audio/transcriptions, 30 languages" },
+      fullDescription:
+        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vLLM with a full OpenAI-compatible transcription API.
+
+**Model**
+Qwen/Qwen3-ASR-1.7B (Apache-2.0, commercial use allowed). SOTA among open-source ASR models, competitive with the strongest commercial APIs. Language identification + ASR for 30 languages and 22 Chinese dialects.
+
+**Inference Engine**
+vLLM (official qwenllm/qwen3-asr image, CUDA 12.8). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/transcriptions, /v1/models
+- Automatic language detection (or force e.g. "German")
+- Robust under noise, accents and challenging text patterns
+- Web dashboard for quick testing (upload audio → transcript)
+
+**API Example**
+bash
+curl -X POST http://localhost:8000/v1/audio/transcriptions -H "Content-Type: multipart/form-data" \\
+  -F "file=@audio.wav" -F "model=qwen3-asr-1.7b" -F "language=German"
+# {"text":"..."}
+
+**Resource Usage**
+GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
+RAM: 8 GB, CPU: 2 cores
+Disk: 20 GB (model cache, HF_HOME)`,
+      upgradeDescription:
+        `v1.0.0: Initial release — Qwen3-ASR-1.7B via official qwenllm/qwen3-asr image (digest-pinned), qwen-asr-serve, OpenAI-compatible transcription API, web dashboard.`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-qwen3asr",
+      sourceCode: "https://github.com/bayerhazard/aimighty-qwen3asr",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "8Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "8",
+      limitedMemory: "16Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen3asr", title: { en: "Qwen3-ASR Dashboard" }, port: 8080, host: "aimqwen3asr", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
