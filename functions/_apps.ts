@@ -562,7 +562,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "1.0.3",
+      version: "1.0.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
       title: { en: "AIM Qwen3 TTS 1.7B" },
       description: { en: "Qwen3-TTS-12Hz via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 10 languages" },
