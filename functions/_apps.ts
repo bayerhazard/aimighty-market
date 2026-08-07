@@ -538,7 +538,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "26.08.2",
+      version: "26.08.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
       description: { en: "Configuration-level backup & restore for Olares One" },
@@ -563,7 +563,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 2. Rewind UI → select date → restore (settings, DBs)
 
 **No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v26.08.2: Portabler Login-Flow — keine Olares-Credentials im Image; Verbindung über das UI (Olares-ID + Passwort/TOTP oder Refresh-Token), Profil auf dem persistenten /Data-Volume. v26.08.1: Unified naming — category Utilities, English descriptions. Built for Olares 1.12.6. v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.",
+      upgradeDescription: "v26.08.3: Login-Flow fix — nach erfolgreicher Verbindung wird automatisch zur Rewind-GUI gewechselt. v26.08.2: Portabler Login-Flow — keine Olares-Credentials im Image; Verbindung über das UI (Olares-ID + Passwort/TOTP oder Refresh-Token), Profil auf dem persistenten /Data-Volume. v26.08.1: Unified naming — category Utilities, English descriptions. Built for Olares 1.12.6. v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.",
       categories: ["Utilities"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/rewind",
