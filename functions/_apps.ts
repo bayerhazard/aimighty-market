@@ -621,7 +621,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "1.0.2",
+      version: "1.0.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 ASR 1.7B" },
       description: { en: "Qwen3-ASR-1.7B via vLLM — OpenAI-compatible /v1/audio/transcriptions, 30 languages" },
@@ -651,7 +651,8 @@ GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v1.0.2: KV fit — gpu_memory_utilization 0.9 + --max-model-len 20480 (65536 needs 7 GiB KV, only 2.24 GiB free). Added transcribe-parse sidecar (strips language<asr_text> prefix).
+        `v1.0.3: Co-residency — Slice 6 GiB (6144m), util 0.95, --max-model-len 4096 (voice commands). Frees worker GPU for voxtral (13 GiB) + reranker (3 GiB) = 22 of 23.88 GiB.
+v1.0.2: KV fit — gpu_memory_utilization 0.9 + --max-model-len 20480 (65536 needs 7 GiB KV, only 2.24 GiB free). Added transcribe-parse sidecar (strips language<asr_text> prefix).
 v1.0.1: HAMi fix — CUDA_DEVICE_MEMORY_LIMIT_0=8192m (binding injected memory=0, blocking cudaMalloc).
 v1.0.0: Initial release — Qwen3-ASR-1.7B via official qwenllm/qwen3-asr image (digest-pinned), qwen-asr-serve, OpenAI-compatible transcription API, web dashboard.`,
       categories: ["Audio"],
