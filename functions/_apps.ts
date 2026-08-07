@@ -171,7 +171,7 @@ v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Tem
         `v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker", English descriptions. Built for Olares 1.12.6.
 v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, live metrics, removed API URL line. v1.8.0: Move to worker GPU (MemorySlice) — CUDA_DEVICE_MEMORY_LIMIT_0=3072m + util 0.9. Co-resides with voxtral (13 GiB) + ASR (6 GiB).
         v1.7.0: Native vLLM rerank — removed Python rerank-proxy sidecar. vLLM v0.26.0-cu129 with built-in /v1/rerank serving Qwen3-Reranker-0.6B-seq-cls directly. Pinned immutable image tag. Fixed pod owner label (HAMi GPU binding). v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
-      categories: ["AI Agents"],
+      categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
       sourceCode: "https://github.com/bayerhazard/aimighty-reranker",
