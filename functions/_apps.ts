@@ -244,7 +244,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.3.0",
+      version: "1.3.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS HQ" },
       description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
@@ -271,7 +271,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+        `v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, removed API URL line. v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
@@ -298,7 +298,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   {
     metadata: {
       name: "aimvoxtral3asr",
-      version: "1.0.5",
+      version: "1.0.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 3B ASR" },
       description: { en: "Voxtral 3B ASR via vLLM — native OpenAI-compatible /v1/audio/transcriptions" },
@@ -320,7 +320,7 @@ Admin -> Settings -> Audio: STT engine OpenAI, base URL https://aimvoxtral3asr.<
 GPU: 1x NVIDIA (worker node), ~8 GB VRAM at MAX_MODEL_LEN=32768 / GPU_MEMORY_UTILIZATION=0.45. TTS (~11 GiB) + ASR (~8 GiB) ~ 19 GiB total, ~5 GiB headroom on 24 GB.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
       upgradeDescription:
-        `v1.0.5: Fix dashboard uploads >1 MB (nginx client_max_body_size 64m). v1.0.4: Added nginx web dashboard (record/upload -> transcription, health). Entrance -> port 8080 (dashboard); /v1/* stays on the native OpenAI-compatible API via nginx proxy (Open WebUI base URL unchanged). Renamed to AIM Voxtral 3B ASR. v1.0.3: Headroom balance: MAX_MODEL_LEN 16384 -> 8192 (~11 min audio), GPU_MEMORY_UTILIZATION 0.48 -> 0.44. Measured: ASR ~9 GiB + TTS ~11 GiB -> ~3.5 GiB free on the 24 GB worker GPU under load (16384/0.48 left only ~0.7 GiB). v1.0.2: KV fit fix: MAX_MODEL_LEN 32768 -> 16384 (KV needed 3.75 GiB > available at util 0.45), GPU_MEMORY_UTILIZATION 0.45 -> 0.48. v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
+        `v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, language ISO-code select, removed API URL line. v1.0.5: Fix dashboard uploads >1 MB (nginx client_max_body_size 64m). v1.0.4: Added nginx web dashboard (record/upload -> transcription, health). Entrance -> port 8080 (dashboard); /v1/* stays on the native OpenAI-compatible API via nginx proxy (Open WebUI base URL unchanged). Renamed to AIM Voxtral 3B ASR. v1.0.3: Headroom balance: MAX_MODEL_LEN 16384 -> 8192 (~11 min audio), GPU_MEMORY_UTILIZATION 0.48 -> 0.44. Measured: ASR ~9 GiB + TTS ~11 GiB -> ~3.5 GiB free on the 24 GB worker GPU under load (16384/0.48 left only ~0.7 GiB). v1.0.2: KV fit fix: MAX_MODEL_LEN 32768 -> 16384 (KV needed 3.75 GiB > available at util 0.45), GPU_MEMORY_UTILIZATION 0.45 -> 0.48. v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
