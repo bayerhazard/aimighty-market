@@ -245,34 +245,39 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "1.3.1",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
-      title: { en: "AIM Voxtral 4B TTS HQ" },
-      description: { en: "Mistral Voxtral 4B TTS via vLLM-Omni — 1 GiB KV-Cache, 10.9 GB VRAM" },
+      title: { en: "AIM Voxtral 4B TTS" },
+      description: { en: "Voxtral 4B TTS via vLLM-Omni — 20 voices, 10 languages, 24 kHz, OpenAI-compatible API" },
       fullDescription:
         `**Voxtral-4B-TTS** — Mistral's frontier text-to-speech model, served via vLLM-Omni with optimized resource usage.
 
 **Model**
-mistralai/Voxtral-4B-TTS-2603 via vLLM-Omni v0.18.0. BF16 precision with 1 GiB KV-Cache reduces VRAM to 10.9 GB (vs 20.5 GB default).
+mistralai/Voxtral-4B-TTS-2603 via vLLM-Omni v0.18.0. BF16 precision with 3 GiB KV-Cache reduces VRAM to ~12 GB (vs 20.5 GB default).
 
 **Inference Engine**
 vLLM-Omni with optimized KV-Cache management. OpenAI-compatible API.
 
 **Key Features**
 - OpenAI-compatible API: /v1/audio/speech, /v1/models
-- 20 preset voices across 10 languages
+- 20 preset voices across 10 languages (EN, FR, ES, DE, IT, PT, NL, AR, HI, JP)
 - 24 kHz audio output
-- Optimized: 1 GiB KV-Cache → 10.9 GB VRAM
+- Optimized: 3 GiB KV-Cache (--kv-cache-memory-bytes 3221225472) → ~12 GB VRAM
 - Web dashboard for quick testing
 - Unlimited API timeout for long TTS responses
 
 **API Example**
-bash
 curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application/json" -d '{"model": "voxtral-tts-4b", "input": "Hello world!", "voice": "neutral_female"}' -o output.wav
+
+**Resource Usage**
+GPU: 1× NVIDIA (~12 GB VRAM)
+RAM: 8-16 GB, CPU: 2-8 cores
+Disk: 20 GB (model cache)
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, removed API URL line. v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+        `v26.08.1: Unified naming — title "AIM Voxtral 4B TTS" (HQ/engine removed), English descriptions. Built for Olares 1.12.6.
+v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, removed API URL line. v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
@@ -289,7 +294,7 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
     spec: {
       type: "app",
       entrance: [
-        { name: "aimvoxtral4bvllm", title: { en: "Voxtral 4B HQ" }, port: 8080, host: "aimvoxtral4bvllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimvoxtral4bvllm", title: { en: "AIM Voxtral 4B TTS" }, port: 8080, host: "aimvoxtral4bvllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -299,10 +304,10 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   {
     metadata: {
       name: "aimvoxtral3asr",
-      version: "1.0.6",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 3B ASR" },
-      description: { en: "Voxtral 3B ASR via vLLM — native OpenAI-compatible /v1/audio/transcriptions" },
+      description: { en: "Voxtral Mini 3B ASR via vLLM — offline transcription, 13 languages, OpenAI-compatible API" },
       fullDescription:
         `**Voxtral 3B ASR** — Mistral's compact ASR model, served natively by vLLM with an OpenAI-compatible transcription API.
 
@@ -317,11 +322,12 @@ POST https://aimvoxtral3asr.<user>.olares.com/v1/audio/transcriptions
 **Open WebUI**
 Admin -> Settings -> Audio: STT engine OpenAI, base URL https://aimvoxtral3asr.<user>.olares.com/v1, model voxtral-mini-3b.
 
-**Resource Usage (co-resident with Voxtral 4B TTS-HQ)**
+**Resource Usage (co-resident with Voxtral 4B TTS)**
 GPU: 1x NVIDIA (worker node), ~8 GB VRAM at MAX_MODEL_LEN=32768 / GPU_MEMORY_UTILIZATION=0.45. TTS (~11 GiB) + ASR (~8 GiB) ~ 19 GiB total, ~5 GiB headroom on 24 GB.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
       upgradeDescription:
-        `v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, language ISO-code select, removed API URL line. v1.0.5: Fix dashboard uploads >1 MB (nginx client_max_body_size 64m). v1.0.4: Added nginx web dashboard (record/upload -> transcription, health). Entrance -> port 8080 (dashboard); /v1/* stays on the native OpenAI-compatible API via nginx proxy (Open WebUI base URL unchanged). Renamed to AIM Voxtral 3B ASR. v1.0.3: Headroom balance: MAX_MODEL_LEN 16384 -> 8192 (~11 min audio), GPU_MEMORY_UTILIZATION 0.48 -> 0.44. Measured: ASR ~9 GiB + TTS ~11 GiB -> ~3.5 GiB free on the 24 GB worker GPU under load (16384/0.48 left only ~0.7 GiB). v1.0.2: KV fit fix: MAX_MODEL_LEN 32768 -> 16384 (KV needed 3.75 GiB > available at util 0.45), GPU_MEMORY_UTILIZATION 0.45 -> 0.48. v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
+        `v26.08.1: Unified naming — title "AIM Voxtral 3B ASR" (AIM prefix added), English descriptions. Built for Olares 1.12.6.
+v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, language ISO-code select, removed API URL line. v1.0.5: Fix dashboard uploads >1 MB (nginx client_max_body_size 64m). v1.0.4: Added nginx web dashboard (record/upload -> transcription, health). Entrance -> port 8080 (dashboard); /v1/* stays on the native OpenAI-compatible API via nginx proxy (Open WebUI base URL unchanged). Renamed to AIM Voxtral 3B ASR. v1.0.3: Headroom balance: MAX_MODEL_LEN 16384 -> 8192 (~11 min audio), GPU_MEMORY_UTILIZATION 0.48 -> 0.44. Measured: ASR ~9 GiB + TTS ~11 GiB -> ~3.5 GiB free on the 24 GB worker GPU under load (16384/0.48 left only ~0.7 GiB). v1.0.2: KV fit fix: MAX_MODEL_LEN 32768 -> 16384 (KV needed 3.75 GiB > available at util 0.45), GPU_MEMORY_UTILIZATION 0.45 -> 0.48. v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
@@ -338,7 +344,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimvoxtral3asr", title: { en: "Voxtral 3B ASR" }, port: 8080, host: "aimvoxtral3asr", authLevel: "internal", openMethod: "window" },
+        { name: "aimvoxtral3asr", title: { en: "AIM Voxtral 3B ASR" }, port: 8080, host: "aimvoxtral3asr", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -581,10 +587,10 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "1.0.4",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
-      title: { en: "AIM Qwen3 TTS 1.7B" },
-      description: { en: "Qwen3-TTS-12Hz via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 10 languages" },
+      title: { en: "AIM Qwen3 1.7B TTS" },
+      description: { en: "Qwen3-TTS 1.7B via vLLM-Omni — 9 speakers, 10 languages, low-latency streaming, OpenAI-compatible API" },
       fullDescription:
         `**Qwen3-TTS-12Hz-1.7B** — Alibaba's latest open text-to-speech model, served via vLLM-Omni with a full OpenAI-compatible API.
 
@@ -613,7 +619,8 @@ GPU: 1× NVIDIA (~5-8 GB VRAM)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.0, OpenAI-compatible /v1/audio/speech, Web Dashboard.`,
+        `v26.08.1: Unified naming — title "AIM Qwen3 1.7B TTS", English descriptions. Built for Olares 1.12.6.
+v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.0, OpenAI-compatible /v1/audio/speech, Web Dashboard.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
@@ -630,7 +637,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen3ttsvllm", title: { en: "Qwen3-TTS Dashboard" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen3ttsvllm", title: { en: "AIM Qwen3 1.7B TTS" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -640,27 +647,35 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "1.2.1",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
-      title: { en: "AIM Qwen3 ASR 1.7B" },
-      description: { en: "Qwen3-ASR-1.7B via vLLM - OpenAI-kompatibel" },
+      title: { en: "AIM Qwen3 1.7B ASR" },
+      description: { en: "Qwen3-ASR 1.7B via vLLM — 30 languages, robust under noise, OpenAI-compatible API" },
       fullDescription:
-        `Qwen3-ASR-1.7B — State-of-the-art Spracherkennung via vLLM mit vollständig OpenAI-kompatiblen Endpunkt für eine vollständig lokale Voice Pipeline auf Olares One.
+        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vLLM with a fully OpenAI-compatible transcription API.
 
-Key Features:
-- ASR (Automatic Speech Recognition) / STT (Speech to Text)
-- Spracherkennung: Automatische Identifikation der gesprochene Sprache
-- Sprachunterstützung: 30 Sprachen, inklusive Deutsch und Englisch
-- Robust bei Nebengeräuschen, Akzenten und schwierigen Textstrukturen
-- Dashboard für einfaches Testen
-- Open-Source unter der Apache 2.0 Lizenz
+**Model**
+Qwen/Qwen3-ASR-1.7B (Apache-2.0, commercial use allowed). SOTA among open-source ASR models. Language identification + ASR for 30 languages and 22 Chinese dialects.
 
-Endpunkte:
-- /v1/audio/transcriptions (Transkription von Audiodateien in Text)
-- /v1/models (Abfrage verfügbarer Modelle)
-- /v1/chat/completions (Chat-Kompletionen mit Audio-URLs als Input)`,
+**Inference Engine**
+vLLM (official qwenllm/qwen3-asr image, CUDA 12.8). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/transcriptions, /v1/models
+- Automatic language detection (or force e.g. "German")
+- Robust under noise, accents and challenging text patterns
+- Web dashboard for quick testing (upload/record audio → transcript)
+
+**API Example**
+curl -X POST http://localhost:8000/v1/audio/transcriptions -H "Content-Type: multipart/form-data" -F "file=@audio.wav" -F "model=qwen3-asr-1.7b" -F "language=German"
+
+**Resource Usage**
+GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
+RAM: 8 GB, CPU: 2 cores
+Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `1.2.1: Sprachauswahl sendet ISO-Codes (de/en/fr) — Fix für vLLM-Sprachvalidierung
+        `v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. Built for Olares 1.12.6.
+1.2.1: Sprachauswahl sendet ISO-Codes (de/en/fr) — Fix für vLLM-Sprachvalidierung
 1.2.0: Dashboard im Rewind-Design mit Direktaufnahme (Mikrofon), Sprachumschalter DE/EN und dezenter Konfig-Anzeige
 1.1.0: Initial Release für Olares One`,
       categories: ["Audio"],
@@ -679,7 +694,7 @@ Endpunkte:
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen3asr", title: { en: "Qwen3-ASR Dashboard" }, port: 8080, host: "aimqwen3asr", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen3asr", title: { en: "AIM Qwen3 1.7B ASR" }, port: 8080, host: "aimqwen3asr", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
