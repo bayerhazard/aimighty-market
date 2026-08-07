@@ -22,22 +22,22 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "2.4.0",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
-      title: { en: "AIM Gemma4 26B-A4B vLLM" },
-      description: { en: "Gemma 4 26B A4B QAT-AWQ-INT4 via vLLM — optimized for coding & agentic workflows" },
+      title: { en: "AIM Gemma 4 26B A4B" },
+      description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 96K context, MTP, vision" },
       fullDescription:
-        `Gemma 4 26B A4B – Multimodales LLM (Text + Image) mit QAT-AWQ-INT4 Quantisierung auf vLLM.
+        `Gemma 4 26B A4B — multimodal LLM (text + image) with QAT-AWQ-INT4 quantization on vLLM.
 
 **Model**
 cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
-96K Token Kontext. Multimodal (Text + Image, kein Video).
+96K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM v0.23.1rc cu129, SHA-gepinnt (g4080263bb).
-fp8 KV-Cache. CUDAGraphs + torch.compile aktiv.
-MTP Speculative Decoding (3 Tokens, google/gemma-4-26B-A4B-it-assistant).
-GPU VRAM: ~23.0 GB belegt.
+vLLM v0.23.1rc cu129, SHA-pinned (g4080263bb) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+fp8 KV-Cache. CUDAGraphs + torch.compile.
+MTP Speculative Decoding (3 tokens, google/gemma-4-26B-A4B-it-assistant).
+GPU VRAM: ~22.5 GB.
 
 **Performance (RTX 5090 Blackwell, MTP Spec-Decoding)**
 - Coding (2000 tok): ~419 tok/s
@@ -46,18 +46,19 @@ GPU VRAM: ~23.0 GB belegt.
 - Agentic Tool-Calling: 8/8 (100%)
 
 **API**
-OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
+OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via --enable-auto-tool-choice + --tool-call-parser gemma4.
 Reasoning via --reasoning-parser gemma4 + --default-chat-template-kwargs enable_thinking.
 
 **Resource Usage**
-GPU: ~22.5 GB VRAM belegt (RTX 5090, 24 GB total)
+GPU: ~22.5 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
-Disk: 50 GB (Model-Download ~15 GB + Cache)
-CPU: 4-16 Kerne`,
+Disk: 50 GB (model download ~15 GB + cache)
+CPU: 4-16 cores`,
       upgradeDescription:
-        `v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
-      categories: ["LLM Chat"],
+        `v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
+v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
+      categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -73,7 +74,7 @@ CPU: 4-16 Kerne`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimllmgemma4vllm", title: { en: "AIM Gemma4 26B-A4B vLLM" }, port: 8000, host: "aimllmgemma4vllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimllmgemma4vllm", title: { en: "AIM Gemma 4 26B A4B" }, port: 8000, host: "aimllmgemma4vllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -347,31 +348,44 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen36llama",
-      version: "3.3.3",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
       title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B Beellama - UD-Q4_K_XL - Ardenzard DFlash - Turbo4 - Vision" },
+      description: { en: "Qwen3.6-27B chat via beellama (llama.cpp) — 200K context, vision, DFlash, turbo4 KV" },
       fullDescription:
-        `AImighty HQ stack for Qwen3.6-27B optimized for coding and agentic workflows on Olares One.
+        `AImighty flagship stack for Qwen3.6-27B, optimized for coding and agentic workflows on Olares One.
 
-**Model:** unsloth/Qwen3.6-27B-UD-Q4_K_XL
-**Draft:** Ardenzard/Qwen3.6-27B-DFlash-GGUF IQ4_XS
-**Engine:** aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build)
-**KV Cache:** turbo4 (4-bit Walsh-Hadamard rotated)
-**Vision:** mmproj-F16-27B.gguf on GPU
-**Speculation:** DFlash with --spec-dflash-cross-ctx 1024
-**Parallel Slots:** 1 (single-slot)
-**Context:** 200K tokens with prompt cache (--cache-ram -1)
-**Batch:** 2048 / 512 (processing-optimized)
-**Chat Template:** Custom agentic Jinja2 template (multi-turn tool-call fix, developer role support, robust reasoning handling, think-disabled)
+**Model**
+unsloth/Qwen3.6-27B-UD-Q4_K_XL (UD-Q4_K_XL, ~17.6 GB).
+Draft: Ardenzard/Qwen3.6-27B-DFlash-GGUF IQ4_XS.
+Vision: mmproj-F16-27B.gguf on GPU.
+200K token context.
 
-**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured):**
+**Inference Engine**
+aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build).
+KV Cache: turbo4 (4-bit Walsh-Hadamard rotated).
+Speculation: DFlash with --spec-dflash-cross-ctx 1024.
+Parallel slots: 1 (single-slot).
+Batch: 2048/512 (processing-optimized).
+Custom agentic Jinja2 chat template (multi-turn tool-call fix, developer role support, robust reasoning handling, think-disabled).
+
+**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured)**
 - Decode: 81-106 t/s warm (single-slot load)
 - Boot to listening: ~6s (models on disk)
-- Vision encoder on GPU`,
+- Vision encoder on GPU
+
+**API**
+OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
+
+**Resource Usage**
+GPU: ~23 GB VRAM (RTX 5090, 24 GB)
+RAM: 24-40 GB
+Disk: 25 GB (model cache)
+CPU: 4-16 cores`,
       upgradeDescription:
-        `v3.3.3: Rollback to aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build) + --parallel 1. Reverts the v0.3.1 upgrade and HAMi OOM fix from 3.3.x. The v0.3.1 engine introduced HAMi GPU OOM crashes at high VRAM load despite the --no-spec-dm-adaptive workaround; this version returns to the proven 0.1.3-rc1 engine with stable DFlash speculation, task isolation, and no adaptive dm reallocations. Reasoning budget unchanged at 2048.`,
-      categories: ["LLM Chat", "Vision"],
+        `v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
+v3.3.3: Rollback to aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 build) + --parallel 1. Reverts the v0.3.1 upgrade and HAMi OOM fix from 3.3.x. The v0.3.1 engine introduced HAMi GPU OOM crashes at high VRAM load despite the --no-spec-dm-adaptive workaround; this version returns to the proven 0.1.3-rc1 engine with stable DFlash speculation, task isolation, and no adaptive dm reallocations. Reasoning budget unchanged at 2048.`,
+      categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
@@ -397,29 +411,28 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "1.4.1",
+      version: "26.08.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
-      title: { "en-US": "AIM Qwen3.6 35B A3B" },
-      description: { "en-US": "Qwen3.6-35B-A3B - IQ4_XS - MTP + Vision - Agent-Optimized" },
+      title: { en: "AIM Qwen3.6 35B A3B" },
+      description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
       fullDescription:
-        `Qwen3.6-35B-A3B MoE — an efficient 35B Mixture-of-Experts model
-with only ~3B active parameters per token. Served via llama.cpp
-(spiritbuun buun-llama-cpp fork) on NVIDIA RTX 5090.
+        `Qwen3.6-35B-A3B MoE chat model — ~3B active parameters per token, optimized for coding and agentic workflows on Olares One.
 
-**Key Parameters**
-- Quant: UD-IQ4_XS (4-bit, ~18 GB) — superior quality vs Q3
-- Spec Decoding: Built-in MTP (3 speculative tokens, no drafter needed)
-- Vision: Native via mmproj-gpu-swap (mmproj on CPU, swaps to GPU on image input)
-- KV Cache: q8_0 K / turbo4 V (spiritbuun fork)
-- Context: 200,000 tokens
-- Reasoning: ON (Deep Reasoning aktiv; per Request via enable_thinking:false deaktivierbar)
-- Flash Attention: on
-- GPU: full offload (-ngl all), 19.9 of 24 GB VRAM used
-- Sampling: temp=0.6, top-p=0.95, top-k=20 (Qwen3.6 precise coding)
+**Model**
+unsloth/Qwen3.6-35B-A3B-MTP-GGUF (UD-IQ4_XS, ~18 GB, 35B MoE, ~3B active).
+Built-in MTP Speculative Decoding + native Vision via mmproj-gpu-swap.
+200K token context. Reasoning ON.
 
-**Performance (RTX 5090 Blackwell, 24 GB)**
+**Inference Engine**
+Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026).
+Compiled with CUDA 13.1 + OpenSSL for RTX 5090 (sm_120).
+turbo4 KV-Cache. MTP with 3 speculative tokens.
+--mmproj-gpu-swap: mmproj on CPU while idle, swaps to GPU on vision request (~555ms).
+Sampling: temp=0.6, top-p=0.95, top-k=20. Batch-size 2048.
+
+**Performance (RTX 5090 Blackwell)**
 - Text Generation: ~275 tok/s (88.5% MTP acceptance)
-- Tool-Calling: reliable from max_tokens=256 (no reasoning budget conflict)
+- Tool-Calling: reliable from max_tokens=256
 - Vision: ~555ms swap overhead, correct image analysis
 - VRAM: 19.9 GB / 24.5 GB (81%)
 
@@ -427,10 +440,15 @@ with only ~3B active parameters per token. Served via llama.cpp
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
 Tool Calling via built-in Qwen3 jinja template.
 Vision via image_url in content array.
-Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {enable_thinking: false}.`,
-      upgradeDescription: { "en-US": "v1.4.1: Reasoning ON (--reasoning on). Deep Reasoning aktiv per Default; per Request via enable_thinking:false deaktivierbar." },
-      appDescription: { "en-US": "Qwen3.6-35B-A3B MoE - IQ4_XS - MTP + Vision - Agent-Optimized" },
-      categories: ["LLM Chat", "Vision"],
+Reasoning ON by default; disable per request via chat_template_kwargs {enable_thinking: false}.
+
+**Resource Usage**
+GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
+RAM: 24-40 GB
+Disk: 25 GB (model cache)
+CPU: 4-16 cores`,
+      upgradeDescription: "v26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.\nv1.4.1: Reasoning ON (--reasoning on). Deep Reasoning aktiv per Default; per Request via enable_thinking:false deaktivierbar.",
+      categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
@@ -446,7 +464,7 @@ Reasoning ON per Default; per Request deaktivierbar via chat_template_kwargs {en
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen3635bllama", title: { "en-US": "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635bllama", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen3635bllama", title: { en: "AIM Qwen3.6 35B A3B" }, port: 8000, host: "aimqwen3635bllama", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
