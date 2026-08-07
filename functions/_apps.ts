@@ -483,11 +483,11 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.08.1",
+      version: "26.08.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
-      upgradeDescription: "v26.08.1: Unified naming — category AI, English descriptions. Built for Olares 1.12.6. v1.9.22: OpenAI-TTS SSRF-Allowlist (HERMES_WEBUI_TTS_TRUSTED_HOSTS) — erlaubt private Selbst-Host-Gateways wie internes LiteLLM. v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
+      upgradeDescription: "v26.08.2: Server-STT fix — Diktat wird als 16-bit PCM WAV aufgenommen (Web Audio API statt MediaRecorder/WebM), da das vLLM-ASR-Backend WebM/Opus nicht dekodieren kann. Built for Olares 1.12.6. v26.08.1: Unified naming — category AI, English descriptions. Built for Olares 1.12.6. v1.9.22: OpenAI-TTS SSRF-Allowlist (HERMES_WEBUI_TTS_TRUSTED_HOSTS) — erlaubt private Selbst-Host-Gateways wie internes LiteLLM. v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
