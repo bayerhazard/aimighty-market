@@ -650,7 +650,7 @@ v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.08.2",
+      version: "26.08.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vLLM — 30 languages, robust under noise, OpenAI-compatible API" },
