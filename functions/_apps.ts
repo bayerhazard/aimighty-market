@@ -622,40 +622,27 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "1.0.3",
+      version: "1.1.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 ASR 1.7B" },
-      description: { en: "Qwen3-ASR-1.7B via vLLM — OpenAI-compatible /v1/audio/transcriptions, 30 languages" },
+      description: { en: "Qwen3-ASR-1.7B via vLLM - OpenAI-kompatibel" },
       fullDescription:
-        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vLLM with a full OpenAI-compatible transcription API.
+        `Qwen3-ASR-1.7B — State-of-the-art Spracherkennung via vLLM mit vollständig OpenAI-kompatiblen Endpunkt für eine vollständig lokale Voice Pipeline auf Olares One.
 
-**Model**
-Qwen/Qwen3-ASR-1.7B (Apache-2.0, commercial use allowed). SOTA among open-source ASR models, competitive with the strongest commercial APIs. Language identification + ASR for 30 languages and 22 Chinese dialects.
+Key Features:
+- ASR (Automatic Speech Recognition) / STT (Speech to Text)
+- Spracherkennung: Automatische Identifikation der gesprochene Sprache
+- Sprachunterstützung: 30 Sprachen, inklusive Deutsch und Englisch
+- Robust bei Nebengeräuschen, Akzenten und schwierigen Textstrukturen
+- Dashboard für einfaches Testen
+- Open-Source unter der Apache 2.0 Lizenz
 
-**Inference Engine**
-vLLM (official qwenllm/qwen3-asr image, CUDA 12.8). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
-
-**Key Features**
-- OpenAI-compatible API: /v1/audio/transcriptions, /v1/models
-- Automatic language detection (or force e.g. "German")
-- Robust under noise, accents and challenging text patterns
-- Web dashboard for quick testing (upload audio → transcript)
-
-**API Example**
-bash
-curl -X POST http://localhost:8000/v1/audio/transcriptions -H "Content-Type: multipart/form-data" \\
-  -F "file=@audio.wav" -F "model=qwen3-asr-1.7b" -F "language=German"
-# {"text":"..."}
-
-**Resource Usage**
-GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
-RAM: 8 GB, CPU: 2 cores
-Disk: 20 GB (model cache, HF_HOME)`,
+Endpunkte:
+- /v1/audio/transcriptions (Transkription von Audiodateien in Text)
+- /v1/models (Abfrage verfügbarer Modelle)
+- /v1/chat/completions (Chat-Kompletionen mit Audio-URLs als Input)`,
       upgradeDescription:
-        `v1.0.3: Co-residency — Slice 6 GiB (6144m), util 0.95, --max-model-len 4096 (voice commands). Frees worker GPU for voxtral (13 GiB) + reranker (3 GiB) = 22 of 23.88 GiB.
-v1.0.2: KV fit — gpu_memory_utilization 0.9 + --max-model-len 20480 (65536 needs 7 GiB KV, only 2.24 GiB free). Added transcribe-parse sidecar (strips language<asr_text> prefix).
-v1.0.1: HAMi fix — CUDA_DEVICE_MEMORY_LIMIT_0=8192m (binding injected memory=0, blocking cudaMalloc).
-v1.0.0: Initial release — Qwen3-ASR-1.7B via official qwenllm/qwen3-asr image (digest-pinned), qwen-asr-serve, OpenAI-compatible transcription API, web dashboard.`,
+        `1.1.0: Initial Release für Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
