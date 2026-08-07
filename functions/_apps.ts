@@ -153,7 +153,7 @@ v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Tem
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.08.2",
+      version: "26.08.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
