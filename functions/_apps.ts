@@ -622,7 +622,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "1.1.0",
+      version: "1.2.0",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 ASR 1.7B" },
       description: { en: "Qwen3-ASR-1.7B via vLLM - OpenAI-kompatibel" },
@@ -642,7 +642,8 @@ Endpunkte:
 - /v1/models (Abfrage verfügbarer Modelle)
 - /v1/chat/completions (Chat-Kompletionen mit Audio-URLs als Input)`,
       upgradeDescription:
-        `1.1.0: Initial Release für Olares One`,
+        `1.2.0: Dashboard im Rewind-Design mit Direktaufnahme (Mikrofon), Sprachumschalter DE/EN und dezenter Konfig-Anzeige
+1.1.0: Initial Release für Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
