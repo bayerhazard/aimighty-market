@@ -84,10 +84,10 @@ v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "1.8.2",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
-      title: { en: "AIM Qwen3 Embedding" },
-      description: { en: "Qwen3-Embedding-4B INT8 via OpenVINO" },
+      title: { en: "AIM Qwen3 4B Embedding" },
+      description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
       fullDescription:
         `Qwen3-Embedding-4B + OpenVINO on CPU, optimized for Olares One.
 
@@ -111,8 +111,9 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Template entfernt (Webhook setzt aimighty). v1.8.1: Fix check-auth CrashLoopBackOff (manual check-auth/render-envoy-config/olares-sidecar-init/olares-envoy-sidecar, check-auth command ["true"], awk statt sed). v1.8.0: Performance & quality release (OpenVINO CPU, Modell unverändert INT8): Batch-Aggregator (~1.9x Durchsatz, gemessen), Instruction-Support (Qwen instruct format, +1-5% Retrieval), MRL-Dim (EMBED_DIM 32..2560), Dependencies gepinnt (optimum-intel 2.0.0 statt git@main, transformers 4.55.4, openvino 2026.2.1, torch 2.13.0), OV-Config-Bug gefixt (PERFORMANCE_HINT/NUM_STREAMS wurden ignoriert), CPU_PINNING default YES, neue Envs (INFERENCE_THREADS/MAX_LENGTH/BATCH_WINDOW_MS/INFER_TIMEOUT_SEC/DEFAULT_INSTRUCTION/EMBED_DIM), ECHTER 2-Node-Cluster: EMBEDDER_MODE=cluster rendert jetzt 2 Replicas (anti-affinity, je 1 Worker) statt 2 Worker im selben Pod. v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
-      categories: ["AI Agents"],
+        `v26.08.1: Unified naming — title "AIM Qwen3 4B Embedding", English descriptions. Built for Olares 1.12.6.
+v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Template entfernt (Webhook setzt aimighty). v1.8.1: Fix check-auth CrashLoopBackOff (manual check-auth/render-envoy-config/olares-sidecar-init/olares-envoy-sidecar, check-auth command ["true"], awk statt sed). v1.8.0: Performance & quality release (OpenVINO CPU, Modell unverändert INT8): Batch-Aggregator (~1.9x Durchsatz, gemessen), Instruction-Support (Qwen instruct format, +1-5% Retrieval), MRL-Dim (EMBED_DIM 32..2560), Dependencies gepinnt (optimum-intel 2.0.0 statt git@main, transformers 4.55.4, openvino 2026.2.1, torch 2.13.0), OV-Config-Bug gefixt (PERFORMANCE_HINT/NUM_STREAMS wurden ignoriert), CPU_PINNING default YES, neue Envs (INFERENCE_THREADS/MAX_LENGTH/BATCH_WINDOW_MS/INFER_TIMEOUT_SEC/DEFAULT_INSTRUCTION/EMBED_DIM), ECHTER 2-Node-Cluster: EMBEDDER_MODE=cluster rendert jetzt 2 Replicas (anti-affinity, je 1 Worker) statt 2 Worker im selben Pod. v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+      categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
       sourceCode: "https://github.com/bayerhazard/aimighty-embedder",
@@ -128,7 +129,7 @@ Disk: 50 GB for model cache`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimembqwen3vino", title: { en: "Qwen3 Embedding" }, port: 9997, host: "aimembqwen3vino", authLevel: "internal", openMethod: "window" },
+        { name: "aimembqwen3vino", title: { en: "AIM Qwen3 4B Embedding" }, port: 9997, host: "aimembqwen3vino", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -152,10 +153,10 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "1.9.0",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
-      title: { en: "AIM Qwen3 Reranker" },
-      description: { en: "Qwen3-Reranker-0.6B via vllm (native rerank)" },
+      title: { en: "AIM Qwen3 0.6B Reranker" },
+      description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
       fullDescription:
         `Aimighty Reranker deploys Qwen3-Reranker-0.6B using vLLM on NVIDIA RTX 5090 (Blackwell).
 
@@ -167,7 +168,8 @@ Disk: 50 GB for model cache`,
 - 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, live metrics, removed API URL line. v1.8.0: Move to worker GPU (MemorySlice) — CUDA_DEVICE_MEMORY_LIMIT_0=3072m + util 0.9. Co-resides with voxtral (13 GiB) + ASR (6 GiB).
+        `v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker", English descriptions. Built for Olares 1.12.6.
+v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, live metrics, removed API URL line. v1.8.0: Move to worker GPU (MemorySlice) — CUDA_DEVICE_MEMORY_LIMIT_0=3072m + util 0.9. Co-resides with voxtral (13 GiB) + ASR (6 GiB).
         v1.7.0: Native vLLM rerank — removed Python rerank-proxy sidecar. vLLM v0.26.0-cu129 with built-in /v1/rerank serving Qwen3-Reranker-0.6B-seq-cls directly. Pinned immutable image tag. Fixed pod owner label (HAMi GPU binding). v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
       categories: ["AI Agents"],
       developer: "Aimighty",
@@ -185,7 +187,7 @@ Disk: 50 GB for model cache`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimrerqwen3vllm", title: { en: "Qwen3 Reranker" }, port: 8080, host: "aimrerqwen3vllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimrerqwen3vllm", title: { en: "AIM Qwen3 0.6B Reranker" }, port: 8080, host: "aimrerqwen3vllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -195,10 +197,10 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "1.2.0",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
-      title: { en: "AIM Qwen3 Reranker CPU" },
-      description: { en: "Qwen3-Reranker-0.6B INT8 via OpenVINO" },
+      title: { en: "AIM Qwen3 0.6B Reranker CPU" },
+      description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU — Jina/Cohere-compatible /v1/rerank" },
       fullDescription:
         `Qwen3-Reranker-0.6B + OpenVINO on CPU, optimized for Olares One.
 
@@ -218,8 +220,9 @@ OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-int
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, removed API URL line. v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
-      categories: ["AI Agents"],
+        `v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker CPU", English descriptions. Built for Olares 1.12.6.
+v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, removed API URL line. v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
+      categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
       sourceCode: "https://github.com/bayerhazard/aimighty-reranker-cpu",
@@ -235,7 +238,7 @@ Disk: 10 GB`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimrerqwen3vino", title: { en: "Qwen3 Reranker CPU" }, port: 8080, host: "aimrerqwen3vino", authLevel: "internal", openMethod: "window" },
+        { name: "aimrerqwen3vino", title: { en: "AIM Qwen3 0.6B Reranker CPU" }, port: 8080, host: "aimrerqwen3vino", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
@@ -480,11 +483,11 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "1.9.22",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
-      description: { en: "Wings for Hermes — AI Agent Web UI, runs agent in-process like hermes-webui" },
-      upgradeDescription: "v1.9.22: OpenAI-TTS SSRF-Allowlist (HERMES_WEBUI_TTS_TRUSTED_HOSTS) — erlaubt private Selbst-Host-Gateways wie internes LiteLLM. v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
+      description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
+      upgradeDescription: "v26.08.1: Unified naming — category AI, English descriptions. Built for Olares 1.12.6. v1.9.22: OpenAI-TTS SSRF-Allowlist (HERMES_WEBUI_TTS_TRUSTED_HOSTS) — erlaubt private Selbst-Host-Gateways wie internes LiteLLM. v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
       fullDescription:
         `**Wings for Hermes** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
@@ -535,10 +538,10 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "1.3.15",
+      version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
-      description: { en: "Backup Solution for Olares One" },
+      description: { en: "Configuration-level backup & restore for Olares One" },
       fullDescription:
         `Rewind complements the Olares standard backup by exporting what it does NOT cover:
 
@@ -560,8 +563,8 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 2. Rewind UI → select date → restore (settings, DBs)
 
 **No encryption, no archives, no retention** — Olares handles all of that. Rewind only exports what Olares misses.`,
-      upgradeDescription: "v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.'",
-      categories: ["Utilities", "Developer Tools"],
+      upgradeDescription: "v26.08.1: Unified naming — category Utilities, English descriptions. Built for Olares 1.12.6. v1.3.15: Letzter DB-Export zeigt echten Voll-DB-Dump.'",
+      categories: ["Utilities"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/rewind",
       sourceCode: "https://github.com/bayerhazard/rewind",
