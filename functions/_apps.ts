@@ -590,15 +590,15 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "26.08.4",
+      version: "26.08.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
       title: { en: "AIM Qwen3 TTS 1.7B" },
-      description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 2 task modes, 9 voices, 10 languages, 8 GB VRAM, ~5 min max audio" },
+      description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible" },
       fullDescription:
-        `**Qwen3-TTS-12Hz-1.7B** — Alibaba's latest open text-to-speech model, served via vLLM-Omni with a full OpenAI-compatible API.
+        `**Qwen3-TTS-12Hz-1.7B-CustomVoice** — Text-to-speech served via vLLM-Omni with a full OpenAI-compatible API.
 
 **Model**
-Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (Apache-2.0, commercial use allowed). End-to-end discrete multi-codebook LM architecture at 12 Hz codec rate.
+Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (Apache-2.0). End-to-end discrete multi-codebook LM architecture at 12 Hz codec rate. Standard --max-model-len 4096 for up to 5 min audio streams and 3-4 parallel users.
 
 **Inference Engine**
 vLLM-Omni v0.24.0 (stable). OpenAI-compatible /v1/audio/speech + /v1/audio/voices.
@@ -606,11 +606,10 @@ vLLM-Omni v0.24.0 (stable). OpenAI-compatible /v1/audio/speech + /v1/audio/voice
 **Key Features**
 - 2 task modes: CustomVoice (preset speakers), VoiceDesign (voice from description)
 - 9 preset speakers + natural-language style instructions (emotion, speed, tone)
-- 10 languages (ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT)
+- 10 languages incl. German and English
 - Output formats: wav, mp3, flac, pcm, aac, opus
 - Speed control
 - Extreme low-latency streaming (first audio packet after a single character, ~97 ms e2e)
-- Custom dashboard in AIMightys design language (DE/EN toggle)
 
 **API Example**
 bash
@@ -619,15 +618,11 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   -o output.wav
 
 **Resource Usage**
-GPU: 1× NVIDIA — 8 GB VRAM slice (fp8 KV cache, gpu_memory_utilization 0.60)
+GPU: 1× NVIDIA — 8 GB VRAM slice (fp8 KV cache)
 RAM: 8 GB, CPU: 2 cores
-Disk: 20 GB (model cache, HF_HOME)
-
-**Capacity**
-- Max audio per request: ~5 minutes (max_model_len 4096 @ 12 Hz codec rate)
-- Concurrent users: 2-3 (e.g. short voice commands) — requests beyond queue automatically`,
+Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.08.4: Tuned for a stable 8 GB VRAM slice — max_model_len 4096 (~5 min audio), fp8 KV cache, gpu_memory_utilization 0.60, CUDA_DEVICE_MEMORY_LIMIT_0=8192m. Removed Base (voice-clone) task — Qwen3-TTS-12Hz-1.7B-CustomVoice ships no speaker encoder, voice cloning requires the separate Qwen3-TTS-12Hz-1.7B-Base model. Built for Olares 1.12.6.`,
+        `v26.08.5: Tuned for a stable 8 GB VRAM slice — max_model_len 4096 (~5 min audio), fp8 KV cache. Built for Olares 1.12.6.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
