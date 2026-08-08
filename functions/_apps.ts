@@ -590,10 +590,10 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
-      title: { en: "AIM Qwen3 1.7B TTS" },
-      description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 3 task modes, 9 voices, 10 languages, gapless streaming" },
+      title: { en: "AIM Qwen3 TTS 1.7B" },
+      description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible /v1/audio/speech, 2 task modes, 9 voices, 10 languages, 8 GB VRAM, ~5 min max audio" },
       fullDescription:
         `**Qwen3-TTS-12Hz-1.7B** — Alibaba's latest open text-to-speech model, served via vLLM-Omni with a full OpenAI-compatible API.
 
@@ -604,7 +604,7 @@ Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice (Apache-2.0, commercial use allowed). End-t
 vLLM-Omni v0.24.0 (stable). OpenAI-compatible /v1/audio/speech + /v1/audio/voices.
 
 **Key Features**
-- 3 task modes: CustomVoice (preset speakers), VoiceDesign (voice from description), Base (voice cloning via reference audio)
+- 2 task modes: CustomVoice (preset speakers), VoiceDesign (voice from description)
 - 9 preset speakers + natural-language style instructions (emotion, speed, tone)
 - 10 languages (ZH, EN, JA, KO, DE, FR, RU, PT, ES, IT)
 - Output formats: wav, mp3, flac, pcm, aac, opus
@@ -619,14 +619,15 @@ curl -X POST http://localhost:8000/v1/audio/speech -H "Content-Type: application
   -o output.wav
 
 **Resource Usage**
-GPU: 1× NVIDIA (~5-8 GB VRAM)
+GPU: 1× NVIDIA — 8 GB VRAM slice (fp8 KV cache, gpu_memory_utilization 0.60)
 RAM: 8 GB, CPU: 2 cores
-Disk: 20 GB (model cache, HF_HOME)`,
+Disk: 20 GB (model cache, HF_HOME)
+
+**Capacity**
+- Max audio per request: ~5 minutes (max_model_len 4096 @ 12 Hz codec rate)
+- Concurrent users: 2-3 (e.g. short voice commands) — requests beyond queue automatically`,
       upgradeDescription:
-        `v26.08.3: Lined-up with Voxtral family — custom static dashboard in AIM design language (Hanseatenblau + Gold, DE/EN), 3 task modes, voice list from server, output formats, speed control. Built for Olares 1.12.6.
-v26.08.2: Official vLLM-Omni Gradio dashboard — gapless AudioWorklet streaming, real-time metrics (TTFP, RTF), Voice Design, Voice Cloning, multiple output formats, speed control. Replaces custom HTML dashboard.
-v26.08.1: Unified naming — title "AIM Qwen3 1.7B TTS", English descriptions. Built for Olares 1.12.6.
-v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.0, OpenAI-compatible /v1/audio/speech, Web Dashboard.`,
+        `v26.08.4: Tuned for a stable 8 GB VRAM slice — max_model_len 4096 (~5 min audio), fp8 KV cache, gpu_memory_utilization 0.60, CUDA_DEVICE_MEMORY_LIMIT_0=8192m. Removed Base (voice-clone) task — Qwen3-TTS-12Hz-1.7B-CustomVoice ships no speaker encoder, voice cloning requires the separate Qwen3-TTS-12Hz-1.7B-Base model. Built for Olares 1.12.6.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
@@ -643,7 +644,7 @@ v1.0.0: Initial release — Qwen3-TTS-12Hz-1.7B-CustomVoice via vLLM-Omni v0.24.
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen3ttsvllm", title: { en: "AIM Qwen3 1.7B TTS" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen3ttsvllm", title: { en: "AIM Qwen3 TTS 1.7B" }, port: 8080, host: "aimqwen3ttsvllm", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
