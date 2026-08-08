@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.08.3: Umbenennung — App heißt jetzt "Relay" (Namespace relay, Userverzeichnis /data/Relay → relay), neues Apple-Mail-Icon, Route mail dokumentiert. Built for Olares 1.12.6.
+        `v26.08.4: Push-Benachrichtigungen — Web Push (VAPID) bei neuen E-Mails, auch bei geschlossener App (iOS 16.4+ als Home-Screen-PWA). Aktivierung in Einstellungen → Allgemein → Push-Benachrichtigungen. Built for Olares 1.12.6.
+v26.08.3: Umbenennung — App heißt jetzt "Relay" (Namespace relay, Userverzeichnis /data/Relay → relay), neues Apple-Mail-Icon, Route mail dokumentiert. Built for Olares 1.12.6.
 v26.08.2: Archiv-Modus — lokale Mail-Kopien werden nicht mehr automatisch gelöscht (Retention aus, keine Spiegelung von Provider-Löschungen). Built for Olares 1.12.6.
 v26.08.1: Erster Release auf dem AIMighty Market. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
