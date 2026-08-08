@@ -703,6 +703,37 @@ Disk: 20 GB (model cache, HF_HOME)`,
       options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "relayapp",
+      version: "26.08.1",
+      icon: "https://app.cdn.olares.com/appstore/default/defaulticon.webp",
+      title: { en: "AImighty Relay One" },
+      description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
+      fullDescription:
+        `**AImighty Relay One** — dein selbst gehosteter E-Mail-Client.
+IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
+      upgradeDescription:
+        `v26.08.1: Erster Release auf dem AIMighty Market. Built for Olares 1.12.6.`,
+      categories: ["Utilities"],
+      developer: "bayerhazard",
+      website: "https://github.com/bayerhazard/relay-one",
+      sourceCode: "https://github.com/bayerhazard/relay-one",
+      supportArch: ["amd64", "arm64"],
+      requiredCpu: "500m",
+      requiredMemory: "1Gi",
+      requiredDisk: "10Gi",
+      limitedCpu: "4",
+      limitedMemory: "8Gi",
+    },
+    spec: {
+      type: "app",
+      entrance: [{ name: "relayapp", title: { en: "AImighty Relay One" }, port: 3000, host: "relayapp", authLevel: "internal", openMethod: "window" }],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "8Gi", disk: "200Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
