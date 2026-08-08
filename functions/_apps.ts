@@ -590,7 +590,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "26.08.5",
+      version: "26.08.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
       title: { en: "AIM Qwen3 TTS 1.7B" },
       description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible" },
@@ -622,7 +622,7 @@ GPU: 1× NVIDIA — 8 GB VRAM slice (fp8 KV cache)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.08.5: Tuned for a stable 8 GB VRAM slice — max_model_len 4096 (~5 min audio), fp8 KV cache. Built for Olares 1.12.6.`,
+        `v26.08.6: Fixed owner labels in chart (app-service now sets correct owner), 8 GB VRAM slice — max_model_len 4096 (~5 min audio), fp8 KV cache. Built for Olares 1.12.6.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3ttsvllm",
