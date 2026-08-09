@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.26",
+      version: "26.09.27",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.26: Migration: reset-target (Ziel-Konto komplett leeren vor frischer Migration).
+        `v26.09.27: Bugfixes — Anhang-Download aus lokalem EML, Profilbild/Voice/CardDAV-Endpoints (waren nie portiert), Restore-Funktion, unbegrenzter Download; Migration als server-interner Background-Task (kein Gateway-Timeout-Race).
+v26.09.26: Migration: reset-target (Ziel-Konto komplett leeren vor frischer Migration).
 v26.09.25: Migration: stop-sync (Ziel vom Sync trennen, damit lokale Ordner nicht überschrieben werden).
 v26.09.24: Diagnose: db-count (DB-Zählung der Quell-Mails für DB-basierte Migration).
 v26.09.23: FIX: removal_check löscht keine lokalen Ordner mehr (zweiter Lösch-Pfad) — Migration bleibt bestehen.
