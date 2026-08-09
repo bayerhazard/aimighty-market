@@ -590,7 +590,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "26.08.8",
+      version: "26.08.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
       title: { en: "AIM Qwen3 TTS 1.7B" },
       description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible" },
@@ -649,7 +649,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.08.8",
+      version: "26.08.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vLLM — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.08.8",
+      version: "26.08.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.08.8: Fix: Datenverzeichnis-Permissions (initContainer busybox + runAsUser 0, chown 1000:1000) — App startet zuverlässig. Built for Olares 1.12.6.
+        `v26.08.9: Fix: Web-Serving-Pfad (/opt/relay/web) + authLevel public — App öffnet wieder im Browser. Built for Olares 1.12.6.
+v26.08.8: Fix: Datenverzeichnis-Permissions (initContainer busybox + runAsUser 0, chown 1000:1000). Built for Olares 1.12.6.
 v26.08.7: Fix: initContainer chown (v1). Built for Olares 1.12.6.
 v26.08.6: Fix: statisches musl-Binary (libgcc_s-Fehler behoben). Built for Olares 1.12.6.
 v26.08.5: Fix Image-Pfad (/opt/relay/relay-server) — Push-Benachrichtigungen aktiv. Built for Olares 1.12.6.
@@ -735,7 +736,7 @@ v26.08.1: Erster Release auf dem AIMighty Market. Built for Olares 1.12.6.`,
     },
     spec: {
       type: "app",
-      entrance: [{ name: "relay", title: { en: "Relay" }, port: 3000, host: "relay", authLevel: "internal", openMethod: "window" }],
+      entrance: [{ name: "relay", title: { en: "Relay" }, port: 3000, host: "relay", authLevel: "public", openMethod: "window" }],
       permission: [],
       middleware: [],
       options: { resources: { cpu: "4", memory: "8Gi", disk: "200Gi" } },
