@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.3",
+      version: "26.09.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.3: Fix: X-Relay-Key-Guard lässt Browser-Weg (öffentlicher Host) durch, schützt nur Cluster-interne Zugriffe. Built for Olares 1.12.6.
+        `v26.09.6: Sammel-Release — API auf 3-Segment-Pfade (behebt 405/404 durch Olares-Gateway: read/delete/move/body/raw/attachments/flag/config funktionieren wieder), Extended-Modus (nur INBOX+SPAM+lokale Ordner, SPAM ohne lokalen Cache, Gesendet/Entwürfe lokal, lokal-only Ordner eingerückt unter Posteingang), draft/save + draft/discard (Entwürfe speichern repariert), flag + move-cross-account neu, imap_insecure-Persistenz + Edit-Dialog-Fix (kein Duplikat-Konto), Ordnerliste-Fallback bei Getrennt, UI-Feinschliff (Sidebar-/Vorschau-Linien unsichtbar). Built for Olares 1.12.6.
+v26.09.3: Fix: X-Relay-Key-Guard lässt Browser-Weg (öffentlicher Host) durch, schützt nur Cluster-interne Zugriffe. Built for Olares 1.12.6.
 v26.09.2: Fix: statisches musl-Binary (crt-static) — App startet zuverlässig. Built for Olares 1.12.6.
 v26.09.1: Vollständige Konzept-Umsetzung — EML-Roharchiv (Immer), lokal-only Ordner (Verify→EXPUNGE), sync_mode pro Account, delete_queue+Verify-Pipeline, lokaler Papierkorb (30 Tage pro Account), X-Relay-Key API-Sperre, MBox/EML-ZIP-Export, Backup-Snapshot, IMAP-IDLE, Attachment-Dedup (sha256), modseq-Delta-Sync. Built for Olares 1.12.6.
 v26.08.9: Fix: Web-Serving-Pfad (/opt/relay/web) + authLevel public — App öffnet wieder im Browser. Built for Olares 1.12.6.
