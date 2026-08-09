@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.16",
+      version: "26.09.17",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.16: FIX Migration: explizite folder_id (kein NULL-Folder — Mails landen garantiert im Ziel-Ordner).
+        `v26.09.17: FIX: Sync löscht lokale Ordner nicht mehr (delete_messages_not_in überspringt local_only); Migrator legt Ziel-Ordner bei Bedarf neu an.
+v26.09.16: FIX Migration: explizite folder_id (kein NULL-Folder — Mails landen garantiert im Ziel-Ordner).
 v26.09.15: Diagnose: count-folder Endpoint (UID-Zählung pro Ordner).
 v26.09.14: FIX Migration: SELECT+UID-SEARCH atomar (Race-Condition) — keine Mails aus falschen Ordnern mehr.
 v26.09.13: FIX Migration: überspringt bereits kopierte UIDs (kein Doppel-Zählen); batch_limit zählt nur echte neue Kopien.
