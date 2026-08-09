@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.13",
+      version: "26.09.14",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.13: FIX Migration: überspringt bereits kopierte UIDs (kein Doppel-Zählen); batch_limit zählt nur echte neue Kopien.
+        `v26.09.14: FIX Migration: SELECT+UID-SEARCH atomar (Race-Condition) — keine Mails aus falschen Ordnern mehr.
+v26.09.13: FIX Migration: überspringt bereits kopierte UIDs (kein Doppel-Zählen); batch_limit zählt nur echte neue Kopien.
 v26.09.12: Migration: batch_limit für große Ordner (chunked, unter Gateway-Timeout).
 v26.09.11: Migration: copy-folder Chunk-Endpoint (pro Ordner, unter Gateway-Timeout) für vollständige Migration.
 v26.09.10: Migration: holt ALLE Mails vom IMAP (fetch_all_uids) statt nur die lokal gecachten 50/Folder — vollständige Migration ohne 50er-Begrenzung.
