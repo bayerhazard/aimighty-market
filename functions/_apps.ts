@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.43",
+      version: "26.09.44",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.43: FIX Sync-Befüllung: Ordner werden vollständig synchronisiert (Sync-Cursor last_uid wird nach jeder Batch fortgeschrieben — vorher blieb der Sync bei den ersten 50 Mails hängen); Web lädt alle Mails eines Ordners (Limit 100 -> 10000, Virtualisierung skaliert); save_message loggt Fehler detailliert.
+        `v26.09.44: MBOX-Import: /import/mbox (Inhalt) + /import/mbox-dir (liest alle .mbox unter /data/Relay/Mails, jede Datei wird ein lokaler Ordner, z.B. Auto.mbox -> "Auto"). Message-ID-Dedup, EML-Archiv + DB-Index, uid= max+1 pro Ordner.
+v26.09.43: FIX Sync-Befüllung: Ordner werden vollständig synchronisiert (Sync-Cursor last_uid wird nach jeder Batch fortgeschrieben — vorher blieb der Sync bei den ersten 50 Mails hängen); Web lädt alle Mails eines Ordners (Limit 100 -> 10000, Virtualisierung skaliert); save_message loggt Fehler detailliert.
 v26.09.42: ToneControls wie zuvor (7-Stufen-Slider mit Locker/Ausgewogen/Formell) in der Desktop-Ansicht; mobil werden nur die Pill-Tags (Seriosität/Textumfang) + Mittellabels (Ausgewogen/Normal) ausgeblendet. FIX IMAP-UTF-7: Ordner mit Umlauten ("Entwürfe" war "Entwfe", "Gelöscht" war "Gelcht") werden korrekt dekodiert (UTF-16BE + Padding); Umbenennen sendet Namen IMAP-UTF-7-encodiert (kein "unsupported folder name" mehr).
 v26.09.41: FIX Account-Löschen (war generell kaputt — 422, falscher Request-Typ); Voice-Aufnahme stoppt nach 2s Stille (RMS-basiert) und sendet automatisch STT->LLM; Compose: Tone-Steuerung vereinfacht (Locker/Formell + Knapp/Ausführlich statt 7-Stufen-Slider), mobile Darstellung überarbeitet (Felder vertikal, "Zurück" statt doppelter Navigation).
 v26.09.40: FIX Voice-Aufnahme: MediaRecorder liefert browserabhängig WebM/MP4 (kein WAV) -> "Format not recognised" am STT-Server. Aufnahme wird jetzt mit der Web Audio API in echtes 16-kHz/16-bit/mono-PCM-WAV konvertiert (Whisper-Standard). Live verifiziert: STT akzeptiert das Format (HTTP 200).
