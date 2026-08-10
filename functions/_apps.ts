@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.37",
+      version: "26.09.38",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.37: FIX: Kontextmenü im Posteingang zeigt nicht mehr zu weit rechts (contain: style statt inline-size — nur style erzeugt keinen containing block für fixed-Menüs); Voice-Einstellungen werden jetzt dauerhaft gespeichert (camelCase-Feldnamen akzeptiert).
+        `v26.09.38: FIX Voice-Einstellungen: GET liefert camelCase-Feldnamen (sttUrl/sttKey/sttModel), damit die Werte beim erneuten Öffnen der Einstellungen geladen werden; Speichern validiert jetzt (leere/ungültige URL oder fehlendes Modell -> Fehlermeldung statt "Gespeichert").
+v26.09.37: FIX: Kontextmenü im Posteingang zeigt nicht mehr zu weit rechts (contain: style statt inline-size — nur style erzeugt keinen containing block für fixed-Menüs); Voice-Einstellungen werden jetzt dauerhaft gespeichert (camelCase-Feldnamen akzeptiert).
 v26.09.36: Kontextmenü (Rechtsklick) auch auf Postfach-Ebene (Neuer Ordner unter INBOX); Cross-Account-Verschieben in lokale Ordner (kein IMAP-APPEND-Fehler mehr); Profilbild-Upload gefixt (camelCase-Feldnamen wurden vom Server nicht akzeptiert).
 v26.09.35: FIX CardDAV-Sync: vCard-URLs aus der Sync-Antwort werden gegen die Server-Basis aufgelöst (bisher relativer Pfad -> "builder error", 0 Kontakte).
 v26.09.34: UI-Fixes: Kontextmenü nicht mehr nach rechts versetzt (contain-Fix), macOS-Titlebar folgt Hell/Dunkel-Theme, Swipe-Buttons nur noch beim Wischen sichtbar (Dark-Mode-Overlay), Accounts in der Sidebar unabhängig ein-/ausklappbar, CardDAV-Kontaktsuche im Empfängerfeld (Endpoints waren nie registriert).
