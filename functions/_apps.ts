@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.53",
+      version: "26.09.54",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.53: FIX Papierkorb: Der lokale "Trash"-Ordner wird beim Löschen automatisch angelegt (vorher: Mails wurden mit folder_id=NULL verwaist und verschwanden); Löschung ist auf den Quell-Ordner begrenzt (uid ist nur pro Ordner eindeutig — vorher wurden ALLE Mails mit derselben uid verschoben).
+        `v26.09.54: uid-Ordner-Scope überall: Löschen (Archive/Mirror/Permanent) und Verschieben (IMAP/local) treffen nur noch die Mail im Quell-Ordner; das Frontend sendet den Quell-Ordner mit (uid ist nur pro Ordner eindeutig).
 v26.09.43: FIX Sync-Befüllung: Ordner werden vollständig synchronisiert (Sync-Cursor last_uid wird nach jeder Batch fortgeschrieben — vorher blieb der Sync bei den ersten 50 Mails hängen); Web lädt alle Mails eines Ordners (Limit 100 -> 10000, Virtualisierung skaliert); save_message loggt Fehler detailliert.
 v26.09.42: ToneControls wie zuvor (7-Stufen-Slider mit Locker/Ausgewogen/Formell) in der Desktop-Ansicht; mobil werden nur die Pill-Tags (Seriosität/Textumfang) + Mittellabels (Ausgewogen/Normal) ausgeblendet. FIX IMAP-UTF-7: Ordner mit Umlauten ("Entwürfe" war "Entwfe", "Gelöscht" war "Gelcht") werden korrekt dekodiert (UTF-16BE + Padding); Umbenennen sendet Namen IMAP-UTF-7-encodiert (kein "unsupported folder name" mehr).
 v26.09.41: FIX Account-Löschen (war generell kaputt — 422, falscher Request-Typ); Voice-Aufnahme stoppt nach 2s Stille (RMS-basiert) und sendet automatisch STT->LLM; Compose: Tone-Steuerung vereinfacht (Locker/Formell + Knapp/Ausführlich statt 7-Stufen-Slider), mobile Darstellung überarbeitet (Felder vertikal, "Zurück" statt doppelter Navigation).
