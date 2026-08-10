@@ -706,7 +706,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.40",
+      version: "26.09.41",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -714,7 +714,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.40: FIX Voice-Aufnahme: MediaRecorder liefert browserabhängig WebM/MP4 (kein WAV) -> "Format not recognised" am STT-Server. Aufnahme wird jetzt mit der Web Audio API in echtes 16-kHz/16-bit/mono-PCM-WAV konvertiert (Whisper-Standard). Live verifiziert: STT akzeptiert das Format (HTTP 200).
+        `v26.09.41: FIX Account-Löschen (war generell kaputt — 422, falscher Request-Typ); Voice-Aufnahme stoppt nach 2s Stille (RMS-basiert) und sendet automatisch STT->LLM; Compose: Tone-Steuerung vereinfacht (Locker/Formell + Knapp/Ausführlich statt 7-Stufen-Slider), mobile Darstellung überarbeitet (Felder vertikal, "Zurück" statt doppelter Navigation).
+v26.09.40: FIX Voice-Aufnahme: MediaRecorder liefert browserabhängig WebM/MP4 (kein WAV) -> "Format not recognised" am STT-Server. Aufnahme wird jetzt mit der Web Audio API in echtes 16-kHz/16-bit/mono-PCM-WAV konvertiert (Whisper-Standard). Live verifiziert: STT akzeptiert das Format (HTTP 200).
 v26.09.39: Voice-Transkription vollständig implementiert: /voice/transcribe (OpenAI-kompatibler STT-Aufruf mit multipart, bearer-auth, Fehlerbehandlung) + Web-Parsing des {text}-Antwortformats. Vorher HTTP 405 (Route fehlte).
 v26.09.38: FIX Voice-Einstellungen: GET liefert camelCase-Feldnamen (sttUrl/sttKey/sttModel), damit die Werte beim erneuten Öffnen der Einstellungen geladen werden; Speichern validiert jetzt (leere/ungültige URL oder fehlendes Modell -> Fehlermeldung statt "Gespeichert").
 v26.09.37: FIX: Kontextmenü im Posteingang zeigt nicht mehr zu weit rechts (contain: style statt inline-size — nur style erzeugt keinen containing block für fixed-Menüs); Voice-Einstellungen werden jetzt dauerhaft gespeichert (camelCase-Feldnamen akzeptiert).
