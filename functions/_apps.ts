@@ -419,7 +419,7 @@ v3.3.3: Rollback to aamsellem/beellama-cpp:0.1.3-rc1 (custom Blackwell sm_120 bu
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.2",
+      version: "26.08.3",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -436,6 +436,7 @@ Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026).
 Compiled with CUDA 13.1 + OpenSSL for RTX 5090 (sm_120).
 VBR KV-Cache (variable bit-rate, both K/V sides: starts at f16, degrades per-layer only under VRAM pressure, floor turbo1_tcq).
 MTP with 3 speculative tokens.
+--reasoning-preserve: thinking traces from previous turns are kept (Qwen3.6 preserve_thinking).
 --mmproj-gpu-swap: mmproj on CPU while idle, swaps to GPU on vision request (~555ms).
 Sampling: temp=0.6, top-p=0.95, top-k=20. Batch-size 2048.
 
@@ -456,7 +457,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.08.2: Full VBR KV-Cache — dynamic bit-rate on both K/V sides (starts at f16, degrades per-layer only under VRAM pressure, floor turbo1_tcq). Higher KV fidelity at typical session depths; verified ~305 tok/s decode, MTP acceptance up to 1.0. Built for Olares 1.12.6.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
+      upgradeDescription: "v26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
