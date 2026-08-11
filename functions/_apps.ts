@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.17",
+      version: "26.08.18",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, MTP, vision" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~15 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.17: NVFP4 KV fix — attention backend flash_attn (triton_attn rejects nvfp4-KV: 'kv_cache_dtype not supported'). NVFP4 weights + nvfp4 KV. Built for Olares 1.12.6.
+        `v26.08.18: REVERT to proven config (AWQ-INT4 + fp8-KV + triton_attn). NVFP4 evaluation ended: weights only ~1 GiB savings (15 vs 16 GiB); nvfp4-KV unavailable on SM120 ('FP8 KV requires FA3 SM90 / FA4 SM100', RTX 5090 = SM120) — both triton_attn and flash_attn reject it. Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
 v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["AI", "Vision"],
