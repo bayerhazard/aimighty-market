@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.8",
+      version: "26.08.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, MTP, vision" },
@@ -35,7 +35,7 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
 
 **Inference Engine**
 vLLM v0.26.0 cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
-fp8 KV-Cache. enforce-eager (torch.compile inkompatibel mit Gemma4-MoE).
+fp8 KV-Cache. CUDAGraphs + torch.compile.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~15 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.8: vLLM v0.26.0-cu129 (Gemma4 fixes + per-KV-group backend). skip-layers flag removed (forced BF16 at full length -> 8.55 GiB estimate, same as v0.23). 200K only without MTP + without skip-flag: fp8 native SWA amortization. enforce-eager. Built for Olares 1.12.6.
+        `v26.08.9: vLLM v0.26.0-cu129, no MTP, no skip-flag, CUDAGraphs+torch.compile re-enabled (they only crash with MTP draft; proven 136 tok/s @200K in 26.08.4). fp8 native SWA amortization. Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
 v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["AI", "Vision"],
