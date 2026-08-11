@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.21",
+      version: "26.08.22",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.21: Attention backend switched to FlashInfer (test: speed gain on Blackwell/SM120; sampler stays disabled VLLM_USE_FLASHINFER_SAMPLER=0 — SM120 crash fix). Reverts if no gain or crash. Built for Olares 1.12.6.`,
+        `v26.08.22: REVERT to triton_attn — FlashInfer test (26.08.21) ended: 'partial multimodal token full attention not supported' (Gemma4 vision needs bidirectional MM attention, FlashInfer can't in v0.23.1rc1). Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
