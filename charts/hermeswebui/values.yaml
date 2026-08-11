@@ -1,0 +1,47 @@
+image:
+  repository: ghcr.io/nesquena/hermes-webui
+  tag: "0.52.201"
+  pullPolicy: IfNotPresent
+agentImage:
+  repository: beclab/harveyff-hermes-agent
+  tag: "v2026.7.30-uid1000"
+  pullPolicy: IfNotPresent
+workloads:
+  hermeswebui:
+    replicaCount: 1
+webuiPort: 8787
+resources:
+  limits:
+    cpu: "4"
+    memory: 4Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+env:
+  HERMES_WEBUI_HOST: "0.0.0.0"
+  HERMES_WEBUI_PORT: "8787"
+  HERMES_WEBUI_SSE_CHUNKED: "1"
+  HERMES_WEBUI_AGENT_DIR: "/home/hermeswebui/.hermes/hermes-agent"
+  HERMES_WEBUI_AUTO_INSTALL: "1"
+  WANTED_UID: "1000"
+  WANTED_GID: "1000"
+  TZ: Etc/UTC
+olaresEnv:
+  HERMES_WEBUI_PASSWORD: ""
+  HERMES_WEBUI_DEFAULT_MODEL: ""
+startupProbe:
+  httpGet:
+    path: /health
+    port: 8787
+  failureThreshold: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8787
+  periodSeconds: 15
+  timeoutSeconds: 5
+  failureThreshold: 3
+service:
+  type: ClusterIP

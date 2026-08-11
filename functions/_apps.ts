@@ -536,6 +536,61 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   },
   {
     metadata: {
+      name: "hermeswebui",
+      version: "26.08.1",
+      icon: "https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png",
+      title: { en: "Hermes WebUI" },
+      description: { en: "Standard browser interface for Hermes Agent — chat, sessions, memory, skills, cron" },
+      upgradeDescription: "v26.08.1: First release — upstream nesquena/hermes-webui 0.52.201 as a separate Olares app. In-process agent on the shared HERMES_HOME (like Wings), but with its own WebUI state dir (HERMES_HOME/webui-standard) so it can run alongside Wings without clobbering settings/sessions. Built for Olares 1.12.6.",
+      fullDescription:
+        `**Hermes WebUI** — the standard browser interface for Hermes Agent (upstream \`nesquena/hermes-webui\`).
+
+**Full CLI parity** — everything you can do from the Hermes terminal:
+- Chat with streaming, reasoning display, tool-call cards, approvals
+- Sessions: create, resume, search, pin, archive, projects, export
+- Memory: view and edit MEMORY.md / USER.md inline
+- Skills: list, preview, create, edit, delete
+- Tasks: cron jobs — view, create, edit, run, pause/resume, run history
+- Profiles, workspaces with file browser, todos, themes
+
+**Shared-state architecture**
+Runs an in-process agent instance on the *same* HERMES_HOME as your Hermes Agent app. Sessions, memory, auth, and config are shared. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code. Its own WebUI state lives in HERMES_HOME/webui-standard, so it can run alongside Wings without conflicts.
+
+**Auto-detection**
+Automatically finds your Hermes Agent home directory on startup — no manual configuration needed.
+
+**Requirements**
+- Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
+  - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
+      categories: ["AI"],
+      developer: "nesquena",
+      website: "https://github.com/nesquena/hermes-webui",
+      sourceCode: "https://github.com/nesquena/hermes-webui",
+      supportArch: ["amd64"],
+      requiredCpu: "1",
+      requiredMemory: "2Gi",
+      requiredDisk: "5Gi",
+      requiredGpu: "0",
+      limitedCpu: "4",
+      limitedMemory: "8Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "hermeswebui", title: { en: "Hermes WebUI" }, port: 8787, host: "hermeswebui", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "1", memory: "2Gi", disk: "5Gi" } },
+      envs: [
+        { envName: "HERMES_WEBUI_PASSWORD", required: false, type: "password", editable: true, applyOnChange: true, description: "Optional app-level password for the Web UI (in addition to Olares SSO). Recommended when exposing beyond LAN." },
+        { envName: "HERMES_WEBUI_DEFAULT_MODEL", required: false, default: "Agent", type: "string", editable: true, applyOnChange: true, description: "Default model name used for new chats (must match a model your Hermes provider key can access, e.g. 'Agent')." },
+      ],
+    },
+  },
+  {
+    metadata: {
       name: "rewind",
       version: "26.08.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",

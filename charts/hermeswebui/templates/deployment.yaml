@@ -1,0 +1,160 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hermeswebui
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: hermeswebui
+    applications.app.bytetrade.io/name: hermeswebui
+    applications.app.bytetrade.io/raw-app-name: hermeswebui
+spec:
+  replicas: {{ .Values.workloads.hermeswebui.replicaCount }}
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: hermeswebui
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hermeswebui
+        applications.app.bytetrade.io/name: hermeswebui
+        applications.app.bytetrade.io/raw-app-name: hermeswebui
+        io.bytetrade.app: "true"
+    spec:
+      initContainers:
+      - name: detect-hermes-home
+        image: busybox:latest
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          # Extract username from namespace (e.g. hermeswebui-aimighty -> aimighty)
+          NS="{{ .Release.Namespace }}"
+          USER=$(echo "$NS" | sed 's/^hermeswebui-//')
+          echo "Looking for hermesagent home for user: $USER"
+
+          # Search for hermesagent home in the user's PVC
+          FOUND=""
+          for dir in /olares-rootfs/pvc-userspace-${USER}-*/Data/hermesagent/home; do
+            if [ -d "$dir" ]; then
+              FOUND="$dir"
+              break
+            fi
+          done
+
+          if [ -z "$FOUND" ]; then
+            echo "ERROR: No hermesagent home directory found for user $USER"
+            echo "Checked: /olares-rootfs/pvc-userspace-${USER}-*/Data/hermesagent/home"
+            echo "Make sure hermesagent is installed for this Olares user."
+            exit 1
+          fi
+
+          echo "Found hermesagent home: $FOUND"
+          mkdir -p /hermes-home-path
+          echo -n "$FOUND" > /hermes-home-path/hermes_home
+
+          # Auto-detect kubelet CIDR from node IP
+          NODE_IP=$(hostname -i 2>/dev/null | awk '{print $1}')
+          if [ -n "$NODE_IP" ]; then
+            CIDR=$(echo "$NODE_IP" | awk -F. '{print $1"."$2".0.0/16"}')
+            echo "Detected kubelet CIDR: $CIDR"
+            echo -n "$CIDR" > /hermes-home-path/kubelet_cidr
+          else
+            echo "172.20.0.0/16" > /hermes-home-path/kubelet_cidr
+          fi
+        volumeMounts:
+        - name: olares-rootfs
+          mountPath: /olares-rootfs
+          readOnly: true
+        - name: hermes-home-path
+          mountPath: /hermes-home-path
+      - name: fix-kubelet-bypass
+        image: beclab/init:v1.2.3
+        command:
+        - sh
+        - -c
+        - |
+          CIDR=$(cat /hermes-home-path/kubelet_cidr)
+          echo "Applying kubelet bypass for CIDR: $CIDR"
+          iptables -t nat -I OUTPUT -d $CIDR -p tcp --dport 10250 -j DNAT --to-destination 127.0.0.1:10250
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        volumeMounts:
+        - name: hermes-home-path
+          mountPath: /hermes-home-path
+          readOnly: true
+      - name: agent-src
+        image: "{{ .Values.agentImage.repository }}:{{ .Values.agentImage.tag }}"
+        imagePullPolicy: {{ .Values.agentImage.pullPolicy }}
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          echo "Copying /opt/hermes from beclab agent image to shared volume..."
+          cp -a /opt/hermes/. /agent-src/
+          rm -rf /agent-src/.venv /agent-src/.playwright
+          chown -R 1000:1000 /agent-src
+          echo "Agent source ready."
+        volumeMounts:
+        - name: agent-src
+          mountPath: /agent-src
+      containers:
+      - name: hermeswebui
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+        - sh
+        - -c
+        - |
+          set -e
+          HERMES_HOME=$(cat /hermes-home-path/hermes_home)
+          export HERMES_HOME
+          export HERMES_WEBUI_STATE_DIR="$HERMES_HOME/webui-standard"
+          export HERMES_WEBUI_SERVER_CWD="$HERMES_HOME"
+          echo "Starting Hermes WebUI with HERMES_HOME=$HERMES_HOME"
+          echo "WebUI state dir: $HERMES_WEBUI_STATE_DIR"
+          exec /hermeswebui_init.bash
+        env:
+          {{- range $key, $value := .Values.env }}
+          {{- if ne $value "" }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+          {{- range $key, $value := .Values.olaresEnv }}
+          {{- if ne $value "" }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
+          {{- end }}
+        ports:
+        - containerPort: {{ .Values.webuiPort }}
+          name: http
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        volumeMounts:
+        - name: olares-rootfs
+          mountPath: /olares-rootfs
+        - name: hermes-home-path
+          mountPath: /hermes-home-path
+          readOnly: true
+        - name: agent-src
+          mountPath: /home/hermeswebui/.hermes/hermes-agent
+        startupProbe:
+          {{- toYaml .Values.startupProbe | nindent 10 }}
+        readinessProbe:
+          {{- toYaml .Values.readinessProbe | nindent 10 }}
+      volumes:
+      - name: olares-rootfs
+        hostPath:
+          path: /olares/rootfs/userspace
+          type: Directory
+      - name: hermes-home-path
+        emptyDir: {}
+      - name: agent-src
+        emptyDir: {}

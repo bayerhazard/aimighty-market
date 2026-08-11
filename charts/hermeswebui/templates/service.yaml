@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hermeswebui
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: hermeswebui
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+  - name: http
+    port: {{ .Values.webuiPort }}
+    targetPort: {{ .Values.webuiPort }}
+    protocol: TCP
+  selector:
+    app: hermeswebui

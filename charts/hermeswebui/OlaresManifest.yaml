@@ -1,0 +1,112 @@
+olaresManifest.version: '0.12.0'
+olaresManifest.type: app
+apiVersion: 'v3'
+
+workloadReplicas:
+  hermeswebui: 1
+
+metadata:
+  name: hermeswebui
+  appid: hermeswebui
+  icon: https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png
+  title: Hermes WebUI
+  version: 26.08.1
+  categories:
+    - AI
+  description: Hermes WebUI — browser interface for Hermes Agent
+  fullDescription: >
+    **Hermes WebUI** — the standard browser interface for Hermes Agent (upstream `nesquena/hermes-webui`).
+
+    **Feature set:**
+    - Chat with streaming, reasoning display, tool-call cards, approvals
+    - Sessions: create, resume, search, pin, archive, projects, export
+    - Memory: view and edit MEMORY.md / USER.md inline
+    - Skills: list, preview, create, edit, delete
+    - Tasks: cron jobs — view, create, edit, run, pause/resume, run history
+    - Profiles, workspaces with file browser, todos, themes
+
+    **Shared-state architecture**
+    Runs an in-process agent instance on the *same* HERMES_HOME as your existing Hermes Agent app. Sessions, memory, auth, and config are shared. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
+
+    **Auto-detection**
+    On startup, the app automatically finds your Hermes Agent home directory — no manual path configuration needed. UID/GID is auto-detected from the hermesagent directory ownership.
+
+    **Access**
+    Protected by Olares SSO (internal). Set an additional app password in the app settings for defense in depth.
+
+    **Requirements**
+    - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
+    - Upstream project: https://github.com/nesquena/hermes-webui (MIT)
+  upgradeDescription: "v26.08.1: First release — upstream nesquena/hermes-webui 0.52.201 as a separate Olares app. In-process agent on the shared HERMES_HOME (like Wings), but with its own WebUI state dir (HERMES_HOME/webui-standard) so it can run alongside Wings without clobbering settings/sessions. Built for Olares 1.12.6."
+  developer: nesquena
+  website: https://github.com/nesquena/hermes-webui
+  sourceCode: https://github.com/nesquena/hermes-webui
+  locale:
+    - en-US
+  supportArch:
+    - amd64
+
+spec:
+  versionName: '26.08.1'
+  fullDescription: >
+    **Hermes WebUI** — the standard browser interface for Hermes Agent (upstream `nesquena/hermes-webui`).
+
+    **Feature set:**
+    - Chat with streaming, reasoning display, tool-call cards, approvals
+    - Sessions: create, resume, search, pin, archive, projects, export
+    - Memory: view and edit MEMORY.md / USER.md inline
+    - Skills: list, preview, create, edit, delete
+    - Tasks: cron jobs — view, create, edit, run, pause/resume, run history
+    - Profiles, workspaces with file browser, todos, themes
+
+    **Shared-state architecture**
+    Runs an in-process agent instance on the *same* HERMES_HOME as your existing Hermes Agent app. Sessions, memory, auth, and config are shared. The agent source is copied from the exact running gateway image at pod start, so the WebUI always runs version-matched code.
+
+    **Auto-detection**
+    On startup, the app automatically finds your Hermes Agent home directory — no manual path configuration needed. UID/GID is auto-detected from the hermesagent directory ownership.
+
+    **Access**
+    Protected by Olares SSO (internal). Set an additional app password in the app settings for defense in depth.
+
+    **Requirements**
+    - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
+    - Upstream project: https://github.com/nesquena/hermes-webui (MIT)
+  upgradeDescription: "v26.08.1: First release — upstream nesquena/hermes-webui 0.52.201 as a separate Olares app. In-process agent on the shared HERMES_HOME (like Wings), but with its own WebUI state dir (HERMES_HOME/webui-standard) so it can run alongside Wings without clobbering settings/sessions. Built for Olares 1.12.6."
+  developer: nesquena
+  website: https://github.com/nesquena/hermes-webui
+  sourceCode: https://github.com/nesquena/hermes-webui
+  locale:
+    - en-US
+  supportArch:
+    - amd64
+  requiredCpu: '1'
+  limitedCpu: '4'
+  requiredMemory: 2Gi
+  limitedMemory: 8Gi
+  requiredDisk: 5Gi
+  limitedDisk: 20Gi
+  requiredGpu: '0'
+
+entrances:
+  - name: hermeswebui
+    port: 8787
+    host: hermeswebui
+    title: Hermes WebUI
+    authLevel: internal
+    invisible: false
+    openMethod: window
+
+permission: {}
+
+envs: []
+
+options:
+  apiTimeout: 0
+  allowMultipleInstall: false
+  dependencies:
+    - name: olares
+      version: '>=1.12.6-0'
+      type: system
+    - name: hermesagent
+      version: '>=1.0.0'
+      type: application

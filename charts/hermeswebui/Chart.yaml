@@ -1,0 +1,18 @@
+apiVersion: v2
+name: hermeswebui
+description: Hermes WebUI — browser interface for Hermes Agent
+type: application
+version: 26.08.1
+appVersion: "0.52.201"
+keywords:
+  - ai
+  - hermes
+  - agent
+  - webui
+  - chat
+home: https://github.com/nesquena/hermes-webui
+sources:
+  - https://github.com/nesquena/hermes-webui
+maintainers:
+  - name: Aimighty
+    email: admin@aimighty.local
