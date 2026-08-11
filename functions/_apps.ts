@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.12",
+      version: "26.08.13",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, MTP, vision" },
@@ -34,8 +34,8 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
 200K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM v0.26.0 cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
-fp8 KV-Cache. CUDAGraphs (torch.compile aus — Inductor-VRAM-Overhead).
+vLLM v0.23.1rc cu129, SHA-pinned (g4080263bb) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+fp8 KV-Cache. CUDAGraphs + torch.compile.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~15 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.12: vLLM v0.26.0-cu129, CUDAGraphs ACTIVE, torch.compile OFF (--compilation-config '{"mode":0}' JSON form): Inductor workspace eats too much VRAM (OOM at capture). expandable_segments + max-num-seqs 1. Built for Olares 1.12.6.
+        `v26.08.13: REVERT to v0.23.1rc1 (cu129-nightly-4080263bb) — the proven 26.08.4 config: 200K + CUDAGraphs + torch.compile + 136 tok/s. v0.26.0 experiment ended: MTP draft collides with Gemma4-MoE (mat-shape), CUDAGraph capture OOM (23.4/23.42 GiB) even without Inductor. fp8, no MTP, no skip-flag. Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
 v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["AI", "Vision"],
