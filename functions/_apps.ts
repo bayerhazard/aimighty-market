@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.4",
+      version: "26.08.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, MTP, vision" },
@@ -34,8 +34,9 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~15 GB).
 200K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM v0.23.1rc cu129, SHA-pinned (g4080263bb) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+vLLM v0.26.0 cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
 fp8 KV-Cache. CUDAGraphs + torch.compile.
+MTP Speculative Decoding (3 tokens, google/gemma-4-26B-A4B-it-assistant).
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
@@ -55,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~15 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.4: 200K context ACTIVE — MTP/draft model removed (assistant model eats ~2 GiB VRAM; without it the KV budget suffices for 200K). Native hybrid SWA amortization: 5 full-attention layers (global KV 2x512) pay long context, 25 sliding-window layers (local KV 8x256 w1024) stay bounded. KV cache fp8, no skip-layers flag. CUDAGraphs kept. Built for Olares 1.12.6.
+        `v26.08.5: vLLM update v0.23.1rc1-dev -> v0.26.0-cu129. Gemma4 fixes (#47091 MTP quant, #47332 FA4 mm_prefix, #47217 image bidir sliding) + per-KV-group attention backend (#48012) + sliding-window as explicit backend capability (#48011) — foundation for correct 200K SWA bounding. MTP re-enabled + kv-cache-dtype-skip-layers sliding_window (test: 200K + MTP on new per-layer KV logic). Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
 v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["AI", "Vision"],
