@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.9",
+      version: "26.08.10",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, MTP, vision" },
@@ -55,7 +55,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~15 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.9: vLLM v0.26.0-cu129, no MTP, no skip-flag, CUDAGraphs+torch.compile re-enabled (they only crash with MTP draft; proven 136 tok/s @200K in 26.08.4). fp8 native SWA amortization. Built for Olares 1.12.6.
+        `v26.08.10: vLLM v0.26.0-cu129, CUDAGraphs+torch.compile active. OOM fix at graph capture: PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True + max-num-seqs 2->1 (smaller capture sizes). Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Gemma 4 26B A4B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.
 v2.4.0: MTP Speculative Decoding reaktiviert. CUDAGraphs + torch.compile — 419 tok/s Coding, 280 tok/s Poetry (3.5x schneller). enforce-eager entfernt, chunked-prefill entfernt, VLLM_USE_FLASHINFER_SAMPLER=0. MAX_MODEL_LEN 200k→96k (V1 Engine 28 KiB/Tok vs V0 14 KiB, MTP + CUDAGraphs passen nicht in 24 GB). Needle 100%, Agentic 100%. v2.3.0: Voller 200K-Kontext zurueck — hybride SWA-Amortisation (5 Full-Attention-Layer, Pool 267k Tokens). v2.2.2: Olares 1.12.6 Reparatur — SHA-gepinnter cu129-nightly g4080263bb. video:0, batch 8192, util 0.98.`,
       categories: ["AI", "Vision"],
