@@ -761,66 +761,17 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.67",
+      version: "26.09.69",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
-      description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
+      description: { en: "Relay — the intelligent, local email client" },
       fullDescription:
-        `**Relay** — dein selbst gehosteter E-Mail-Client.
-IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
+        `- **AI Email Generation** – quickly draft precise emails and replies in your individual tone. It learns automatically to adapt generated email texts for different recipient groups (work, private) and even for individual recipients.
+- **Voice-to-Mail** – voice input that automatically becomes a finished email. It recognizes recipients and subject lines to generate complete templates.
+- **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
+- **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.67: FIX Cross-Account-Verschieben (IMAP-Verbindungslimit): connect/reconnect jetzt pro Konto serialisiert (Single-Flight), alte Sessions werden vor dem Neuverbinden sauber ausgeloggt statt gedroppt (Verbindungs-Leak), IMAP-Operationen per op_lock gestaffelt — behebt "[UNAVAILABLE] Maximum number of connections from user+IP exceeded". Plus: Ordnerwechsel in großen Ordnern instant — Mail-Listen werden ohne Body (metadata-only, list_only=1) übertragen, Body lädt on-demand; persistenter Folder-Cache (localStorage) rendert bereits geladene Ordner sofort mit Hintergrund-Refresh. Mobile: Compose-Toolbar 3px tiefer. Built for Olares 1.12.6.
-v26.09.57: FIX UTF-7-Ordner: select_folder bekam den bereits UTF-7-codierten rohen Ordnernamen und encodierte ihn doppelt (& → &-) — deutsche Ordner (Entwürfe, Gelöscht) wurden nie selektiert ("unknown folder"). Sync übergibt jetzt immer den dekodierten Namen.
-v26.09.43: FIX Sync-Befüllung: Ordner werden vollständig synchronisiert (Sync-Cursor last_uid wird nach jeder Batch fortgeschrieben — vorher blieb der Sync bei den ersten 50 Mails hängen); Web lädt alle Mails eines Ordners (Limit 100 -> 10000, Virtualisierung skaliert); save_message loggt Fehler detailliert.
-v26.09.42: ToneControls wie zuvor (7-Stufen-Slider mit Locker/Ausgewogen/Formell) in der Desktop-Ansicht; mobil werden nur die Pill-Tags (Seriosität/Textumfang) + Mittellabels (Ausgewogen/Normal) ausgeblendet. FIX IMAP-UTF-7: Ordner mit Umlauten ("Entwürfe" war "Entwfe", "Gelöscht" war "Gelcht") werden korrekt dekodiert (UTF-16BE + Padding); Umbenennen sendet Namen IMAP-UTF-7-encodiert (kein "unsupported folder name" mehr).
-v26.09.41: FIX Account-Löschen (war generell kaputt — 422, falscher Request-Typ); Voice-Aufnahme stoppt nach 2s Stille (RMS-basiert) und sendet automatisch STT->LLM; Compose: Tone-Steuerung vereinfacht (Locker/Formell + Knapp/Ausführlich statt 7-Stufen-Slider), mobile Darstellung überarbeitet (Felder vertikal, "Zurück" statt doppelter Navigation).
-v26.09.40: FIX Voice-Aufnahme: MediaRecorder liefert browserabhängig WebM/MP4 (kein WAV) -> "Format not recognised" am STT-Server. Aufnahme wird jetzt mit der Web Audio API in echtes 16-kHz/16-bit/mono-PCM-WAV konvertiert (Whisper-Standard). Live verifiziert: STT akzeptiert das Format (HTTP 200).
-v26.09.39: Voice-Transkription vollständig implementiert: /voice/transcribe (OpenAI-kompatibler STT-Aufruf mit multipart, bearer-auth, Fehlerbehandlung) + Web-Parsing des {text}-Antwortformats. Vorher HTTP 405 (Route fehlte).
-v26.09.38: FIX Voice-Einstellungen: GET liefert camelCase-Feldnamen (sttUrl/sttKey/sttModel), damit die Werte beim erneuten Öffnen der Einstellungen geladen werden; Speichern validiert jetzt (leere/ungültige URL oder fehlendes Modell -> Fehlermeldung statt "Gespeichert").
-v26.09.37: FIX: Kontextmenü im Posteingang zeigt nicht mehr zu weit rechts (contain: style statt inline-size — nur style erzeugt keinen containing block für fixed-Menüs); Voice-Einstellungen werden jetzt dauerhaft gespeichert (camelCase-Feldnamen akzeptiert).
-v26.09.36: Kontextmenü (Rechtsklick) auch auf Postfach-Ebene (Neuer Ordner unter INBOX); Cross-Account-Verschieben in lokale Ordner (kein IMAP-APPEND-Fehler mehr); Profilbild-Upload gefixt (camelCase-Feldnamen wurden vom Server nicht akzeptiert).
-v26.09.35: FIX CardDAV-Sync: vCard-URLs aus der Sync-Antwort werden gegen die Server-Basis aufgelöst (bisher relativer Pfad -> "builder error", 0 Kontakte).
-v26.09.34: UI-Fixes: Kontextmenü nicht mehr nach rechts versetzt (contain-Fix), macOS-Titlebar folgt Hell/Dunkel-Theme, Swipe-Buttons nur noch beim Wischen sichtbar (Dark-Mode-Overlay), Accounts in der Sidebar unabhängig ein-/ausklappbar, CardDAV-Kontaktsuche im Empfängerfeld (Endpoints waren nie registriert).
-v26.09.33: Ordner-Löschung robust: schlägt die IMAP-Löschung fehl (Ordner existiert remote nicht), wird trotzdem lokal gelöscht (Mails + Ordnerzeile).
-v26.09.32: Ordner-Löschung ohne IMAP-Client: lokale Ordner (und Migrations-Ziel-Ordner) lassen sich löschen, auch wenn kein IMAP-Session verbunden ist — IMAP-Gegenstück bleibt unangetastet.
-v26.09.31: FIX Rebuild-Migration: Tabelle wird vollständig neu aufgebaut (raw_path/raw_sha256 inklusive), FTS-Trigger werden sauber neu erstellt — keine "no such table: messages_old"-Fehler.
-v26.09.30: FIX: IMAP-UIDs sind pro Ordner eindeutig — UNIQUE(account_id, folder_id, uid) statt (account_id, uid). Mails gleicher UID in verschiedenen Ordnern werden nicht mehr still verschluckt (DB-Rebuild-Migration).
-v26.09.29: Migration pro Ordner (start-folder): Hintergrund-Task je Ordner mit Fehlerfeld statt stiller Done-Markierung.
-v26.09.28: Mobile: iOS-Mail-Swipe-Gesten (links=Gelesen, rechts=Markieren, voll=Löschen) + iPhone-15-Pro-Optimierung (Safe-Area, Touch-Targets, Compose-Vollbild).
-v26.09.27: Bugfixes — Anhang-Download aus lokalem EML, Profilbild/Voice/CardDAV-Endpoints (waren nie portiert), Restore-Funktion, unbegrenzter Download; Migration als server-interner Background-Task (kein Gateway-Timeout-Race).
-v26.09.26: Migration: reset-target (Ziel-Konto komplett leeren vor frischer Migration).
-v26.09.25: Migration: stop-sync (Ziel vom Sync trennen, damit lokale Ordner nicht überschrieben werden).
-v26.09.24: Diagnose: db-count (DB-Zählung der Quell-Mails für DB-basierte Migration).
-v26.09.23: FIX: removal_check löscht keine lokalen Ordner mehr (zweiter Lösch-Pfad) — Migration bleibt bestehen.
-v26.09.22: FIX Migration: IMAP-Verbindung wird nach jedem Ordner geschlossen (kein Leck — Provider blockt sonst bei 30 Verbindungen).
-v26.09.21: FIX Migration: 'Not found'-Mails werden übersprungen (nicht rekonstruiert) — keine leeren Mails.
-v26.09.20: FIX Migration: dedizierte IMAP-Connection (kein Sync-Session-Konflikt).
-v26.09.19: FIX Migration: Ziel-Ordner werden als lokal erzwungen (kein Konflikt mit IMAP-Spiegeln); Cleanup löscht auch IMAP-Spiegel.
-v26.09.18: FIX Migration: SQL-Parameter-Indizes korrigiert (folder_id).
-v26.09.17: FIX: Sync löscht lokale Ordner nicht mehr (delete_messages_not_in überspringt local_only); Migrator legt Ziel-Ordner bei Bedarf neu an.
-v26.09.16: FIX Migration: explizite folder_id (kein NULL-Folder — Mails landen garantiert im Ziel-Ordner).
-v26.09.15: Diagnose: count-folder Endpoint (UID-Zählung pro Ordner).
-v26.09.14: FIX Migration: SELECT+UID-SEARCH atomar (Race-Condition) — keine Mails aus falschen Ordnern mehr.
-v26.09.13: FIX Migration: überspringt bereits kopierte UIDs (kein Doppel-Zählen); batch_limit zählt nur echte neue Kopien.
-v26.09.12: Migration: batch_limit für große Ordner (chunked, unter Gateway-Timeout).
-v26.09.11: Migration: copy-folder Chunk-Endpoint (pro Ordner, unter Gateway-Timeout) für vollständige Migration.
-v26.09.10: Migration: holt ALLE Mails vom IMAP (fetch_all_uids) statt nur die lokal gecachten 50/Folder — vollständige Migration ohne 50er-Begrenzung.
-v26.09.9: Migration: Fallback für lokal-only Mails (Rekonstruktion aus DB statt Fehler) — keine Mail geht verloren.
-v26.09.8: Migration (copy-account Endpoint) + read/unread/flag IMAP-SELECT-Fix.
-v26.09.7: Sammel-Release — API 3-Segment (behebt 405/404 durch Olares-Gateway), Extended-Modus (INBOX+SPAM+lokale, SPAM ohne Cache, Gesendet/Entwürfe lokal), draft/flag/move-cross neu, imap_insecure-Persistenz, 422-Fix (Konto-Anlegen im Einstellungen-Dialog), Ordner löschen (IMAP+lokal), Neuer-Ordner im Kontextmenü, Posteingang-Chevron entfernt (Doppelklick), UI-Feinschliff. Built for Olares 1.12.6.
-v26.09.6: Sammel-Release — API auf 3-Segment-Pfade (behebt 405/404 durch Olares-Gateway: read/delete/move/body/raw/attachments/flag/config funktionieren wieder), Extended-Modus (nur INBOX+SPAM+lokale Ordner, SPAM ohne lokalen Cache, Gesendet/Entwürfe lokal, lokal-only Ordner eingerückt unter Posteingang), draft/save + draft/discard (Entwürfe speichern repariert), flag + move-cross-account neu, imap_insecure-Persistenz + Edit-Dialog-Fix (kein Duplikat-Konto), Ordnerliste-Fallback bei Getrennt, UI-Feinschliff (Sidebar-/Vorschau-Linien unsichtbar). Built for Olares 1.12.6.
-v26.09.3: Fix: X-Relay-Key-Guard lässt Browser-Weg (öffentlicher Host) durch, schützt nur Cluster-interne Zugriffe. Built for Olares 1.12.6.
-v26.09.2: Fix: statisches musl-Binary (crt-static) — App startet zuverlässig. Built for Olares 1.12.6.
-v26.09.1: Vollständige Konzept-Umsetzung — EML-Roharchiv (Immer), lokal-only Ordner (Verify→EXPUNGE), sync_mode pro Account, delete_queue+Verify-Pipeline, lokaler Papierkorb (30 Tage pro Account), X-Relay-Key API-Sperre, MBox/EML-ZIP-Export, Backup-Snapshot, IMAP-IDLE, Attachment-Dedup (sha256), modseq-Delta-Sync. Built for Olares 1.12.6.
-v26.08.9: Fix: Web-Serving-Pfad (/opt/relay/web) + authLevel public — App öffnet wieder im Browser. Built for Olares 1.12.6.
-v26.08.8: Fix: Datenverzeichnis-Permissions (initContainer busybox + runAsUser 0, chown 1000:1000). Built for Olares 1.12.6.
-v26.08.7: Fix: initContainer chown (v1). Built for Olares 1.12.6.
-v26.08.6: Fix: statisches musl-Binary (libgcc_s-Fehler behoben). Built for Olares 1.12.6.
-v26.08.5: Fix Image-Pfad (/opt/relay/relay-server) — Push-Benachrichtigungen aktiv. Built for Olares 1.12.6.
-v26.08.4: Push-Benachrichtigungen — Web Push (VAPID) bei neuen E-Mails, auch bei geschlossener App (iOS 16.4+ als Home-Screen-PWA). Aktivierung in Einstellungen → Allgemein → Push-Benachrichtigungen. Built for Olares 1.12.6.
-v26.08.3: Umbenennung — App heißt jetzt "Relay" (Namespace relay, Userverzeichnis /data/Relay → relay), neues Apple-Mail-Icon, Route mail dokumentiert. Built for Olares 1.12.6.
-v26.08.2: Archiv-Modus — lokale Mail-Kopien werden nicht mehr automatisch gelöscht (Retention aus, keine Spiegelung von Provider-Löschungen). Built for Olares 1.12.6.
-v26.08.1: Erster Release auf dem AIMighty Market. Built for Olares 1.12.6.`,
+        `v26.09.69: Initial release of Relay.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
