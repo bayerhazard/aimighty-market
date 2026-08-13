@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.66",
+      version: "26.09.67",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Selbst gehosteter E-Mail-Client — IMAP/SMTP mit KI-Unterstützung." },
@@ -769,7 +769,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
         `**Relay** — dein selbst gehosteter E-Mail-Client.
 IMAP/SMTP-Anbindung mit lokalem Cache und KI-Assistenz (Antworten, Zusammenfassungen, Prioritäten, Tonfall).`,
       upgradeDescription:
-        `v26.09.57: FIX UTF-7-Ordner: select_folder bekam den bereits UTF-7-codierten rohen Ordnernamen und encodierte ihn doppelt (& → &-) — deutsche Ordner (Entwürfe, Gelöscht) wurden nie selektiert ("unknown folder"). Sync übergibt jetzt immer den dekodierten Namen.
+        `v26.09.67: FIX Cross-Account-Verschieben (IMAP-Verbindungslimit): connect/reconnect jetzt pro Konto serialisiert (Single-Flight), alte Sessions werden vor dem Neuverbinden sauber ausgeloggt statt gedroppt (Verbindungs-Leak), IMAP-Operationen per op_lock gestaffelt — behebt "[UNAVAILABLE] Maximum number of connections from user+IP exceeded". Plus: Ordnerwechsel in großen Ordnern instant — Mail-Listen werden ohne Body (metadata-only, list_only=1) übertragen, Body lädt on-demand; persistenter Folder-Cache (localStorage) rendert bereits geladene Ordner sofort mit Hintergrund-Refresh. Mobile: Compose-Toolbar 3px tiefer. Built for Olares 1.12.6.
+v26.09.57: FIX UTF-7-Ordner: select_folder bekam den bereits UTF-7-codierten rohen Ordnernamen und encodierte ihn doppelt (& → &-) — deutsche Ordner (Entwürfe, Gelöscht) wurden nie selektiert ("unknown folder"). Sync übergibt jetzt immer den dekodierten Namen.
 v26.09.43: FIX Sync-Befüllung: Ordner werden vollständig synchronisiert (Sync-Cursor last_uid wird nach jeder Batch fortgeschrieben — vorher blieb der Sync bei den ersten 50 Mails hängen); Web lädt alle Mails eines Ordners (Limit 100 -> 10000, Virtualisierung skaliert); save_message loggt Fehler detailliert.
 v26.09.42: ToneControls wie zuvor (7-Stufen-Slider mit Locker/Ausgewogen/Formell) in der Desktop-Ansicht; mobil werden nur die Pill-Tags (Seriosität/Textumfang) + Mittellabels (Ausgewogen/Normal) ausgeblendet. FIX IMAP-UTF-7: Ordner mit Umlauten ("Entwürfe" war "Entwfe", "Gelöscht" war "Gelcht") werden korrekt dekodiert (UTF-16BE + Padding); Umbenennen sendet Namen IMAP-UTF-7-encodiert (kein "unsupported folder name" mehr).
 v26.09.41: FIX Account-Löschen (war generell kaputt — 422, falscher Request-Typ); Voice-Aufnahme stoppt nach 2s Stille (RMS-basiert) und sendet automatisch STT->LLM; Compose: Tone-Steuerung vereinfacht (Locker/Formell + Knapp/Ausführlich statt 7-Stufen-Slider), mobile Darstellung überarbeitet (Felder vertikal, "Zurück" statt doppelter Navigation).
