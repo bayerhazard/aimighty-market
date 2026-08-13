@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.69",
+      version: "26.09.70",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -771,7 +771,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.69: Initial release of Relay.`,
+        `v26.09.70: FIX "false" hinter Absendernamen (Svelte rendert das bool aus {is_flagged && "🚩"} als Text); FIX Entwürfe: Speichern aktualisiert den bestehenden Entwurf in-place statt ein Duplikat anzulegen (kein veralteter Text mehr), Entwurfstext wird beim Laden nicht mehr fälschlich QP-decodiert; Neu: "Weiterleiten" im Kontextmenü (Rechtsklick) unter "Antworten"; FIX Anhang-Button in Mailcompose (Web-Dateiauswahl funktioniert jetzt).`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
