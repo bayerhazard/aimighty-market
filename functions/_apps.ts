@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.70",
+      version: "26.09.71",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -771,7 +771,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.70: FIX "false" hinter Absendernamen (Svelte rendert das bool aus {is_flagged && "🚩"} als Text); FIX Entwürfe: Speichern aktualisiert den bestehenden Entwurf in-place statt ein Duplikat anzulegen (kein veralteter Text mehr), Entwurfstext wird beim Laden nicht mehr fälschlich QP-decodiert; Neu: "Weiterleiten" im Kontextmenü (Rechtsklick) unter "Antworten"; FIX Anhang-Button in Mailcompose (Web-Dateiauswahl funktioniert jetzt).`,
+        `v26.09.71: Compose: feiner Trennstrich zwischen Mikro-Symbol und "Generieren"-Text im KI-Button (Hintergrundfarbe, gleichmäßige Abstände, nur bei aktivem Voice).
+v26.09.70: FIX "false" hinter Absendernamen (Svelte rendert das bool aus {is_flagged && "🚩"} als Text); FIX Entwürfe: Speichern aktualisiert den bestehenden Entwurf in-place statt ein Duplikat anzulegen (kein veralteter Text mehr), Entwurfstext wird beim Laden nicht mehr fälschlich QP-decodiert; Neu: "Weiterleiten" im Kontextmenü (Rechtsklick) unter "Antworten"; FIX Anhang-Button in Mailcompose (Web-Dateiauswahl funktioniert jetzt).`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
