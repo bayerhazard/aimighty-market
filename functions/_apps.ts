@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.73",
+      version: "26.09.74",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -771,7 +771,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.73: FIX vertauschte KI-Zusammenfassungen — Root Cause behoben: Das Schreiben (update_ai_summary/-priority) lief nur über account_id+uid und überschrieb damit ALLE Zeilen mit gleicher uid in allen Ordnern. Zusammenfassungen und Prioritäten werden jetzt folder-gescoped geschrieben (account+folder+uid), das SSE-Event trägt die folder_id und die UI wendet Updates nur auf den passenden (account,folder,uid) an. Der manuelle Zusammenfassen-Endpoint ist ebenfalls folder-gescoped. Compose: Trennstrich im KI-Button deckt jetzt den kompletten Button inkl. Padding ab (volle Höhe, 5px breit).
+        `v26.09.74: Compose: Trennstrich zwischen Mikro-Symbol und "Generieren"-Text vorübergehend deaktiviert (im Code auskommentiert, wieder aktivierbar).
+v26.09.73: FIX vertauschte KI-Zusammenfassungen — Root Cause behoben: Das Schreiben (update_ai_summary/-priority) lief nur über account_id+uid und überschrieb damit ALLE Zeilen mit gleicher uid in allen Ordnern. Zusammenfassungen und Prioritäten werden jetzt folder-gescoped geschrieben (account+folder+uid), das SSE-Event trägt die folder_id und die UI wendet Updates nur auf den passenden (account,folder,uid) an. Der manuelle Zusammenfassen-Endpoint ist ebenfalls folder-gescoped. Compose: Trennstrich im KI-Button deckt jetzt den kompletten Button inkl. Padding ab (volle Höhe, 5px breit).
 v26.09.72: FIX vertauschte KI-Zusammenfassungen — die Zusammenfassung gehört jetzt prozessual immer zur richtigen Mail: Der Summary-Pfad trägt die folder_id (IMAP-UIDs sind nur pro Ordner eindeutig), damit bei einer uid-Kollision zwischen Ordnern nie die falsche Mail zusammengefasst/überschrieben wird. Compose: Trennstrich im KI-Button jetzt über die volle Buttonhöhe und 5px breit.
 v26.09.71: Compose: feiner Trennstrich zwischen Mikro-Symbol und "Generieren"-Text im KI-Button (Hintergrundfarbe, gleichmäßige Abstände, nur bei aktivem Voice).
 v26.09.70: FIX "false" hinter Absendernamen (Svelte rendert das bool aus {is_flagged && "🚩"} als Text); FIX Entwürfe: Speichern aktualisiert den bestehenden Entwurf in-place statt ein Duplikat anzulegen (kein veralteter Text mehr), Entwurfstext wird beim Laden nicht mehr fälschlich QP-decodiert; Neu: "Weiterleiten" im Kontextmenü (Rechtsklick) unter "Antworten"; FIX Anhang-Button in Mailcompose (Web-Dateiauswahl funktioniert jetzt).`,
