@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.23",
+      version: "26.08.24",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -34,7 +34,7 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
 200K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM v0.27.1 stable cu129, SHA-pinned (v0.27.1-cu129) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+vLLM nightly 2026-08-14 cu129, SHA-pinned (cu129-nightly-ac7509e2) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
 fp8 KV-Cache (sliding-window layers kept BF16 via --kv-cache-dtype-skip-layers). CUDAGraphs + torch.compile.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.23: vLLM upgrade to stable v0.27.1-cu129 (SHA-pinned) — Gemma-4 ViT CUDA graph (#46837), JIT warmup (#47451/#49903), SM120/121 kernel fix (#49904), torch 2.13. KV cache: fp8 + --kv-cache-dtype-skip-layers sliding_window (SWA layers stay BF16). triton_attn kept — FlashInfer still unsupported on SM120 for Gemma-4 vision (#40677). Built for Olares 1.12.6.`,
+        `v26.08.24: vLLM Nightly 2026-08-14 cu129 (SHA-pinned) — the v0.27.1 stable image was broken for Gemma 4 (transformers 5.15.0 breaks config parsing, #51744); fix PR #49797 only in main. Keeps v0.27.1 features: Gemma-4 ViT CUDA graph, JIT warmup, SM120/121 fix. KV cache: fp8 + --kv-cache-dtype-skip-layers sliding_window (SWA layers stay BF16). triton_attn kept (#40677 open). Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
