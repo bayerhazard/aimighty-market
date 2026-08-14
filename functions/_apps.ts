@@ -418,7 +418,7 @@ v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), ca
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -431,7 +431,7 @@ Built-in MTP Speculative Decoding + native Vision via mmproj-gpu-swap.
 200K token context. Reasoning ON.
 
 **Inference Engine**
-Fresh build from spiritbuun/buun-llama-cpp master (Jul 25, 2026).
+Fresh build from spiritbuun/buun-llama-cpp master (Aug 13, 2026).
 Compiled with CUDA 13.1 + OpenSSL for RTX 5090 (sm_120).
 VBR KV-Cache (variable bit-rate, both K/V sides: starts at f16, degrades per-layer only under VRAM pressure, floor turbo1_tcq).
 MTP with 3 speculative tokens.
@@ -456,7 +456,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
+      upgradeDescription: "v26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
