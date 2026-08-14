@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.24",
+      version: "26.08.25",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -35,7 +35,7 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
 
 **Inference Engine**
 vLLM nightly 2026-08-14 cu129, SHA-pinned (cu129-nightly-ac7509e2) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
-fp8 KV-Cache (sliding-window layers kept BF16 via --kv-cache-dtype-skip-layers). CUDAGraphs + torch.compile.
+fp8 KV-Cache (all layers). CUDAGraphs + torch.compile.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.24: vLLM Nightly 2026-08-14 cu129 (SHA-pinned) — the v0.27.1 stable image was broken for Gemma 4 (transformers 5.15.0 breaks config parsing, #51744); fix PR #49797 only in main. Keeps v0.27.1 features: Gemma-4 ViT CUDA graph, JIT warmup, SM120/121 fix. KV cache: fp8 + --kv-cache-dtype-skip-layers sliding_window (SWA layers stay BF16). triton_attn kept (#40677 open). Built for Olares 1.12.6.`,
+        `v26.08.25: skip-layers test (26.08.24) ended — --kv-cache-dtype-skip-layers sliding_window blew the KV budget (8.55 GiB needed vs 4.67 GiB free, sliding layers not allocated window-bounded). Reverted to fp8 on all layers. Nightly 2026-08-14 cu129 (ac7509e2) with Gemma-4/transformers-5.15 fix (#49797) kept. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
