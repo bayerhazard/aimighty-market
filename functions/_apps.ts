@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.25",
+      version: "26.08.26",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -41,7 +41,7 @@ GPU VRAM: ~22.5 GB.
 
 **Performance (RTX 5090 Blackwell)**
 - 200K token context
-- ~136 tok/s generation
+- ~136 tok/s generation (MTP spec-decode draft active)
 - Needle Haystack: 25/25 (100%)
 - Agentic Tool-Calling: 8/8 (100%)
 
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.25: skip-layers test (26.08.24) ended — --kv-cache-dtype-skip-layers sliding_window blew the KV budget (8.55 GiB needed vs 4.67 GiB free, sliding layers not allocated window-bounded). Reverted to fp8 on all layers. Nightly 2026-08-14 cu129 (ac7509e2) with Gemma-4/transformers-5.15 fix (#49797) kept. Built for Olares 1.12.6.`,
+        `v26.08.26: MTP/Draft experiment — google/gemma-4-26B-A4B-it-assistant (4-layer drafter, ~420 MB) via --speculative-config method=mtp, 3 tokens. Earlier failures (mat-shape 3840 vs 5632, CUDAGraph-OOM) were on v0.26.0 without fixes; #47091 + #48892 + #49797 are in nightly ac7509e2. Target >136 tok/s. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
