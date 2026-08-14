@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.26",
+      version: "26.08.27",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -31,16 +31,16 @@ export const apps: AppManifest[] = [
 
 **Model**
 cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
-200K token context. Multimodal (text + image, no video).
+100K token context (MTP spec-decode mode). Multimodal (text + image, no video).
 
 **Inference Engine**
 vLLM nightly 2026-08-14 cu129, SHA-pinned (cu129-nightly-ac7509e2) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
-fp8 KV-Cache (all layers). CUDAGraphs + torch.compile.
+fp8 KV-Cache (all layers). CUDAGraphs + torch.compile. MTP drafter: google/gemma-4-26B-A4B-it-assistant (3 tokens).
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
 **Performance (RTX 5090 Blackwell)**
-- 200K token context
+- 100K token context (MTP spec-decode mode)
 - ~136 tok/s generation (MTP spec-decode draft active)
 - Needle Haystack: 25/25 (100%)
 - Agentic Tool-Calling: 8/8 (100%)
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.26: MTP/Draft experiment — google/gemma-4-26B-A4B-it-assistant (4-layer drafter, ~420 MB) via --speculative-config method=mtp, 3 tokens. Earlier failures (mat-shape 3840 vs 5632, CUDAGraph-OOM) were on v0.26.0 without fixes; #47091 + #48892 + #49797 are in nightly ac7509e2. Target >136 tok/s. Built for Olares 1.12.6.`,
+        `v26.08.27: MTP test (26.08.26) done — drafter works (no mat-shape error, #47091/#48892 in nightly), but ~2 GiB VRAM: 200K fp8 (3.57 GiB KV) > 2.66 GiB available (est. max 104224). Compromise: max_model_len 100000 for the perf test. Target >136 tok/s via MTP spec-decode. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
