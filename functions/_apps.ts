@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.76",
+      version: "26.09.77",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -771,7 +771,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.76: Chart-Fix — Deployment-Image-Tag auf 26.09.75 korrigiert (Version-Bump erzwingt Olares-Re-Fetch, da der Chart-Inhalt sich geändert hat, aber der Hash bei gleicher Version unverändert bleibt).
+        `v26.09.77: FIX Mails in der Vorschau nicht mehr vollständig geladen — Als-gelesen/Ungelesen-Markieren lief für Mails in lokalen Ordnern ('Mama und Papa', 'Auto') gegen den IMAP-Server (SELECT 'Mama und Papa' → unknown folder → 500) und das Frontend brach dadurch VOR dem Body-Abruf ab. Jetzt: lokale Ordner werden nie per IMAP angetastet (Flag-Sync nur in DB, folder-gescoped gegen UID-Kollisionen), der Body-Abruf macht für lokale Ordner keinen IMAP-Fallback mehr und der Raw-Backfill überspringt lokale Ordner.
+v26.09.76: Chart-Fix — Deployment-Image-Tag auf 26.09.75 korrigiert (Version-Bump erzwingt Olares-Re-Fetch, da der Chart-Inhalt sich geändert hat, aber der Hash bei gleicher Version unverändert bleibt).
 v26.09.75: Anlagen-Management Überarbeitung — (1) FIX UID-Kollisionen: Attachment-Endpoints und Sync-Lookup sind jetzt folder-gescoped (IMAP-UIDs sind nur pro Ordner eindeutig; gleiche uid in verschiedenen Ordnern zeigte die falschen Anhänge). (2) Stabile Anhang-IDs: Statt DELETE+re-INSERT bei jedem Sync gibt es jetzt einen part_index-basierten Reconcile (Upsert) — IDs bleiben stabil, verwaiste Zeilen werden entfernt, Duplikat-Dateien via SHA-256-Dedup gespeichert. (3) Entwürfe speichern Anhänge (bis 25 MB, werden beim erneuten Öffnen geladen und beim Senden mitgeschickt). (4) Weiterleiten übernimmt Original-Anhänge (lazy: Metadaten sofort, Inhalt je Anhang beim Senden geladen). (5) Wartung: on-demand + tägliche Garbage-Collection des Dedup-Stores, Consistency-Checker/Reparatur (has_attachments-Flags, fehlende Dateien), Cache-Stats/ Cleanup-Endpoints im Web verdrahtet.
 v26.09.74: Compose: Trennstrich zwischen Mikro-Symbol und "Generieren"-Text vorübergehend deaktiviert (im Code auskommentiert, wieder aktivierbar).
 v26.09.73: FIX vertauschte KI-Zusammenfassungen — Root Cause behoben: Das Schreiben (update_ai_summary/-priority) lief nur über account_id+uid und überschrieb damit ALLE Zeilen mit gleicher uid in allen Ordnern. Zusammenfassungen und Prioritäten werden jetzt folder-gescoped geschrieben (account+folder+uid), das SSE-Event trägt die folder_id und die UI wendet Updates nur auf den passenden (account,folder,uid) an. Der manuelle Zusammenfassen-Endpoint ist ebenfalls folder-gescoped. Compose: Trennstrich im KI-Button deckt jetzt den kompletten Button inkl. Padding ab (volle Höhe, 5px breit).
