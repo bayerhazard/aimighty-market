@@ -761,7 +761,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.78",
+      version: "26.09.79",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -771,7 +771,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.78: Chart-Fix — Image-Tag auf 26.09.77 korrigiert (Version-Bump erzwingt Olares-Re-Fetch; 26.09.76-Image hatte das Binary fälschlich unter opt/relay/relay-server/ abgelegt → 'is a directory' beim Start).
+        `v26.09.79: FIX vertauschte E-Mail-Texte in der Vorschau — Root Cause: UID-Kollision zwischen lokalen Ordnern (Ecommerce/Auto u.a. vergeben uid=MAX+1 unabhängig voneinander → identische uid-Sets). Die Liste ist folder-gescoped (korrekte Absender), aber der Body-Abruf lief ohne Ordner gegen den unscoped Lookup → lieferte die Zeile mit kleinster id (falsche Mail). Jetzt: Body-Fetch, Als-gelesen/Ungelesen und Flag-Toggle sind folder-gescoped (Frontend sendet den aktiven Ordner), IMAP-Body-Fallback schreibt per Primary-Key.
+v26.09.78: Chart-Fix — Image-Tag auf 26.09.77 korrigiert (Version-Bump erzwingt Olares-Re-Fetch; 26.09.76-Image hatte das Binary fälschlich unter opt/relay/relay-server/ abgelegt → 'is a directory' beim Start).
 v26.09.77: FIX Mails in der Vorschau nicht mehr vollständig geladen — Als-gelesen/Ungelesen-Markieren lief für Mails in lokalen Ordnern ('Mama und Papa', 'Auto') gegen den IMAP-Server (SELECT 'Mama und Papa' → unknown folder → 500) und das Frontend brach dadurch VOR dem Body-Abruf ab. Jetzt: lokale Ordner werden nie per IMAP angetastet (Flag-Sync nur in DB, folder-gescoped gegen UID-Kollisionen), der Body-Abruf macht für lokale Ordner keinen IMAP-Fallback mehr und der Raw-Backfill überspringt lokale Ordner.
 v26.09.76: Chart-Fix — Deployment-Image-Tag auf 26.09.75 korrigiert (Version-Bump erzwingt Olares-Re-Fetch, da der Chart-Inhalt sich geändert hat, aber der Hash bei gleicher Version unverändert bleibt).
 v26.09.75: Anlagen-Management Überarbeitung — (1) FIX UID-Kollisionen: Attachment-Endpoints und Sync-Lookup sind jetzt folder-gescoped (IMAP-UIDs sind nur pro Ordner eindeutig; gleiche uid in verschiedenen Ordnern zeigte die falschen Anhänge). (2) Stabile Anhang-IDs: Statt DELETE+re-INSERT bei jedem Sync gibt es jetzt einen part_index-basierten Reconcile (Upsert) — IDs bleiben stabil, verwaiste Zeilen werden entfernt, Duplikat-Dateien via SHA-256-Dedup gespeichert. (3) Entwürfe speichern Anhänge (bis 25 MB, werden beim erneuten Öffnen geladen und beim Senden mitgeschickt). (4) Weiterleiten übernimmt Original-Anhänge (lazy: Metadaten sofort, Inhalt je Anhang beim Senden geladen). (5) Wartung: on-demand + tägliche Garbage-Collection des Dedup-Stores, Consistency-Checker/Reparatur (has_attachments-Flags, fehlende Dateien), Cache-Stats/ Cleanup-Endpoints im Web verdrahtet.
