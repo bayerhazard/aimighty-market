@@ -419,7 +419,7 @@ v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), ca
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.08.1",
+      version: "26.08.2",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
