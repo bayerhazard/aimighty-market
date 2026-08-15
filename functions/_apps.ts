@@ -418,6 +418,75 @@ v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), ca
   },
   {
     metadata: {
+      name: "aimqwen38llama",
+      version: "26.08.6",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
+      title: { en: "AIM Qwen3.8 27B" },
+      description: { en: "Qwen3.8-27B chat via buun-llama-cpp (llama.cpp) — 200K context, vision, MTP speculation, turbo4 KV" },
+      fullDescription:
+        `AImighty flagship stack for Qwen3.8-27B, the latest dense hybrid-attention VL model, optimized for
+coding, vision and long-horizon agentic workflows on Olares One.
+
+**Model**
+unsloth/Qwen3.8-27B-GGUF (UD-Q4_K_XL, ~18 GB, arch qwen35 — native Gated DeltaNet + Gated Attention,
+MTP trained in).
+Vision: mmproj-F16.gguf on GPU.
+200K token context (native 262K).
+
+**Inference Engine**
+spiritbuun/buun-llama-cpp master HEAD d89f0aeb (2026-08-15, custom CUDA 13.1 sm_120
+Blackwell build, MTP vocabulary optimization series).
+KV Cache: turbo4 (4-bit Walsh-Hadamard rotated).
+Speculation: multi-spec MTP + ngram-cache (draft-mtp,ngram-cache, --spec-draft-n-max 3) — self-drafting.
+Parallel slots: 1 (single-slot).
+Batch: 2048/512 (processing-optimized).
+Reasoning: on with --reasoning-budget 16384 (agentic-safe thinking cap).
+
+**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4)**
+- Decode: 40-60+ t/s warm (single-slot load, MTP + ngram-cache)
+- Boot to listening: ~6s (models on disk)
+- Vision encoder on GPU (mmproj-gpu-swap)
+
+**API**
+OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
+
+**Resource Usage**
+GPU: ~23 GB VRAM (RTX 5090, 24 GB)
+RAM: 24-40 GB
+Disk: 25 GB (model cache)
+CPU: 4-16 cores`,
+      upgradeDescription:
+        `v26.08.6: Engine updated to spiritbuun/buun-llama-cpp master HEAD d89f0aeb (2026-08-15) — MTP vocabulary optimization series (FR-Spec draft-vocab trim, auto-trim Qwen 27B MTP vocab, optimized mapped vocab sampling, recursive MTP draft depth). Sustained benchmarks (10-run avg): repetitive 90.7 t/s, prose 59.4 t/s, agentic multi-turn 85-91 t/s, 93k-ctx 45.8 t/s — all stable (stdev <2).
+v26.08.5: Engine updated to spiritbuun/buun-llama-cpp master 38ae764 (2026-08-15) — custom ghcr build (CUDA 13.1, sm_120, AVX-512/AMX, FA all quants). Picks up fused turbo4 K/V materialization, on-device target argmax, Blackwell MoE prompt tuning, recurrent graph reserve bounds.
+v26.08.4: Inference speedup — multi-spec decoding draft-mtp,ngram-cache (+~19% decode throughput, acceptance ~40% -> ~51%; measured, stable).
+v26.08.3: Agentic optimization — cap thinking tokens with --reasoning-budget 16384 so agent turns don't stall in runaway reasoning (per-request override still possible).
+v26.08.2: Fix boot crash — removed unsupported --reasoning-preserve flag (not present in buun-llama-cpp 87c351d2); reasoning stays enabled via --reasoning on.
+v26.08.1: Initial release. Qwen3.8-27B dense hybrid-attention VL model served via aamsellem/buun-llama-cpp:87c351d2 with MTP self-speculation (--spec-type draft-mtp, depth 3). Model: unsloth/Qwen3.8-27B-UD-Q4_K_XL + mmproj-F16 (vision). KV Cache: turbo4. Reasoning: on with --reasoning-preserve. Built for Olares 1.12.6.`,
+      categories: ["AI", "Vision"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "25Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen38llama", title: { en: "AIM Qwen3.8 27B" }, port: 8000, host: "aimqwen38llama", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimqwen3635bllama",
       version: "26.08.5",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
