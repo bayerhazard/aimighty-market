@@ -811,7 +811,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.87",
+      version: "26.09.88",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -821,7 +821,8 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.87: Mobile Compose: Fußzeilen-Toolbar korrigiert — Buttons 58px → 45px, Button-Padding oben/unten 10px, Toolbar-Padding 10px; vertikale Zentrierung per Browser-Messung verifiziert (0px Abweichung).
+        `v26.09.88: NEU Anhang-Vorschau — "Öffnen" zeigt das Dokument jetzt in einem In-App-Overlay (Root-Cause vorher: Blob ohne MIME-Type + window.open im WebView → leeres Fenster). Blob mit content_type, Overlay rendert PDFs/Bilder/Text, Download-Button, Esc/Scrim schließt. Kontextmenü: "Speichern als…" → "Download"; saveAttachment nutzt den MIME-Type. Mobile Compose: Button-Padding 10px → 15px (height auto, min-height 45px), Zentrierung per Messung bestätigt (0px).
+v26.09.87: Mobile Compose: Fußzeilen-Toolbar korrigiert — Buttons 58px → 45px, Button-Padding oben/unten 10px, Toolbar-Padding 10px; vertikale Zentrierung per Browser-Messung verifiziert (0px Abweichung).
 v26.09.86: NEU Markiert-Stern — Suchfeld-Stern-Shortcut (Umriss=inaktiv, gefüllt=aktiv) filtert auf markierte E-Mails via is:flagged; die is:flagged-Suche war durch einen Parameter-Bug defekt (LIMIT ?3 mit 2 Params → "Got 2, needed 3") und funktioniert jetzt (manuell tippbar, mit Text kombinierbar). Markierte Mails zeigen denselben stilisierten Stern als Markierung (statt 🚩-Emoji), normale Schriftfarbe. Mobile Compose: Fußzeilen-Toolbar +33% (Touch-Ziele 44px → 58px).
 v26.09.85: FIX Soft-Fallback beim Löschen — der Provider-Papierkorb wird jetzt aus der echten Ordnerliste ermittelt (GMX: "Gelöscht", Gmail: "[Gmail]/Papierkorb", IMAP: "Trash"), statt hart "Trash" zu verwenden (existiert auf dem Server nicht → Queue-Einträge schlugen fehl). Kein Papierkorb auf dem Server: harter Delete als letzte Option.
 v26.09.84: FIX Löschen → IMAP — die Provider-Löschung wurde NIE in die Lösch-Queue geschrieben (SELECT id mit JOIN folders = "ambiguous column name: id" → message_id unauflösbar → enqueue übersprungen; enqueue-Fehler wurden still verschluckt; Log "Provider-Löschung in Queue" erschien trotzdem). Gelöschte Mails blieben daher auf dem IMAP-Server. Jetzt: m.id qualifiziert, Queries korrekt gebunden, enqueue-Fehler werden geloggt, Log erst nach erfolgreichem Queue-Eintrag. FIX Markieren — is_flagged-SQL hatte kollidierende Parameter (anonymes ? wird von rusqlite als ?1 gezählt → WHERE account_id=?1 referenzierte den Flag-Wert) → das Flag wurde NIE in der DB geschrieben (keine Markierung sichtbar, Kontextmenü blieb "Markieren"). Jetzt korrekt nummerierte Parameter in allen 3 Stellen. NEU Unterordner standardmäßig zugeklappt (erst per Doppelklick aufklappen). FIX Mobile Compose: Fußzeile (Generieren/Formatieren/Senden) jetzt dauerhaft fixiert wie der Header (war nur sticky im Scroll-Body). NEU MacOS: Cmd+, (Einstellungen) + Olares-Desktop-postMessage-Navigation führen jetzt zu /settings.
