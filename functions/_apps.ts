@@ -248,7 +248,7 @@ v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS" },
       description: { en: "Voxtral 4B TTS via vLLM-Omni — 20 voices, 10 languages, 24 kHz, OpenAI-compatible API" },
@@ -533,7 +533,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
@@ -643,7 +643,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
       description: { en: "Configuration-level backup & restore for Olares One" },
