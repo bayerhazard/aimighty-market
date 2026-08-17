@@ -811,7 +811,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.09.88",
+      version: "26.09.90",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -821,7 +821,9 @@ Disk: 20 GB (model cache, HF_HOME)`,
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
       upgradeDescription:
-        `v26.09.88: NEU Anhang-Vorschau — "Öffnen" zeigt das Dokument jetzt in einem In-App-Overlay (Root-Cause vorher: Blob ohne MIME-Type + window.open im WebView → leeres Fenster). Blob mit content_type, Overlay rendert PDFs/Bilder/Text, Download-Button, Esc/Scrim schließt. Kontextmenü: "Speichern als…" → "Download"; saveAttachment nutzt den MIME-Type. Mobile Compose: Button-Padding 10px → 15px (height auto, min-height 45px), Zentrierung per Messung bestätigt (0px).
+        `v26.09.90: NEU Sofortiger Ordnerwechsel (Meta-only Liste + Server-Side-Cache — grosse Ordner laden in Millisekunden statt Sekunden). FIX IMAP-Session-Leak (Timeout/Join-Fehler loggen die Session sauber aus → kein Login-Limit mehr). FIX Sent-Ordner: gesendete Mails sind gelesen (is_read=1 + APPEND \Seen), flag_refresh schuetzt kuerzlich lokal gelesene Mails (30s-Cooldown). NEU Empfaenger-Anzeige (An:/CC:) in der Mail-Vorschau. NEU Reply-All-Rueckfrage (An alle / nur Absender) bei mehreren Empfaengern. NEU Batch gelesen/ungelesen (eine Anfrage fuer alle markierten). FIX Unterordner-Drag-Reihenfolge baum-basiert (innerhalb der eigenen Geschwister, persistiert). FIX Mobile Compose Toolbar-Buttons vertikal zentriert (45px, kein Padding-Overlauf). Sidebar: "AImighty Relay 3.0". Profilbild-Upload unterstuetzt SVG.
+v26.09.89: Designguide-Konformitaet — Hanseatenblau/Gold-Palette (#caa960), keine Apple-Farben/SF-Fonts, Geist als Variable Fonts (100-900), keine dekorativen Schatten/Verlaeufe, Zustandsfarben an Guide-Palette, konformes App-Icon (Hanseatenblau + goldener Punkt).
+v26.09.88: NEU Anhang-Vorschau — "Öffnen" zeigt das Dokument jetzt in einem In-App-Overlay (Root-Cause vorher: Blob ohne MIME-Type + window.open im WebView → leeres Fenster). Blob mit content_type, Overlay rendert PDFs/Bilder/Text, Download-Button, Esc/Scrim schließt. Kontextmenü: "Speichern als…" → "Download"; saveAttachment nutzt den MIME-Type. Mobile Compose: Button-Padding 10px → 15px (height auto, min-height 45px), Zentrierung per Messung bestätigt (0px).
 v26.09.87: Mobile Compose: Fußzeilen-Toolbar korrigiert — Buttons 58px → 45px, Button-Padding oben/unten 10px, Toolbar-Padding 10px; vertikale Zentrierung per Browser-Messung verifiziert (0px Abweichung).
 v26.09.86: NEU Markiert-Stern — Suchfeld-Stern-Shortcut (Umriss=inaktiv, gefüllt=aktiv) filtert auf markierte E-Mails via is:flagged; die is:flagged-Suche war durch einen Parameter-Bug defekt (LIMIT ?3 mit 2 Params → "Got 2, needed 3") und funktioniert jetzt (manuell tippbar, mit Text kombinierbar). Markierte Mails zeigen denselben stilisierten Stern als Markierung (statt 🚩-Emoji), normale Schriftfarbe. Mobile Compose: Fußzeilen-Toolbar +33% (Touch-Ziele 44px → 58px).
 v26.09.85: FIX Soft-Fallback beim Löschen — der Provider-Papierkorb wird jetzt aus der echten Ordnerliste ermittelt (GMX: "Gelöscht", Gmail: "[Gmail]/Papierkorb", IMAP: "Trash"), statt hart "Trash" zu verwenden (existiert auf dem Server nicht → Queue-Einträge schlugen fehl). Kein Papierkorb auf dem Server: harter Delete als letzte Option.
