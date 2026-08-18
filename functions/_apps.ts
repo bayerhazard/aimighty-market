@@ -467,6 +467,53 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   },
   {
     metadata: {
+      name: "aimqwen3827b",
+      version: "26.08.1",
+      icon: "https://app.cdn.olares.com/appstore/llm/llamacpp/qwen.png",
+      title: { en: "AIM Qwen3.8 27B Console" },
+      description: { en: "Qwen3.8-27B Vision via buun-llama-cpp with TurboQuant KV" },
+      fullDescription:
+        `Qwen3.8-27B vision-language model served with buun-llama-cpp and TurboQuant KV-cache.
+
+**Model**
+- unsloth/Qwen3.8-27B-GGUF (UD-Q4_K_XL, native Gated DeltaNet + Gated Attention, MTP)
+- Vision: mmproj-F16.gguf (auto-loaded via -hf)
+- 200K token context, Turbo4 KV (4-bit Walsh-Hadamard rotated, ~16.5 KB/tok)
+
+**Inference Engine**
+- buun-llama-cpp (spiritbuun master HEAD d89f0aeb, CUDA 13.1 sm_120 custom build)
+- MTP (draft-mtp, --spec-draft-n-max 3), Reasoning on, KV-cache reuse
+- OpenAI-compatible: /v1/chat/completions, /v1/models, /health
+
+**Model Console**
+- Download + progress UI and OpenAI API proxy on port 8090`,
+      upgradeDescription:
+        `26.08.1: first release. buun-llama-cpp d89f0aeb (TurboQuant turbo4 KV, 200K ctx, MTP n_max 3); Built for Olares 1.12.6.`,
+      categories: ["AI", "Vision"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimqwen3827b",
+      sourceCode: "https://github.com/bayerhazard/aimqwen3827b",
+      supportArch: ["amd64"],
+      requiredCpu: "1",
+      requiredMemory: "23Gi",
+      requiredDisk: "50Gi",
+      requiredGpu: "1",
+      limitedCpu: "15",
+      limitedMemory: "32Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "llamacppclient", title: { en: "AIM Qwen3.8 27B" }, port: 8090, host: "download-svc", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "1", memory: "23Gi", disk: "50Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimqwen3635bllama",
       version: "26.08.5",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
