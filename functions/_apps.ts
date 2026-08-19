@@ -865,7 +865,7 @@ v26.09.70: FIX "false" hinter Absendernamen (Svelte rendert das bool aus {is_fla
   {
     metadata: {
       name: "insilo",
-      version: "0.1.78",
+      version: "0.1.80",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -900,7 +900,7 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.78: fixes the upgrade path — a values key added in 0.1.77 was dereferenced directly, and since an upgrade replays the stored values rather than the new chart defaults, rendering failed before anything was applied. Same feature set as 0.1.77. v0.1.77: Speech-to-text is now a configurable OpenAI-compatible endpoint — leave it empty and the bundled service keeps transcribing on the box. Speaker separation stays local either way. The privacy statement lists audio as its own destination and names it before all others, because with an external endpoint the recording itself leaves the box. v0.1.76: Manifest on apiVersion v3, schema 0.12.0, olares dependency >=1.12.6-0 — the previous pin excluded 1.12.6 itself. Replica counts now come from workloadReplicas, so suspend and resume work. Built for Olares 1.12.6. v0.1.75: no baked-in API key in the chart, single category. v0.1.74: the language-model connection test works with an empty key field. v0.1.72: no invented default endpoint — the app states what is missing instead of failing.`,
+        `v0.1.80: the setup is mirrored next to the recordings, so backing up the data directory covers it — including the organisation id, which keeps existing recordings attached after a reinstall. Note the file holds credentials. Speech-recognition errors now carry the reason the endpoint gave, and a missing model id is caught before the request. v0.1.78: fixes the upgrade path — a values key added in 0.1.77 was dereferenced directly, and since an upgrade replays the stored values rather than the new chart defaults, rendering failed before anything was applied. Same feature set as 0.1.77. v0.1.77: Speech-to-text is now a configurable OpenAI-compatible endpoint — leave it empty and the bundled service keeps transcribing on the box. Speaker separation stays local either way. The privacy statement lists audio as its own destination and names it before all others, because with an external endpoint the recording itself leaves the box. v0.1.76: Manifest on apiVersion v3, schema 0.12.0, olares dependency >=1.12.6-0 — the previous pin excluded 1.12.6 itself. Replica counts now come from workloadReplicas, so suspend and resume work. Built for Olares 1.12.6. v0.1.75: no baked-in API key in the chart, single category. v0.1.74: the language-model connection test works with an empty key field. v0.1.72: no invented default endpoint — the app states what is missing instead of failing.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
