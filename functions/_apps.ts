@@ -468,7 +468,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.5",
+      version: "26.08.6",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -506,7 +506,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.08.5: Stability fix — fresh build (Aug 14, 2026) including \"recurrent: bound graph reserves by resident capacity\" (fixes a crash in hybrid-MoE memory when using vision with a long context).\nv26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
+      upgradeDescription: "v26.08.6: --cache-reuse 256 (KV-Cache-Reuse for long agentic sessions) + think-budget loop guards anchored in chart.\nv26.08.5: Stability fix — fresh build (Aug 14, 2026) including \"recurrent: bound graph reserves by resident capacity\" (fixes a crash in hybrid-MoE memory when using vision with a long context).\nv26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
