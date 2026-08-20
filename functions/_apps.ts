@@ -924,6 +924,46 @@ GPU: none — Whisper runs on CPU, the language model is external`,
       options: { resources: { cpu: "4", memory: "12Gi", disk: "30Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "opendesign",
+      version: "26.08.10",
+      icon: "https://raw.githubusercontent.com/bayerhazard/opendesign/master/icon.png",
+      title: { en: "Open Design" },
+      description: { en: "Open-source Claude Design alternative — local-first design studio" },
+      fullDescription:
+        `Open Design is the open-source alternative to Claude Design. It turns any
+coding agent (Claude Code, Codex, OpenCode, DeepSeek Harness, ...) into a
+design engine: prototypes, landing pages, dashboards, decks, images and
+video — as real files with HTML / PDF / PPTX / MP4 export.
+
+- Local-first design studio with brand-grade DESIGN.md design systems
+- BYOK at every layer: any OpenAI-compatible endpoint or CLI agent
+- HyperFrames HTML → MP4 motion graphics
+- Sandboxed iframe preview, live dashboards and artifacts`,
+      upgradeDescription:
+        "v26.08.10: Env-configurable LLM gateway — opencode base URL + API key come from app env (LLM_BASE_URL / LLM_API_KEY), no hardcoded credential in the chart. v26.08.1: Initial release. Built for Olares 1.12.6.",
+      categories: ["Utilities"],
+      developer: "nexu-io",
+      website: "https://open-design.ai",
+      sourceCode: "https://github.com/nexu-io/open-design",
+      supportArch: ["amd64"],
+      requiredCpu: "100m",
+      requiredMemory: "128Mi",
+      requiredDisk: "500Mi",
+      requiredGpu: "0",
+      limitedCpu: "2",
+      limitedMemory: "2Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [{ name: "opendesign", title: { en: "Open Design" }, port: 80, host: "opendesign", authLevel: "internal", openMethod: "window" }],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "100m", memory: "128Mi", disk: "500Mi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
