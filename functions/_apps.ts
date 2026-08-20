@@ -419,7 +419,7 @@ v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), ca
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.08.5",
+      version: "26.08.10",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -441,7 +441,8 @@ Space Invaders HTML: 100 t/s
 Creative Writing: 65 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
       upgradeDescription:
-        `26.08.5: Reasoning effort medium (--chat-template-kwargs reasoning_effort=medium) for complete, faster answers (xhigh default burned tokens on empty outputs + lower MTP acceptance); Built for Olares 1.12.6.`,
+        `26.08.10: Fixed --chat-template-kwargs to valid JSON object ('{"reasoning_effort":"medium"}') — flat key=value crashed llama-server (json.parse_error); Built for Olares 1.12.6.
+26.08.5: Reasoning effort medium (--chat-template-kwargs reasoning_effort=medium) for complete, faster answers (xhigh default burned tokens on empty outputs + lower MTP acceptance); Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
