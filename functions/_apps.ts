@@ -197,42 +197,44 @@ v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "26.08.1",
+      version: "26.08.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker CPU" },
-      description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU — Jina/Cohere-compatible /v1/rerank" },
+      description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU or Intel iGPU accelerator — Jina/Cohere-compatible /v1/rerank" },
       fullDescription:
-        `Qwen3-Reranker-0.6B + OpenVINO on CPU, optimized for Olares One.
+        `Qwen3-Reranker-0.6B + OpenVINO on CPU or Intel integrated GPU (iGPU accelerator), optimized for Olares One.
 
 **Model**
-tomaarsen/Qwen3-Reranker-0.6B-seq-cls — a 600-million-parameter cross-encoder sequence classification model, INT8 quantized via Optimum Intel for efficient CPU inference.
+tomaarsen/Qwen3-Reranker-0.6B-seq-cls — a 600-million-parameter cross-encoder sequence classification model, INT8 quantized via Optimum Intel for efficient inference.
 
 **Inference Engine**
-OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-intel 2.0.0. Runs on Intel Core Ultra 9 275HX CPU.
+OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-intel 2.0.0. Runs on the Intel Core Ultra 9 275HX CPU or the integrated GPU through the Level Zero driver ("intel" compute mode).
 
 **Key Features**
 - Jina/Cohere-compatible API endpoints: /v1/rerank, /rerank, /v1/models, /health
 - Dynamic shapes, async endpoints, and multicore scaling using OpenVINO TBB
 - Model pre-converted and baked into the image (deterministic, pinned build)
 - Built-in HTML dashboard on root endpoint (/)
+- Compute modes: cpu (default) and intel (iGPU accelerator, ~2-2.5x faster)
 
 **Resource Usage**
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker CPU", English descriptions. Built for Olares 1.12.6.
+        `v26.08.2: Intel accelerator support — new "intel" compute mode (spec.accelerator) with the Intel GPU runtime baked into the image (ubuntu 24.04 base, intel-opencl-icd + intel-level-zero-gpu). Runs on the Core Ultra 9 275HX iGPU via Level Zero, ~2-2.5x faster than CPU (PoC-verified 2026-08-20). Auto device detection in entrypoint (GPU if render node openable, else CPU). Built for Olares 1.12.6.
+v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker CPU", English descriptions. Built for Olares 1.12.6.
 v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, removed API URL line. v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
       sourceCode: "https://github.com/bayerhazard/aimighty-reranker-cpu",
       supportArch: ["amd64"],
-      requiredCpu: "4",
+      requiredCpu: "5",
       requiredMemory: "16Gi",
       requiredDisk: "10Gi",
       requiredGpu: "0",
-      limitedCpu: "24",
-      limitedMemory: "16Gi",
+      limitedCpu: "25",
+      limitedMemory: "17Gi",
       apiTimeout: 3600,
     },
     spec: {
@@ -242,7 +244,7 @@ v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
       ],
       permission: [],
       middleware: [],
-      options: { resources: { cpu: "4", memory: "16Gi", disk: "10Gi" } },
+      options: { resources: { cpu: "5", memory: "17Gi", disk: "10Gi" } },
     },
   },
   {
