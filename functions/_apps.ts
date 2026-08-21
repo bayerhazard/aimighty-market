@@ -197,7 +197,7 @@ v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "26.08.3",
+      version: "26.08.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU or Intel iGPU accelerator — Jina/Cohere-compatible /v1/rerank" },
@@ -221,7 +221,8 @@ OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-int
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v26.08.3: Intel GPU device access — gpu-inject annotation triggers the app-service webhook to inject gpu.intel.com/i915 (Intel GPU device plugin) into the server container, granting /dev/dri access without privileged mode. No image change.
+        `v26.08.4: Direct extended-resource request — the server container requests gpu.intel.com/i915 in resources.limits (Intel GPU device plugin grants /dev/dri access). Olares 1.12.6 webhook only sets GPU_TYPE/nodeSelector, so the chart requests the resource itself. No image change.
+v26.08.3: Intel GPU device access — gpu-inject annotation triggers the app-service webhook to inject gpu.intel.com/i915 (Intel GPU device plugin) into the server container, granting /dev/dri access without privileged mode. No image change.
 v26.08.2: Intel accelerator support — new "intel" compute mode (spec.accelerator) with the Intel GPU runtime baked into the image (ubuntu 24.04 base, intel-opencl-icd + intel-level-zero-gpu). Runs on the Core Ultra 9 275HX iGPU via Level Zero, ~2-2.5x faster than CPU (PoC-verified 2026-08-20). Auto device detection in entrypoint (GPU if render node openable, else CPU). Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker CPU", English descriptions. Built for Olares 1.12.6.
 v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, removed API URL line. v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
