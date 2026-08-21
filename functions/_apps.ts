@@ -759,18 +759,18 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.09.3",
+      version: "26.09.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
-      description: { en: "Qwen3-ASR 1.7B via vLLM — 30 languages, robust under noise, OpenAI-compatible API" },
+      description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
       fullDescription:
-        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vLLM with a fully OpenAI-compatible transcription API.
+        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vllm-omni with a fully OpenAI-compatible transcription API.
 
 **Model**
 Qwen/Qwen3-ASR-1.7B (Apache-2.0, commercial use allowed). SOTA among open-source ASR models. Language identification + ASR for 30 languages and 22 Chinese dialects.
 
 **Inference Engine**
-vLLM (official qwenllm/qwen3-asr image, CUDA 12.8). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
+vllm-omni v0.18.0 (audio-spezialisierter vLLM-Fork, Qwen3-ASR nativ, Audio-Deps soundfile/librosa eingebacken; Lang-Audio ohne OOM im MemorySlice). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
 
 **Key Features**
 - OpenAI-compatible API: /v1/audio/transcriptions, /v1/models
@@ -786,7 +786,8 @@ GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. Built for Olares 1.12.6.
+        `v26.09.6: Engine-Wechsel auf vllm-omni v0.18.0 (Audio-Fork, Qwen3-ASR nativ, soundfile/librosa eingebacken; Lang-Audio ohne OOM im 6GiB-Slice). vllm 0.14.0 -> 0.18.0; funktional + performancetechnisch identisch (Kurz ~143ms, Lang ~356ms), A/B-verifiziert 2026-08-21. Bewusst nicht omni-v0.26 (Lang-Audio-Regression). Built for Olares 1.12.6.
+v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. Built for Olares 1.12.6.
 1.2.1: Sprachauswahl sendet ISO-Codes (de/en/fr) — Fix für vLLM-Sprachvalidierung
 1.2.0: Dashboard im Rewind-Design mit Direktaufnahme (Mikrofon), Sprachumschalter DE/EN und dezenter Konfig-Anzeige
 1.1.0: Initial Release für Olares One`,
