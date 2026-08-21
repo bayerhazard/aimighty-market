@@ -759,7 +759,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.09.6",
+      version: "26.09.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -786,7 +786,8 @@ GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.09.6: Engine-Wechsel auf vllm-omni v0.18.0 (Audio-Fork, Qwen3-ASR nativ, soundfile/librosa eingebacken; Lang-Audio ohne OOM im 6GiB-Slice). vllm 0.14.0 -> 0.18.0; funktional + performancetechnisch identisch (Kurz ~143ms, Lang ~356ms), A/B-verifiziert 2026-08-21. Bewusst nicht omni-v0.26 (Lang-Audio-Regression). Built for Olares 1.12.6.
+        `v26.09.7: Rebuild von 26.09.6 — transcribe-parse-Sidecar-Tag explizit auf 26.09.5 gepinnt (AppVersion-Follow referenzierte nicht-existentes ghcr-Tag; raw_data-Freeze wegen identischer Version). Erzwingt Re-Fetch.
+v26.09.6: Engine-Wechsel auf vllm-omni v0.18.0 (Audio-Fork, Qwen3-ASR nativ, soundfile/librosa eingebacken; Lang-Audio ohne OOM im 6GiB-Slice). vllm 0.14.0 -> 0.18.0; funktional + performancetechnisch identisch (Kurz ~143ms, Lang ~356ms), A/B-verifiziert 2026-08-21. Bewusst nicht omni-v0.26 (Lang-Audio-Regression). Built for Olares 1.12.6.
 v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. Built for Olares 1.12.6.
 1.2.1: Sprachauswahl sendet ISO-Codes (de/en/fr) — Fix für vLLM-Sprachvalidierung
 1.2.0: Dashboard im Rewind-Design mit Direktaufnahme (Mikrofon), Sprachumschalter DE/EN und dezenter Konfig-Anzeige
