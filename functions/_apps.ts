@@ -360,68 +360,6 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   },
   {
     metadata: {
-      name: "aimqwen36llama",
-      version: "26.08.2",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen36llama/main/icon.png",
-      title: { en: "AIM Qwen3.6 27B" },
-      description: { en: "Qwen3.6-27B chat via buun-llama-cpp (llama.cpp) — 200K context, vision, MTP speculation, turbo4 KV" },
-      fullDescription:
-        `AImighty flagship stack for Qwen3.6-27B, optimized for coding and agentic workflows on Olares One.
-
-**Model**
-unsloth/Qwen3.6-27B-MTP-UD-Q4_K_XL (MTP variant, UD-Q4_K_XL, ~18 GB).
-Vision: mmproj-F16-27B.gguf on GPU.
-200K token context.
-
-**Inference Engine**
-aamsellem/buun-llama-cpp:87c351d2 (custom Blackwell sm_120 build).
-KV Cache: turbo4 (4-bit Walsh-Hadamard rotated).
-Speculation: MTP (draft-mtp, --spec-draft-n-max 3) — self-drafting, no separate drafter.
-Parallel slots: 1 (single-slot).
-Batch: 2048/512 (processing-optimized).
-Reasoning: on with --reasoning-preserve.
-
-**Performance (RTX 5090 Blackwell, 24 GiB, 200k ctx, turbo4, live measured)**
-- Decode: 43-63 t/s warm (single-slot load)
-- Boot to listening: ~6s (models on disk)
-- Vision encoder on GPU
-
-**API**
-OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
-
-**Resource Usage**
-GPU: ~23 GB VRAM (RTX 5090, 24 GB)
-RAM: 24-40 GB
-Disk: 25 GB (model cache)
-CPU: 4-16 cores`,
-      upgradeDescription:
-        `v26.08.2: New engine + model stack. Engine switched from aamsellem/beellama-cpp:0.1.3-rc1 (DFlash) to aamsellem/buun-llama-cpp:87c351d2 with MTP (Multi-Token Prediction) self-speculation (--spec-type draft-mtp, depth 3). Model changed to unsloth/Qwen3.6-27B-MTP-UD-Q4_K_XL — the MTP variant carries its own drafter, so the separate Ardenzard DFlash GGUF is no longer downloaded. KV Cache: turbo4 on both K and V (VBR removed). Vision: mmproj-gpu-swap. Reasoning: on with --reasoning-preserve (thinking preserved in output). Model alias renamed to qwen3.6-27b. Parallel slots: 1. Built for Olares 1.12.6.
-v26.08.1: Unified naming — title "AIM Qwen3.6 27B" (engine suffix removed), categories AI + Vision, English descriptions. Built for Olares 1.12.6.`,
-      categories: ["AI", "Vision"],
-      developer: "Aimighty",
-      website: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
-      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen36llama",
-      supportArch: ["amd64"],
-      requiredCpu: "4",
-      requiredMemory: "24Gi",
-      requiredDisk: "25Gi",
-      requiredGpu: "1",
-      limitedCpu: "16",
-      limitedMemory: "40Gi",
-      apiTimeout: 0,
-    },
-    spec: {
-      type: "app",
-      entrance: [
-        { name: "aimqwen36llama", title: { en: "AIM Qwen3.6 27B" }, port: 8000, host: "aimqwen36llama", authLevel: "internal", openMethod: "window" },
-      ],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
-    },
-  },
-  {
-    metadata: {
       name: "aimqwen38llama",
       version: "26.08.10",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
