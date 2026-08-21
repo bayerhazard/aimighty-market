@@ -934,7 +934,7 @@ GPU: none — Whisper runs on CPU, the language model is external`,
   {
     metadata: {
       name: "opendesign",
-      version: "26.08.10",
+      version: "26.08.11",
       icon: "https://raw.githubusercontent.com/bayerhazard/opendesign/master/icon.png",
       title: { en: "Open Design" },
       description: { en: "Open-source Claude Design alternative — local-first design studio" },
@@ -949,7 +949,7 @@ video — as real files with HTML / PDF / PPTX / MP4 export.
 - HyperFrames HTML → MP4 motion graphics
 - Sandboxed iframe preview, live dashboards and artifacts`,
       upgradeDescription:
-        "v26.08.10: Env-configurable LLM gateway — opencode base URL + API key come from app env (LLM_BASE_URL / LLM_API_KEY), no hardcoded credential in the chart. v26.08.1: Initial release. Built for Olares 1.12.6.",
+        "v26.08.11: Configurable origins — OD_PUBLIC_BASE_URL / OD_ALLOWED_ORIGINS from app env (defaults to primary entrance), so a custom route domain works. v26.08.10: Env-configurable LLM gateway — opencode base URL + API key from app env, no hardcoded credential. v26.08.1: Initial release. Built for Olares 1.12.6.",
       categories: ["Utilities"],
       developer: "nexu-io",
       website: "https://open-design.ai",
