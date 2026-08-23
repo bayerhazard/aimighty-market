@@ -361,7 +361,7 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.08.10",
+      version: "26.08.11",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -374,7 +374,7 @@ Model:
 - 200K token context Turbo4 (4-bit Walsh-Hadamard rotated)
 
 Inference Engine:
-- buun-llama-cpp (spiritbuun master HEAD, CUDA 13.1 sm_120 custom build)
+- buun-llama-cpp 39d97a8 (MTP+mmproj swap-fit accounting; CUDA 13.1 sm_120 custom build)
 - MTP (draft-mtp, --spec-draft-n-max 3)
 - Parallel slots: 1, Batch: 2048/512, Reasoning: medium effort, KV-cache reuse
 
@@ -383,7 +383,8 @@ Space Invaders HTML: 100 t/s
 Creative Writing: 65 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
       upgradeDescription:
-        `26.08.10: Fixed --chat-template-kwargs to valid JSON object ('{"reasoning_effort":"medium"}') — flat key=value crashed llama-server (json.parse_error); Built for Olares 1.12.6.
+        `26.08.11: Engine buun-llama-cpp 39d97a8 (MTP+mmproj swap-fit accounting — spart VRAM auf hybriden Qwen-Modellen) via shared build-output; benchmarks ≥ baseline, keine Regression; Built for Olares 1.12.6.
+26.08.10: Fixed --chat-template-kwargs to valid JSON object ('{"reasoning_effort":"medium"}') — flat key=value crashed llama-server (json.parse_error); Built for Olares 1.12.6.
 26.08.5: Reasoning effort medium (--chat-template-kwargs reasoning_effort=medium) for complete, faster answers (xhigh default burned tokens on empty outputs + lower MTP acceptance); Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
