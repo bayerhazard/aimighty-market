@@ -361,7 +361,7 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.08.13",
+      version: "26.08.14",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -383,7 +383,8 @@ Space Invaders HTML: 100 t/s
 Creative Writing: 65 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
       upgradeDescription:
-        `26.08.13: --reasoning-budget 8192 (hartes Thinking-Cap, kein Ausufern) + budget-message; Antworten entkoppelt von max_tokens; Built for Olares 1.12.6.
+        `26.08.14: Unified engine image ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 — llama-server binary now ships inside the image (no shared-disk build pin); removed redundant values; Built for Olares 1.12.6.
+26.08.13: --reasoning-budget 8192 (hartes Thinking-Cap, kein Ausufern) + budget-message; Antworten entkoppelt von max_tokens; Built for Olares 1.12.6.
 26.08.12: --reasoning-preserve (Reasoning bleibt im Multi-Turn-Verlauf erhalten) + GGUF Dynamic V3.0 (Unsloth Aug-19-Update, ~10% mehr Genauigkeit); Built for Olares 1.12.6.
 26.08.11: Engine buun-llama-cpp 39d97a8 (MTP+mmproj swap-fit accounting — spart VRAM auf hybriden Qwen-Modellen) via shared build-output; benchmarks ≥ baseline, keine Regression; Built for Olares 1.12.6.
 26.08.10: Fixed --chat-template-kwargs to valid JSON object ('{"reasoning_effort":"medium"}') — flat key=value crashed llama-server (json.parse_error); Built for Olares 1.12.6.
@@ -414,7 +415,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.6",
+      version: "26.08.7",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -427,7 +428,7 @@ Built-in MTP Speculative Decoding + native Vision via mmproj-gpu-swap.
 200K token context. Reasoning ON.
 
 **Inference Engine**
-Fresh build from spiritbuun/buun-llama-cpp master (Aug 13, 2026).
+buun-llama-cpp commit 39d97a8 (spiritbuun master, Aug 18, 2026) — ships inside the unified app image.
 Compiled with CUDA 13.1 + OpenSSL for RTX 5090 (sm_120).
 VBR KV-Cache (variable bit-rate, both K/V sides: starts at f16, degrades per-layer only under VRAM pressure, floor turbo1_tcq).
 MTP with 3 speculative tokens.
@@ -452,7 +453,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.08.6: --cache-reuse 256 (KV-Cache-Reuse for long agentic sessions) + think-budget loop guards anchored in chart.\nv26.08.5: Stability fix — fresh build (Aug 14, 2026) including \"recurrent: bound graph reserves by resident capacity\" (fixes a crash in hybrid-MoE memory when using vision with a long context).\nv26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
+      upgradeDescription: "v26.08.7: Unified engine image ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 — llama-server binary now ships inside the image; think-budget moved from env to --reasoning-budget flags; removed redundant values; Built for Olares 1.12.6.\nv26.08.6: --cache-reuse 256 (KV-Cache-Reuse for long agentic sessions) + think-budget loop guards anchored in chart.\nv26.08.5: Stability fix — fresh build (Aug 14, 2026) including \"recurrent: bound graph reserves by resident capacity\" (fixes a crash in hybrid-MoE memory when using vision with a long context).\nv26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
