@@ -415,7 +415,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.9",
+      version: "26.08.8",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -480,7 +480,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.08.8",
+      version: "26.08.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
