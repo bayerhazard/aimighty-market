@@ -914,6 +914,52 @@ video — as real files with HTML / PDF / PPTX / MP4 export.
       options: { resources: { cpu: "100m", memory: "128Mi", disk: "500Mi" } },
     },
   },
+  {
+    metadata: {
+      name: "streetyeet",
+      version: "26.08.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/streetyeet.png",
+      title: { en: "Street Yeet" },
+      description: { en: "Street Yeet — a fast-paced 3D street action game via three.js — cinematic camera, ACES tone-mapping and bloom" },
+      fullDescription:
+        `Street Yeet — a fast-paced 3D street action game built with three.js.
+
+**Key Features**
+- Cinematic entry cutscene (letterbox, over-the-shoulder camera, drift)
+- ACES filmic tone-mapping + Unreal bloom post-processing
+- 52 AI street wanderers with real-time collision avoidance
+- 60 fps target on modern GPUs
+
+**Rendering**
+WebGL via three.js: ACES tone mapping, MSAA (4x), UnrealBloomPass, HDR pipeline.
+
+**Access**
+Protected by Olares SSO (internal). Opens in a browser window.
+
+**Resource Usage**
+Lightweight static server (nginx). No host GPU required — the game renders client-side in the browser.`,
+      upgradeDescription: "v26.08.1: Initial release — 3D street action game with cinematic cutscene, ACES tone-mapping and bloom. Built for Olares 1.12.6.",
+      categories: ["Utilities"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-market",
+      sourceCode: "https://github.com/bayerhazard/aimighty-market",
+      supportArch: ["amd64"],
+      requiredCpu: "1",
+      requiredMemory: "256Mi",
+      requiredDisk: "1Gi",
+      requiredGpu: "0",
+      limitedCpu: "2",
+      limitedMemory: "1Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [{ name: "streetyeet", title: { en: "Street Yeet" }, port: 80, host: "streetyeet", authLevel: "internal", openMethod: "window" }],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "1", memory: "256Mi", disk: "1Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
