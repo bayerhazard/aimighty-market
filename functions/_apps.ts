@@ -310,6 +310,65 @@ v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   },
   {
     metadata: {
+      name: "aimomnivoice",
+      version: "26.08.2",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
+      title: { en: "AIM OmniVoice 0.6B TTS" },
+      description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
+      fullDescription:
+        `**OmniVoice-0.6B** — k2-fsa's massively multilingual zero-shot TTS (600+ languages) based on a Qwen3-0.6B diffusion language model.
+
+**Model**
+k2-fsa/OmniVoice (~2.5 GB fp16), trained on 581k hours of open-source speech data. Apache-2.0 licensed.
+
+**Inference Engine**
+Native omnivoice runtime (PyTorch 2.8 cu128) behind an OpenAI-compatible FastAPI wrapper. Single process, requests queued per device.
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/speech, /v1/models, /v1/voices
+- Zero-shot voice cloning from 3-10 s reference audio: POST /v1/audio/clone
+- Voice design via attributes: "female, low pitch, british accent"
+- Preset voices (auto, female, male, child, whisper, ...) mapped to design instructs
+- Non-verbal tags like [laughter], pronunciation control via phonemes/pinyin
+- 24 kHz output; WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility
+- Web dashboard for quick testing (synthesis + voice cloning)
+
+**API Example**
+curl -X POST http://localhost:8880/v1/audio/speech -H "Content-Type: application/json" -d '{"model": "omnivoice", "input": "Hallo Welt!", "voice": "female"}' -o output.wav
+
+**Resource Usage**
+GPU: 1× NVIDIA (~4 GB VRAM)
+RAM: 6-16 GB, CPU: 2-8 cores
+Disk: 20 GB (model cache)
+
+**Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
+      upgradeDescription:
+        `v26.08.2: Initial release — OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (digest-pinned diogod2r/omnivoice-fastapi). Endpoints: /v1/audio/speech (presets + free-form instruct), /v1/audio/design, /v1/audio/clone. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI. ~4 GB VRAM on worker GPU (MemorySlice co-residency). Built for Olares 1.12.6.`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimomnivoice",
+      sourceCode: "https://github.com/bayerhazard/aimomnivoice",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "6Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "8",
+      limitedMemory: "16Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimomnivoice", title: { en: "AIM OmniVoice 0.6B TTS" }, port: 8080, host: "aimomnivoice", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "6Gi", disk: "20Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimvoxtral3asr",
       version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
