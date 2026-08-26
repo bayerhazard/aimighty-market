@@ -311,7 +311,7 @@ v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.08.12",
+      version: "26.08.13",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
@@ -343,7 +343,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.08.12: Clone registry — re-registering a clone now replaces its previous reference audio (no duplicate entries); delete removes all files of a clone. plus v26.08.11: Voice Design — custom voice dropdown with per-clone delete (×); file-based reference audio normalized to 16-bit PCM WAV at registration (fast inference, no slow decode fallback). plus v26.08.10: Initial release — OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (FastAPI wrapper, digest-pinned diogod2r/omnivoice-fastapi). Named voice clones (voice: "clone:<name>") with persistent registry (POST/GET/DELETE /v1/audio/clones, WAV/MP3/M4A reference audio). Web dashboard: text synthesis, voice presets + free-form design, microphone recording, named clones. OpenAI-compatible API: /v1/audio/speech, /v1/audio/design, /v1/audio/clone, /v1/models, /v1/voices. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility. ~4 GB VRAM. Built for Olares 1.12.6.`,
+        `v26.08.13: OpenAI drop-in hardening — unknown voice names (alloy, echo, nova, ...) now map to the model's default voice instead of failing; other invalid free-form instructs are retried with the default voice. Built for Olares 1.12.6. plus v26.08.12: Clone registry — re-registering a clone now replaces its previous reference audio (no duplicate entries); delete removes all files of a clone. plus v26.08.11: Voice Design — custom voice dropdown with per-clone delete (×); file-based reference audio normalized to 16-bit PCM WAV at registration (fast inference, no slow decode fallback). plus v26.08.10: Initial release — OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (FastAPI wrapper, digest-pinned diogod2r/omnivoice-fastapi). Named voice clones (voice: "clone:<name>") with persistent registry (POST/GET/DELETE /v1/audio/clones, WAV/MP3/M4A reference audio). Web dashboard: text synthesis, voice presets + free-form design, microphone recording, named clones. OpenAI-compatible API: /v1/audio/speech, /v1/audio/design, /v1/audio/clone, /v1/models, /v1/voices. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility. ~4 GB VRAM. Built for Olares 1.12.6.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
