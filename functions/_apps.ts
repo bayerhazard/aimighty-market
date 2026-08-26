@@ -311,7 +311,7 @@ v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.08.2",
+      version: "26.08.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
@@ -343,7 +343,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.08.2: Initial release — OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (digest-pinned diogod2r/omnivoice-fastapi). Endpoints: /v1/audio/speech (presets + free-form instruct), /v1/audio/design, /v1/audio/clone. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI. ~4 GB VRAM on worker GPU (MemorySlice co-residency). Built for Olares 1.12.6.`,
+        `v26.08.7: Dashboard branding "AImighty OmniVoice TTS" (AI in gold), card title "Was soll ich sagen?", app icon aligned with AIM Voxtral 4B TTS. plus v26.08.6: Dashboard relaunch — new layout (text on top, voice + voice cloning side by side, "Sprachausgabe generieren"), microphone recording for reference audio, named clones in the UI (dropdown + "Als Klon speichern"), design-guide compliance (self-hosted Geist, Hanseatic blue/gold, no gradients). plus v26.08.5: voice-clone registry supports WAV/MP3/M4A reference audio (extension-preserving) — plus v26.08.4: voice-clone registry (POST/GET/DELETE /v1/audio/clones) + v26.08.3: named voice clones (voice: "clone:<name>", reference audio from voices/) — based on 26.08.2: OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (FastAPI wrapper, digest-pinned diogod2r/omnivoice-fastapi). Endpoints: /v1/audio/speech (OpenAI-compatible, presets + free-form instruct), /v1/audio/design, /v1/audio/clone, /v1/models, /v1/voices. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility. ~4 GB VRAM on worker GPU (MemorySlice co-residency). Built for Olares 1.12.6.`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
