@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.09.101",
+      version: "26.09.102",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,8 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
        upgradeDescription:
-                  `v26.09.101: Chart-Re-Sync (Version-Bump auf 26.09.x uebersteuert den stale 26.09.99-Chart in der app-service; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
+                  `v26.09.102: UI — Logo links oben in der Sidebar durch das AIMIGHTY-Wordmark ersetzt (Gold-Schild + "AIMIGHTY"-Text, inline-SVG). Built for Olares 1.12.6.
+ v26.09.101: Chart-Re-Sync (Version-Bump auf 26.09.x uebersteuert den stale 26.09.99-Chart in der app-service; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
  v26.08.101: Chart-Re-Sync (Version-Bump erzwingt Olares-Chart-Re-Fetch; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
 v26.08.100: UI-Verfeinerung — (1) Konten-Pill in der Sidebar durch Gold-Schild-Logo ersetzt (Klick fuehrt zu Einstellungen). (2) Versionszeile "AImighty Relay 3.0" in der Sidebar entfernt. (3) Modul-Buttons (Kalender/Kontakte/Aufgaben) zeigen nur noch Icons ohne Text (Tooltip bleibt). Built for Olares 1.12.6.
 v26.09.99: NEU AI-first Outlook-Alternative — (1) Kalendersync via CalDAV (Kalender anlegen/verwalten) + Kontaktsync via CardDAV; (2) iMIP — Meeting-Einladungen empfangen, akzeptieren/ablehnen; (3) Aufgaben (Todo) mit Faelligkeit; (4) AI-Followups — automatische To-dos aus Mails extrahieren; (5) NL-Erstellung — Termine per freier Sprache anlegen; (6) Smart Scheduling — KI-Vorschlaege fuer freie Zeitfenster; (7) Meeting-Prep — Teilnehmer + Agenda + Vorbereitungshinweise; (8) Agenda-Digest — tagesuebersicht mit Prioritaeten; (9) Globaler Assistent — Mails beantworten und Termine per Chat anlegen. Built for Olares 1.12.6.
