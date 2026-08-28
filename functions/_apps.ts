@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.09.103",
+      version: "26.09.104",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,8 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                   `v26.09.103: UI-Overhaul + Kalender-Fixes — (1) Einheitliches Layout: AIMIGHTY-Logo (themenbewusst: Gold-Schild + "AIMIGHTY"-Text) oben in jeder Modul-Sidebar, unten Suchfeld + Modul-Icons (Kalender/Kontakte/Aufgaben) in allen Modulen. (2) FIX Kalender-Namen: Backend lieferte display_name/last_sync_at, Frontend erwartete name/last_synced_at/read_only — Felder angeglichen, Kalender zeigen jetzt Namen. (3) FIX Sync: CalDAV-Sync macht jetzt immer einen Voll-Sync (der inkrementelle Pfad deckte nur den ersten Kalender ab). (4) FIX Termin anlegen/bearbeiten: EventRow serialisierte start_at/end_at, Frontend las start/end — Termine wurden nicht gruppiert und die Erstellungs-/Bearbeitungs-Flows liefen leer; jetzt per serde-Rename auf start/end. Built for Olares 1.12.6.
+                   `v26.09.104: Shortcuts & Assistent — (1) Einheitliches Shortcut-Verhalten: Backspace/Entf loescht den markierten Eintrag mit Bestaetigungsdialog (Mail bereits vorhanden, jetzt auch im Kalender: markierten Termin mit Backspace/Entf loeschen). (2) Assistent (FAB): Eingabefeld jetzt einzeilig, Text vertikal zentriert (gleicher Abstand oben/unten), Hoehe von Eingabefeld und Senden-Button angeglichen. Built for Olares 1.12.6.
+   v26.09.103: UI-Overhaul + Kalender-Fixes — (1) Einheitliches Layout: AIMIGHTY-Logo (themenbewusst: Gold-Schild + "AIMIGHTY"-Text) oben in jeder Modul-Sidebar, unten Suchfeld + Modul-Icons (Kalender/Kontakte/Aufgaben) in allen Modulen. (2) FIX Kalender-Namen: Backend lieferte display_name/last_sync_at, Frontend erwartete name/last_synced_at/read_only — Felder angeglichen, Kalender zeigen jetzt Namen. (3) FIX Sync: CalDAV-Sync macht jetzt immer einen Voll-Sync (der inkrementelle Pfad deckte nur den ersten Kalender ab). (4) FIX Termin anlegen/bearbeiten: EventRow serialisierte start_at/end_at, Frontend las start/end — Termine wurden nicht gruppiert und die Erstellungs-/Bearbeitungs-Flows liefen leer; jetzt per serde-Rename auf start/end. Built for Olares 1.12.6.
   v26.09.102: UI — Logo links oben in der Sidebar durch das AIMIGHTY-Wordmark ersetzt (Gold-Schild + "AIMIGHTY"-Text, inline-SVG). Built for Olares 1.12.6.
  v26.09.101: Chart-Re-Sync (Version-Bump auf 26.09.x uebersteuert den stale 26.09.99-Chart in der app-service; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
  v26.08.101: Chart-Re-Sync (Version-Bump erzwingt Olares-Chart-Re-Fetch; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
