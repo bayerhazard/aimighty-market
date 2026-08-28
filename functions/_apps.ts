@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.09.102",
+      version: "26.09.103",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -828,8 +828,9 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **Voice-to-Mail** – voice input that automatically becomes a finished email. It recognizes recipients and subject lines to generate complete templates.
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
-       upgradeDescription:
-                  `v26.09.102: UI — Logo links oben in der Sidebar durch das AIMIGHTY-Wordmark ersetzt (Gold-Schild + "AIMIGHTY"-Text, inline-SVG). Built for Olares 1.12.6.
+        upgradeDescription:
+                   `v26.09.103: UI-Overhaul + Kalender-Fixes — (1) Einheitliches Layout: AIMIGHTY-Logo (themenbewusst: Gold-Schild + "AIMIGHTY"-Text) oben in jeder Modul-Sidebar, unten Suchfeld + Modul-Icons (Kalender/Kontakte/Aufgaben) in allen Modulen. (2) FIX Kalender-Namen: Backend lieferte display_name/last_sync_at, Frontend erwartete name/last_synced_at/read_only — Felder angeglichen, Kalender zeigen jetzt Namen. (3) FIX Sync: CalDAV-Sync macht jetzt immer einen Voll-Sync (der inkrementelle Pfad deckte nur den ersten Kalender ab). (4) FIX Termin anlegen/bearbeiten: EventRow serialisierte start_at/end_at, Frontend las start/end — Termine wurden nicht gruppiert und die Erstellungs-/Bearbeitungs-Flows liefen leer; jetzt per serde-Rename auf start/end. Built for Olares 1.12.6.
+  v26.09.102: UI — Logo links oben in der Sidebar durch das AIMIGHTY-Wordmark ersetzt (Gold-Schild + "AIMIGHTY"-Text, inline-SVG). Built for Olares 1.12.6.
  v26.09.101: Chart-Re-Sync (Version-Bump auf 26.09.x uebersteuert den stale 26.09.99-Chart in der app-service; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
  v26.08.101: Chart-Re-Sync (Version-Bump erzwingt Olares-Chart-Re-Fetch; Image bleibt 26.08.100 mit UI-Verfeinerung: Gold-Schild-Logo, Versionszeile entfernt, Modul-Buttons icon-only). Built for Olares 1.12.6.
 v26.08.100: UI-Verfeinerung — (1) Konten-Pill in der Sidebar durch Gold-Schild-Logo ersetzt (Klick fuehrt zu Einstellungen). (2) Versionszeile "AImighty Relay 3.0" in der Sidebar entfernt. (3) Modul-Buttons (Kalender/Kontakte/Aufgaben) zeigen nur noch Icons ohne Text (Tooltip bleibt). Built for Olares 1.12.6.
