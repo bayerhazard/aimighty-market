@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.29",
+      version: "26.08.30",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.29: Production hardening — GPU_MEMORY_UTILIZATION 0.98->0.96 (headroom: 0.98 left only ~90 MB free, CUDACachingAllocator OOM at warmup). KV pool ~4.1-4.2 GiB still fits 200K (~3.57 GiB needed). Removed dead VLLM_EXTRA_ARGS (generation-config is hardcoded in args). Built for Olares 1.12.6.`,
+        `v26.08.30: vLLM update nightly ac7509e2 -> Stable v0.28.0-cu129 (Gemma4 fix #49797, MTP CUDA-graph fix #53884, parser fix #52430). GPU_UTIL 0.96 kept. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
