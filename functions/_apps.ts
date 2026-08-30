@@ -83,7 +83,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.08.1",
+      version: "26.8.30",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -110,8 +110,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v26.08.1: Unified naming — title "AIM Qwen3 4B Embedding", English descriptions. Built for Olares 1.12.6.
-v1.8.2: Fix Application-CR owner (entrance 502/leere Seite): Owner-Label aus Template entfernt (Webhook setzt aimighty). v1.8.1: Fix check-auth CrashLoopBackOff (manual check-auth/render-envoy-config/olares-sidecar-init/olares-envoy-sidecar, check-auth command ["true"], awk statt sed). v1.8.0: Performance & quality release (OpenVINO CPU, Modell unverändert INT8): Batch-Aggregator (~1.9x Durchsatz, gemessen), Instruction-Support (Qwen instruct format, +1-5% Retrieval), MRL-Dim (EMBED_DIM 32..2560), Dependencies gepinnt (optimum-intel 2.0.0 statt git@main, transformers 4.55.4, openvino 2026.2.1, torch 2.13.0), OV-Config-Bug gefixt (PERFORMANCE_HINT/NUM_STREAMS wurden ignoriert), CPU_PINNING default YES, neue Envs (INFERENCE_THREADS/MAX_LENGTH/BATCH_WINDOW_MS/INFER_TIMEOUT_SEC/DEFAULT_INSTRUCTION/EMBED_DIM), ECHTER 2-Node-Cluster: EMBEDDER_MODE=cluster rendert jetzt 2 Replicas (anti-affinity, je 1 Worker) statt 2 Worker im selben Pod. v1.7.0: accelerator: [{mode: cpu}] ergänzt (v3 AutoSelectMode: ohne → "No matching GPU type" 400). v1.6.9: replicas via .Values.workloads.aimembqwen3vino.replicaCount (v3-Validation). v1.6.8: Olares-Dependency >=1.12.6-0 (v3 erfordert es). v1.6.7: Migrate OlaresManifest v2 → v3 (app-service lehnt apiVersion v2 ab, HTTP 403). v1.6.6: Version alignment + sauberes Chart-Packaging. v1.6.5: Fixed deployment title. v1.6.4: Renamed to 'AIM Qwen3 Embedding'. v1.6.2: Simplified deployment (Recreate), fixed pod anti-affinity deadlock. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix. v1.5.1: Fixed app title. v1.5.0: Version bump to force Olares re-sync.`,
+        `26.8.30: Initial Release for Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
