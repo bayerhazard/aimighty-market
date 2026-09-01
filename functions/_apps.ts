@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.124",
+      version: "26.9.125",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                    `v26.9.124: Security hardening — 13 fixes from external security review: SMTP TLS/IP validation, PII masking (IBAN/BIC/dates), circuit breaker latch fix, DAV SSRF guard, foreign_keys enforcement, phishing link detection, API key removed from localStorage, IMAP UID batching, digest auth method fix, CSP hardening. Built for Olares 1.12.6.`,
+                    `v26.9.125: Security — relay_key_guard now fail-closed: without RELAY_TRUSTED_HOST_SUFFIX configured, public-looking Host headers can no longer bypass the X-Relay-Key requirement. Configurable via trustedHostSuffix in chart values. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
