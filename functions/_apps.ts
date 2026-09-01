@@ -420,7 +420,7 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.08.14",
+      version: "26.9.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.123",
+      version: "26.9.124",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                    `v26.9.123: Calendar RSVP-Status — Teilnehmer-Antworten (Angenommen/Abgelehnt/Vielleicht/Noch keine Antwort) werden jetzt in der Termin-Detailansicht mit farbiger Kennzeichnung angezeigt. Built for Olares 1.12.6.`,
+                    `v26.9.124: Security hardening — 13 fixes from external security review: SMTP TLS/IP validation, PII masking (IBAN/BIC/dates), circuit breaker latch fix, DAV SSRF guard, foreign_keys enforcement, phishing link detection, API key removed from localStorage, IMAP UID batching, digest auth method fix, CSP hardening. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
