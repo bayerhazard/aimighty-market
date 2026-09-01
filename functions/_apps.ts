@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.120",
+      version: "26.9.121",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                    `v26.9.120: Dringlich-Kennzeichnung + Mobile-Views + CC/Bcc — (1) Dringliche Mails: neue rote Kennzeichnung (roter Balken + Unterlegung, wie bei Ungelesen) für Mails, die die KI als KRITISCH einstufte oder die manuell per Kontextmenü „Dringlich“ markiert wurden; der alte Prioritäts-Punkt wurde entfernt. (2) Markierungs-Stern in Gold. (3) Mobile Ansicht (Kontakte/Aufgaben/Kalender): Sidebar als Overlay mit Burger-Button; Detail-Pane im Kalender als Vollbild-Overlay. (4) CC/Bcc: Pillen-Eingabe wie bei „An“ (Kontakt-Vorschläge + Auto-Completion); CC wird jetzt im Entwurf gespeichert. (5) KI-Urgency: Dringlichkeit wird jetzt aus der Dringlichkeits-Zeile der KI-Zusammenfassung abgeleitet (statt Volltext-Suche) und der Betreff fließt in die Analyse ein. Built for Olares 1.12.6.`,
+                    `v26.9.121: IMAP-Connection-Leak-Fix + Calendar-Attendee-Fix — (1) IMAP: Socket-Timeout-Refactor verhindert Connection-Leaks bei toten Verbindungen (1&1 Limit mail_max_userip_connections=25); TcpStream mit 30s Read-Timeout statt spawn_blocking-Hang. (2) Calendar: IcsAttendee.rsvp mit serde(default) — Events mit Teilnehmern funktionieren jetzt ohne HTTP 422. (3) Removal-Check: API-Endpoint zum Aktivieren/Deaktivieren. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
