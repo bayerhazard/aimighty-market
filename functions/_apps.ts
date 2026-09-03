@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.126",
+      version: "26.9.127",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                    `v26.9.126: Performance & Compose — IMAP body fetch optimized (BODY.PEEK[TEXT] + folder caching), background body pre-fetch after sync, Markdown toolbar in compose (bold/italic/heading/list/link/code + mode toggle), move-dialog UX fix. Built for Olares 1.12.6.`,
+                    `v26.9.127: WYSIWYG compose editor with SVG formatting toolbar (bold, italic, heading, list, link, code) — replaces plain textarea with live rich-text editing. IMAP fetch optimization + background body pre-fetch. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
