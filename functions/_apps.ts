@@ -1028,11 +1028,11 @@ RAM: 1 GB requested, up to 2
 Disk: 1 GB (database share, backups)
 GPU: none — the language model is external`,
       upgradeDescription:
-        `v0.1.4: lists are now questions put to your data — filter on any field, save the answer as a view, choose columns, sort, and change or delete a whole selection at once. The AImighty mark sits top left, and the person you are working as is always visible bottom left. Built for Olares 1.12.6.`,
+        `v0.2.0: aicrm is now Beacon — same product, new name. Since 0.1.11 mail leaves through your own SMTP account with a ledger, double opt-in and threaded ticket replies; 0.1.4: lists are now questions put to your data — filter on any field, save the answer as a view, choose columns, sort, and change or delete a whole selection at once. The AImighty mark sits top left, and the person you are working as is always visible bottom left. Built for Olares 1.12.6.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://aimighty.de",
-      sourceCode: "https://github.com/ska1walker/aicrm",
+      sourceCode: "https://github.com/ska1walker/beacon",
       supportArch: ["amd64"],
       requiredCpu: "0.2",
       requiredMemory: "1Gi",
@@ -1045,7 +1045,8 @@ GPU: none — the language model is external`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aicrm", title: { en: "aicrm" }, port: 3000, host: "aicrm", authLevel: "internal", openMethod: "window" },
+        { name: "beacon", title: { en: "Beacon" }, port: 3000, host: "beacon", authLevel: "internal", openMethod: "window" },
+        { name: "beaconlinks", title: { en: "Beacon Links" }, port: 8001, host: "beacon-links", authLevel: "public", openMethod: "window", invisible: true },
       ],
       permission: [],
       middleware: [],
