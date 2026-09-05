@@ -1000,7 +1000,7 @@ Lightweight static server (nginx). No host GPU required — the game renders cli
   {
     metadata: {
       name: "beacon",
-      version: "0.2.1",
+      version: "0.2.2",
       icon: "https://raw.githubusercontent.com/ska1walker/beacon/main/icon.png",
       title: { en: "Beacon" },
       description: { en: "Sales CRM that runs entirely on your own box — companies, contacts, deals and an AI assistant that never phones home" },
@@ -1028,7 +1028,7 @@ RAM: 1 GB requested, up to 2
 Disk: 1 GB (database share, backups)
 GPU: none — the language model is external`,
       upgradeDescription:
-        `v0.2.1: lists (static or filter-based), campaigns that only mail contacts with proven consent, per-recipient click and unsubscribe links, templates, Brevo as second delivery path; settings regrouped into five sections with plain-language explanations. v0.2.0: aicrm is now Beacon — same product, new name. Since 0.1.11 mail leaves through your own SMTP account with a ledger, double opt-in and threaded ticket replies; 0.1.4: lists are now questions put to your data — filter on any field, save the answer as a view, choose columns, sort, and change or delete a whole selection at once. The AImighty mark sits top left, and the person you are working as is always visible bottom left. Built for Olares 1.12.6.`,
+        `v0.2.2: a source's kind is part of its contract (relay vs. events), outgoing mail carries a delivery id, retries with backoff and keeps the service's message id. v0.2.1: lists (static or filter-based), campaigns that only mail contacts with proven consent, per-recipient click and unsubscribe links, templates, Brevo as second delivery path; settings regrouped into five sections with plain-language explanations. v0.2.0: aicrm is now Beacon — same product, new name. Since 0.1.11 mail leaves through your own SMTP account with a ledger, double opt-in and threaded ticket replies; 0.1.4: lists are now questions put to your data — filter on any field, save the answer as a view, choose columns, sort, and change or delete a whole selection at once. The AImighty mark sits top left, and the person you are working as is always visible bottom left. Built for Olares 1.12.6.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://aimighty.de",
