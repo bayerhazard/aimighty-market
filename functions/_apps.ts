@@ -1000,7 +1000,7 @@ Lightweight static server (nginx). No host GPU required — the game renders cli
   {
     metadata: {
       name: "beacon",
-      version: "0.2.5",
+      version: "0.2.6",
       icon: "https://raw.githubusercontent.com/ska1walker/beacon/main/icon.png",
       title: { en: "Beacon" },
       description: { en: "Sales CRM that runs entirely on your own box — companies, contacts, deals and an AI assistant that never phones home" },
