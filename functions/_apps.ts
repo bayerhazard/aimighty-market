@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.141",
+      version: "26.9.142",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
         upgradeDescription:
-                    `v26.9.141: AI Assistant v2 — ask in plain language about your calendar, contacts, tasks and mail; the agent proposes actions as reviewable plans that you confirm before anything is written. Also fixes the container image not following the app version on upgrade. Built for Olares 1.12.6.`,
+                    `v26.9.142: Proactive mail follow-ups — the assistant reads each new mail and offers typed suggestions (task, calendar event, reply draft) as chips under the message. Accepting a chip opens the assistant with a ready-to-confirm card; nothing is written until you confirm. Mail body is clamped and treated as data only, so injected instructions never execute. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
