@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.142",
+      version: "26.9.145",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -828,8 +828,8 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **Voice-to-Mail** – voice input that automatically becomes a finished email. It recognizes recipients and subject lines to generate complete templates.
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
-        upgradeDescription:
-                    `v26.9.142: Proactive mail follow-ups — the assistant reads each new mail and offers typed suggestions (task, calendar event, reply draft) as chips under the message. Accepting a chip opens the assistant with a ready-to-confirm card; nothing is written until you confirm. Mail body is clamped and treated as data only, so injected instructions never execute. Built for Olares 1.12.6.`,
+         upgradeDescription:
+                     `v26.9.145: Mail follow-ups now appear instantly — suggested actions (task, calendar event, reply) are generated in the background as each inbox mail arrives and shown the moment you open the message, with a startup catch-up that fills in anything generated while the app was offline. v26.9.144: internal database hardening (versioned schema migrations). v26.9.143: voice-out for assistant answers plus compose fixes (Reply-All To/CC split, full mail chain). Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
