@@ -474,7 +474,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.08.8",
+      version: "26.9.1",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
