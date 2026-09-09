@@ -819,7 +819,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "relay",
-      version: "26.9.147",
+      version: "26.9.148",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: { en: "Relay — the intelligent, local email client" },
@@ -829,7 +829,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
          upgradeDescription:
-                       `v26.9.147: each account in the sidebar now shows a small unread badge next to its inbox, so you can see at a glance when new mail arrives at any account — not just the open one. v26.9.146: first-time sync of a large mailbox is now dramatically faster (full history drains in hours, not days). v26.9.145: mail follow-ups now appear instantly (background generation + startup catch-up). Built for Olares 1.12.6.`,
+                       `v26.9.148: the account name can now be renamed directly in Settings (a rename was previously shown but never saved), and the macOS web-app icon is fixed — a dedicated maskable icon is served and the service-worker cache was bumped so installed web apps pick up the fresh icon. v26.9.147: each account in the sidebar now shows a small unread badge next to its inbox. v26.9.146: first-time sync of a large mailbox is now dramatically faster (full history drains in hours, not days). Built for Olares 1.12.6.`,
       categories: ["Utilities"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
