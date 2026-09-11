@@ -852,7 +852,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.81",
+      version: "0.1.90",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -868,6 +868,8 @@ No audio, no transcript and no search index ever leaves the box. Unlike PLAUD, O
 - Structured summaries from a template system, produced by the language model you point it at
 - Ask questions across the whole meeting archive (RAG over pgvector)
 - Outbound integration: webhooks with HMAC signatures, REST API, Markdown export — manual dispatch by default
+- Every meeting also lands on disk as Markdown next to its audio — transcript and summary, readable without Insilo
+- Audit log over every change and every export, and a trash with two separate retention deadlines
 
 **Privacy proof, measured**
 The navigation carries a live statement of what actually leaves the box, derived from the configured endpoints and the delivered bytes in the audit log — not a promise. Three destinations are possible and each is named: an external language model endpoint, configured webhooks, and the one-time model download on first boot.
@@ -887,7 +889,19 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.81: an update from the market now actually replaces the program, not just the version shown — until now a market upgrade could report the new version while the old one kept running. The setup file announced in v0.1.80 is also written for the first time: it aimed at a directory that does not exist inside the container and queried a column that had been removed. v0.1.80: the setup is mirrored next to the recordings, so backing up the data directory covers it — including the organisation id, which keeps existing recordings attached after a reinstall. Note the file holds credentials. Speech-recognition errors now carry the reason the endpoint gave, and a missing model id is caught before the request. v0.1.78: fixes the upgrade path — a values key added in 0.1.77 was dereferenced directly, and since an upgrade replays the stored values rather than the new chart defaults, rendering failed before anything was applied. Same feature set as 0.1.77. v0.1.77: Speech-to-text is now a configurable OpenAI-compatible endpoint — leave it empty and the bundled service keeps transcribing on the box. Speaker separation stays local either way. The privacy statement lists audio as its own destination and names it before all others, because with an external endpoint the recording itself leaves the box. v0.1.76: Manifest on apiVersion v3, schema 0.12.0, olares dependency >=1.12.6-0 — the previous pin excluded 1.12.6 itself. Replica counts now come from workloadReplicas, so suspend and resume work. Built for Olares 1.12.6. v0.1.75: no baked-in API key in the chart, single category. v0.1.74: the language-model connection test works with an empty key field. v0.1.72: no invented default endpoint — the app states what is missing instead of failing.`,
+        `v0.1.90: nine releases in one. The box now keeps a record of every change and every export, deleting is reversible, and each meeting lands on disk as readable Markdown.
+
+**Audit log** — who changed or exported what, and when. Exports are marked as such and can be filtered on their own. Entries cannot be edited or deleted; the database enforces that, not the application. The wording of search queries is deliberately not recorded.
+
+**Trash with two deadlines** — deleting moves a meeting to the trash with its audio and is reversible until the deadline runs out (30 days by default). A second, separate deadline removes only the audio recording after 90 days and keeps transcript and summary: the recording is raw material, the minutes are the record.
+
+**Transcript and summary as files** — next to the audio, same folder, same stem — the recording, then "…transkript.md" and "…zusammenfassung.md". Readable without Insilo, ready to drop into a case file or a document management system. Note that a backup of the data directory now carries the conversation in plain text, not just audio.
+
+**A fresh box lets its first user in** — until now the first call to a new installation ended in "Unknown identity" because nothing created the first organisation. The first person to open an empty box becomes its owner; every further unknown name is still turned away.
+
+**Security** — the backend no longer trusts a claimed identity: a shared secret guards it, and row-level security is now enforced in the database rather than merely declared. Access keys work again (they were broken by a library incompatibility).
+
+**Also** — new app icon, and the privacy statement no longer says the same sentence twice.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
