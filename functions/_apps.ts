@@ -852,7 +852,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.93",
+      version: "0.1.95",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -887,7 +887,15 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.93: Finished meeting summaries are now additionally exported as a Markdown file (with frontmatter, written atomically) into the shared app folder — Relay picks them up automatically and shows them in its new Meetings area. Deleting a meeting also removes its export; a backfill endpoint re-exports all finished meetings on demand. v0.1.81: an update from the market now actually replaces the program, not just the version shown — until now a market upgrade could report the new version while the old one kept running. The setup file announced in v0.1.80 is also written for the first time: it aimed at a directory that does not exist inside the container and queried a column that had been removed. v0.1.80: the setup is mirrored next to the recordings, so backing up the data directory covers it — including the organisation id, which keeps existing recordings attached after a reinstall. Note the file holds credentials. Speech-recognition errors now carry the reason the endpoint gave, and a missing model id is caught before the request. v0.1.78: fixes the upgrade path — a values key added in 0.1.77 was dereferenced directly, and since an upgrade replays the stored values rather than the new chart defaults, rendering failed before anything was applied. Same feature set as 0.1.77. v0.1.77: Speech-to-text is now a configurable OpenAI-compatible endpoint — leave it empty and the bundled service keeps transcribing on the box. Speaker separation stays local either way. The privacy statement lists audio as its own destination and names it before all others, because with an external endpoint the recording itself leaves the box. v0.1.76: Manifest on apiVersion v3, schema 0.12.0, olares dependency >=1.12.6-0 — the previous pin excluded 1.12.6 itself. Replica counts now come from workloadReplicas, so suspend and resume work. Built for Olares 1.12.6. v0.1.75: no baked-in API key in the chart, single category. v0.1.74: the language-model connection test works with an empty key field. v0.1.72: no invented default endpoint — the app states what is missing instead of failing.`,
+        `v0.1.95: two corrections to the Relay export that came with 0.1.93, one of which kept existing installs from updating.
+
+**Updating works again on boxes that had Insilo before 0.1.93.** The export mounts the shared app folder, and Olares only provides that folder for permissions requested at install time. On an older install the path was empty, and Kubernetes rejects the deployment ("hostPath.path: Required value"). Insilo now mounts the folder only where Olares provides it; without it the export simply stays off.
+
+**The shared folder is no longer taken over.** 0.1.93 changed the owner of the top-level shared folder on every start — a folder that belongs to every app using it. Now only Insilo's own subfolder.
+
+**Four fixes to the export itself:** permanently deleting a meeting could remove another meeting's export file when their ids started alike; the bulk export bypassed the audit log and was open to every member — now owners and admins only, recorded as an export; and the privacy statement now lists the shared folder as a target of its own, with the number of summaries lying there.
+
+**Please note:** where the shared folder is available, the export is on and has no switch. Every app with access to that folder can read the summaries of all meetings. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
