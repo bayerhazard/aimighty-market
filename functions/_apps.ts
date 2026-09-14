@@ -852,7 +852,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.95",
+      version: "0.1.96",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -887,15 +887,15 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.95: two corrections to the Relay export that came with 0.1.93, one of which kept existing installs from updating.
+        `v0.1.96: no recording gets lost on the way to the box any more.
 
-**Updating works again on boxes that had Insilo before 0.1.93.** The export mounts the shared app folder, and Olares only provides that folder for permissions requested at install time. On an older install the path was empty, and Kubernetes rejects the deployment ("hostPath.path: Required value"). Insilo now mounts the folder only where Olares provides it; without it the export simply stays off.
+**Recordings longer than about ten minutes did not arrive.** The frontend passed every request through a middleware that cut the body off at 10 MB. The box rejected the truncated upload, and because the audio lived only in the browser tab's memory, the recording was gone. Uploads now stream through in full.
 
-**The shared folder is no longer taken over.** 0.1.93 changed the owner of the top-level shared folder on every start — a folder that belongs to every app using it. Now only Insilo's own subfolder.
+**Every recording is kept on the device until the box has it.** While recording, each second is written to the browser's storage and deleted only after the box confirms. If sending fails, or the tab is closed or crashes, Insilo offers the recording the next time it is opened: send again, save as file, or discard (it asks first). A recording no longer disappears on its own.
 
-**Four fixes to the export itself:** permanently deleting a meeting could remove another meeting's export file when their ids started alike; the bulk export bypassed the audit log and was open to every member — now owners and admins only, recorded as an export; and the privacy statement now lists the shared folder as a target of its own, with the number of summaries lying there.
+**The backend log reaches further back.** Successful readiness probes are no longer written to it on every call.
 
-**Please note:** where the shared folder is available, the export is on and has no switch. Every app with access to that folder can read the summaries of all meetings. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
+**Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
