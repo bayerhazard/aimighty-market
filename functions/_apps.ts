@@ -12,7 +12,7 @@ interface AppManifest {
   spec: {
     type: string;
     entrance: { name: string; title: Record<string, string>; port: number; host?: string; authLevel?: string; openMethod?: string }[];
-    permission: unknown[]; middleware: unknown[];
+    permission: unknown; middleware: unknown;
     options: { resources: { cpu: string; memory: string; disk: string } };
     envs?: { envName: string; required: boolean; default?: string; type?: string; editable?: boolean; applyOnChange?: boolean; description?: string; options?: { title: string; value: string }[] }[];
   };
@@ -1054,6 +1054,64 @@ GPU: none — the language model is external`,
       permission: [],
       middleware: [],
       options: { resources: { cpu: "0.2", memory: "1Gi", disk: "1Gi" } },
+    },
+  },
+  {
+    metadata: {
+      name: "aimragflow",
+      version: "26.9.1",
+      icon: "https://app.cdn.olares.com/appstore/ragflow/icon.png",
+      title: { en: "AIM RAGFlow" },
+      description: { en: "Self-hosted RAG engine (RAGFlow 0.27.2) optimized for Olares and the Hermes Agent — Agentic RAG, knowledge compilation, OpenAI-compatible API" },
+      fullDescription:
+        `AIM RAGFlow — upstream RAGFlow 0.27.2 repackaged for Olares and tuned for use from the Hermes Agent.
+
+**Model**
+Retrieval/knowledge backend. Parses documents, chunks, embeds and optionally compiles knowledge; answers with Agentic RAG.
+
+**Inference Engine**
+RAGFlow 0.27.2 with Olares tuning baked in: MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale(age=3600), CPU 10 / RAM 12Gi. Document engine Elasticsearch 8.11.3, object storage MinIO, cache Valkey 8, metadata on the shared MySQL middleware.
+
+**Key Features**
+- Agentic RAG thinking modes None / Low / Medium / High / Ultra (v0.27.0, refactored in v0.27.2 for speed and benchmarks).
+- Knowledge Compilation: Wiki, Graph, Tree, PageIndex, Mind Map, Timeline, To Skills (replaces GraphRAG/RAPTOR).
+- OpenAI-compatible chat endpoint and a RAGFlow MCP server (retrieve tool).
+- Model wiring points at the local AIM apps (LiteLLM, embedder, reranker).
+
+**API**
+Web UI at the entrance; API key for the OpenAI-compatible and MCP interfaces.
+Wire Hermes via the chat-assistant endpoint for Agentic RAG, or MCP retrieve for chunks.
+
+**Resource Usage**
+CPU: 2-10 cores
+RAM: 8-12 GiB (plus Elasticsearch / MinIO / Valkey)
+Disk: appData volumes`,
+      upgradeDescription:
+        `v26.9.1: Initial AIM release — RAGFlow 0.27.2 repackaged from the Olares chart 1.0.30 with Olares tuning baked in (MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale=3600, CPU 10 / RAM 12Gi). Infinity companion removed (DOC_ENGINE=elasticsearch). Built for Olares 1.12.6. Adds Agentic RAG (thinking modes) and Knowledge Compilation (Graph/Tree/Wiki/PageIndex).`,
+      categories: ["AI"],
+      developer: "Aimighty",
+      website: "https://ragflow.io/",
+      sourceCode: "https://github.com/bayerhazard/aimragflow",
+      supportArch: ["amd64"],
+      requiredCpu: "2",
+      requiredMemory: "8Gi",
+      requiredDisk: "10Gi",
+      requiredGpu: "0",
+      limitedCpu: "13",
+      limitedMemory: "28Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimragflow", title: { en: "AIM RAGFlow" }, port: 80, host: "aimragflow", authLevel: "private", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: { mysql: { username: "aimragflow", databases: [{ name: "aimragflow" }] } },
+      options: { resources: { cpu: "2", memory: "8Gi", disk: "10Gi" } },
+      envs: [
+        { envName: "HF_ENDPOINT", required: true, default: "", type: "string", editable: true, applyOnChange: true, description: "HuggingFace mirror endpoint (injected from the Olares HuggingFace service)" },
+      ],
     },
   },
 ];
