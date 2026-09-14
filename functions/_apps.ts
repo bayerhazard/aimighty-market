@@ -1067,7 +1067,7 @@ GPU: none — the language model is external`,
   {
     metadata: {
       name: "aimragflow",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://app.cdn.olares.com/appstore/ragflow/icon.png",
       title: { en: "AIM RAGFlow" },
       description: { en: "Self-hosted RAG engine (RAGFlow 0.27.2) optimized for Olares and the Hermes Agent — Agentic RAG, knowledge compilation, OpenAI-compatible API" },
