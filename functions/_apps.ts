@@ -1124,6 +1124,56 @@ Disk: appData volumes`,
       ],
     },
   },
+  {
+    metadata: {
+      name: "aimqwen38ninfer",
+      version: "26.9.1",
+      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      title: { en: "AIM Qwen3.8 27B-N" },
+      description: { en: "Qwen3.8-27B Vision via NInfer (sm_120a C++/CUDA) — NVFP4, 100K context, MTP speculation" },
+      fullDescription:
+        `AImighty stack for Qwen3.8-27B served by the NInfer C++/CUDA inference engine on a single NVIDIA GeForce RTX 5090 (sm_120a).
+
+**Model**
+neroued/Qwen3.8-27B-nvfp4-NInfer (container v3, 22.1 GiB, SHA-256 verified): mixed NVFP4 + row-scaled FP8 weights, native Vision, MTP and DFlash2 companion weights.
+
+**Inference Engine**
+NInfer (upstream Neroued/ninfer, pinned cde57e48), CUDA 13.1 sm_120a. MTP speculative decoding (3 drafts + optimized proposal head). NVFP4 KV cache, 103,936-token context on 24 GB. CUDA Graph decode and compatible-prefix reuse.
+
+**Key Features**
+OpenAI Chat Completions/Responses and Anthropic Messages APIs, function/tool calling, reasoning control (reasoning_effort, enable_thinking, preserve-thinking), image/video input.
+
+**API**
+OpenAI-compatible /v1/chat/completions, /v1/responses, /v1/models; Anthropic /v1/messages; health at /health.
+
+**Resource Usage**
+One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host state.`,
+      upgradeDescription:
+        `26.9.1: First release of AIM Qwen3.8 27B-N. NInfer (upstream, sm_120a, CUDA 13.1) + Qwen3.8-27B NVFP4 artifact; NVFP4 KV; 103,936-token context; MTP3 + proposal head; preserve-thinking. Built for Olares 1.12.6.`,
+      categories: ["AI", "Vision"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen38ninfer",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen38ninfer",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 3600,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen38ninfer", title: { en: "AIM Qwen3.8 27B-N" }, port: 8080, host: "aimqwen38ninfer", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
+    },
+  },
+
 ];
 
 // redeploy timestamp: 1784998158
