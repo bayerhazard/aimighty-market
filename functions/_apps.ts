@@ -852,7 +852,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.96",
+      version: "0.1.97",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -887,13 +887,15 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.96: no recording gets lost on the way to the box any more.
+        `v0.1.97: upload existing recordings, see how far sending has got.
 
-**Recordings longer than about ten minutes did not arrive.** The frontend passed every request through a middleware that cut the body off at 10 MB. The box rejected the truncated upload, and because the audio lived only in the browser tab's memory, the recording was gone. Uploads now stream through in full.
+**Upload an audio file.** Below the microphone there is now "Upload audio file": m4a (including iPhone), mp3, wav, ogg, webm, flac and aac up to 500 MB, processed like a recording with the chosen template and language. A recording saved with "Save as file" can be brought back this way and gets its original title.
 
-**Every recording is kept on the device until the box has it.** While recording, each second is written to the browser's storage and deleted only after the box confirms. If sending fails, or the tab is closed or crashes, Insilo offers the recording the next time it is opened: send again, save as file, or discard (it asks first). A recording no longer disappears on its own.
+**Progress while sending.** Instead of minutes of "Saving", the view shows how far the upload has got, then that the box is processing it.
 
-**The backend log reaches further back.** Successful readiness probes are no longer written to it on every call.
+**The screen stays awake** while recording or sending; a locked phone could pause the recording. Where the browser cannot do that, Insilo asks you not to lock the screen.
+
+**Corrections on the box:** mp3, flac and aac were stored under the wrong extension and could not be played back in the browser. Files over the size limit are refused before anything is written. A meeting's length now comes from the transcription, not from the browser.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
       categories: ["AI"],
