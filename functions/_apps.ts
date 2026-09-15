@@ -1127,7 +1127,7 @@ Disk: appData volumes`,
   {
     metadata: {
       name: "aimqwen38ninfer",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B-N" },
       description: { en: "Qwen3.8-27B Vision via NInfer (sm_120a C++/CUDA) — NVFP4, 100K context, MTP speculation" },
@@ -1149,7 +1149,8 @@ OpenAI-compatible /v1/chat/completions, /v1/responses, /v1/models; Anthropic /v1
 **Resource Usage**
 One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host state.`,
       upgradeDescription:
-        `26.9.1: First release of AIM Qwen3.8 27B-N. NInfer (upstream, sm_120a, CUDA 13.1) + Qwen3.8-27B NVFP4 artifact; NVFP4 KV; 103,936-token context; MTP3 + proposal head; preserve-thinking. Built for Olares 1.12.6.`,
+        `26.9.2: Fixed the model-presence check ([-f] instead of [-s]) so the zero-byte .ok marker skips the download step on restart. Built for Olares 1.12.6.
+26.9.1: First release of AIM Qwen3.8 27B-N. NInfer (upstream, sm_120a, CUDA 13.1) + Qwen3.8-27B NVFP4 artifact; NVFP4 KV; 103,936-token context; MTP3 + proposal head; preserve-thinking. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38ninfer",
