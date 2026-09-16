@@ -1187,7 +1187,7 @@ One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host st
   {
     metadata: {
       name: "move",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://raw.githubusercontent.com/ska1walker/move/main/icon.png",
       title: { en: "Move" },
       description: { en: "Cut templates as timestamps, applied deterministically with ffmpeg" },
@@ -1208,7 +1208,15 @@ downloader.
 
 **Resource usage** CPU only. No GPU is requested in this version.`,
       upgradeDescription:
-        `26.9.2: Fixes a chart that could not install. In 26.9.1 a Go template trim
+        `26.9.3: Makes the app installable at all. The olares dependency was missing
+the field \`type: system\`, and without it a box refuses the install with
+"Incompatible with this Olares version" even though the version pin itself
+is correct and \`chart lint\` reports nothing. Measured against the
+catalogue, not guessed: of the 21 charts in the AImighty market source
+that install, 21 carry \`type: system\`; the only two without it were
+move 26.9.1 and 26.9.2. A guard now rejects a chart that omits it.
+
+26.9.2: Fixes a chart that could not install. In 26.9.1 a Go template trim
 marker swallowed the newline after a variable assignment, so the worker
 Deployment rendered without an apiVersion field and the API rejected it.
 Measured, not assumed: rendering the published 26.9.1 chart yields
