@@ -1179,6 +1179,63 @@ One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host st
     },
   },
 
+  // move: erzeugt von scripts/markteintrag.py im Repo https://github.com/ska1walker/move
+  {
+    metadata: {
+      name: "move",
+      version: "26.9.1",
+      icon: "https://raw.githubusercontent.com/ska1walker/move/main/icon.png",
+      title: { en: "Move" },
+      description: { en: "Cut templates as timestamps, applied deterministically with ffmpeg" },
+      fullDescription:
+        `Move builds videos from cut templates.
+
+**Cut templates** A cut template is not a model. It is a list of
+timestamps: cut points, pacing, transition kinds and a beat grid,
+extracted statistically from a reference clip and stored as JSON.
+
+**Assembly** The assembler takes one cut template plus N clips and renders
+a finished MP4 with ffmpeg. The edit is arithmetic, not inference: cut
+points land on the frame the plan names, and the same template with the
+same clips produces the same file byte for byte on a given ffmpeg build.
+
+**Uploads** Source footage is uploaded by the user. Move ships no
+downloader.
+
+**Resource usage** CPU only. No GPU is requested in this version.`,
+      upgradeDescription:
+        `26.9.1: First release. Chart skeleton, single entrance, SQLite on appData.
+Deterministic cut assembler with placeholder clips. No model inference in
+this version. Built for Olares 1.12.6.`,
+      categories: ["Utilities"],
+      developer: "kaivo.studio",
+      website: "https://kaivo.studio",
+      sourceCode: "https://github.com/ska1walker/move",
+      supportArch: ["amd64"],
+      requiredCpu: "2000m",
+      requiredMemory: "4Gi",
+      requiredDisk: "20Gi",
+      requiredGpu: "0",
+      limitedCpu: "6000m",
+      limitedMemory: "12Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "move", title: { en: "Move" }, port: 3000, host: "move", authLevel: "private", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2000m", memory: "4Gi", disk: "20Gi" } },
+      envs: [
+        { envName: "FAL_KEY", required: false, type: "password", editable: true, applyOnChange: true, description: "Your own fal.ai API key, used to generate clips. fal bills per call against this key. Leave it empty to work with placeholder clips and your own uploads only: a job that asks for generated clips then fails with a plain message instead of silently doing nothing." },
+        { envName: "MOVE_FAL_MODEL", required: false, type: "string", editable: true, applyOnChange: true, description: "Default fal.ai video model, for example fal-ai/ltx-video. Leave empty to use the worker's built-in default. A single job can override it." },
+        { envName: "MOVE_FAL_MAX_CLIPS", required: false, default: "12", type: "int", editable: true, applyOnChange: true, description: "Most generated clips a single job may request. Checked before the first paid call, so an oversized job costs nothing. Set it to 0 to switch generation off entirely and allow placeholders and uploads only." },
+      ],
+    },
+  },
+  // move: Ende
 ];
 
 // redeploy timestamp: 1784998158
