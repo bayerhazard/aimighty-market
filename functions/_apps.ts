@@ -1195,7 +1195,7 @@ One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host st
   {
     metadata: {
       name: "move",
-      version: "26.9.3",
+      version: "26.9.4",
       icon: "https://raw.githubusercontent.com/ska1walker/move/main/icon.png",
       title: { en: "Move" },
       description: { en: "Cut templates as timestamps, applied deterministically with ffmpeg" },
@@ -1216,7 +1216,25 @@ downloader.
 
 **Resource usage** CPU only. No GPU is requested in this version.`,
       upgradeDescription:
-        `26.9.3: Makes the app installable at all. The olares dependency was missing
+        `26.9.4: The interface can now do the whole job. Until this version a user
+had to run \`move_worker extract\` inside the worker pod to get a template
+at all, so the page showed nothing but a hint. New: upload an MP4 and the
+worker extracts the cut points from it; a figure carries a reference
+image, a description and a stable seed, so the same person can appear
+across several generated shots.
+
+On consistent characters, plainly: fal.ai remembers nothing between two
+calls. A person looks the same across shots only because every shot gets
+the same inputs. The reference image is the strong lever, the description
+is free but weak, the seed helps with some models. LoRA training stays
+out of scope.
+
+Schema: only new tables (upload, extract_job, figur). An existing
+database keeps its rows -- this file runs as executescript with
+CREATE TABLE IF NOT EXISTS, which cannot add a column to a table that
+already exists.
+
+26.9.3: Makes the app installable at all. The olares dependency was missing
 the field \`type: system\`, and without it a box refuses the install with
 "Incompatible with this Olares version" even though the version pin itself
 is correct and \`chart lint\` reports nothing. Measured against the
