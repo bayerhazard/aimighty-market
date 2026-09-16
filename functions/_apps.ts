@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.08.30",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -34,16 +34,16 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
 200K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM nightly 2026-08-14 cu129, SHA-pinned (cu129-nightly-ac7509e2) with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
-fp8 KV-Cache (all layers). CUDAGraphs + torch.compile.
+vLLM stable v0.29.0-cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+fp8 KV-Cache (all layers). CUDAGraphs + torch.compile. Model Runner V2.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
 
 **Performance (RTX 5090 Blackwell)**
 - 200K token context
-- ~136 tok/s generation
-- Needle Haystack: 25/25 (100%)
-- Agentic Tool-Calling: 8/8 (100%)
+- ~137 tok/s generation
+- Needle Haystack: 25/25 (100%, incl. 131K/190K)
+- Agentic Tool-Calling: 9/9 (100%)
 
 **API**
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health.
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.08.30: vLLM update nightly ac7509e2 -> Stable v0.28.0-cu129 (Gemma4 fix #49797, MTP CUDA-graph fix #53884, parser fix #52430). GPU_UTIL 0.96 kept. Built for Olares 1.12.6.`,
+        `v26.9.1: vLLM update Stable v0.28.0-cu129 -> Stable v0.29.0-cu129 (Model Runner V2 default #53183, CUDA-graph memory reservation #53306, parser fixes #54089/#54218, spec-decode improvements #48915/#52242). Identical performance (136.6 tok/s, Needle 25/25, Tool 9/9, 200K, KV pool 236,049). MTP stays disabled (VRAM overhead unchanged: max 50.4K context at GPU_UTIL 0.96). Built for Olares 1.12.6. Note: switching from 26.08.X (old format) to 26.9.1 requires a one-time uninstall + install.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
