@@ -1195,7 +1195,7 @@ One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host st
   {
     metadata: {
       name: "move",
-      version: "26.9.6",
+      version: "26.9.7",
       icon: "https://raw.githubusercontent.com/ska1walker/move/main/icon.png",
       title: { en: "Move" },
       description: { en: "Cut templates as timestamps, applied deterministically with ffmpeg" },
@@ -1216,7 +1216,42 @@ downloader.
 
 **Resource usage** CPU only. No GPU is requested in this version.`,
       upgradeDescription:
-        `26.9.6: Three sample templates, so the app is usable the moment it opens.
+        `26.9.7: Corrects what move sends to fal.ai, measured against the client
+library and the model pages instead of assumed. Three of the assumptions
+held, two did not.
+
+Held: image_url and seed are the real argument names, and the call form
+subscribe(model, arguments=..., client_timeout=...) matches the actual
+signature of fal-client 1.0.1 -- the version this worker pins, checked
+against its source, not a similar one. A test now pins that signature and
+fails if the library changes it.
+
+Did not hold, and this one mattered: the built-in default model
+fal-ai/ltx-video is a text-to-video endpoint. It has no image parameter,
+so a figure with a reference image went to a model that could not use it.
+The call would have been billed and the face would have been different in
+every shot -- a failure that produces a video rather than an error. Shots
+with a reference image now go to an image-to-video endpoint
+(fal-ai/ltx-2/image-to-video by default, MOVE_FAL_BILD_MODEL to change
+it), and MOVE_FAL_MODEL deliberately does not apply to them.
+
+Also corrected: the shot length went out as a float. One model's own
+example sends it as the string "8", others want a whole number, some
+accept only fixed values. It now goes as a whole second, rounded up --
+rounding down would be billed and then rejected by the assembler, which
+requires a clip to be at least as long as its shot. Three environment
+switches cover the rest without a new image: MOVE_FAL_DAUER_ARGUMENT,
+MOVE_FAL_DAUER_TEXT, MOVE_FAL_DAUER_AUS.
+
+Smaller: FAL_KEY_ID plus FAL_KEY_SECRET now count as a key, because the
+client accepts them, and the secret is scrubbed from error messages the
+same way FAL_KEY already was.
+
+What is still not measured: no real call has been made. fal.ai is
+unreachable from the build environment, so the response shape and whether
+a reference image acts as the first frame remain unverified.
+
+26.9.6: Three sample templates, so the app is usable the moment it opens.
 Until now the first visit showed an empty page and a hint; a template had
 to be extracted from an uploaded video first. The worker now seeds three
 hand-written ones on start -- fast montage, trailer build, quiet sequence --
@@ -1316,7 +1351,8 @@ this version. Built for Olares 1.12.6.`,
       options: { resources: { cpu: "2000m", memory: "4Gi", disk: "20Gi" } },
       envs: [
         { envName: "FAL_KEY", required: false, type: "password", editable: true, applyOnChange: true, description: "Your own fal.ai API key, used to generate clips. fal bills per call against this key. Leave it empty to work with placeholder clips and your own uploads only: a job that asks for generated clips then fails with a plain message instead of silently doing nothing." },
-        { envName: "MOVE_FAL_MODEL", required: false, type: "string", editable: true, applyOnChange: true, description: "Default fal.ai video model, for example fal-ai/ltx-video. Leave empty to use the worker's built-in default. A single job can override it." },
+        { envName: "MOVE_FAL_MODEL", required: false, type: "string", editable: true, applyOnChange: true, description: "Default fal.ai model for shots WITHOUT a reference image, for example fal-ai/ltx-video. Leave empty for the worker's built-in default. A single job can override it. This value deliberately does not apply to shots that carry a figure's reference image: fal-ai/ltx-video is a text-to-video endpoint and has no image parameter, so using it there would charge for the call and ignore the image." },
+        { envName: "MOVE_FAL_BILD_MODEL", required: false, type: "string", editable: true, applyOnChange: true, description: "Default fal.ai model for shots WITH a reference image, for example fal-ai/ltx-2/image-to-video. Leave empty for the worker's built-in default. This has to be an image-to-video endpoint: it is the one that receives image_url, which is how a figure keeps the same face across shots." },
         { envName: "MOVE_FAL_MAX_CLIPS", required: false, default: "12", type: "int", editable: true, applyOnChange: true, description: "Most generated clips a single job may request. Checked before the first paid call, so an oversized job costs nothing. Set it to 0 to switch generation off entirely and allow placeholders and uploads only." },
       ],
     },
