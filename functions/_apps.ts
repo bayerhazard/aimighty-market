@@ -420,7 +420,7 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -433,16 +433,19 @@ Model:
 - 200K token context Turbo4 (4-bit Walsh-Hadamard rotated)
 
 Inference Engine:
-- buun-llama-cpp 39d97a8 (MTP+mmproj swap-fit accounting; CUDA 13.1 sm_120 custom build)
-- MTP (draft-mtp, --spec-draft-n-max 3)
+- buun-llama-cpp 117300f7 (Vision+DFlash fixes, Turbo/FA tuning; CUDA 13.1 sm_120 custom build)
+- DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
 - Parallel slots: 1, Batch: 2048/512, Reasoning: medium effort, KV-cache reuse
 
 Performance:
-Space Invaders HTML: 100 t/s
-Creative Writing: 65 t/s
+Space Invaders HTML: 118 t/s
+Creative Writing: 78 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
       upgradeDescription:
-        `26.08.14: Unified engine image ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 — llama-server binary now ships inside the image (no shared-disk build pin); removed redundant values; Built for Olares 1.12.6.
+        `26.9.3: Engine-Update buun-llama-cpp 117300f7 (571 Commits: Vision+DFlash-Speculation-Fixes, Turbo/FA-Tuning, Upstream 0.4.1) — Image ghcr.io/bayerhazard/buun-llama-cpp:117300f2; Build-Fix GGML_NATIVE=OFF (AVX2+AVX-VNNI, kein AVX-512/AMX) behebt SIGILL; gemessen +4% repetitiv / +2% Prosa vs 283ba19e, Tool-Calling 9/9, Needle 100%, Vision ok; Built for Olares 1.12.6.
+26.9.2: DFlash2 wird Default Spec-Decoding (draft-dflash, Q4_K_M-Draft, --spec-draft-n-max 7) — gemessen +155% repetitiv / +140% Prosa vs MTP (110.5 / 77.4 t/s), KV bleibt 200k; Built for Olares 1.12.6.
+26.9.1: Engine-Update buun-llama-cpp 283ba19e (MTP-Context-Sizing/Fit-Alignment, DFlash2-GGUF-Schema, Upstream-Sync) — Image ghcr.io/bayerhazard/buun-llama-cpp:283ba19e; Spec-Typ parametrisierbar (SPEC_TYPE/DRAFT_MAX/DRAFT_MODEL_FILE); Built for Olares 1.12.6.
+26.08.14: Unified engine image ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 — llama-server binary now ships inside the image (no shared-disk build pin); removed redundant values; Built for Olares 1.12.6.
 26.08.13: --reasoning-budget 8192 (hartes Thinking-Cap, kein Ausufern) + budget-message; Antworten entkoppelt von max_tokens; Built for Olares 1.12.6.
 26.08.12: --reasoning-preserve (Reasoning bleibt im Multi-Turn-Verlauf erhalten) + GGUF Dynamic V3.0 (Unsloth Aug-19-Update, ~10% mehr Genauigkeit); Built for Olares 1.12.6.
 26.08.11: Engine buun-llama-cpp 39d97a8 (MTP+mmproj swap-fit accounting — spart VRAM auf hybriden Qwen-Modellen) via shared build-output; benchmarks ≥ baseline, keine Regression; Built for Olares 1.12.6.
