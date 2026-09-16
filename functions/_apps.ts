@@ -1187,7 +1187,7 @@ One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host st
   {
     metadata: {
       name: "move",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/ska1walker/move/main/icon.png",
       title: { en: "Move" },
       description: { en: "Cut templates as timestamps, applied deterministically with ffmpeg" },
@@ -1208,7 +1208,19 @@ downloader.
 
 **Resource usage** CPU only. No GPU is requested in this version.`,
       upgradeDescription:
-        `26.9.1: First release. Chart skeleton, single entrance, SQLite on appData.
+        `26.9.2: Fixes a chart that could not install. In 26.9.1 a Go template trim
+marker swallowed the newline after a variable assignment, so the worker
+Deployment rendered without an apiVersion field and the API rejected it.
+Measured, not assumed: rendering the published 26.9.1 chart yields
+apiVersion=None for the moveworker Deployment. A guard now counts
+apiVersion and kind in the rendered output, not in the source.
+
+Also new: the web container learns whether a fal.ai key is configured
+(yes/no only, never the key itself), so a job asking for generated clips
+is refused up front with a plain message instead of being accepted and
+failing later in the worker.
+
+26.9.1: First release. Chart skeleton, single entrance, SQLite on appData.
 Deterministic cut assembler with placeholder clips. No model inference in
 this version. Built for Olares 1.12.6.`,
       categories: ["Utilities"],
