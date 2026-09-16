@@ -856,7 +856,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.98",
+      version: "0.1.100",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -891,15 +891,17 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.98: long uploads arrive, nothing is created twice.
+        `v0.1.100: long meetings get through.
 
-**Uploads that took longer than five minutes were cut off** (since 0.1.96), for example a long meeting sent over a weak mobile connection. Uploads now have up to two hours.
+**Recordings over about twenty minutes were stored but their processing aborted.** The cause was a fixed 25-minute limit on each recognition call: without a graphics card the bundled recogniser needs more compute time than the recording is long — measured on a box without a GPU, 795 seconds of work for 626 seconds of audio. The limit now follows the length of the recording.
 
-**Large uploads no longer strain the box.** Sending a 500 MB file briefly used as much memory in the frontend; two at once could crash it for everyone. The upload now passes through with a small fixed buffer.
+**Long recordings are split into sections** and transcribed one section at a time, cut at pauses in speech rather than mid-word. The meeting view shows how far along it is. If processing is interrupted, the next attempt resumes at the section that was missing instead of starting over.
 
-**"Send again" does not create a second meeting** when the first attempt did arrive after all. If that meeting is in the trash, Insilo says so and keeps the recording on the device.
+**New button "process again".** A failed meeting can be sent through the pipeline once more — for example after configuring a faster speech recognition endpoint under Settings. The recording itself was never touched.
 
-**A meeting's date is when it was recorded,** also when it is sent later. An uploaded file takes the date from its Insilo file name or its modification date.
+**Meetings whose processing was interrupted** used to sit on "transcribing" forever. They are now detected and reported as failed.
+
+**Very long transcripts are condensed before summarizing.** The language model could previously truncate the beginning without saying so, leaving the first hour out of the summary.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
       categories: ["AI"],
