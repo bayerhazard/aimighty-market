@@ -856,7 +856,7 @@ v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. B
   {
     metadata: {
       name: "insilo",
-      version: "0.1.100",
+      version: "0.1.101",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
@@ -891,7 +891,7 @@ RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
       upgradeDescription:
-        `v0.1.100: long meetings get through.
+        `v0.1.101: long meetings get through.
 
 **Recordings over about twenty minutes were stored but their processing aborted.** The cause was a fixed 25-minute limit on each recognition call: without a graphics card the bundled recogniser needs more compute time than the recording is long — measured on a box without a GPU, 795 seconds of work for 626 seconds of audio. The limit now follows the length of the recording.
 
@@ -902,6 +902,8 @@ GPU: none — Whisper runs on CPU, the language model is external`,
 **Meetings whose processing was interrupted** used to sit on "transcribing" forever. They are now detected and reported as failed.
 
 **Very long transcripts are condensed before summarizing.** The language model could previously truncate the beginning without saying so, leaving the first hour out of the summary.
+
+**Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
       categories: ["AI"],
