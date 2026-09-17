@@ -420,7 +420,7 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.4",
+      version: "26.9.5",
       icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
