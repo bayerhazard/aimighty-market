@@ -151,7 +151,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.08.4",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
@@ -166,10 +166,7 @@ Disk: 50 GB for model cache`,
 - 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `v26.08.4: Release via market.AImighty — same validated native vLLM stack (v0.26.0-cu129, worker-GPU MemorySlice tuning CUDA_DEVICE_MEMORY_LIMIT_0=3584m, util 0.9). Built for Olares 1.12.6.
-v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker", English descriptions. Built for Olares 1.12.6.
-v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, live metrics, removed API URL line. v1.8.0: Move to worker GPU (MemorySlice) — CUDA_DEVICE_MEMORY_LIMIT_0=3072m + util 0.9. Co-resides with voxtral (13 GiB) + ASR (6 GiB).
-        v1.7.0: Native vLLM rerank — removed Python rerank-proxy sidecar. vLLM v0.26.0-cu129 with built-in /v1/rerank serving Qwen3-Reranker-0.6B-seq-cls directly. Pinned immutable image tag. Fixed pod owner label (HAMi GPU binding). v1.6.5: Fixed deployment title to 'Qwen3 Reranker'. v1.6.4: Category update — moved to AI Agents. v1.6.3: Renamed to 'AIM Qwen3 Reranker'. v1.6.2: Fixed chart encoding (was double-gzip, broke Olares tar extraction). v1.6.1: Fixed corrupted chart in market source (base64 truncation). v1.6.0: Version bump to force Olares re-sync with fresh chart encoding. v1.5.5: Release v1.5.5. Final naming corrections and entrance status fix.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
@@ -196,7 +193,7 @@ v1.9.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "26.08.4",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker CPU" },
       description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU or Intel iGPU accelerator — Jina/Cohere-compatible /v1/rerank" },
@@ -220,11 +217,7 @@ OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-int
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v26.08.4: Direct extended-resource request — the server container requests gpu.intel.com/i915 in resources.limits (Intel GPU device plugin grants /dev/dri access). Olares 1.12.6 webhook only sets GPU_TYPE/nodeSelector, so the chart requests the resource itself. No image change.
-v26.08.3: Intel GPU device access — gpu-inject annotation triggers the app-service webhook to inject gpu.intel.com/i915 (Intel GPU device plugin) into the server container, granting /dev/dri access without privileged mode. No image change.
-v26.08.2: Intel accelerator support — new "intel" compute mode (spec.accelerator) with the Intel GPU runtime baked into the image (ubuntu 24.04 base, intel-opencl-icd + intel-level-zero-gpu). Runs on the Core Ultra 9 275HX iGPU via Level Zero, ~2-2.5x faster than CPU (PoC-verified 2026-08-20). Auto device detection in entrypoint (GPU if render node openable, else CPU). Built for Olares 1.12.6.
-v26.08.1: Unified naming — title "AIM Qwen3 0.6B Reranker CPU", English descriptions. Built for Olares 1.12.6.
-v1.2.0: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, Rerank test card, removed API URL line. v1.1.0: Deterministic build - OpenVINO 2026.2.1 + optimum-intel 2.0.0 pinned (replaces unpinned git-main). OlaresManifest migrated to apiVersion v3 (Olares >=1.12.6). Fixed MODEL_NAME env overriding the baked model cache path. Chart now installable on Olares 1.12.6. v1.0.3: Fixed deployment title. v1.0.2: Category update. v1.0.1: Renamed. v1.0.0: Initial release.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
