@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -56,7 +56,7 @@ RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
       upgradeDescription:
-        `v26.9.1: vLLM update Stable v0.28.0-cu129 -> Stable v0.29.0-cu129 (Model Runner V2 default #53183, CUDA-graph memory reservation #53306, parser fixes #54089/#54218, spec-decode improvements #48915/#52242). Identical performance (136.6 tok/s, Needle 25/25, Tool 9/9, 200K, KV pool 236,049). MTP stays disabled (VRAM overhead unchanged: max 50.4K context at GPU_UTIL 0.96). Built for Olares 1.12.6. Note: switching from 26.08.X (old format) to 26.9.1 requires a one-time uninstall + install.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
@@ -412,8 +412,8 @@ v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.5",
-      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      version: "26.9.6",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
       fullDescription:
@@ -433,6 +433,8 @@ Performance:
 Space Invaders HTML: 118 t/s
 Creative Writing: 78 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
+      upgradeDescription:
+        `Initial Release for AImighty Olares One`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
@@ -459,8 +461,8 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.9.4",
-      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      version: "26.9.5",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen3635ba3b/main/icon.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
       fullDescription:
@@ -497,7 +499,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.08.8: Fix upgrade with frozen install values — image falls back to ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 literal when values snapshot lacks image.full; Built for Olares 1.12.6.\nv26.08.7: Unified engine image ghcr.io/bayerhazard/buun-llama-cpp:39d97a8 — llama-server binary now ships inside the image; think-budget moved from env to --reasoning-budget flags; removed redundant values; Built for Olares 1.12.6.\nv26.08.6: --cache-reuse 256 (KV-Cache-Reuse for long agentic sessions) + think-budget loop guards anchored in chart.\nv26.08.5: Stability fix — fresh build (Aug 14, 2026) including \"recurrent: bound graph reserves by resident capacity\" (fixes a crash in hybrid-MoE memory when using vision with a long context).\nv26.08.4: Fresh build from master (Aug 13, 2026) — CUDA 13.1, sm_120, ggml 0.19, hardened VBR + Blackwell tuning.\nv26.08.3: Reasoning-preserve and Full VBR KV-Cache — dynamic bit-rate on both K/V sides.\nv26.08.1: Unified naming — title \"AIM Qwen3.6 35B A3B\", categories AI + Vision, English descriptions. Built for Olares 1.12.6.",
+      upgradeDescription: "Initial Release for AImighty Olares One",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
@@ -1125,8 +1127,8 @@ Disk: appData volumes`,
   {
     metadata: {
       name: "aimqwen38ninfer",
-      version: "26.9.2",
-      icon: "https://app.cdn.olares.com/appstore/llamacpp/icon2.png",
+      version: "26.9.3",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38ninfer/main/icon.png",
       title: { en: "AIM Qwen3.8 27B-N" },
       description: { en: "Qwen3.8-27B Vision via NInfer (sm_120a C++/CUDA) — NVFP4, 100K context, MTP speculation" },
       fullDescription:
@@ -1147,8 +1149,7 @@ OpenAI-compatible /v1/chat/completions, /v1/responses, /v1/models; Anthropic /v1
 **Resource Usage**
 One RTX 5090 (24 GB) exclusively; ~20 GiB VRAM for weights; ~4 GB pinned host state.`,
       upgradeDescription:
-        `26.9.2: Fixed the model-presence check ([-f] instead of [-s]) so the zero-byte .ok marker skips the download step on restart. Built for Olares 1.12.6.
-26.9.1: First release of AIM Qwen3.8 27B-N. NInfer (upstream, sm_120a, CUDA 13.1) + Qwen3.8-27B NVFP4 artifact; NVFP4 KV; 103,936-token context; MTP3 + proposal head; preserve-thinking. Built for Olares 1.12.6.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38ninfer",
