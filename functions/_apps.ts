@@ -524,7 +524,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.9.6",
+      version: "26.9.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings for Hermes" },
       description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
