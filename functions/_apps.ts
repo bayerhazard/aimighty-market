@@ -1368,8 +1368,8 @@ this version. Built for Olares 1.12.6.`,
   {
     metadata: {
       name: "aimterminal",
-      version: "26.9.1",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimterminal/main/icon.png",
+      version: "26.9.2",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-terminal/main/icon.png",
       title: { en: "AIM Terminal" },
       description: { en: "Open Terminal sandbox for Open WebUI — real shell, persistent file browser and Python (pandas, DuckDB, calamine) for analysing very large spreadsheets up to 100 MB and beyond" },
       fullDescription:
@@ -1401,7 +1401,7 @@ curl -X POST http://aimterminal:8000/execute \\
 CPU: 0.5-8 cores, RAM: 1-12 GiB (a 100 MB xlsx parses comfortably; DuckDB spills to disk beyond that), Disk: ~3 GB image, home directory on the Olares userspace volume
 No GPU required.`,
       upgradeDescription:
-        `v26.9.1: Initial release — Open Terminal 0.12.3 (the code-execution engine Open WebUI recommends over the legacy Jupyter/Pyodide interpreters) packaged for Olares. Gives Open WebUI a real shell, a persistent home directory and a file browser instead of text extraction. Preinstalled here: pandas, numpy, scipy, scikit-learn, matplotlib, plotly, openpyxl, csvkit plus duckdb, pyarrow, python-calamine, polars, xlsx2csv. Sized for spreadsheets up to 100 MB (12 GiB memory, 8 CPU). Built for Olares 1.12.6.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimterminal",
