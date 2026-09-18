@@ -83,7 +83,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.8.31",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -110,8 +110,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `26.8.31: Fix v3 install lint — Resource-Envelope (requiredCpu/limitedCpu/requiredMemory/limitedMemory/requiredDisk) wiederhergestellt (26.8.30-Install scheiterte am app-service lint).
-26.8.30: Initial Release for Olares One`,
+        `Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
