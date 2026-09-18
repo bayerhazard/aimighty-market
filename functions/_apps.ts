@@ -244,7 +244,7 @@ Disk: 10 GB`,
   {
     metadata: {
       name: "aimvoxtral4bvllm",
-      version: "26.08.4",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-4b/main/icon.png",
       title: { en: "AIM Voxtral 4B TTS" },
       description: { en: "Voxtral 4B TTS via vLLM-Omni — 20 voices, 10 languages, 24 kHz, OpenAI-compatible API" },
@@ -275,8 +275,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Model weights are CC-BY-NC-4.0 (non-commercial use only).`,
       upgradeDescription:
-        `v26.08.1: Unified naming — title "AIM Voxtral 4B TTS" (HQ/engine removed), English descriptions. Built for Olares 1.12.6.
-v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, removed API URL line. v1.3.0: VRAM co-residency fix — cap engine at GPU_MEMORY_UTILIZATION=0.45 + --kv-cache-memory-bytes 1GiB (was default 0.9, ~19.3 GiB, starving co-resident apps on the 24 GB worker GPU). TTS now ~11 GiB. v1.0.4: Upgraded vLLM-Omni image to v0.24.0 (stable, latest) — Voxtral serving fixes + engine improvements. v1.0.3: Fixed deployment title to 'Voxtral 4B HQ'. v1.0.2: Category update — moved to Audio. v1.0.1: Fixed OlaresManifest schema (appid, type, entrances), added openMethod: window. v1.0.0: Initial release — vLLM-Omni with optimized KV-Cache (1 GiB), 10.9 GB VRAM, Web Dashboard.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-4b",
@@ -303,7 +302,7 @@ v1.3.1: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), G
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.08.16",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
@@ -335,7 +334,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.08.16: Compact header — shield-only logo (36 px icon) next to the app name. Built for Olares 1.12.6. plus v26.08.15: AImighty logo in header (self-hosted inline SVG, gold shield + wordmark); file picker button and "no file" text now translatable (DE/EN); clone name example "Max". Built for Olares 1.12.6. plus v26.08.14: Full i18n — voice presets, demo text, error prefixes and aria-labels switch between DE/EN. Built for Olares 1.12.6. plus v26.08.13: OpenAI drop-in hardening — unknown voice names (alloy, echo, nova, ...) now map to the model's default voice instead of failing; other invalid free-form instructs are retried with the default voice. Built for Olares 1.12.6. plus v26.08.12: Clone registry — re-registering a clone now replaces its previous reference audio (no duplicate entries); delete removes all files of a clone. plus v26.08.11: Voice Design — custom voice dropdown with per-clone delete (×); file-based reference audio normalized to 16-bit PCM WAV at registration (fast inference, no slow decode fallback). plus v26.08.10: Initial release — OmniVoice 0.6B zero-shot TTS via native omnivoice runtime (FastAPI wrapper, digest-pinned diogod2r/omnivoice-fastapi). Named voice clones (voice: "clone:<name>") with persistent registry (POST/GET/DELETE /v1/audio/clones, WAV/MP3/M4A reference audio). Web dashboard: text synthesis, voice presets + free-form design, microphone recording, named clones. OpenAI-compatible API: /v1/audio/speech, /v1/audio/design, /v1/audio/clone, /v1/models, /v1/voices. WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility. ~4 GB VRAM. Built for Olares 1.12.6.`,
+        `Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
@@ -362,7 +361,7 @@ Disk: 20 GB (model cache)
   {
     metadata: {
       name: "aimvoxtral3asr",
-      version: "26.08.1",
+      version: "26.9.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-voxtral-realtime/main/icon.png",
       title: { en: "AIM Voxtral 3B ASR" },
       description: { en: "Voxtral Mini 3B ASR via vLLM — offline transcription, 13 languages, OpenAI-compatible API" },
@@ -384,8 +383,7 @@ Admin -> Settings -> Audio: STT engine OpenAI, base URL https://aimvoxtral3asr.<
 GPU: 1x NVIDIA (worker node), ~8 GB VRAM at MAX_MODEL_LEN=32768 / GPU_MEMORY_UTILIZATION=0.45. TTS (~11 GiB) + ASR (~8 GiB) ~ 19 GiB total, ~5 GiB headroom on 24 GB.
 RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
       upgradeDescription:
-        `v26.08.1: Unified naming — title "AIM Voxtral 3B ASR" (AIM prefix added), English descriptions. Built for Olares 1.12.6.
-v1.0.6: Dashboard restyled to the Rewind design (Hanseatenblau + gold accent), German default with DE/EN toggle, discrete model footer, language ISO-code select, removed API URL line. v1.0.5: Fix dashboard uploads >1 MB (nginx client_max_body_size 64m). v1.0.4: Added nginx web dashboard (record/upload -> transcription, health). Entrance -> port 8080 (dashboard); /v1/* stays on the native OpenAI-compatible API via nginx proxy (Open WebUI base URL unchanged). Renamed to AIM Voxtral 3B ASR. v1.0.3: Headroom balance: MAX_MODEL_LEN 16384 -> 8192 (~11 min audio), GPU_MEMORY_UTILIZATION 0.48 -> 0.44. Measured: ASR ~9 GiB + TTS ~11 GiB -> ~3.5 GiB free on the 24 GB worker GPU under load (16384/0.48 left only ~0.7 GiB). v1.0.2: KV fit fix: MAX_MODEL_LEN 32768 -> 16384 (KV needed 3.75 GiB > available at util 0.45), GPU_MEMORY_UTILIZATION 0.45 -> 0.48. v1.0.1: Removed --task transcribe (not supported on vLLM v0.26; task auto-detected for ASR models -> /v1/audio/transcriptions). v1.0.0: Initial release — Mistral Voxtral Mini 3B ASR served natively by vLLM v0.26.0-cu129. OpenAI-compatible POST /v1/audio/transcriptions out of the box (no bridge needed). Drop-in for Open WebUI STT (engine OpenAI). Tuned for co-residency with Voxtral 4B TTS-HQ on Olares One worker GPU (~8 GB VRAM).`,
+        `Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-voxtral-realtime",
@@ -747,7 +745,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.9.8",
+      version: "26.9.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -774,13 +772,7 @@ GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.9.8: transcribe-parse Memory-Limit 512Mi -> 4Gi (requests 128Mi -> 1Gi) — Fix OOMKilled/502 bei großen Audio-Uploads (z. B. 73-MiB-WebM/Opus: Upload-Body + ffmpeg-Parsing sprengte 512Mi). Built for Olares 1.12.6.
-v26.09.7: Rebuild von 26.09.6 — transcribe-parse-Sidecar-Tag explizit auf 26.09.5 gepinnt (AppVersion-Follow referenzierte nicht-existentes ghcr-Tag; raw_data-Freeze wegen identischer Version). Erzwingt Re-Fetch.
-v26.09.6: Engine-Wechsel auf vllm-omni v0.18.0 (Audio-Fork, Qwen3-ASR nativ, soundfile/librosa eingebacken; Lang-Audio ohne OOM im 6GiB-Slice). vllm 0.14.0 -> 0.18.0; funktional + performancetechnisch identisch (Kurz ~143ms, Lang ~356ms), A/B-verifiziert 2026-08-21. Bewusst nicht omni-v0.26 (Lang-Audio-Regression). Built for Olares 1.12.6.
-v26.08.1: Unified naming — title "AIM Qwen3 1.7B ASR", English descriptions. Built for Olares 1.12.6.
-1.2.1: Sprachauswahl sendet ISO-Codes (de/en/fr) — Fix für vLLM-Sprachvalidierung
-1.2.0: Dashboard im Rewind-Design mit Direktaufnahme (Mikrofon), Sprachumschalter DE/EN und dezenter Konfig-Anzeige
-1.1.0: Initial Release für Olares One`,
+        `Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
