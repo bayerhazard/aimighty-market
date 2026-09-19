@@ -151,7 +151,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
@@ -161,12 +161,12 @@ Disk: 50 GB for model cache`,
 **Features**
 - /v1/rerank endpoint (native vLLM, Jina/Cohere compatible)
 - Live monitoring dashboard on port 8080
-- vLLM v0.26.0-cu129 (pinned, immutable)
+- vLLM v0.29.0-cu129 (pinned, immutable)
 - Prometheus metrics via /metrics
 - 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GB GPU, 12 GB RAM`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
