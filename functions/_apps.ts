@@ -1060,7 +1060,7 @@ GPU: none — the language model is external`,
   {
     metadata: {
       name: "aimragflow",
-      version: "26.9.8",
+      version: "26.9.9",
       icon: "https://app.cdn.olares.com/appstore/ragflow/icon.png",
       title: { en: "AIM RAGFlow" },
       description: { en: "Self-hosted RAG engine (RAGFlow 0.27.2) optimized for Olares and the Hermes Agent — Agentic RAG, knowledge compilation, OpenAI-compatible API" },
@@ -1088,7 +1088,8 @@ CPU: 2-10 cores
 RAM: 8-12 GiB (plus Elasticsearch / MinIO / Valkey)
 Disk: appData volumes`,
       upgradeDescription:
-        `v26.9.1: Initial AIM release — RAGFlow 0.27.2 repackaged from the Olares chart 1.0.30 with Olares tuning baked in (MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale=3600, CPU 10 / RAM 12Gi). Infinity companion removed (DOC_ENGINE=elasticsearch). Built for Olares 1.12.6. Adds Agentic RAG (thinking modes) and Knowledge Compilation (Graph/Tree/Wiki/PageIndex).`,
+        `v26.9.9: PDF parser targets the new AIM PaddleOCR app — the PaddleOCR-VL base URL is hardcoded in the chart (http://sharedentrances-aimpaddleocr.aimpaddleocr-shared); the previous value pointed at the retired paddleocrv3 shared entrance and made every PDF parse fail with a DNS error (0 chunks).
+        v26.9.1: Initial AIM release — RAGFlow 0.27.2 repackaged from the Olares chart 1.0.30 with Olares tuning baked in (MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale=3600, CPU 10 / RAM 12Gi). Infinity companion removed (DOC_ENGINE=elasticsearch). Built for Olares 1.12.6. Adds Agentic RAG (thinking modes) and Knowledge Compilation (Graph/Tree/Wiki/PageIndex).`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://ragflow.io/",
