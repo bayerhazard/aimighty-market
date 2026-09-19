@@ -151,7 +151,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.5",
+      version: "26.9.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM with Qwen3 instruction template proxy (Jina/Cohere compatible, calibrated scores)" },
@@ -166,7 +166,7 @@ Disk: 50 GB for model cache`,
 - 3 containers: vLLM + dashboard + Qwen3 template proxy (stdlib, no extra GPU/RAM)
 - Optimized: 4 GiB HAMi memory slice, 12 GB RAM`,
       upgradeDescription:
-        `v26.9.5: Rerank-quality fix — a stdlib template-proxy sidecar wraps query/documents in the Qwen3-Reranker instruction prompt before vLLM /rerank. Without it vLLM 0.29 returned miscalibrated scores (0.30/0.12 instead of 0.9997/0.0001) and RAGFlow's hybrid blend demoted relevant chunks; with the proxy rerank improves ranking. nginx routes /v1/rerank to the proxy; /v1/models, /v1/score, /metrics stay on vLLM. v26.9.4: GPU resources hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 4 GiB. v26.9.3: HAMi memory-slice pinned to 4 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 4096m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
+        `v26.9.6: Same rerank-quality fix as v26.9.5, with the proxy container/port/nginx route hardcoded in the templates (dodges the Olares values-freeze that made the v26.9.5 render fail). v26.9.5: Rerank-quality fix — a stdlib template-proxy sidecar wraps query/documents in the Qwen3-Reranker instruction prompt before vLLM /rerank. Without it vLLM 0.29 returned miscalibrated scores (0.30/0.12 instead of 0.9997/0.0001) and RAGFlow's hybrid blend demoted relevant chunks; with the proxy rerank improves ranking. nginx routes /v1/rerank to the proxy; /v1/models, /v1/score, /metrics stay on vLLM. v26.9.4: GPU resources hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 4 GiB. v26.9.3: HAMi memory-slice pinned to 4 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 4096m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
