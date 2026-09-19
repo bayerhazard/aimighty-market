@@ -151,7 +151,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.3",
+      version: "26.9.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
@@ -166,7 +166,7 @@ Disk: 50 GB for model cache`,
 - 2 containers only (vLLM + dashboard); no proxy sidecar
 - Optimized: 4 GiB HAMi memory slice, 12 GB RAM`,
       upgradeDescription:
-        `v26.9.3: HAMi memory-slice pinned to 4 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 4096m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
+        `v26.9.4: GPU resources hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 4 GiB. v26.9.3: HAMi memory-slice pinned to 4 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 4096m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
