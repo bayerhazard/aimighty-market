@@ -6,7 +6,7 @@ metadata:
   description: Text Recognition & Doc Parsing Toolkit
   icon: https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png
   appid: aimpaddleocr
-  version: '26.9.1'
+  version: '26.9.2'
   title: AIM PaddleOCR
   categories:
     - AI
@@ -31,7 +31,7 @@ workloadReplicas:
   aimpaddleocr: 1
 spec:
   onlyAdmin: true
-  versionName: '26.9.1'
+  versionName: '26.9.2'
   fullDescription: |
     AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
 
@@ -45,7 +45,7 @@ spec:
     - Document OCR pipeline: layout detection, text recognition, Markdown-style block output.
     - Markdown-ignore labels for header/footer/number/footnote to keep parsed output clean.
     - Web frontend served over HTTPS; backend reachable in-cluster for other Olares apps (RAGFlow, MinerU and friends).
-    - Single-pod layout: paddlex engine + nginx frontend, one GPU slice (8 GiB).
+    - Single-pod layout: paddlex engine + nginx frontend, one GPU slice (6 GiB).
 
     **API**
     ```bash
@@ -54,8 +54,10 @@ spec:
     Reachable inside the cluster; expose via entrance or shared entrance for cross-app use.
 
     **Resource Usage**
-    CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 8 GiB VRAM (RTX 5090), Disk: ~3 GB image (models baked in).
+    CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-resident with OmniVoice TTS, Qwen3-ASR and the Qwen3 Reranker), Disk: ~3 GB image (models baked in).
 
+  upgradeDescription: |
+    v26.9.2: HAMi memory-slice reduced from 8 GiB to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Built for Olares 1.12.6.
   developer: Aimighty
   website: https://github.com/bayerhazard/aimpaddleocr
   sourceCode: https://github.com/bayerhazard/aimpaddleocr
@@ -74,8 +76,8 @@ spec:
       limitedMemory: 5Gi
       requiredDisk: 128Mi
       limitedDisk: 100Gi
-      requiredGPUMemory: 8Gi
-      limitedGPUMemory: 8Gi
+      requiredGPUMemory: 6Gi
+      limitedGPUMemory: 6Gi
 
   supportArch:
     - amd64

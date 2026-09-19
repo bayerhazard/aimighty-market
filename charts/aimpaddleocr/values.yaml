@@ -15,7 +15,7 @@ frontend:
       memory: 64Mi
 
 engine:
-  gpuMemory: 8Gi
+  gpuMemory: 6Gi
   resources:
     limits:
       cpu: "2"
