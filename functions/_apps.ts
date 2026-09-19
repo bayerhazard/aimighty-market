@@ -193,31 +193,30 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vino",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker-cpu/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker CPU" },
-      description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU or Intel iGPU accelerator — Jina/Cohere-compatible /v1/rerank" },
+      description: { en: "Qwen3-Reranker-0.6B via OpenVINO on CPU — Jina/Cohere-compatible /v1/rerank" },
       fullDescription:
-        `Qwen3-Reranker-0.6B + OpenVINO on CPU or Intel integrated GPU (iGPU accelerator), optimized for Olares One.
+        `Qwen3-Reranker-0.6B + OpenVINO on CPU, optimized for Olares One.
 
 **Model**
 tomaarsen/Qwen3-Reranker-0.6B-seq-cls — a 600-million-parameter cross-encoder sequence classification model, INT8 quantized via Optimum Intel for efficient inference.
 
 **Inference Engine**
-OpenVINO 2026.2.1 (pinned) with Hugging Face Transformers 4.55.4 and optimum-intel 2.0.0. Runs on the Intel Core Ultra 9 275HX CPU or the integrated GPU through the Level Zero driver ("intel" compute mode).
+OpenVINO 2026.4.0 (pinned) with Hugging Face Transformers 4.57.6 and optimum-intel 2.2.0. Runs on the Intel Core Ultra 9 275HX CPU.
 
 **Key Features**
 - Jina/Cohere-compatible API endpoints: /v1/rerank, /rerank, /v1/models, /health
 - Dynamic shapes, async endpoints, and multicore scaling using OpenVINO TBB
 - Model pre-converted and baked into the image (deterministic, pinned build)
 - Built-in HTML dashboard on root endpoint (/)
-- Compute modes: cpu (default) and intel (iGPU accelerator, ~2-2.5x faster)
 
 **Resource Usage**
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.2: Fix install blocked by gpu.intel.com/i915 (not allocatable on nodes). App runs on CPU. OpenVINO 2026.4.0 + optimum-intel 2.2.0 + transformers 4.57.6 (performance at parity). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
