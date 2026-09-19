@@ -1366,6 +1366,61 @@ this version. Built for Olares 1.12.6.`,
   // move: Ende
   {
     metadata: {
+      name: "aimpaddleocr",
+      version: "26.9.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png",
+      title: { en: "AIM PaddleOCR" },
+      description: { en: "PaddleOCR-VL 1.5 document OCR via PaddleX — layout analysis and text extraction to Markdown, on the local RTX 5090" },
+      fullDescription:
+        `AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
+
+**Model**
+PaddleOCR-VL-1.5-0.9B for document recognition and text extraction. Layout detection via PP-DocLayoutV3. Built for the RTX 5090 (Blackwell sm_120).
+
+**Inference Engine**
+PaddleX serving framework (\`paddlex --serve\`) with FastDeploy pipeline. Runs on the local NVIDIA GPU via HAMi; the engine container publishes the \`/layout-parsing\` endpoint on 8080.
+
+**Key Features**
+- Document OCR pipeline: layout detection, text recognition, Markdown-style block output.
+- Markdown-ignore labels for header/footer/number/footnote to keep parsed output clean.
+- Web frontend served over HTTPS; backend reachable in-cluster for other Olares apps (RAGFlow, MinerU and friends).
+- Single-pod layout: paddlex engine + nginx frontend, one GPU slice (8 GiB).
+
+**API**
+\`\`\`bash
+curl http://aimpaddleocr:8080/layout-parsing
+\`\`\`
+Reachable inside the cluster; expose via entrance or shared entrance for cross-app use.
+
+**Resource Usage**
+CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 8 GiB VRAM (RTX 5090), Disk: ~3 GB image (models baked in).`,
+      upgradeDescription:
+        `Initial Release for AImighty Olares One`,
+      categories: ["AI"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimpaddleocr",
+      sourceCode: "https://github.com/bayerhazard/aimpaddleocr",
+      supportArch: ["amd64"],
+      requiredCpu: "630m",
+      limitedCpu: "3",
+      requiredMemory: "5Gi",
+      limitedMemory: "5Gi",
+      requiredDisk: "10Gi",
+      requiredGpu: "1",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimpaddleocr", title: { en: "AIM PaddleOCR" }, port: 80, host: "aimpaddleocr", authLevel: "private", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "630m", memory: "5Gi", disk: "10Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "aimterminal",
       version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-terminal/main/icon.png",

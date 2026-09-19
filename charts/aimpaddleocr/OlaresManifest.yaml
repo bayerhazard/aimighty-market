@@ -1,0 +1,95 @@
+olaresManifest.version: '0.12.0'
+olaresManifest.type: app
+apiVersion: 'v3'
+metadata:
+  name: aimpaddleocr
+  description: Text Recognition & Doc Parsing Toolkit
+  icon: https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png
+  appid: aimpaddleocr
+  version: '26.9.1'
+  title: AIM PaddleOCR
+  categories:
+    - AI
+sharedEntrances:
+  - name: aimpaddleocr
+    title: AIM PaddleOCR API
+    host: sharedentrances-aimpaddleocr
+    icon: https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png
+    port: 0
+    invisible: true
+    authLevel: internal
+entrances:
+  - name: aimpaddleocr
+    port: 80
+    host: aimpaddleocr
+    title: AIM PaddleOCR
+    icon: https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png
+    authLevel: private
+    openMethod: window
+#   aimpaddleocr — single Pod: paddlex engine (8080) + nginx frontend (80)
+workloadReplicas:
+  aimpaddleocr: 1
+spec:
+  onlyAdmin: true
+  versionName: '26.9.1'
+  fullDescription: |
+    AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
+
+    **Model**
+    PaddleOCR-VL-1.5-0.9B for document recognition and text extraction. Layout detection via PP-DocLayoutV3. Built for the RTX 5090 (Blackwell sm_120).
+
+    **Inference Engine**
+    PaddleX serving framework (`paddlex --serve`) with FastDeploy pipeline. Runs on the local NVIDIA GPU via HAMi; the engine container publishes the `/layout-parsing` endpoint on 8080.
+
+    **Key Features**
+    - Document OCR pipeline: layout detection, text recognition, Markdown-style block output.
+    - Markdown-ignore labels for header/footer/number/footnote to keep parsed output clean.
+    - Web frontend served over HTTPS; backend reachable in-cluster for other Olares apps (RAGFlow, MinerU and friends).
+    - Single-pod layout: paddlex engine + nginx frontend, one GPU slice (8 GiB).
+
+    **API**
+    ```bash
+    curl http://aimpaddleocr:8080/layout-parsing
+    ```
+    Reachable inside the cluster; expose via entrance or shared entrance for cross-app use.
+
+    **Resource Usage**
+    CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 8 GiB VRAM (RTX 5090), Disk: ~3 GB image (models baked in).
+
+  developer: Aimighty
+  website: https://github.com/bayerhazard/aimpaddleocr
+  sourceCode: https://github.com/bayerhazard/aimpaddleocr
+  submitter: Aimighty
+  locale:
+    - en-US
+  license:
+    - text: Apache-2.0
+      url: https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE
+
+  accelerator:
+    - mode: nvidia
+      requiredCpu: "630m"
+      limitedCpu: "3"
+      requiredMemory: 5Gi
+      limitedMemory: 5Gi
+      requiredDisk: 128Mi
+      limitedDisk: 100Gi
+      requiredGPUMemory: 8Gi
+      limitedGPUMemory: 8Gi
+
+  supportArch:
+    - amd64
+
+permission:
+  appData: true
+  appCache: true
+  userData:
+    - Home
+options:
+  apiTimeout: 0
+  allowMultipleInstall: true
+  shared: true
+  dependencies:
+    - name: olares
+      type: system
+      version: '>=1.12.6-0'
