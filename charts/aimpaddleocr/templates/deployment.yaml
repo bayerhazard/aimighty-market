@@ -2,7 +2,7 @@
 {{- $isBlackwell := include "aimpaddleocr.isBlackwell" . -}}
 {{- $engineImage := include "aimpaddleocr.engineImage" . -}}
 {{- $isNvidia := eq $gpuType "nvidia" -}}
-{{- $gpuMemMi := include "aimpaddleocr.gpuMiB" (.Values.engine.gpuMemory | default "6Gi") -}}
+{{- $gpuMemMi := "6144" -}}
 ---
 apiVersion: apps/v1
 kind: Deployment
