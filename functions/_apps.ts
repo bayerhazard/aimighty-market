@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -216,7 +216,7 @@ OpenVINO 2026.4.0 (pinned) with Hugging Face Transformers 4.57.6 and optimum-int
 RAM: 16 GB, CPU: 24 cores
 Disk: 10 GB`,
       upgradeDescription:
-        `v26.9.2: Fix install blocked by gpu.intel.com/i915 (not allocatable on nodes). App runs on CPU. OpenVINO 2026.4.0 + optimum-intel 2.2.0 + transformers 4.57.6 (performance at parity). v26.9.1: Initial Release for AImighty Olares One`,
+        `v26.9.3: chart image -> OpenVINO 2026.4.0 stack. v26.9.2: Fix install blocked by gpu.intel.com/i915 (not allocatable on nodes). App runs on CPU. OpenVINO 2026.4.0 + optimum-intel 2.2.0 + transformers 4.57.6 (performance at parity). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker-cpu",
