@@ -410,7 +410,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.6",
+      version: "26.9.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
