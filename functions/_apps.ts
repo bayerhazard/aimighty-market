@@ -301,7 +301,7 @@ Disk: 20 GB (model cache)
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
@@ -333,7 +333,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.9.3: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 5 GiB. v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
@@ -744,7 +744,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.9.10",
+      version: "26.9.11",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -771,7 +771,7 @@ GPU: 1× NVIDIA (6 GiB HAMi memory slice, co-resident with OmniVoice TTS, Paddle
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.9.11: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 6 GiB. v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
@@ -1368,7 +1368,7 @@ this version. Built for Olares 1.12.6.`,
   {
     metadata: {
       name: "aimpaddleocr",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png",
       title: { en: "AIM PaddleOCR" },
       description: { en: "PaddleOCR-VL 1.5 document OCR via PaddleX — layout analysis and text extraction to Markdown, on the local RTX 5090" },
@@ -1396,7 +1396,7 @@ Reachable inside the cluster; expose via entrance or shared entrance for cross-a
 **Resource Usage**
 CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-resident), Disk: ~3 GB image (models baked in).`,
       upgradeDescription:
-        `v26.9.2: HAMi memory-slice reduced from 8 GiB to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.9.3: GPU memory slice hardcoded in the template (dodges the Olares values-freeze on upgrade) - 6 GiB. v26.9.2: HAMi memory-slice reduced from 8 GiB to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimpaddleocr",
