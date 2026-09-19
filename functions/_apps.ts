@@ -151,7 +151,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.2",
+      version: "26.9.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM — native /v1/rerank (Jina/Cohere compatible)" },
@@ -164,9 +164,9 @@ Disk: 50 GB for model cache`,
 - vLLM v0.29.0-cu129 (pinned, immutable)
 - Prometheus metrics via /metrics
 - 2 containers only (vLLM + dashboard); no proxy sidecar
-- Optimized: 4 GB GPU, 12 GB RAM`,
+- Optimized: 4 GiB HAMi memory slice, 12 GB RAM`,
       upgradeDescription:
-        `v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
+        `v26.9.3: HAMi memory-slice pinned to 4 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 4096m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. v26.9.2: vLLM v0.26.0 -> v0.29.0 (Model Runner V2 default, ~2-3x faster rerank, benchmarked). v26.9.1: Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-reranker",
@@ -301,7 +301,7 @@ Disk: 20 GB (model cache)
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
@@ -327,13 +327,13 @@ Native omnivoice runtime (PyTorch 2.8 cu128) behind an OpenAI-compatible FastAPI
 curl -X POST http://localhost:8880/v1/audio/speech -H "Content-Type: application/json" -d '{"model": "omnivoice", "input": "Hallo Welt!", "voice": "female"}' -o output.wav
 
 **Resource Usage**
-GPU: 1× NVIDIA (~4 GB VRAM)
+GPU: 1× NVIDIA (5 GiB HAMi memory slice, co-resident with Qwen3-ASR, PaddleOCR and the Qwen3 Reranker)
 RAM: 6-16 GB, CPU: 2-8 cores
 Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
@@ -744,7 +744,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.9.9",
+      version: "26.9.10",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -767,11 +767,11 @@ vllm-omni v0.18.0 (audio-spezialisierter vLLM-Fork, Qwen3-ASR nativ, Audio-Deps 
 curl -X POST http://localhost:8000/v1/audio/transcriptions -H "Content-Type: multipart/form-data" -F "file=@audio.wav" -F "model=qwen3-asr-1.7b" -F "language=German"
 
 **Resource Usage**
-GPU: 1× NVIDIA (~6-8 GB VRAM via memory slice, co-resident)
+GPU: 1× NVIDIA (6 GiB HAMi memory slice, co-resident with OmniVoice TTS, PaddleOCR and the Qwen3 Reranker)
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
@@ -1368,7 +1368,7 @@ this version. Built for Olares 1.12.6.`,
   {
     metadata: {
       name: "aimpaddleocr",
-      version: "26.9.1",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png",
       title: { en: "AIM PaddleOCR" },
       description: { en: "PaddleOCR-VL 1.5 document OCR via PaddleX — layout analysis and text extraction to Markdown, on the local RTX 5090" },
@@ -1385,7 +1385,7 @@ PaddleX serving framework (\`paddlex --serve\`) with FastDeploy pipeline. Runs o
 - Document OCR pipeline: layout detection, text recognition, Markdown-style block output.
 - Markdown-ignore labels for header/footer/number/footnote to keep parsed output clean.
 - Web frontend served over HTTPS; backend reachable in-cluster for other Olares apps (RAGFlow, MinerU and friends).
-- Single-pod layout: paddlex engine + nginx frontend, one GPU slice (8 GiB).
+- Single-pod layout: paddlex engine + nginx frontend, one GPU slice (6 GiB).
 
 **API**
 \`\`\`bash
@@ -1394,9 +1394,9 @@ curl http://aimpaddleocr:8080/layout-parsing
 Reachable inside the cluster; expose via entrance or shared entrance for cross-app use.
 
 **Resource Usage**
-CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 8 GiB VRAM (RTX 5090), Disk: ~3 GB image (models baked in).`,
+CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-resident), Disk: ~3 GB image (models baked in).`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.2: HAMi memory-slice reduced from 8 GiB to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimpaddleocr",
