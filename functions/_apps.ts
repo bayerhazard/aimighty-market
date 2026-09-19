@@ -522,6 +522,70 @@ CPU: 4-16 cores`,
   },
   {
     metadata: {
+      name: "aimqwen3635bft",
+      version: "26.9.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimqwen3635bft.png",
+      title: { en: "AIM Qwen3.6 35B A3B FT" },
+      description: { en: "Qwen3.6-35B-A3B MoE chat via FreeToken — ~3B active, 200K context, 2 parallel requests" },
+      fullDescription:
+        `Qwen3.6-35B-A3B MoE chat model served by FreeToken, the edge-native MoE engine — ~3B active parameters per token, 200K context, two concurrent requests.
+
+**Model**
+nvidia/Qwen3.6-35B-A3B-NVFP4 (NVFP4 experts, bf16 non-expert weights, 35B MoE, ~3B active per token). 262K native context, served at 200K. Text-only.
+
+**Inference Engine**
+FreeToken 0.1.3 (nightly, pinned) — edge-native MoE serving with bandwidth-adaptive CPU-GPU co-execution. CUDA 13.4, RTX 5090 (sm_120).
+MoE strategy: offload (expert banks in host RAM, LRU expert cache on GPU, PCIe streaming on misses).
+KV cache: bf16 (unquantized), 200K tokens. Attention: Triton. PLE: pinned host memory.
+NOTE: FreeToken does not implement MTP / speculative decoding yet, so no speculative speedup.
+
+**Key Features**
+- 200K token context, 2 parallel requests
+- OpenAI-compatible API (chat completions, models, health)
+- Reasoning parser (Qwen3), tool-call parser (qwen3_coder)
+- 8800/10240 experts resident on GPU; the rest stream over PCIe
+- Special-token decode-state checkpointing for agentic context reuse
+
+**Performance (RTX 5090 Laptop, 24 GB)**
+- Single stream: ~148 tok/s
+- 2 parallel: ~112 tok/s each (~236 tok/s aggregate)
+- VRAM: ~23.6 GB / 24.5 GB; RAM: ~24 GB (expert banks)
+
+**API**
+OpenAI-compatible at port 1919: /v1/chat/completions, /v1/models, /health.
+Internal entrance; wire it into LiteLLM or the Olares Router.
+
+**Resource Usage**
+GPU: ~23.6 GB VRAM (RTX 5090, 24 GB)
+RAM: 24-40 GB
+Disk: ~25 GB (NVFP4 checkpoint)
+CPU: 4-16 cores`,
+      upgradeDescription: "v26.9.1: Initial release — Qwen3.6-35B-A3B NVFP4 on FreeToken with 200K context and 2 parallel requests. Built for Olares 1.12.6.",
+      categories: ["AI"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-freetoken",
+      sourceCode: "https://github.com/bayerhazard/aimighty-freetoken",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "5Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen3635bft", title: { en: "AIM Qwen3.6 35B A3B FT" }, port: 1919, host: "aimqwen3635bft", authLevel: "internal", invisible: true },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "24Gi", disk: "5Gi" } },
+    },
+  },
+  {
+    metadata: {
       name: "wings",
       version: "26.9.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
