@@ -409,7 +409,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.7",
+      version: "26.9.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -431,7 +431,7 @@ Space Invaders HTML: 118 t/s
 Creative Writing: 78 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.9.8: Shared-Model-Pfad auf /olares/share/ai/llm-model umgestellt — die neue Olares-ComfyUI-App beansprucht /olares/share/ai/model und verschiebt dessen Inhalt; dieser Fix schützt die LLM-Modelle. Built for Olares 1.12.6.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
@@ -458,7 +458,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.9.7",
+      version: "26.9.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimqwen3635bllama.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -496,7 +496,7 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "Initial Release for AImighty Olares One",
+      upgradeDescription: "v26.9.8: Shared-Model-Pfad auf /olares/share/ai/llm-model umgestellt — die neue Olares-ComfyUI-App beansprucht /olares/share/ai/model und verschiebt dessen Inhalt; dieser Fix schützt die LLM-Modelle. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
