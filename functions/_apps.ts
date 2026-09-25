@@ -409,7 +409,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.8",
+      version: "26.9.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -417,9 +417,9 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
         `AImighty flagship stack for Qwen3.8-27B, the latest dense hybrid-attention VL model, optimized for coding, vision and long-horizon agentic workflows on Olares One.
 
 Model:
-- unsloth/Qwen3.8-27B-GGUF (UD-Q4_K_XL, native Gated DeltaNet + Gated Attention, MTP)
-- Vision: mmproj-F16.gguf on GPU
-- 200K token context Turbo4 (4-bit Walsh-Hadamard rotated)
+- 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (RVN: ARA + Heretic abliteration, Q4_K_M, native MTP head)
+- Vision: mmproj-Q8_0.gguf on GPU
+- 125K token context Turbo4 (4-bit Walsh-Hadamard rotated)
 
 Inference Engine:
 - buun-llama-cpp 117300f7 (Vision+DFlash fixes, Turbo/FA tuning; CUDA 13.1 sm_120 custom build)
