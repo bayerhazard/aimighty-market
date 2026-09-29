@@ -409,7 +409,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.12",
+      version: "26.9.13",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama" },
@@ -424,7 +424,7 @@ Model:
 Inference Engine:
 - buun-llama-cpp 03e5ad6c (Blackwell CUDA tiles, resume platform, MoE/VBR series; CUDA 13.1 sm_120 custom build)
 - DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
-- Warm-restart resume: conversation KV is saved at shutdown and restored at startup (--resume)
+- Warm-restart resume (--resume, slot-only via --resume-no-host-cache): the conversation KV state is restored at startup (~1 s for 48K, 7 s for 96K) - no re-prefill after restarts; the store keeps the slot state only, so it grows slowly on shared storage
 - Parallel slots: 1, Batch: 2048/512, Reasoning: medium effort, KV-cache reuse
 
 Performance:
