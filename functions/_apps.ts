@@ -459,7 +459,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.9.8",
+      version: "26.9.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimqwen3635bllama.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -472,16 +472,17 @@ Built-in MTP Speculative Decoding + native Vision via mmproj-gpu-swap.
 200K token context. Reasoning ON.
 
 **Inference Engine**
-buun-llama-cpp commit 39d97a8 (spiritbuun master, Aug 18, 2026) — ships inside the unified app image.
+buun-llama-cpp commit 03e5ad6c (spiritbuun master, Sep 28, 2026) — same unified app image as AIM Qwen3.8 27B.
 Compiled with CUDA 13.1 + OpenSSL for RTX 5090 (sm_120).
-VBR KV-Cache (variable bit-rate, both K/V sides: starts at f16, degrades per-layer only under VRAM pressure, floor turbo1_tcq).
-MTP with 3 speculative tokens.
+VBR KV-Cache (variable bit-rate, both K/V sides: starts at f16, degrades per-layer only under VRAM pressure, floor turbo2_tcq pinned via --vbr-floor t2).
+Warm-restart resume (--resume): the conversation KV state is persisted and restored (96K context back in ~7 s; the first request after a restart serves in ~1 s instead of ~35 s) and survives stop/resume and release restarts.
+MTP with 4 speculative tokens.
 --reasoning-preserve: thinking traces from previous turns are kept (Qwen3.6 preserve_thinking).
 --mmproj-gpu-swap: mmproj on CPU while idle, swaps to GPU on vision request (~555ms).
 Sampling: temp=0.6, top-p=0.95, top-k=20. Batch-size 2048.
 
 **Performance (RTX 5090 Blackwell)**
-- Text Generation: ~275 tok/s (88.5% MTP acceptance)
+- Text Generation: ~268 tok/s (MTP n-max 4)
 - Tool-Calling: reliable from max_tokens=256
 - Vision: ~555ms swap overhead, correct image analysis
 - VRAM: 19.9 GB / 24.5 GB (81%)
