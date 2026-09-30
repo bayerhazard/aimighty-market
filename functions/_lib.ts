@@ -348,7 +348,11 @@ export function getApplicationDetail(appName: string) {
 }
 
 // v2 taxonomy — categories/nav/pages/tags/topic_lists derived from the catalog.
-const LANG = ["de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "ja-JP", "zh-CN"];
+const LANG_NAMES: Record<string, string> = {
+  "de-DE": "Deutsch", "en-US": "English", "es-ES": "Español", "fr-FR": "Français",
+  "it-IT": "Italiano", "ja-JP": "日本語", "zh-CN": "简体中文",
+};
+const LANG = ["en-US", "zh-CN", "de-DE", "es-ES", "it-IT", "fr-FR", "ja-JP"];
 function i18nAll(s: string): Record<string, string> {
   const o: Record<string, string> = {};
   for (const l of LANG) o[l] = s;
@@ -401,8 +405,8 @@ export function getTaxonomy() {
       source: getSourceInfo(),
       languages: LANG.map((code, i) => ({
         code,
-        display_name: i18nAll(code),
-        sort: i,
+        display_name: LANG_NAMES[code] ?? code,
+        sort: i + 1,
         enabled: true,
       })),
       categories,
