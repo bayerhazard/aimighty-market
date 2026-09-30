@@ -15,9 +15,10 @@ export async function onRequestGet(context: { request: Request; params: { app: s
         headers: { "Content-Type": "application/json" },
       });
     }
-    return new Response(b64, {
+    const binary = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+    return new Response(binary, {
       headers: {
-        "Content-Type": "application/octet-stream",
+        "Content-Type": "application/gzip",
         "Content-Disposition": `attachment; filename="${fileName ?? APP}.tgz"`,
         "Access-Control-Allow-Origin": "*",
       },
