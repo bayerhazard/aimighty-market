@@ -259,3 +259,186 @@ export function getLatest(): string[] {
 export function getHash(): string {
   return computeHash();
 };
+
+// ——— v2 source API (Olares >= 1.12.7) ————————————————————————————————
+// The 1.12.7 syncer probes <base>/api/v2/catalog, then pulls /api/v2/taxonomy,
+// /api/v2/applications and the ranking step. schema_version/source_id are
+// validated against the local source binding, so they must match this source.
+export const SOURCE_ID = "market.AImighty";
+export const SOURCE_DISPLAY = "AImighty";
+export const SCHEMA_VERSION = "v2";
+
+// Deterministic per-app modify time (epoch ms). Derived from the version so a
+// version/chart bump advances it and the syncer re-fetches that app.
+function appModifyTime(name: string, version: string): number {
+  const v = Number.parseInt(md5(`${name}:${version}`).slice(0, 8), 16);
+  // Anchor 2026-01-01 (ms) + up to ~68 days spread so values stay in a sane
+  // epoch-ms range while remaining deterministic per name:version.
+  return 1767225600000 + (v % 5806080000);
+}
+
+function maxModifyTime(items: { last_modify_time: number }[]): number {
+  return items.reduce((m, i) => Math.max(m, i.last_modify_time), 0);
+}
+
+// Source block mirrors market.olares' taxonomy.source.
+export function getSourceInfo(): Record<string, unknown> {
+  const t = {
+    "de-DE": "AImighty", "en-US": "AImighty", "es-ES": "AImighty", "fr-FR": "AImighty",
+    "it-IT": "AImighty", "ja-JP": "AImighty", "zh-CN": "AImighty",
+  };
+  return {
+    source_id: SOURCE_ID,
+    short_label: SOURCE_DISPLAY,
+    display_name: t,
+    icon: "",
+    is_official: false,
+  };
+}
+
+// v2 catalog envelope — the probe reads the two *_last_modify_time fields.
+export function getCatalog() {
+  const taxTime = appModifyTime("__taxonomy__", "v2");
+  const appsTime = getCatalogueMax();
+  return {
+    code: 0,
+    msg: "success",
+    data: {
+      schema_version: SCHEMA_VERSION,
+      source_id: SOURCE_ID,
+      taxonomy_last_modify_time: taxTime,
+      apps_last_modify_time: appsTime,
+      apps_filter_digest: md5(apps.map((a) => appID(a.metadata.name)).sort().join(",")),
+    },
+  };
+}
+
+// Per-app list entries (summary shape the v2 applications route returns).
+export function getCatalogueItems() {
+  return apps.map((a) => {
+    const m = a.metadata;
+    const id = appID(m.name);
+    return {
+      app_id: id,
+      app_labels: [],
+      categories: m.categories ?? [],
+      categories_v2: m.categories ?? [],
+      cfg_type: a.spec.type,
+      featured_image: "",
+      icon: m.icon,
+      last_modify_time: appModifyTime(m.name, m.version),
+      name: m.name,
+      olares_version_constraint: ">=1.12.6-0",
+      tags: [],
+      title: toString(m.title),
+      updated_at: appModifyTime(m.name, m.version),
+      version: m.version,
+    };
+  });
+}
+
+export function getCatalogueMax(): number {
+  return maxModifyTime(getCatalogueItems());
+}
+
+export function getApplicationDetail(appName: string) {
+  const a = apps.find((x) => x.metadata.name === appName);
+  if (!a) return undefined;
+  return buildDetail(a, appID(a.metadata.name));
+}
+
+// v2 taxonomy — categories/nav/pages/tags/topic_lists derived from the catalog.
+const LANG = ["de-DE", "en-US", "es-ES", "fr-FR", "it-IT", "ja-JP", "zh-CN"];
+function i18nAll(s: string): Record<string, string> {
+  const o: Record<string, string> = {};
+  for (const l of LANG) o[l] = s;
+  return o;
+}
+
+function collectCategories(): string[] {
+  const set = new Set<string>();
+  for (const a of apps) for (const c of a.metadata.categories ?? []) set.add(c);
+  return Array.from(set).sort();
+}
+
+export function getTaxonomy() {
+  const cats = collectCategories();
+  const categories = [
+    { id: "recommended", builtin: true, sort: 0, icon: "", title: i18nAll("Discover") },
+    ...cats.map((c, i) => ({
+      id: c.toLowerCase().replace(/\s+/g, "_"),
+      builtin: false,
+      sort: 10 + i * 10,
+      icon: "",
+      title: i18nAll(c),
+      description: "",
+    })),
+  ];
+  const pages = categories.map((c) => ({
+    category_id: c.id,
+    items: [{ id: "all", type: "all" }],
+  }));
+  const tags = cats.map((c, i) => ({
+    slug: c.toLowerCase().replace(/\s+/g, "_"),
+    sort: i,
+    icon: "",
+    title: i18nAll(c),
+  }));
+  const topic_lists = [
+    {
+      name: "discover",
+      type: "grid",
+      title: i18nAll("Discover"),
+      description: "",
+      topics: [],
+    },
+  ];
+  return {
+    code: 0,
+    msg: "success",
+    data: {
+      last_modify_time: appModifyTime("__taxonomy__", "v2"),
+      source: getSourceInfo(),
+      languages: LANG.map((code, i) => ({
+        code,
+        display_name: i18nAll(code),
+        sort: i,
+        enabled: true,
+      })),
+      categories,
+      nav: categories.map((c) => c.id),
+      tags,
+      pages,
+      topic_lists,
+      topics: [],
+      recommends: [],
+    },
+  };
+}
+
+// v2 applications envelope (paged list + removed tombstone list).
+export function getApplications(query: { page?: number; page_size?: number }) {
+  const items = getCatalogueItems();
+  const removed = REMOVED_APPS.map((r) => ({ ...r }));
+  return {
+    code: 0,
+    msg: "success",
+    data: {
+      has_more: false,
+      items,
+      max_last_modify_time: maxModifyTime(items),
+      removed,
+    },
+  };
+}
+
+// Apps intentionally removed from the catalog — the syncer purges these.
+const REMOVED_APPS: { app_id: string; name: string; removed_at: number; reason: string }[] = [
+  { app_id: appID("aimqwen38llmconsole"), name: "aimqwen38llmconsole", removed_at: getRemovedAt("aimqwen38llmconsole"), reason: "removed from repository" },
+  { app_id: appID("aimqwen38ninfer"), name: "aimqwen38ninfer", removed_at: getRemovedAt("aimqwen38ninfer"), reason: "removed from repository" },
+  { app_id: appID("aimqwen3827b"), name: "aimqwen3827b", removed_at: getRemovedAt("aimqwen3827b"), reason: "removed from repository" },
+];
+
+function getRemovedAt(name: string): number {
+  return 1786000000000;
+}
