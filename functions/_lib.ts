@@ -421,22 +421,31 @@ export function getTaxonomy() {
 }
 
 // v2 applications envelope (paged list + removed tombstone list).
+// max_last_modify_time must cover items AND tombstones, otherwise the syncer
+// refuses the page ("answered since=0 with content modified at X but declared
+// max_last_modify_time=Y").
 export function getApplications(query: { page?: number; page_size?: number }) {
   const items = getCatalogueItems();
   const removed = REMOVED_APPS.map((r) => ({ ...r }));
+  const maxTime = Math.max(
+    maxModifyTime(items),
+    removed.reduce((m, r) => Math.max(m, r.removed_at), 0),
+  );
   return {
     code: 0,
     msg: "success",
     data: {
       has_more: false,
       items,
-      max_last_modify_time: maxModifyTime(items),
+      max_last_modify_time: maxTime,
       removed,
     },
   };
 }
 
 // Apps intentionally removed from the catalog — the syncer purges these.
+// removed_at must not exceed the newest real app modify time (see above), so
+// derive it from a fixed, small epoch (2026-01-01) instead of a future one.
 const REMOVED_APPS: { app_id: string; name: string; removed_at: number; reason: string }[] = [
   { app_id: appID("aimqwen38llmconsole"), name: "aimqwen38llmconsole", removed_at: getRemovedAt("aimqwen38llmconsole"), reason: "removed from repository" },
   { app_id: appID("aimqwen38ninfer"), name: "aimqwen38ninfer", removed_at: getRemovedAt("aimqwen38ninfer"), reason: "removed from repository" },
@@ -444,5 +453,5 @@ const REMOVED_APPS: { app_id: string; name: string; removed_at: number; reason: 
 ];
 
 function getRemovedAt(name: string): number {
-  return 1786000000000;
+  return 1767225600000 + (Number.parseInt(md5(name).slice(0, 6), 16) % 580600000);
 }
