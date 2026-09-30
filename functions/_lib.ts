@@ -375,7 +375,7 @@ export function getTaxonomy() {
       sort: 10 + i * 10,
       icon: "",
       title: i18nAll(c),
-      description: "",
+      description: i18nAll(""),
     })),
   ];
   const pages = categories.map((c) => ({
