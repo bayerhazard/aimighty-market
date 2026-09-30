@@ -368,7 +368,7 @@ function collectCategories(): string[] {
 export function getTaxonomy() {
   const cats = collectCategories();
   const categories = [
-    { id: "recommended", builtin: true, sort: 0, icon: "", title: i18nAll("Discover") },
+    { id: "recommended", builtin: true, sort: 0, icon: "", title: i18nAll("Discover"), description: i18nAll("") },
     ...cats.map((c, i) => ({
       id: c.toLowerCase().replace(/\s+/g, "_"),
       builtin: false,
@@ -393,7 +393,7 @@ export function getTaxonomy() {
       name: "discover",
       type: "grid",
       title: i18nAll("Discover"),
-      description: "",
+      description: i18nAll(""),
       topics: [],
     },
   ];
