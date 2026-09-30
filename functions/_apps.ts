@@ -1546,6 +1546,59 @@ No GPU required.`,
       options: { resources: { cpu: "500m", memory: "1Gi", disk: "10Gi" } },
     },
   },
+  {
+    metadata: {
+      name: "aimqwen38llmconsole",
+      version: "26.9.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
+      title: { en: "AIM Qwen3.8 27B Console" },
+      description: { en: "Qwen3.8-27B (RVN uncensored) via llama.cpp + Model Console (llm-init)" },
+      fullDescription:
+        `AImighty Model-Console pilot for Qwen3.8-27B - the same tuned RVN stack as AIM Qwen3.8 27B, served with the Olares Model Console (llm-init) so Router can discover and manage it.
+
+**Model**
+- 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (RVN: ARA + Heretic abliteration, Q4_K_M, native MTP head)
+- Vision: mmproj-Q8_0.gguf from the shared HF cache
+- 150K token context (K q8_0, V turbo4 - 4-bit Walsh-Hadamard rotated)
+
+**Model Console**
+- beclab/llm-init v1.3.5: downloads the weights (main GGUF + mmproj + DFlash2 draft) into the shared appCommon HF cache, publishes the model card, serves the OpenAI API on port 8090 and proxies the engine on 8081.
+
+**Inference Engine**
+- buun-llama-cpp ab22bc53 (same image as AIM Qwen3.8 27B)
+- DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
+- Warm-restart resume (--resume), reasoning medium (8192 budget)
+
+**API**
+OpenAI-compatible on port 8090: /v1/chat/completions, /v1/models; /api/model-spec for Router discovery.
+
+**Resource Usage**
+~22 GiB VRAM (23Gi slice), 24-40 GiB RAM, ~19 GB model cache in the shared HF cache.`,
+      upgradeDescription:
+        `v26.9.1: first release - Model Console (llm-init v1.3.5) integration pilot for the RVN Qwen3.8-27B stack; same engine (ab22bc53) and flags as AIM Qwen3.8 27B. Built for Olares 1.12.7.`,
+      categories: ["AI", "Vision"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
+      sourceCode: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "24Gi",
+      requiredDisk: "25Gi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "40Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "llamacppclient", title: { en: "AIM Qwen3.8 27B Console" }, port: 8090, host: "download-svc", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "16", memory: "40Gi", disk: "50Gi" } },
+    },
+  },
 ];
 
 // redeploy timestamp: 1784998158
