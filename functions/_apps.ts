@@ -409,30 +409,33 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.14",
+      version: "26.9.15",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
-      description: { en: "Qwen3.8-27B Vision via buun-llama" },
+      description: { en: "Qwen3.8-27B Vision via buun-llama + Model Console (llm-init)" },
       fullDescription:
-        `AImighty flagship stack for Qwen3.8-27B, the latest dense hybrid-attention VL model, optimized for coding, vision and long-horizon agentic workflows on Olares One.
+        `AImighty flagship stack for Qwen3.8-27B, the dense hybrid-attention VL model, optimized for coding, vision and long-horizon agentic workflows on Olares One - now served through the Olares Model Console.
 
 Model:
 - 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (RVN: ARA + Heretic abliteration, Q4_K_M, native MTP head)
 - Vision: mmproj-Q8_0.gguf on GPU
 - 150K token context (K q8_0, V turbo4 - 4-bit Walsh-Hadamard rotated)
 
+Model Console:
+- beclab/llm-init v1.3.5 downloads the weights into the shared appCommon HF cache, publishes the model card on /api/model-spec, serves the console UI and the OpenAI-compatible API on port 8090, and reverse-proxies the engine on llamacpp:8081 - so Router can discover and manage the model.
+
 Inference Engine:
 - buun-llama-cpp ab22bc53 (llama.cpp upstream merge + fork sync: FWHT F16 CUDA for Turbo KV, RMS_NORM+SCALE fusion, argsort fix, AVX2 Q4_K/Q6_K; CUDA 13.1 sm_120 custom build)
 - DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
-- Warm-restart resume (--resume, slot-only via --resume-no-host-cache): the conversation KV state is restored at startup (~1 s for 48K, 7 s for 96K) - no re-prefill after restarts; the store keeps the slot state only, so it grows slowly on shared storage
-- Parallel slots: 1, Batch: 2048/512, Reasoning: medium effort, KV-cache reuse
+- Warm-restart resume (--resume, slot-only via --resume-no-host-cache)
+- Parallel slots: 1, Batch: 1024/256, Reasoning: medium effort, KV-cache reuse
 
 Performance:
-Space Invaders HTML: 118 t/s
-Creative Writing: 78 t/s
-OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
+Space Invaders HTML: 127 t/s
+Creative Writing: 82 t/s
+OpenAI-compatible: /v1/chat/completions, /v1/models, /health (port 8090)`,
       upgradeDescription:
-        `v26.9.8: Shared-Model-Pfad auf /olares/share/ai/llm-model umgestellt — die neue Olares-ComfyUI-App beansprucht /olares/share/ai/model und verschiebt dessen Inhalt; dieser Fix schützt die LLM-Modelle. Built for Olares 1.12.6.`,
+        `v26.9.15: Model Console rollout — same engine (buun-llama-cpp ab22bc53), same RVN weights, 150K context, DFlash2 (n=7) and warm-restart resume, now managed by the Olares Model Console (beclab/llm-init v1.3.5). llm-init downloads the GGUFs into the shared appCommon HF cache, publishes the model card and proxies the OpenAI API on port 8090 so Router can discover it. Entrance name/host unchanged, so existing URLs and custom routes stay valid. Built for Olares 1.12.7.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
@@ -449,7 +452,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimqwen38llama", title: { en: "AIM Qwen3.8 27B" }, port: 8000, host: "aimqwen38llama", authLevel: "internal", openMethod: "window" },
+        { name: "aimqwen38llama", title: { en: "AIM Qwen3.8 27B" }, port: 8090, host: "aimqwen38llama", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
