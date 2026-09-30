@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.3",
+      version: "26.9.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -702,7 +702,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "rewind",
-      version: "26.08.4",
+      version: "26.08.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/rewind/master/logo.png",
       title: { en: "Rewind" },
       description: { en: "Configuration-level backup & restore for Olares One" },
@@ -754,7 +754,7 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
   {
     metadata: {
       name: "aimqwen3ttsvllm",
-      version: "26.09.3",
+      version: "26.08.7",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3ttsvllm/main/icon.png",
       title: { en: "AIM Qwen3 TTS 1.7B" },
       description: { en: "Qwen3-TTS-12Hz-1.7B via vLLM-Omni — OpenAI-compatible" },
