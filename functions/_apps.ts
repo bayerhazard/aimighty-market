@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.2",
+      version: "26.9.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -61,7 +61,7 @@ CPU: 4-16 cores`,
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
       sourceCode: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
-      supportArch: ["amd64"],
+      supportArch: ["amd64", "arm64"],
       requiredCpu: "4",
       requiredMemory: "24Gi",
       requiredDisk: "50Gi",
