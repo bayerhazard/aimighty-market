@@ -771,7 +771,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.10.1",
+      version: "26.9.14",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
@@ -798,7 +798,7 @@ GPU: 1× NVIDIA (6 GiB HAMi memory slice, co-resident with OmniVoice TTS and Com
 RAM: 8 GB, CPU: 2 cores
 Disk: 20 GB (model cache, HF_HOME)`,
       upgradeDescription:
-        `v26.10.1: Published as a shared model app (Olares Model Console / Router) - sharedEntrances + LLMGatewaySupported so the Olares Router auto-discovers Qwen3-ASR as an audio model; reachable by other apps via the shared gateway. Built for Olares 1.12.6.`,
+        `v26.9.14: HAMi memory slice back to the proven 6 GiB (nvidia.com/gpumem + CUDA cap 6144m) - 5 GiB OOMs at KV-cache init (only 0.01 GiB KV free). Stability-first worker-GPU layout: ASR 6 GiB + OmniVoice 5 GiB + ComfyUI 8 GiB = 19 GiB, ~4.9 GiB headroom (the Qwen3 Reranker is stopped to guarantee margin). Built for Olares 1.12.6. v26.9.12: HAMi memory slice trimmed 6 GiB -> 5 GiB (nvidia.com/gpumem + CUDA cap 5120m) so Qwen3-ASR fits on the olares-worker RTX 5090 with >=1.9 GiB free after OmniVoice TTS, the Qwen3 Reranker and ComfyUI - stability-first headroom. Built for Olares 1.12.6. v26.9.11: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 6 GiB. v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
