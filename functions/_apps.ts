@@ -579,13 +579,19 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.9.10",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings" },
-      description: { en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron" },
-      upgradeDescription: "v26.9.10: Chart/manifest fix — the v3 validator no longer accepts the metadata duplicates (fullDescription, upgradeDescription, developer, website, sourceCode, locale, supportArch); they now live under spec only, so the chart passes validation again. No functional change. Built for Olares 1.12.6. v26.9.9: Renamed to “Wings” (was “Wings for Hermes”) and moved to the Utilities category. The iOS home-screen icon now renders: the old PNG had transparent rounded corners, which iOS paints black, and was declared at the wrong size — the icon is now an opaque, full-bleed tile at 180/167/152/120, plus an opaque 512 for the manifest. Built for Olares 1.12.6. v26.9.8: Plugin toolsets are now wired into the platform toolset lists at startup, so tools from an enabled plugin (ragflow-kb, opendesign, ...) reach CLI and WebUI sessions without a manual 'hermes tools enable'. Built for Olares 1.12.6. v26.9.6: Chat titles now line up with their project folder name, and nothing in the folder tree is bold any more — folder names and chat titles share one weight, with the active row marked by colour and wash. Built for Olares 1.12.6. v26.9.5: Sidebar project folders follow the Beacon navigation language — one 40pt row each with a leading icon, a muted session count and a gold active state, opened by a single tap (iOS never fired the old double-click). Phones get the sidebar tone on the nav bar and the input field, and the chat empty state shows the Wings shield beside the wordmark. Built for Olares 1.12.6. v26.9.4: Mobile-native PWA for the iPhone — a slim nav bar (menu, centred title, new chat), edge-to-edge safe-area handling for Dynamic Island and home indicator, a composer with the context ring inside the model pill, and 44pt touch targets. Adds finger-following edge swipe, swipe-to-close, long-press message actions and iOS launch images. Built for Olares 1.12.6. v26.9.3: Dark-mode surfaces rebalanced — the sidebar now carries the lighter Hanseatenblau (former input-field tone) while the entire right side, including the composer field, sits on one uniform dark; the new-chat plus moved to the footer module row as its leftmost icon. Built for Olares 1.12.6. v26.9.2: Relay design port for Basic mode — AImighty wordmark header, 220px sidebar, Relay color tokens (light and dark), search and module-icon footer rows; the sidebar gauge pill dissolves into the composer as a centered status cluster (context ring, model chip, token readout) with new-chat on the action side. Built for Olares 1.12.6. v26.9.1: Upstream-sync round 4 (anchor merge to hermes-webui exp-v0.52.264) — structural maintenance release, no functional change: the voice backend moved to api/wings_voice.py and Wings-only CSS to static/wings.css so future upstream merges stay mechanical; repo hygiene (node_modules and orphaned root JS removed from Git). Built for Olares 1.12.6. v26.08.13: TTS voice pin — the deployment now pins the TTS voice via HERMES_WEBUI_TTS_VOICE (default 'clone:new', the registered OmniVoice voice clone), so Wings speaks with the intended cloned voice instead of the OpenAI default 'alloy'. Built for Olares 1.12.6. v26.08.12: Server-STT fix — the dictation endpoint now pins the OpenAI-compatible STT model via HERMES_WEBUI_STT_MODEL (default 'stt', the LiteLLM gateway ASR model), so mic dictation works against the local qwen3-asr backend instead of the default whisper-1 (which the gateway key rejects). Built for Olares 1.12.6. v26.08.11: Chart-Fix (upgradeDescription-Quote) — Funktionsumfang identisch zu v26.08.9/v26.08.10 (Upstream-Sync Runde 3 + Agent 0.20.5). Built for Olares 1.12.6. v26.08.10: Market-Sync-Rekick — identischer Funktionsumfang wie 26.08.9; Versionssprung zur Aufloesung eines Hash-Deadlocks im Market-Backend. Built for Olares 1.12.6. v26.08.9: Upstream-Sync Runde 3 (hermes-webui bis 24.08.) — Security: Approval-request_id-Matching (#7093), kein Double-Respond nach end_headers, OS-Drop-Snapshot (#7142). Kernfixes: User-Timestamps bleiben erhalten (#6935), SSE Last-Event-ID-Resumption (#6886), Cross-Session-Render-Leak (#6502), Phantom-Compression-Barrier (#6572), Theme-Boot-Fabrication (#6808), Settings-Autosave-Isolation (#6666/#6856), SILENT-Control-Turns (#7018), Titel-Sync zu state.db (#6892/#6964), Scroll-Bounce-Fade (#6257), Worklog-Leerframe (#6473). Agent-Image auf v2026.8.19 (=0.20.5). Built for Olares 1.12.6. v26.08.8: AImighty-Designguide umgesetzt — Theme “AImighty” entfernt (identisch zu Dunkel, als `.dark` zusammengefuehrt), Ordner-Drag&Drop-Reihenfolge (persistiert, Unassigned oben), Ordner-Doppelklick-Seed einmalig, Sessions im Ordner 4px eingerueckt, Mikro-Status 12px ausgerichtet, Favicon hart erneuert, Startbildschirm-Logo als Wortmarke (Gold/Blau, je Grund getauscht). Built for Olares 1.12.6. v26.08.7: Sidebar-Ordner + Sprachmodus-Fixes — Ordner je Projekt genau einmal (korrigiert), Pfeile/Farbpunkte entfernt (nur Ordnername, Doppelklick klappt aus/ein), Farben getauscht (Ordner weiss/Sessions blaeulich), Sessions eingerueckt, Standard alles eingeklappt ausser Unassigned (oben, offen). Zuhör-Animation in Akzentfarbe, Denk-Animation 180° gedreht und halbiert. Built for Olares 1.12.6. v26.08.6: Session-Verwaltung + UI-Fixes — Drag&Drop-Umsortierung (persistiert), Ordner-Hierarchie in der Sidebar, 'Auswählen' ins Kontextmenü, Synthwave-Denk-Animation, korrigiertes App-Favicon, Sidebar-Breite 270px, Lösch-Dialog-Dunkelmodus-Fix, doppeltes Plus entfernt. Built for Olares 1.12.6. v26.08.5: Designguide-Konformitaet — Hanseatenblau/Gold-Palette, keine dekorativen Schatten/Verlaeufe, Zustandsfarben als Tokens, konformes App-Icon. Built for Olares 1.12.6. v26.08.3: Conversational voice — Streaming-TTS (Satz-für-Satz, progressives Playback) + Barge-in-Unterbrechungserkennung (Full-Duplex), TTS-Timeout konfigurierbar (HERMES_WEBUI_TTS_TIMEOUT), Agent-Source v2026.8.3. Built for Olares 1.12.6. v26.08.2: Server-STT fix — Diktat wird als 16-bit PCM WAV aufgenommen (Web Audio API statt MediaRecorder/WebM), da das vLLM-ASR-Backend WebM/Opus nicht dekodieren kann. Built for Olares 1.12.6. v26.08.1: Unified naming — category AI, English descriptions. Built for Olares 1.12.6. v1.9.22: OpenAI-TTS SSRF-Allowlist (HERMES_WEBUI_TTS_TRUSTED_HOSTS) — erlaubt private Selbst-Host-Gateways wie internes LiteLLM. v1.9.21: OpenAI-TTS fix — Server fällt für den API-Key auf tts.openai.api_key aus der geteilten config.yaml zurück (bisher nur Env/.env -> 503). v1.9.20: Client-seitige VAD-Ruheerkennung (Auto-Stopp beim Diktieren via Server-STT); AImighty Navy-Dark-Theme. v1.9.19: Owner-Label-Fix.",
-      fullDescription:
-        `**Wings** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
+      description: {
+        en: "AI Agent Web UI for Hermes — chat, sessions, memory, skills, cron",
+        de: "KI-Agent-Web-UI für Hermes — Chat, Sessions, Memory, Skills, Cron",
+      },
+      upgradeDescription: {
+        en: "v26.10.1: Initial Release for AImighty Analyst",
+        de: "v26.10.1: Initial Release für AImighty Analyst",
+      },
+      fullDescription: {
+        en: `**Wings** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
 
 **Full CLI parity** — everything you can do from the Hermes terminal:
 - Chat with streaming, reasoning display, tool-call cards, approvals
@@ -604,7 +610,27 @@ Automatically finds your Hermes Agent home directory on startup — no manual co
 **Requirements**
 - Requires the Hermes Agent app (hermesagent) installed for the same Olares user.
   - Upstream project: https://github.com/nesquena/hermes-webui (MIT)`,
-      categories: ["Utilities"],
+        de: `**Wings** — KI-Agent-Web-UI mit hochwertigem Redesign, kuratierten Skins und automatischer Erkennung des Hermes-Agent-Home-Verzeichnisses.
+
+**Volle CLI-Parität** — alles, was du im Hermes-Terminal tun kannst:
+- Chat mit Streaming, Reasoning-Anzeige, Tool-Call-Karten, Freigaben
+- Sessions: erstellen, fortsetzen, durchsuchen, anpinnen, archivieren, Projekte, Export
+- Memory: MEMORY.md / USER.md direkt ansehen und bearbeiten
+- Skills: auflisten, Vorschau, erstellen, bearbeiten, löschen
+- Tasks: Cron-Jobs — ansehen, erstellen, bearbeiten, ausführen, pausieren/fortsetzen, Ausführungsverlauf
+- Profile, Workspaces mit Dateibrowser, Todos, Themes
+
+**Geteilter Zustand**
+Läuft auf demselben HERMES_HOME wie deine Hermes-Agent-App. Sessions, Memory, Auth und Konfiguration werden geteilt.
+
+**Automatische Erkennung**
+Findet beim Start automatisch dein Hermes-Agent-Home-Verzeichnis — keine manuelle Konfiguration nötig.
+
+**Voraussetzungen**
+- Erfordert die installierte Hermes-Agent-App (hermesagent) für denselben Olares-Nutzer.
+  - Upstream-Projekt: https://github.com/nesquena/hermes-webui (MIT)`,
+      },
+      categories: ["Applications"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/wings-for-hermes",
       sourceCode: "https://github.com/bayerhazard/wings-for-hermes",
@@ -799,18 +825,28 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "relay",
-      version: "26.9.185",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
-      description: { en: "Relay — the intelligent, local email client" },
-      fullDescription:
-        `- **AI Email Generation** – quickly draft precise emails and replies in your individual tone. It learns automatically to adapt generated email texts for different recipient groups (work, private) and even for individual recipients.
+      description: {
+        en: "Relay — the intelligent, local email client",
+        de: "Relay — der intelligente, lokale E-Mail-Client",
+      },
+      fullDescription: {
+        en: `- **AI Email Generation** – quickly draft precise emails and replies in your individual tone. It learns automatically to adapt generated email texts for different recipient groups (work, private) and even for individual recipients.
 - **Voice-to-Mail** – voice input that automatically becomes a finished email. It recognizes recipients and subject lines to generate complete templates.
 - **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
 - **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
-         upgradeDescription:
-                                               `v26.9.185: The web-app icon now shows correctly when Relay is added to the home screen on iOS. v26.9.184: The Tasks sidebar is slimmer — the redundant New and Refresh buttons are gone (you add tasks in the field at the top of the list, and the list refreshes itself every minute and when the window regains focus). Sorting moved into the list header as a single dropdown, and the "Show completed" toggle was removed (completed tasks live in the Completed view). v26.9.183: The task list now defaults to a dependency-aware work order — overdue and due dates first, then priority, then alphabetically, and a task never appears before a task it waits on. Priorities are unified to one canonical 1–5 scale (1 highest, 5 lowest, or none) across app, API and AI, and the sidebar has new sort options. v26.9.182: Maintenance pass that re-normalises existing task tags (case/synonyms); rare tags (fewer than five tasks) are removed and kept hidden for later promotion. v26.9.181: Tags are handled conservatively — a thematic tag only appears once it marks five tasks, earlier proposals stay hidden, and the origin label is now "Insilo". v26.9.180: The task list matches the mail inbox (flat rows, description preview, tag pills, tags sidebar); duplicate open tasks are merged. v26.9.179: Insilo idea memos are always processed into tasks immediately and no longer appear in the Meetings area. v26.9.169: Relay can adopt a mail account from Olares on first launch — if SMTP (and optionally IMAP, your name and company details) are stored under Olares -> Settings -> Advanced -> System environment variables, the setup wizard offers "Adopt automatically" or "Set up manually", and the same import is available under Settings -> Email accounts. Every value is optional; passwords never reach the browser. v26.9.168: Overdue tasks keep the standard card background — only the red bar on the left edge marks them, matching the urgent marking in the mail list. v26.9.167: Overdue tasks now use the same marking as an urgent mail — a red bar on the left edge with a subtle red wash — instead of a full red outline. v26.9.166: The Tasks area now sits in the same shell as Mail, Contacts, Calendar and Meetings — New/Refresh back under the sidebar header, the task counter in the same styled divider row, item titles at the same weight, recurrence and due markers as crisp inline icons instead of emoji, Escape closes the detail and sub-task dialogs from anywhere, and the label fields are fully localised. v26.9.165: Tasks sidebar fix — the New and Refresh buttons were restored after the previous release had shipped only their styles. v26.9.164: Tasks design is now fully consistent with the rest of Relay — same colours, fonts and spacing as the other modules, the sidebar has the same New/Refresh buttons and task-count line, click a task for a centred detail dialog like Contacts and Calendar, and the mobile view has the same header with a new-task button. Also fixes recurring dates: a timezone block in the calendar data no longer leaks into a task's recurrence, and a task entered with a date only (no time) stays all-day. v26.9.163: Tasks is now a full task manager. Quick Add captures a task in one natural-language line — dates ("Friday", "3.10."), times, "p1"–"p4" priority, "#Project", "@label" and "/section" are recognised live while typing (press Q to focus it). The sidebar offers focus views (Inbox, Today, Upcoming, All, Completed) and your projects, which map to the CalDAV calendars so everything stays usable in other calendar apps. Clicking a task opens an inline detail panel with notes, date and time, priority, recurrence, project, section and labels; tasks support sub-tasks and repeating (completing a recurring task creates its next occurrence). Completed tasks are hidden by default. All tasks sync over CalDAV. v26.9.162: the lower sidebar block now looks identical in every area — Mail, Contacts, Calendar, Meetings and Tasks all show the same module icons, the same search field size and the divider at the same height; in Contacts, Calendar, Meetings and Tasks the search field now matches Mail exactly. v26.9.161: the module bar at the bottom of every area now includes Mail (envelope) as its first entry, with one identical order everywhere — Mail, Contacts, Calendar, Meetings, Tasks — and the icons sit slightly closer together. v26.9.160: creating a task with a due date works again — the date picker sends a plain date and the server rejected it as an invalid timestamp, so the task was not saved. v26.9.159: the assistant can now draft completely new e-mails — ask it to write a mail and it navigates to Mail and opens the compose window with recipient, subject and dictated text pre-filled; sending stays manual. Previously the model could only reply to existing mails. v26.9.157: web frontend rebuilt without the stale build cache — the 26.9.156 image shipped an outdated web bundle (same features, now actually visible). v26.9.156: cross-module GUI consistency — dark theme on every module, context menus everywhere, in-app confirmation dialogs, assistant markdown, refresh buttons for calendar/contacts, Escape handling, unified date formats; meetings preview cleanup. v26.9.155: meetings can now be removed from Relay — the meeting view has a Delete button that takes the meeting out of the list (it stays in Insilo, and new scans will not bring it back). The "Refresh" button now spans the full sidebar width like the task module, and the small status lines under it were removed. v26.9.154: meeting minutes can now be sent by mail — the meeting view has an "Email minutes" button that opens the compose window with the subject and the full summary pre-filled, ready for a recipient. v26.9.153: the Meetings sidebar now matches the other modules exactly — same search field size and position, centered module icons, divider at the same height — and the "Scan now" button is renamed to "Refresh" and styled like the task sidebar buttons. v26.9.152: fix — AI requests now send the JSON response format in the OpenAI-standard object form, so JSON-mode calls (follow-up suggestions, summaries, assistant) work with LiteLLM gateways that reject the bare string form. v26.9.151: meeting follow-ups — the Meetings module now reads the agreed next steps from each summary and suggests concrete actions (tasks, calendar events) as chips below the meeting. Accepting a chip opens the assistant with a ready-to-confirm card; nothing is created until you confirm, and executed suggestions are not offered again for that meeting. v26.9.150: new Meetings area — Relay reads the finished meeting summaries that Insilo exports into the shared app folder and shows them as a fifth module: list, full-text search, participants, tags and the complete Markdown summary, with live updates as soon as Insilo writes a new export. The assistant can search meetings and navigate to the module. v26.9.149: AI-composed text in the compose window keeps its formatting again — greetings, paragraphs and the sign-off are cleanly separated by line breaks instead of collapsing into a single block. Suggested follow-ups (task, calendar event, reply) now remember which ones you already executed: once a suggestion is confirmed and carried out, it is no longer offered again for that mail — on this device, even across restarts. v26.9.148: the account name can now be renamed directly in Settings (a rename was previously shown but never saved), and the macOS web-app icon is fixed — a dedicated maskable icon is served and the service-worker cache was bumped so installed web apps pick up the fresh icon. v26.9.147: each account in the sidebar now shows a small unread badge next to its inbox. v26.9.146: first-time sync of a large mailbox is now dramatically faster (full history drains in hours, not days). Built for Olares 1.12.6.`,
-      categories: ["Utilities"],
+        de: `- **KI-E-Mail-Erstellung** – verfasse präzise E-Mails und Antworten in deinem eigenen Ton. Relay lernt automatisch und passt formulierte Texte an verschiedene Empfängergruppen (beruflich, privat) und sogar an einzelne Empfänger an.
+- **Voice-to-Mail** – Spracheingabe, die automatisch zu einer fertigen E-Mail wird. Empfänger und Betreff werden erkannt, um vollständige Vorlagen zu erstellen.
+- **KI-Überwachung** – intelligente Postfach-Analyse auf kritische Inhalte, Phishing-Warnungen, Prioritätseinstufung und automatische Zusammenfassungen.
+- **Lokal & sicher** – volle Datenhoheit; E-Mails und KI-Modelle bleiben ausschließlich lokal auf deinem Gerät.`,
+      },
+      upgradeDescription: {
+        en: "v26.10.1: Initial Release for AImighty",
+        de: "v26.10.1: Initial Release für AImighty",
+      },
+      categories: ["Applications"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
       sourceCode: "https://github.com/bayerhazard/relay-one",
@@ -1363,7 +1399,7 @@ CPU: 0,6-2 Kerne, RAM: 4 GiB, GPU: 6 GiB HAMi-Memory-Slice (RTX 5090, ko-residen
         en: "v26.10.1: Initial Release for AImighty",
         de: "v26.10.1: Initial Release für AImighty",
       },
-      categories: ["AI"],
+      categories: ["Utilities"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimpaddleocr",
       sourceCode: "https://github.com/bayerhazard/aimpaddleocr",
@@ -1456,7 +1492,7 @@ Keine GPU erforderlich.`,
         en: "v26.10.1: Initial Release for AImighty",
         de: "v26.10.1: Initial Release für AImighty",
       },
-      categories: ["AI"],
+      categories: ["Utilities"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimterminal",
       sourceCode: "https://github.com/bayerhazard/aimterminal",
