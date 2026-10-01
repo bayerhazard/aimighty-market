@@ -5,7 +5,7 @@ interface AppManifest {
     name: string; version: string; icon: string; title: Record<string, string>;
     description: Record<string, string>; categories: string[]; developer: string;
     website?: string; sourceCode?: string; license?: string; supportArch?: string[];
-    fullDescription?: string; upgradeDescription?: string; requiredCpu?: string;
+    fullDescription?: string | Record<string, string>; upgradeDescription?: string | Record<string, string>; requiredCpu?: string;
     requiredMemory?: string; requiredDisk?: string; requiredGpu?: string;
     limitedCpu?: string; limitedMemory?: string; apiTimeout?: number;
   };
@@ -1061,12 +1061,15 @@ GPU: none — the language model is external`,
   {
     metadata: {
       name: "aimragflow",
-      version: "26.9.10",
+      version: "26.10.1",
       icon: "https://app.cdn.olares.com/appstore/ragflow/icon.png",
       title: { en: "AIM RAGFlow" },
-      description: { en: "Self-hosted RAG engine (RAGFlow 0.27.2) optimized for Olares and the Hermes Agent — Agentic RAG, knowledge compilation, OpenAI-compatible API" },
-      fullDescription:
-        `AIM RAGFlow — upstream RAGFlow 0.27.2 repackaged for Olares and tuned for use from the Hermes Agent.
+      description: {
+        en: "Self-hosted RAG engine (RAGFlow 0.27.2) optimized for Olares and the Hermes Agent — Agentic RAG, knowledge compilation, OpenAI-compatible API",
+        de: "Selbst gehostete RAG-Engine (RAGFlow 0.27.2), optimiert für Olares und den Hermes Agent — Agentic RAG, Knowledge Compilation, OpenAI-kompatible API",
+      },
+      fullDescription: {
+        en: `AIM RAGFlow — upstream RAGFlow 0.27.2 repackaged for Olares and tuned for use from the Hermes Agent.
 
 **Model**
 Retrieval/knowledge backend. Parses documents, chunks, embeds and optionally compiles knowledge; answers with Agentic RAG.
@@ -1088,10 +1091,33 @@ Wire Hermes via the chat-assistant endpoint for Agentic RAG, or MCP retrieve for
 CPU: 2-10 cores
 RAM: 8-12 GiB (plus Elasticsearch / MinIO / Valkey)
 Disk: appData volumes`,
-      upgradeDescription:
-        `v26.9.10: Moved to the new Applications category. Metadata-only release — the app now appears under "Applications" in the AImighty market source instead of "AI"; the chart, image and runtime behaviour are unchanged.
-        v26.9.9: PDF parser targets the new AIM PaddleOCR app — the PaddleOCR-VL base URL is hardcoded in the chart (http://sharedentrances-aimpaddleocr.aimpaddleocr-shared); the previous value pointed at the retired paddleocrv3 shared entrance and made every PDF parse fail with a DNS error (0 chunks).
-        v26.9.1: Initial AIM release — RAGFlow 0.27.2 repackaged from the Olares chart 1.0.30 with Olares tuning baked in (MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale=3600, CPU 10 / RAM 12Gi). Infinity companion removed (DOC_ENGINE=elasticsearch). Built for Olares 1.12.6. Adds Agentic RAG (thinking modes) and Knowledge Compilation (Graph/Tree/Wiki/PageIndex).`,
+        de: `AIM RAGFlow — das Upstream-RAGFlow 0.27.2, für Olares neu gepackt und für den Einsatz mit dem Hermes Agent optimiert.
+
+**Modell**
+Wissens- und Retrieval-Backend. Verarbeitet Dokumente über Parsing, Chunking, Embedding und optional Knowledge Compilation; antwortet mit Agentic RAG.
+
+**Inferenz-Engine**
+RAGFlow 0.27.2 mit fest eingebauter Olares-Optimierung: MAX_CONCURRENT_CHUNK_BUILDERS=4, DOC_BULK_SIZE=50, EMBEDDING_BATCH_SIZE=16, close_stale(age=3600), CPU 10 / RAM 12Gi. Dokument-Engine Elasticsearch 8.11.3, Objektspeicher MinIO, Cache Valkey 8, Metadaten auf der gemeinsamen MySQL-Middleware.
+
+**Kernfunktionen**
+- Agentic RAG mit Denkmodi None / Low / Medium / High / Ultra (v0.27.0, in v0.27.2 für Geschwindigkeit und Benchmarks refaktoriert).
+- Knowledge Compilation: Wiki, Graph, Tree, PageIndex, Mind Map, Timeline, To Skills (ersetzt GraphRAG/RAPTOR).
+- OpenAI-kompatibler Chat-Endpunkt und ein RAGFlow-MCP-Server (Retrieve-Tool).
+- Modell-Verdrahtung zeigt auf die lokalen AIM-Apps (LiteLLM, Embedder, Reranker).
+
+**API**
+Web-Oberfläche am Entrance; API-Schlüssel für die OpenAI-kompatible und die MCP-Schnittstelle.
+Hermes über den Chat-Assistant-Endpunkt für Agentic RAG anbinden oder über MCP Retrieve für Chunks.
+
+**Ressourcenverbrauch**
+CPU: 2-10 Kerne
+RAM: 8-12 GiB (zusätzlich Elasticsearch / MinIO / Valkey)
+Disk: appData-Volumes`,
+      },
+      upgradeDescription: {
+        en: "v26.10.1: Initial Release for AImighty Analyst",
+        de: "v26.10.1: Initial Release für AImighty Analyst",
+      },
       categories: ["Applications"],
       developer: "Aimighty",
       website: "https://ragflow.io/",
