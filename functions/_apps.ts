@@ -22,7 +22,7 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.5",
+      version: "26.9.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
@@ -34,7 +34,7 @@ cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
 200K token context. Multimodal (text + image, no video).
 
 **Inference Engine**
-vLLM stable v0.30.0-cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
+vLLM stable v0.24.0-cu129 with triton_attn backend. CUDA 12.9 (RTX 5090 Blackwell).
 fp8 KV-Cache (all layers). CUDAGraphs + torch.compile. Model Runner V2.
 Native hybrid SWA: 5 full-attention layers for long context, 25 sliding-window layers bounded.
 GPU VRAM: ~22.5 GB.
