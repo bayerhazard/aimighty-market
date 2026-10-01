@@ -445,23 +445,27 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.28",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
-      description: { en: "Qwen3.8-27B Vision via buun-llama + Model Console (llm-init)" },
-      fullDescription:
-        `AImighty flagship stack for Qwen3.8-27B, the dense hybrid-attention VL model, optimized for coding, vision and long-horizon agentic workflows on Olares One - now served through the Olares Model Console.
+      description: {
+        en: "Qwen3.8-27B vision via buun-llama-cpp + Olares Model Console (llm-init) — DFlash2 speculation, 256K context (dynamic VBR KV), warm-restart resume",
+        de: "Qwen3.8-27B Vision via buun-llama-cpp + Olares Model Console (llm-init) — DFlash2-Spekulation, 256K-Kontext (dynamischer VBR-KV), Warm-Restart-Resume",
+      },
+      fullDescription: {
+        en: `AImighty flagship stack for Qwen3.8-27B, the dense hybrid-attention VL model, optimized for coding, vision and long-horizon agentic workflows on Olares One — served through the Olares Model Console.
 
 Model:
 - 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (RVN: ARA + Heretic abliteration, Q4_K_M, native MTP head)
 - Vision: mmproj-Q8_0.gguf on GPU
-- 150K token context (K q8_0, V turbo4 - 4-bit Walsh-Hadamard rotated)
+- 256K token context (dynamic VBR KV: f16 entry, turbo8 floor, quality-anchor cache)
 
 Model Console:
-- beclab/llm-init v1.3.5 downloads the weights into the shared appCommon HF cache, publishes the model card on /api/model-spec, serves the console UI and the OpenAI-compatible API on port 8090, and reverse-proxies the engine on llamacpp:8081 - so Router can discover and manage the model.
+- beclab/llm-init v1.3.5 downloads the weights into the shared appCommon HF cache, publishes the model card on /api/model-spec, serves the console UI and the OpenAI-compatible API on port 8090, and reverse-proxies the engine on llamacpp:8081 — so Router can discover and manage the model.
 
 Inference Engine:
 - buun-llama-cpp ab22bc53 (llama.cpp upstream merge + fork sync: FWHT F16 CUDA for Turbo KV, RMS_NORM+SCALE fusion, argsort fix, AVX2 Q4_K/Q6_K; CUDA 13.1 sm_120 custom build)
+- Dynamic VBR KV cache (f16 entry, turbo8 8.125 bpv floor, 1024 MiB quality anchor)
 - DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
 - Warm-restart resume (--resume, slot-only via --resume-no-host-cache)
 - Parallel slots: 1, Batch: 1024/256, Reasoning: medium effort, KV-cache reuse
@@ -470,8 +474,32 @@ Performance:
 Space Invaders HTML: 127 t/s
 Creative Writing: 82 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health (port 8090)`,
-      upgradeDescription:
-        `v26.9.28: VBR (variable-bit-rate KV) enabled - K/V use the dynamic VBR codec with a f16 entry tier and a turbo8 (8.125 bpv) floor; context raised 150K -> 256K. Measured on the 23.5 GiB slice: entry f16 + floor turbo8 + 256K + DFlash2 draft loads at ~19.3 GiB, draft acceptance 0.62. Built for Olares 1.12.7.`,
+        de: `AImighty-Flaggschiff-Stack für Qwen3.8-27B, das dichte Hybrid-Attention-VL-Modell, optimiert für Coding, Vision und langfristige Agenten-Workflows auf Olares One — bereitgestellt über die Olares Model Console.
+
+Modell:
+- 0bserverx/Qwen3.8-27B-Heretic-Abliterated-Uncensored (RVN: ARA + Heretic-Abliteration, Q4_K_M, nativer MTP-Head)
+- Vision: mmproj-Q8_0.gguf auf der GPU
+- 256K-Token-Kontext (dynamischer VBR-KV: f16-Entry, turbo8-Floor, Quality-Anchor-Cache)
+
+Model Console:
+- beclab/llm-init v1.3.5 lädt die Gewichte in den geteilten appCommon-HF-Cache, veröffentlicht die Modellkarte auf /api/model-spec, liefert die Console-UI und die OpenAI-kompatible API auf Port 8090 und proxyt die Engine auf llamacpp:8081 — so kann Router das Modell entdecken und verwalten.
+
+Inference-Engine:
+- buun-llama-cpp ab22bc53 (llama.cpp-Upstream-Merge + Fork-Sync: FWHT-F16-CUDA für Turbo-KV, RMS_NORM+SCALE-Fusion, argsort-Fix, AVX2 Q4_K/Q6_K; CUDA-13.1-sm_120-Custom-Build)
+- Dynamischer VBR-KV-Cache (f16-Entry, turbo8 8,125 bpv-Floor, 1024-MiB-Quality-Anchor)
+- DFlash2-Spekulationsdekodierung (draft-dflash, Q4_K_M-Draft, --spec-draft-n-max 7)
+- Warm-Restart-Resume (--resume, nur Slot via --resume-no-host-cache)
+- Parallel-Slots: 1, Batch: 1024/256, Reasoning: Medium-Effort, KV-Cache-Reuse
+
+Leistung:
+Space Invaders HTML: 127 t/s
+Creative Writing: 82 t/s
+OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health (Port 8090)`,
+      },
+      upgradeDescription: {
+        en: `v26.10.1 Initial Release for AImighty Expert`,
+        de: `v26.10.1 Initialer Release für den AImighty Experte`,
+      },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
