@@ -445,7 +445,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.9.27",
+      version: "26.9.28",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B Vision via buun-llama + Model Console (llm-init)" },
@@ -471,7 +471,7 @@ Space Invaders HTML: 127 t/s
 Creative Writing: 82 t/s
 OpenAI-compatible: /v1/chat/completions, /v1/models, /health (port 8090)`,
       upgradeDescription:
-        `v26.9.15: Model Console rollout — same engine (buun-llama-cpp ab22bc53), same RVN weights, 150K context, DFlash2 (n=7) and warm-restart resume, now managed by the Olares Model Console (beclab/llm-init v1.3.5). llm-init downloads the GGUFs into the shared appCommon HF cache, publishes the model card and proxies the OpenAI API on port 8090 so Router can discover it. Entrance name/host unchanged, so existing URLs and custom routes stay valid. Built for Olares 1.12.7.`,
+        `v26.9.28: VBR (variable-bit-rate KV) enabled - K/V use the dynamic VBR codec with a f16 entry tier and a turbo8 (8.125 bpv) floor; context raised 150K -> 256K. Measured on the 23.5 GiB slice: entry f16 + floor turbo8 + 256K + DFlash2 draft loads at ~19.3 GiB, draft acceptance 0.62. Built for Olares 1.12.7.`,
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen38llama",
