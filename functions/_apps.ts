@@ -23,7 +23,7 @@ export const apps: AppManifest[] = [
     metadata: {
       name: "aimllmgemma4vllm",
       version: "26.9.7",
-      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmgemma4vllm/main/icon.png",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimllmgemma4vllm.png",
       title: { en: "AIM Gemma 4 26B A4B" },
       description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
       fullDescription:
