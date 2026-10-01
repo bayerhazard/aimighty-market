@@ -22,12 +22,15 @@ export const apps: AppManifest[] = [
   {
     metadata: {
       name: "aimllmgemma4vllm",
-      version: "26.9.7",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimllmgemma4vllm.png",
       title: { en: "AIM Gemma 4 26B A4B" },
-      description: { en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision" },
-      fullDescription:
-        `Gemma 4 26B A4B — multimodal LLM (text + image) with QAT-AWQ-INT4 quantization on vLLM.
+      description: {
+        en: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K context, vision",
+        de: "Gemma 4 26B A4B multimodal via vLLM — QAT-AWQ INT4, 200K Kontext, Vision",
+      },
+      fullDescription: {
+        en: `Gemma 4 26B A4B — multimodal LLM (text + image) with QAT-AWQ-INT4 quantization on vLLM.
 
 **Model**
 cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
@@ -55,8 +58,41 @@ GPU: ~22.5 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 50 GB (model download ~16 GB + cache)
 CPU: 4-16 cores`,
-      upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        de: `Gemma 4 26B A4B — multimodales LLM (Text + Bild) mit QAT-AWQ-INT4-Quantisierung auf vLLM.
+
+**Modell**
+cyankiwi/gemma-4-26B-A4B-it-qat-AWQ-INT4 (QAT + AWQ INT4, ~16 GB).
+200K-Token-Kontext. Multimodal (Text + Bild, kein Video).
+
+**Inference-Engine**
+vLLM Stable v0.24.0-cu129 mit triton_attn-Backend. CUDA 12.9 (RTX 5090 Blackwell).
+fp8-KV-Cache (alle Layer). CUDAGraphs + torch.compile. Model Runner V2.
+Nativer hybrid-SWA: 5 Full-Attention-Layer für langen Kontext, 25 Sliding-Window-Layer begrenzt.
+GPU-VRAM: ~22,5 GB.
+
+**Leistung (RTX 5090 Blackwell)**
+- 200K-Token-Kontext
+- ~137 Tok/s Generierung
+- Needle-Haystack: 25/25 (100 %, inkl. 131K/190K)
+- Agentic-Tool-Calling: 9/9 (100 %)
+
+**API**
+OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health.
+Tool-Calling via --enable-auto-tool-choice + --tool-call-parser gemma4.
+Reasoning via --reasoning-parser gemma4 + --default-chat-template-kwargs enable_thinking.
+
+**Ressourcenverbrauch**
+GPU: ~22,5 GB VRAM (RTX 5090, 24 GB)
+RAM: 24–40 GB
+Disk: 50 GB (Modell-Download ~16 GB + Cache)
+CPU: 4–16 Kerne`,
+      },
+      upgradeDescription: {
+        en: `v26.10.1 Release for AImighty Assistent 1.1
+v26.9.1 Initial Release for AImighty Assistent`,
+        de: `v26.10.1 Release für den AImighty Assistenten 1.1
+v26.9.1 Initialer Release für den AImighty Assistenten`,
+      },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmgemma4vllm",
