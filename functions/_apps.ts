@@ -462,7 +462,7 @@ OpenAI-compatible: /v1/chat/completions, /v1/models, /health (port 8090)`,
   {
     metadata: {
       name: "aimqwen3635bllama",
-      version: "26.9.10",
+      version: "26.9.11",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimqwen3635bllama.png",
       title: { en: "AIM Qwen3.6 35B A3B" },
       description: { en: "Qwen3.6-35B-A3B MoE chat via llama.cpp — ~3B active, 200K context, MTP, vision" },
@@ -501,7 +501,8 @@ GPU: ~19.9 GB VRAM (RTX 5090, 24 GB)
 RAM: 24-40 GB
 Disk: 25 GB (model cache)
 CPU: 4-16 cores`,
-      upgradeDescription: "v26.9.8: Shared-Model-Pfad auf /olares/share/ai/llm-model umgestellt — die neue Olares-ComfyUI-App beansprucht /olares/share/ai/model und verschiebt dessen Inhalt; dieser Fix schützt die LLM-Modelle. Built for Olares 1.12.6.",
+      upgradeDescription: "v26.9.11: Rollback auf den bewaehrten v26.9.9-Stand (Custom-Chart, Single-Deployment) — Engine 03e5ad6c + Warm-Restart-Resume (--resume) + VBR-Floor t2, ohne Model-Console/llm-init. Built for Olares 1.12.6.",
+        upgradeDescription_old: "v26.9.8: Shared-Model-Pfad auf /olares/share/ai/llm-model umgestellt — die neue Olares-ComfyUI-App beansprucht /olares/share/ai/model und verschiebt dessen Inhalt; dieser Fix schützt die LLM-Modelle. Built for Olares 1.12.6.",
       categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-llmqwen3635ba3b",
