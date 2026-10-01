@@ -915,46 +915,6 @@ v0.1.101: long meetings get through.
   },
   {
     metadata: {
-      name: "opendesign",
-      version: "26.08.11",
-      icon: "https://raw.githubusercontent.com/bayerhazard/opendesign/master/icon.png",
-      title: { en: "Open Design" },
-      description: { en: "Open-source Claude Design alternative — local-first design studio" },
-      fullDescription:
-        `Open Design is the open-source alternative to Claude Design. It turns any
-coding agent (Claude Code, Codex, OpenCode, DeepSeek Harness, ...) into a
-design engine: prototypes, landing pages, dashboards, decks, images and
-video — as real files with HTML / PDF / PPTX / MP4 export.
-
-- Local-first design studio with brand-grade DESIGN.md design systems
-- BYOK at every layer: any OpenAI-compatible endpoint or CLI agent
-- HyperFrames HTML → MP4 motion graphics
-- Sandboxed iframe preview, live dashboards and artifacts`,
-      upgradeDescription:
-        "v26.08.11: Configurable origins — OD_PUBLIC_BASE_URL / OD_ALLOWED_ORIGINS from app env (defaults to primary entrance), so a custom route domain works. v26.08.10: Env-configurable LLM gateway — opencode base URL + API key from app env, no hardcoded credential. v26.08.1: Initial release. Built for Olares 1.12.6.",
-      categories: ["Utilities"],
-      developer: "nexu-io",
-      website: "https://open-design.ai",
-      sourceCode: "https://github.com/nexu-io/open-design",
-      supportArch: ["amd64"],
-      requiredCpu: "100m",
-      requiredMemory: "128Mi",
-      requiredDisk: "500Mi",
-      requiredGpu: "0",
-      limitedCpu: "2",
-      limitedMemory: "2Gi",
-      apiTimeout: 0,
-    },
-    spec: {
-      type: "app",
-      entrance: [{ name: "opendesign", title: { en: "Open Design" }, port: 80, host: "opendesign", authLevel: "internal", openMethod: "window" }],
-      permission: [],
-      middleware: [],
-      options: { resources: { cpu: "100m", memory: "128Mi", disk: "500Mi" } },
-    },
-  },
-  {
-    metadata: {
       name: "streetyeet",
       version: "26.08.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/streetyeet.png",
@@ -1346,12 +1306,15 @@ this version. Built for Olares 1.12.6.`,
   {
     metadata: {
       name: "aimpaddleocr",
-      version: "26.9.3",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png",
       title: { en: "AIM PaddleOCR" },
-      description: { en: "PaddleOCR-VL 1.5 document OCR via PaddleX — layout analysis and text extraction to Markdown, on the local RTX 5090" },
-      fullDescription:
-        `AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
+      description: {
+        en: "PaddleOCR-VL 1.5 document OCR via PaddleX — layout analysis and text extraction to Markdown, on the local RTX 5090",
+        de: "PaddleOCR-VL 1.5 Dokument-OCR über PaddleX — Layout-Analyse und Textextraktion nach Markdown, auf der lokalen RTX 5090",
+      },
+      fullDescription: {
+        en: `AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
 
 **Model**
 PaddleOCR-VL-1.5-0.9B for document recognition and text extraction. Layout detection via PP-DocLayoutV3. Built for the RTX 5090 (Blackwell sm_120).
@@ -1373,8 +1336,33 @@ Reachable inside the cluster; expose via entrance or shared entrance for cross-a
 
 **Resource Usage**
 CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-resident), Disk: ~3 GB image (models baked in).`,
-      upgradeDescription:
-        `v26.9.3: GPU memory slice hardcoded in the template (dodges the Olares values-freeze on upgrade) - 6 GiB. v26.9.2: HAMi memory-slice reduced from 8 GiB to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        de: `AIM PaddleOCR bündelt den PaddleOCR-VL-Dokument-OCR-Stack in einer einzigen Olares-App: das Modell PaddleOCR-VL-1.5 für das Dokumentverständnis, PP-DocLayoutV3 für die Layout-Analyse, bereitgestellt über PaddleX mit der Frontend-Oberfläche darüber.
+
+**Modell**
+PaddleOCR-VL-1.5-0.9B für Dokumenterkennung und Textextraktion. Layout-Erkennung über PP-DocLayoutV3. Gebaut für die RTX 5090 (Blackwell sm_120).
+
+**Inferenz-Engine**
+PaddleX-Serving-Framework (\`paddlex --serve\`) mit FastDeploy-Pipeline. Läuft über HAMi auf der lokalen NVIDIA-GPU; der Engine-Container veröffentlicht den \`/layout-parsing\`-Endpunkt auf 8080.
+
+**Kernfunktionen**
+- Dokument-OCR-Pipeline: Layout-Erkennung, Texterkennung, Ausgabe im Markdown-Stil.
+- Markdown-Ignore-Labels für Kopf-/Fußzeile, Nummer und Fußnote, damit die Ausgabe sauber bleibt.
+- Web-Frontend über HTTPS; Backend im Cluster erreichbar für andere Olares-Apps (RAGFlow, MinerU und ähnliche).
+- Ein-Pod-Layout: PaddleX-Engine + nginx-Frontend, ein GPU-Slice (6 GiB).
+
+**API**
+\`\`\`bash
+curl http://aimpaddleocr:8080/layout-parsing
+\`\`\`
+Im Cluster erreichbar; über Entrance oder Shared Entrance für die app-übergreifende Nutzung freigeben.
+
+**Ressourcenverbrauch**
+CPU: 0,6-2 Kerne, RAM: 4 GiB, GPU: 6 GiB HAMi-Memory-Slice (RTX 5090, ko-resident), Disk: ~3 GB Image (Modelle eingebaut).`,
+      },
+      upgradeDescription: {
+        en: "v26.10.1: Initial Release for AImighty",
+        de: "v26.10.1: Initial Release für AImighty",
+      },
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimpaddleocr",
@@ -1401,12 +1389,15 @@ CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-residen
   {
     metadata: {
       name: "aimterminal",
-      version: "26.9.2",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-terminal/main/icon.png",
       title: { en: "AIM Terminal" },
-      description: { en: "Open Terminal sandbox for Open WebUI — real shell, persistent file browser and Python (pandas, DuckDB, calamine) for analysing very large spreadsheets up to 100 MB and beyond" },
-      fullDescription:
-        `**Open Terminal 0.12.3** — the sandboxed shell and filesystem that Open WebUI connects to under *Admin → Integrations → Open Terminal*.
+      description: {
+        en: "Open Terminal sandbox for Open WebUI — real shell, persistent file browser and Python (pandas, DuckDB, calamine) for analysing very large spreadsheets up to 100 MB and beyond",
+        de: "Open-Terminal-Sandbox für Open WebUI — echte Shell, persistenter Dateibrowser und Python (pandas, DuckDB, calamine) zur Analyse sehr großer Tabellen bis 100 MB und darüber hinaus",
+      },
+      fullDescription: {
+        en: `**Open Terminal 0.12.3** — the sandboxed shell and filesystem that Open WebUI connects to under *Admin → Integrations → Open Terminal*.
 
 **Model**
 Upstream image \`ghcr.io/open-webui/open-terminal:0.12.3\` (pinned tag). Runs as an unprivileged user; the API is only reachable inside the cluster (invisible internal entrance), never from the internet.
@@ -1433,8 +1424,38 @@ curl -X POST http://aimterminal:8000/execute \\
 **Resource Usage**
 CPU: 0.5-8 cores, RAM: 1-12 GiB (a 100 MB xlsx parses comfortably; DuckDB spills to disk beyond that), Disk: ~3 GB image, home directory on the Olares userspace volume
 No GPU required.`,
-      upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        de: `**Open Terminal 0.12.3** — die sandboxed Shell und das Dateisystem, mit dem sich Open WebUI unter *Admin → Integrations → Open Terminal* verbindet.
+
+**Modell**
+Upstream-Image \`ghcr.io/open-webui/open-terminal:0.12.3\` (gepinnter Tag). Läuft als unprivilegierter Nutzer; die API ist nur innerhalb des Clusters erreichbar (unsichtbarer interner Entrance), niemals aus dem Internet.
+
+**Inferenz-Engine**
+Kein Modell. Open Terminal stellt \`run_command\`, \`read_file\`, \`write_file\`, \`grep_search\`, \`glob_search\` und Prozesssteuerung als Tools bereit; das Chat-Modell ruft sie per HTTP mit einem Bearer-Key auf. Open WebUI leitet jeden Aufruf weiter, sodass der Key nie den Browser erreicht.
+
+**Kernfunktionen**
+- Chat-Anhänge können direkt in das Arbeitsverzeichnis des Terminals gelegt werden (Open-WebUI-Einstellung *Chat Uploads → Filesystem*): keine Textextraktion, kein RAG-Chunking, keine Kopie in der Open-WebUI-Datenbank — der richtige Weg für eine 100-MB-Arbeitsmappe.
+- Persistentes Home-Verzeichnis (\`/home/user\`) mit Dateibrowser im Chat: durchsuchen, hochladen, herunterladen, bearbeiten, ansehen.
+- Python für große Tabellen: pandas/numpy/scipy/openpyxl sowie duckdb, pyarrow, python-calamine, polars, xlsx2csv für SQL- und Parquet-Arbeit.
+- Dokumente und Konvertierungen: LibreOffice, pandoc, poppler, ffmpeg, imagemagick; matplotlib/seaborn/plotly für Diagramme, die Open WebUI inline rendert.
+- Ehrliche Ausgabegrenzen: in SQL aggregieren, Diagramme als PNG schreiben, niemals 100k Zeilen in das Kontextfenster einfügen.
+
+**API**
+\`\`\`bash
+curl http://aimterminal:8000/health
+curl -X POST http://aimterminal:8000/execute \\
+  -H "Authorization: Bearer $OPEN_TERMINAL_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{"command": "duckdb -c \\"SELECT count(*) FROM read_xlsx(\\\\\\"big.xlsx\\\\\\")\\""}'
+\`\`\`
+
+**Ressourcenverbrauch**
+CPU: 0,5-8 Kerne, RAM: 1-12 GiB (eine 100-MB-xlsx parst bequem; DuckDB lagert darüber hinaus auf die Festplatte aus), Disk: ~3 GB Image, Home-Verzeichnis auf dem Olares-Userspace-Volume
+Keine GPU erforderlich.`,
+      },
+      upgradeDescription: {
+        en: "v26.10.1: Initial Release for AImighty",
+        de: "v26.10.1: Initial Release für AImighty",
+      },
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimterminal",

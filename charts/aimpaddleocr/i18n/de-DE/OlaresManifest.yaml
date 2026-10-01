@@ -1,0 +1,31 @@
+metadata:
+  description: "PaddleOCR-VL 1.5 Dokument-OCR über PaddleX — Layout-Analyse und Textextraktion nach Markdown, auf der lokalen RTX 5090"
+  title: AIM PaddleOCR
+
+spec:
+  fullDescription: |
+    AIM PaddleOCR bündelt den PaddleOCR-VL-Dokument-OCR-Stack in einer einzigen Olares-App: das Modell PaddleOCR-VL-1.5 für das Dokumentverständnis, PP-DocLayoutV3 für die Layout-Analyse, bereitgestellt über PaddleX mit der Frontend-Oberfläche darüber.
+
+    **Modell**
+    PaddleOCR-VL-1.5-0.9B für Dokumenterkennung und Textextraktion. Layout-Erkennung über PP-DocLayoutV3. Gebaut für die RTX 5090 (Blackwell sm_120).
+
+    **Inferenz-Engine**
+    PaddleX-Serving-Framework (`paddlex --serve`) mit FastDeploy-Pipeline. Läuft über HAMi auf der lokalen NVIDIA-GPU; der Engine-Container veröffentlicht den `/layout-parsing`-Endpunkt auf 8080.
+
+    **Kernfunktionen**
+    - Dokument-OCR-Pipeline: Layout-Erkennung, Texterkennung, Ausgabe im Markdown-Stil.
+    - Markdown-Ignore-Labels für Kopf-/Fußzeile, Nummer und Fußnote, damit die Ausgabe sauber bleibt.
+    - Web-Frontend über HTTPS; Backend im Cluster erreichbar für andere Olares-Apps (RAGFlow, MinerU und ähnliche).
+    - Ein-Pod-Layout: PaddleX-Engine + nginx-Frontend, ein GPU-Slice (6 GiB).
+
+    **API**
+    ```bash
+    curl http://aimpaddleocr:8080/layout-parsing
+    ```
+    Im Cluster erreichbar; über Entrance oder Shared Entrance für die app-übergreifende Nutzung freigeben.
+
+    **Ressourcenverbrauch**
+    CPU: 0,6-2 Kerne, RAM: 4 GiB, GPU: 6 GiB HAMi-Memory-Slice (RTX 5090, ko-resident mit OmniVoice TTS, Qwen3-ASR und dem Qwen3 Reranker), Disk: ~3 GB Image (Modelle eingebaut).
+
+  upgradeDescription: |
+    v26.10.1: Initial Release für AImighty
