@@ -187,7 +187,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.7",
+      version: "26.9.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM with Qwen3 instruction template proxy (Jina/Cohere compatible, calibrated scores), Router-integrated" },
