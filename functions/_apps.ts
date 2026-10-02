@@ -338,10 +338,10 @@ Disk: 20 GB (model cache)
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.9.3",
+      version: "26.9.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
-      description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API" },
+      description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API, Router-integrated" },
       fullDescription:
         `**OmniVoice-0.6B** — k2-fsa's massively multilingual zero-shot TTS (600+ languages) based on a Qwen3-0.6B diffusion language model.
 
@@ -359,6 +359,7 @@ Native omnivoice runtime (PyTorch 2.8 cu128) behind an OpenAI-compatible FastAPI
 - Non-verbal tags like [laughter], pronunciation control via phonemes/pinyin
 - 24 kHz output; WAV->MP3 transcode sidecar for LiteLLM/Open WebUI compatibility
 - Web dashboard for quick testing (synthesis + voice cloning)
+- Olares Router integration: a beclab/llm-init sidecar exposes the Model Console contract (MODEL_MODE=tts, supports_tts/-clone/-design/-custom), so Router auto-registers the model under the default-tts categories
 
 **API Example**
 curl -X POST http://localhost:8880/v1/audio/speech -H "Content-Type: application/json" -d '{"model": "omnivoice", "input": "Hallo Welt!", "voice": "female"}' -o output.wav
@@ -370,7 +371,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.9.3: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 5 GiB. v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.9.4: Olares Router integration. A beclab/llm-init sidecar now fronts the app (ENGINE_KIND=audio, MODEL_MODE=tts, MODEL_SUPPORTS=supports_tts,supports_tts_clone,supports_tts_design,supports_tts_custom) and serves the Model Console contract (/api/model-spec) on the shared entrance, so Router auto-discovers the model and fills the default-tts categories. Inference path and voice quality are unchanged. Built for Olares 1.12.7. v26.9.3: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 5 GiB. v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
@@ -387,7 +388,7 @@ Disk: 20 GB (model cache)
     spec: {
       type: "app",
       entrance: [
-        { name: "aimomnivoice", title: { en: "AIM OmniVoice 0.6B TTS" }, port: 8080, host: "aimomnivoice", authLevel: "internal", openMethod: "window" },
+        { name: "aimomnivoice", title: { en: "AIM OmniVoice 0.6B TTS" }, port: 8090, host: "download-svc", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
