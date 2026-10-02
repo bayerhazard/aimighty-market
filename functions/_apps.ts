@@ -890,7 +890,7 @@ Disk: model cache in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimqwen38vllm",
-      version: "1.0.1",
+      version: "1.0.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38vllm/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: { en: "Qwen3.8-27B W4A16 via HyperQwen (patched vLLM 0.30) — DFlash2/MTP speculative decoding, KVarN 4/2-bit KV cache and vision on one 24 GB card" },
@@ -919,7 +919,7 @@ RAM: 8-40 GB, CPU: 2-16 cores
 Disk: ~21.5 GB prepared weights in appCommon/hyperqwen, shared HF cache at appCommon/huggingface`,
       upgradeDescription:
         `v1.0.1: Chart release of the HyperQwen stack. Qwen3.8-27B W4A16 AutoRound served by HyperQwen (vLLM 0.30.0, image pinned to syv-ai/HyperQwen@sha-e1459c7). Serving profiles fast/long/huge as validated sets, KVarN 4/2-bit at 200K, MTP/D flash2 speculative decoding, vision with host-RAM tower offload, exclusive nvidia.com/gpu binding. First boot downloads and requantizes ~21.5 GB. Built for Olares 1.12.6.`,
-      categories: ["AI"],
+      categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimqwen38vllm",
       sourceCode: "https://github.com/bayerhazard/aimqwen38vllm",
