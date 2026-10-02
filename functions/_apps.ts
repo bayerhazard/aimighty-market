@@ -932,7 +932,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "insilo",
-      version: "0.1.103",
+      version: "0.1.104",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: {
@@ -1000,7 +1000,13 @@ Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
 GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
       },
       upgradeDescription: {
-        en: `v0.1.103: Insilo in the AImighty design system.
+        en: `v0.1.104: Templates in your language.
+
+**The five built-in templates now carry their name in every interface language** — for example "Client meeting" in English or "Entretien client" in French — with a translated description. Until now they were German everywhere.
+
+**A name your organisation gave a template stays** in every language. The template lists sort by the name you see.
+
+v0.1.103: Insilo in the AImighty design system.
 
 **Colours, type, icons and components now come from the shared AImighty design system** — the same frame as the other AImighty apps: the AImighty mark with "Insilo" at the top left, the navigation on the left, on the phone four destinations and "More".
 
@@ -1037,7 +1043,13 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
-        de: `v0.1.103: Insilo im Erscheinungsbild von AImighty.
+        de: `v0.1.104: Vorlagen in Ihrer Sprache.
+
+**Die fünf Werksvorlagen heißen jetzt in jeder Sprache der Oberfläche richtig** — etwa „Client meeting" auf Englisch oder „Entretien client" auf Französisch —, mit übersetzter Beschreibung. Bisher standen sie überall auf Deutsch.
+
+**Eine eigene Bezeichnung Ihrer Organisation bleibt** in jeder Sprache stehen. Die Vorlagenlisten sortieren nach dem angezeigten Namen.
+
+v0.1.103: Insilo im Erscheinungsbild von AImighty.
 
 **Farben, Schrift, Zeichen und Bausteine kommen jetzt aus dem gemeinsamen AImighty-Designsystem** — dasselbe Grundgerüst wie in den anderen AImighty-Anwendungen: oben links die AImighty-Marke mit „Insilo", die Navigation links, am Handy vier Ziele und „Mehr".
 
