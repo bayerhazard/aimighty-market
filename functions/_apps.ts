@@ -835,34 +835,35 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.10.2",
+      version: "26.10.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
-      description: { en: "Qwen3-ASR 1.7B via vllm-omni — 30 languages, robust under noise, OpenAI-compatible API" },
+      description: { en: "Qwen3-ASR 1.7B via vLLM + Olares Model Console — 30 languages, noise-robust, OpenAI-compatible transcription" },
       fullDescription:
-        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served via vllm-omni with a fully OpenAI-compatible transcription API.
+        `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served through the Olares Model Console so the Router registers it under default-stt.
 
 **Model**
 Qwen/Qwen3-ASR-1.7B (Apache-2.0, commercial use allowed). SOTA among open-source ASR models. Language identification + ASR for 30 languages and 22 Chinese dialects.
 
 **Inference Engine**
-vllm-omni v0.18.0 (audio-spezialisierter vLLM-Fork, Qwen3-ASR nativ, Audio-Deps soundfile/librosa eingebacken; Lang-Audio ohne OOM im MemorySlice). Native OpenAI-compatible /v1/audio/transcriptions + /v1/chat/completions (audio_url).
+Official Olares audio engine (vLLM-based) behind beclab/llm-init (ENGINE_KIND=audio): downloads the weights into the shared appCommon HF cache, publishes the model card on /api/model-spec and reverse-proxies /v1/audio/transcriptions. Reachable by other apps via the shared entrance.
 
 **Key Features**
 - OpenAI-compatible API: /v1/audio/transcriptions, /v1/models
 - Automatic language detection (or force e.g. "German")
 - Robust under noise, accents and challenging text patterns
-- Web dashboard for quick testing (upload/record audio → transcript)
+- Offline transcription and streaming recognition (stt, stt_stream)
+- Advertised to the Router as default-stt
 
 **API Example**
-curl -X POST http://localhost:8000/v1/audio/transcriptions -H "Content-Type: multipart/form-data" -F "file=@audio.wav" -F "model=qwen3-asr-1.7b" -F "language=German"
+curl -X POST http://<entrance>/v1/audio/transcriptions -F "file=@audio.wav" -F "model=Qwen/Qwen3-ASR-1.7B"
 
 **Resource Usage**
-GPU: 1× NVIDIA (6 GiB HAMi memory slice, co-resident with OmniVoice TTS and ComfyUI low-VRAM on the olares-worker RTX 5090)
-RAM: 8 GB, CPU: 2 cores
-Disk: 20 GB (model cache, HF_HOME)`,
+GPU: 1× NVIDIA (8 GiB HAMi memory slice, co-resident with OmniVoice TTS, PaddleOCR and ComfyUI on the olares-worker RTX 5090)
+RAM: 4-16 GB, CPU: 0.7-7 cores
+Disk: model cache in the shared appCommon HF cache`,
       upgradeDescription:
-        `v26.10.2: Rebuilt on the Olares Model Console (beclab/llm-init, ENGINE_KIND=audio) with MODEL_MODE=audio and MODEL_SUPPORTS=stt,stt_stream - the Router now auto-registers the model under default-stt. Replaces the raw vLLM container with the official audio-engine + llm-init architecture (download-svc entrance :8090, shared entrance for in-cluster callers); GPU memory slice 8 GiB. Reinstall required (architecture change). Built for Olares 1.12.7. v26.10.1: Published as a shared model app (Olares Model Console / Router) - sharedEntrances + LLMGatewaySupported, so the ASR model is discovered by the Router and registered under the default-stt category for Hermes / Open WebUI. App switches to the shared namespace (one-time reinstall). Built for Olares 1.12.6. v26.9.14: HAMi memory slice back to the proven 6 GiB (nvidia.com/gpumem + CUDA cap 6144m) - 5 GiB OOMs at KV-cache init (only 0.01 GiB KV free). Stability-first worker-GPU layout: ASR 6 GiB + OmniVoice 5 GiB + ComfyUI 8 GiB = 19 GiB, ~4.9 GiB headroom (the Qwen3 Reranker is stopped to guarantee margin). Built for Olares 1.12.6. v26.9.12: HAMi memory slice trimmed 6 GiB -> 5 GiB (nvidia.com/gpumem + CUDA cap 5120m) so Qwen3-ASR fits on the olares-worker RTX 5090 with >=1.9 GiB free after OmniVoice TTS, the Qwen3 Reranker and ComfyUI - stability-first headroom. Built for Olares 1.12.6. v26.9.11: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 6 GiB. v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.10.3: Pin CUDA_DEVICE_MEMORY_LIMIT_0 to the 8 GiB HAMi slice in the engine container. HAMi time-slicing injects CUDA_DEVICE_MEMORY_LIMIT_0=0m (whole card) when the app declares no cap, so vLLM derived gpu_memory_utilization = 8 GiB / 24 GiB = 0.29 and starved the KV cache (negative KV memory -> engine stayed up but served 503). With the explicit cap the engine sees exactly 8 GiB (8/8 = 1.0) and the KV cache has ~3 GiB headroom. No architecture change. Built for Olares 1.12.7. v26.10.2: Rebuilt on the Olares Model Console (beclab/llm-init, ENGINE_KIND=audio) with MODEL_MODE=audio and MODEL_SUPPORTS=stt,stt_stream - the Router now auto-registers the model under default-stt. Replaces the raw vLLM container with the official audio-engine + llm-init architecture (download-svc entrance :8090, shared entrance for in-cluster callers); GPU memory slice 8 GiB. Reinstall required (architecture change). Built for Olares 1.12.7. v26.10.1: Published as a shared model app (Olares Model Console / Router) - sharedEntrances + LLMGatewaySupported, so the ASR model is discovered by the Router and registered under the default-stt category for Hermes / Open WebUI. App switches to the shared namespace (one-time reinstall). Built for Olares 1.12.6. v26.9.14: HAMi memory slice back to the proven 6 GiB (nvidia.com/gpumem + CUDA cap 6144m) - 5 GiB OOMs at KV-cache init (only 0.01 GiB KV free). Stability-first worker-GPU layout. Built for Olares 1.12.6. v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-qwen3asr",
