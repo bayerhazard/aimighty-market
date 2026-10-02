@@ -889,6 +889,61 @@ Disk: model cache in the shared appCommon HF cache`,
   },
   {
     metadata: {
+      name: "aimqwen38vllm",
+      version: "1.0.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38vllm/main/icon.png",
+      title: { en: "AIM Qwen3.8 27B" },
+      description: { en: "Qwen3.8-27B W4A16 via HyperQwen (patched vLLM 0.30) — DFlash2/MTP speculative decoding, KVarN 4/2-bit KV cache and vision on one 24 GB card" },
+      fullDescription:
+        `**Qwen3.8-27B** — Alibaba's vision-language model (Qwen3.5 architecture), served through the Olares Model Console so the Router registers it under default-chat.
+
+**Model**
+dbirks/Qwen3.8-27B-W4A16-AutoRound (AutoRound W4A16: int4 body, int8 lm_head/embeddings/MTP). Thinking, tool-calling and native image understanding, 262K context window (Apache-2.0).
+
+**Inference Engine**
+HyperQwen (github.com/syv-ai/HyperQwen): a patch series against a pinned vLLM 0.30.0 plus a model-preparation pipeline, packaged as one image. DFlash2 block drafting, a calibrated draft vocabulary, KVarN 4/2-bit KV-cache compression and int8 tensor-core paths, all tuned for a single 24 GB card.
+
+**Key Features**
+- Speculative decoding: MTP (default) or DFlash2 block drafter
+- KV cache: KVarN 4/2-bit at 200K, plus bf16 and fp8 profiles
+- Vision: one image per request, tower offloaded to host RAM
+- OpenAI-compatible API: /v1/chat/completions, /v1/models
+- Serving profile (fast 64K / long 150K / huge 200K) switchable from Settings; a switch is a pod restart, not a re-download
+
+**API Example**
+curl -X POST http://<entrance>/v1/chat/completions -H "Content-Type: application/json" -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"Hello"}]}'
+
+**Resource Usage**
+GPU: 1x NVIDIA RTX 5090 (exclusive, ~22 GiB VRAM)
+RAM: 8-40 GB, CPU: 2-16 cores
+Disk: ~21.5 GB prepared weights in appCommon/hyperqwen, shared HF cache at appCommon/huggingface`,
+      upgradeDescription:
+        `v1.0.1: Chart release of the HyperQwen stack. Qwen3.8-27B W4A16 AutoRound served by HyperQwen (vLLM 0.30.0, image pinned to syv-ai/HyperQwen@sha-e1459c7). Serving profiles fast/long/huge as validated sets, KVarN 4/2-bit at 200K, MTP/D flash2 speculative decoding, vision with host-RAM tower offload, exclusive nvidia.com/gpu binding. First boot downloads and requantizes ~21.5 GB. Built for Olares 1.12.6.`,
+      categories: ["AI"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimqwen38vllm",
+      sourceCode: "https://github.com/bayerhazard/aimqwen38vllm",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "23Gi",
+      requiredDisk: "50Mi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "48Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen38vllm", title: { en: "AIM Qwen3.8 27B" }, port: 8090, host: "aimqwen38vllm", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "23Gi", disk: "50Mi" } },
+    },
+  },
+  {
+    metadata: {
       name: "relay",
       version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
