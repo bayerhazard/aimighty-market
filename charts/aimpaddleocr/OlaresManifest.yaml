@@ -6,7 +6,7 @@ metadata:
   description: Text Recognition & Doc Parsing Toolkit
   icon: https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png
   appid: aimpaddleocr
-  version: '26.10.1'
+  version: '26.10.2'
   title: AIM PaddleOCR
   categories:
     - AI
@@ -31,7 +31,7 @@ workloadReplicas:
   aimpaddleocr: 1
 spec:
   onlyAdmin: true
-  versionName: '26.10.1'
+  versionName: '26.10.2'
   fullDescription: |
     AIM PaddleOCR wraps the PaddleOCR-VL document OCR stack as a single Olares app: the PaddleOCR-VL-1.5 model for document understanding, PP-DocLayoutV3 for layout analysis, served by PaddleX with the frontend UI on top.
 
@@ -57,7 +57,7 @@ spec:
     CPU: 0.6-2 cores, RAM: 4 GiB, GPU: 6 GiB HAMi memory slice (RTX 5090, co-resident with OmniVoice TTS, Qwen3-ASR and the Qwen3 Reranker), Disk: ~3 GB image (models baked in).
 
   upgradeDescription: |
-    v26.10.1: Initial Release for AImighty
+    v26.10.2: Pin CUDA_DEVICE_MEMORY_LIMIT_0 to the 6 GiB HAMi slice in the engine container. HAMi time-slicing injects CUDA_DEVICE_MEMORY_LIMIT_0=0m (whole card) when the app declares no cap, so the PaddleX engine could grow into the full 24 GiB and starve the co-resident services. Built for Olares 1.12.7. v26.10.1: Initial Release for AImighty
   developer: Aimighty
   website: https://github.com/bayerhazard/aimpaddleocr
   sourceCode: https://github.com/bayerhazard/aimpaddleocr

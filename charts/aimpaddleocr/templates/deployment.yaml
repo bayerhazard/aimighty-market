@@ -67,6 +67,11 @@ spec:
               value: "0"
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: "compute,graphics,utility,video,display"
+            # HAMi time-slicing injects CUDA_DEVICE_MEMORY_LIMIT_0=0m (whole card) when the
+            # app declares no cap; pin it to our HAMi slice so the engine cannot grab the
+            # full 24 GiB and starve the co-resident services (m suffix = HAMi CUDA layer).
+            - name: CUDA_DEVICE_MEMORY_LIMIT_0
+              value: "{{ $gpuMemMi }}m"
           ports:
             - name: http-api
               containerPort: 8080

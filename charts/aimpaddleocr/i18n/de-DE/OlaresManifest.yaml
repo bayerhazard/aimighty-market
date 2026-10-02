@@ -28,4 +28,4 @@ spec:
     CPU: 0,6-2 Kerne, RAM: 4 GiB, GPU: 6 GiB HAMi-Memory-Slice (RTX 5090, ko-resident mit OmniVoice TTS, Qwen3-ASR und dem Qwen3 Reranker), Disk: ~3 GB Image (Modelle eingebaut).
 
   upgradeDescription: |
-    v26.10.1: Initial Release für AImighty
+    v26.10.2: CUDA_DEVICE_MEMORY_LIMIT_0 auf die 6-GiB-HAMi-Slice im Engine-Container festgelegt. HAMi-TimeSlicing injiziert CUDA_DEVICE_MEMORY_LIMIT_0=0m (ganze Karte), wenn die App keinen Cap deklariert, sodass die PaddleX-Engine in die vollen 24 GiB wachsen und die ko-residenten Dienste verdrängen konnte. Gebaut für Olares 1.12.7. v26.10.1: Erste Veröffentlichung für AImighty

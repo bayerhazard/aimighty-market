@@ -1535,7 +1535,7 @@ this version. Built for Olares 1.12.6.`,
   {
     metadata: {
       name: "aimpaddleocr",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-market/main/icons/aimpaddleocr.png",
       title: { en: "AIM PaddleOCR" },
       description: {
