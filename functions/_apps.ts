@@ -932,12 +932,15 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "insilo",
-      version: "0.1.102",
+      version: "0.1.103",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
-      description: { en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud" },
-      fullDescription:
-        `Insilo records business meetings, transcribes them locally and turns them into structured minutes — on your own Olares box.
+      description: {
+        en: "On-premise meeting intelligence — record, transcribe and summarize meetings without sending audio to any cloud",
+        de: "Meeting-Intelligenz auf der eigenen Box — Besprechungen aufnehmen, transkribieren und zusammenfassen, ohne Ton in eine Cloud zu schicken",
+      },
+      fullDescription: {
+        en: `Insilo records business meetings, transcribes them locally and turns them into structured minutes — on your own Olares box.
 
 **The promise**
 No audio, no transcript and no search index ever leaves the box. Unlike PLAUD, Otter or Fireflies there is no cloud upload, no third-party AI API and no telemetry.
@@ -966,8 +969,52 @@ CPU: 4 cores requested, up to 13
 RAM: 12 GB requested, up to 24
 Disk: 30 GB (audio, Whisper and BGE-M3 models ~3 GB, database share)
 GPU: none — Whisper runs on CPU, the language model is external`,
-      upgradeDescription:
-        `v0.1.102: only customer conversations go to the CRM.
+        de: `Insilo nimmt Geschäftsbesprechungen auf, transkribiert sie auf der Box und macht daraus strukturierte Protokolle — auf Ihrer eigenen Olares-Box.
+
+**Das Versprechen**
+Weder Ton noch Transkript noch Suchindex verlassen die Box. Anders als bei PLAUD, Otter oder Fireflies gibt es keinen Cloud-Upload, keine fremde AI-Schnittstelle und keine Telemetrie.
+
+**Was es kann**
+- Aufnehmen im Browser (PWA) oder vorhandene Tonaufnahmen hochladen
+- Transkribieren auf der Box mit faster-whisper (large-v3), Sprechertrennung über Stimmprofile
+- Strukturierte Zusammenfassungen aus Vorlagen, erstellt von dem Sprachmodell, das Sie angeben
+- Fragen an das ganze Besprechungsarchiv (RAG über pgvector)
+- Anbindung nach außen: Webhooks mit HMAC-Signatur, REST-API, Markdown-Export — in der Vorgabe nur von Hand ausgelöst
+
+**Datenschutz-Nachweis, gemessen**
+Die Navigation zeigt laufend, was die Box tatsächlich verlässt — abgeleitet aus den eingerichteten Endpunkten und den ausgelieferten Bytes im Protokoll, kein Versprechen. Drei Ziele sind möglich, und jedes wird genannt: ein externer Sprachmodell-Endpunkt, eingerichtete Webhooks und der einmalige Modell-Download beim ersten Start.
+
+**Sprachmodell**
+Insilo kommt ohne eingerichteten Endpunkt. Tragen Sie unter Einstellungen eine OpenAI-kompatible Adresse ein — zum Beispiel die LiteLLM-App auf derselben Box. Bis dahin funktionieren Aufnahme und Transkription, Zusammenfassungen entfallen, und die App sagt das.
+
+**Gemacht für**
+Kanzleien, Steuerberatungen, Unternehmensberatungen und Mittelstand unter DSGVO, BSI-Grundschutz oder Mandatsgeheimnis.
+
+**Oberfläche**
+Deutsch, Englisch, Französisch, Spanisch und Italienisch; förmliche Anrede in jeder Sprache. Hell- und Dunkelmodus.
+
+**Ressourcen**
+CPU: 4 Kerne angefordert, bis 13
+RAM: 12 GB angefordert, bis 24
+Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
+GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
+      },
+      upgradeDescription: {
+        en: `v0.1.103: Insilo in the AImighty design system.
+
+**Colours, type, icons and components now come from the shared AImighty design system** — the same frame as the other AImighty apps: the AImighty mark with "Insilo" at the top left, the navigation on the left, on the phone four destinations and "More".
+
+**"AI" instead of "KI", in every language.** Deleting for good asks first and is labelled in red; whatever goes to the trash can be restored.
+
+**Every page has a title, and the browser tab names it** ("Archive · Insilo"). The tab shows only the microphone.
+
+**Nothing is cut off on the phone any more:** the meeting list and the trash wrap, filters are large enough for a finger.
+
+**Better legibility** in dark mode and at a few weak contrasts; every icon without a word shows what it does on hover.
+
+**The state of a meeting** (running, done, failed) is a calm pill with a word; nothing blinks any more except the running recording. The descriptions of the built-in templates are in plain German.
+
+v0.1.102: only customer conversations go to the CRM.
 
 **Every template now has the setting "customer conversation — pass on to the CRM".** A connected CRM such as Beacon only takes meetings whose template is marked this way. Until now internal meetings and voice notes arrived there too.
 
@@ -990,6 +1037,44 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
+        de: `v0.1.103: Insilo im Erscheinungsbild von AImighty.
+
+**Farben, Schrift, Zeichen und Bausteine kommen jetzt aus dem gemeinsamen AImighty-Designsystem** — dasselbe Grundgerüst wie in den anderen AImighty-Anwendungen: oben links die AImighty-Marke mit „Insilo", die Navigation links, am Handy vier Ziele und „Mehr".
+
+**„AI" statt „KI", in allen Sprachen.** Endgültiges Löschen fragt nach und ist rot beschriftet; was im Papierkorb landet, lässt sich zurückholen.
+
+**Jede Seite hat einen Titel, und der Browser-Tab nennt sie** („Archiv · Insilo"). Im Tab steht nur noch das Mikrofon.
+
+**Am Handy wird nichts mehr abgeschnitten:** Besprechungsliste und Papierkorb brechen um, Filter sind groß genug für den Finger.
+
+**Bessere Lesbarkeit** im Dunkelmodus und an einigen schwachen Kontrasten; jedes Zeichen ohne Wort zeigt beim Überfahren, was es tut.
+
+**Der Zustand einer Besprechung** (läuft, fertig, Fehler) steht als ruhige Pille mit Wort; nichts blinkt mehr außer der laufenden Aufnahme. Die Beschreibungen der Werksvorlagen sind in klarem Deutsch.
+
+v0.1.102: only customer conversations go to the CRM.
+
+**Every template now has the setting "customer conversation — pass on to the CRM".** A connected CRM such as Beacon only takes meetings whose template is marked this way. Until now internal meetings and voice notes arrived there too.
+
+**Defaults:** client, sales and annual customer review meetings yes; general meeting, quick note and your own templates no. Owners and administrators can change it, and the change applies at once, also to meetings that already exist.
+
+**The mark belongs to the template, not its name** — a renamed template keeps it. It is written into each file in the box's shared folder and into every webhook.
+
+v0.1.101: long meetings get through.
+
+**Recordings over about twenty minutes were stored but their processing aborted.** The cause was a fixed 25-minute limit on each recognition call: without a graphics card the bundled recogniser needs more compute time than the recording is long — measured on a box without a GPU, 795 seconds of work for 626 seconds of audio. The limit now follows the length of the recording.
+
+**Long recordings are split into sections** and transcribed one section at a time, cut at pauses in speech rather than mid-word. The meeting view shows how far along it is. If processing is interrupted, the next attempt resumes at the section that was missing instead of starting over.
+
+**New button "process again".** A failed meeting can be sent through the pipeline once more — for example after configuring a faster speech recognition endpoint under Settings. The recording itself was never touched.
+
+**Meetings whose processing was interrupted** used to sit on "transcribing" forever. They are now detected and reported as failed.
+
+**Very long transcripts are condensed before summarizing.** The language model could previously truncate the beginning without saying so, leaving the first hour out of the summary.
+
+**Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
+
+**Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
+      },
       categories: ["AI"],
       developer: "kaivo.studio",
       website: "https://kaivo.studio",
