@@ -119,7 +119,7 @@ v26.9.1 Initialer Release für den AImighty Assistenten`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -147,7 +147,7 @@ Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `v26.10.1: Olares Router integration. A beclab/llm-init sidecar (ENGINE_KIND=embed, MODEL_MODE=embedding) now fronts the app and exposes the Model Console contract (/api/model-spec on the shared entrance), so Router auto-registers the model and fills default-embedding. The OpenVINO engine on :9997 is untouched — llm-init only reverse-proxies the OpenAI /v1/models + /v1/embeddings contract to it. App switches to the shared namespace (shared: true), so this is a one-time uninstall + install (model is baked in the image; no re-download of the OpenVINO weights, llm-init pulls the HF snapshot once into the shared cache). Built for Olares 1.12.7.`,
+        `v26.10.2: Olares Router integration. A beclab/llm-init sidecar (ENGINE_KIND=embed, MODEL_MODE=embedding) now fronts the app and exposes the Model Console contract (/api/model-spec on the shared entrance), so Router auto-registers the model and fills default-embedding. The OpenVINO engine on :9997 is untouched — llm-init only reverse-proxies the OpenAI /v1/models + /v1/embeddings contract to it. App switches to the shared namespace (shared: true) and uses a Recreate update strategy (hostPath cache volumes require it), so this is a one-time uninstall + install (the OpenVINO weights are baked in the image; llm-init pulls the HF snapshot once into the shared cache). Built for Olares 1.12.7.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
