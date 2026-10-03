@@ -119,7 +119,7 @@ v26.9.1 Initialer Release für den AImighty Assistenten`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.9.1",
+      version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -140,13 +140,14 @@ OpenVINO 2026.2.1 + optimum-intel 2.0.0 + Hugging Face Transformers 4.55.4 (gepi
 - Cluster mode (EMBEDDER_MODE=cluster): 2 replicas spread across nodes via pod anti-affinity — uses both node CPUs
 - Async endpoints with race-condition protection
 - Built-in HTML dashboard on root endpoint (/)
+- Olares Router: auto-registered as a local embedding model via the Model Console (llm-init embed proxy), filling default-embedding
 
 **Resource Usage**
 Single mode: ~24 GB RAM, 2 CPU cores
 Cluster mode: ~48 GB RAM, 4 CPU cores (2 nodes)
 Disk: 50 GB for model cache`,
       upgradeDescription:
-        `Initial Release for AImighty Olares One`,
+        `v26.10.1: Olares Router integration. A beclab/llm-init sidecar (ENGINE_KIND=embed, MODEL_MODE=embedding) now fronts the app and exposes the Model Console contract (/api/model-spec on the shared entrance), so Router auto-registers the model and fills default-embedding. The OpenVINO engine on :9997 is untouched — llm-init only reverse-proxies the OpenAI /v1/models + /v1/embeddings contract to it. App switches to the shared namespace (shared: true), so this is a one-time uninstall + install (model is baked in the image; no re-download of the OpenVINO weights, llm-init pulls the HF snapshot once into the shared cache). Built for Olares 1.12.7.`,
       categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimighty-embedder",
@@ -163,7 +164,7 @@ Disk: 50 GB for model cache`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimembqwen3vino", title: { en: "AIM Qwen3 4B Embedding" }, port: 9997, host: "aimembqwen3vino", authLevel: "internal", openMethod: "window" },
+        { name: "aimembqwen3vino", title: { en: "AIM Qwen3 4B Embedding" }, port: 8090, host: "download-svc", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
