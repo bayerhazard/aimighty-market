@@ -895,7 +895,7 @@ Disk: model cache in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimqwen38vllm",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38vllm/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: {
@@ -907,26 +907,26 @@ Disk: model cache in the shared appCommon HF cache`,
 Qwen3.8-27B supports thinking, tool-calling, and native image understanding.
 
 **Key Features**
-Speculative decoding: MTP as int8
-KV cache: 200k with k4v4_g128
-MAX_SEQS=2
-Performance: 80 - 100 t/s
+Speculative decoding: MTP, int4 GPTQ head
+KV cache: 200k with k4v2_g128
+MAX_SEQS=4
+Performance: 95 - 117 t/s code, 70 - 99 t/s prose
 Vision: Tower is offloaded to host RAM
 OpenAI-compatible API`,
         de: `**Modellübersicht**
 Qwen3.8-27B unterstützt Denken, Tool-Calling und natives Bildverständnis.
 
 **Hauptmerkmale**
-Spekulative Dekodierung: MTP als int8
-KV-Cache: 200k mit k4v4_g128
-MAX_SEQS=2
-Leistung: 80 - 100 t/s
+Spekulative Dekodierung: MTP, int4-GPTQ-Kopf
+KV-Cache: 200k mit k4v2_g128
+MAX_SEQS=4
+Leistung: 95 - 117 t/s Code, 70 - 99 t/s Prosa
 Vision: Der Tower wird in den Host-RAM ausgelagert
 OpenAI-kompatible API`,
       },
       upgradeDescription: {
-        en: "26.10.1 Initial Release for AImighty Analyst",
-        de: "26.10.1 Erste Veröffentlichung für AImighty Analyst",
+        en: `26.10.2 Serving tuning. AutoRound fast variant (GPTQ-int4 lm_head + MTP with a draft vocabulary counted over the model's own outputs), 4 request slots and a 0.93 memory budget: +6.5% decode, KV pool 238,938 -> 339,823 tokens (1.70x at 200k).`,
+        de: `26.10.2 Serving-Feinschliff. AutoRound-Fast-Variante (GPTQ-int4 lm_head + MTP mit einem Draft-Vokabular aus den Ausgaben des Modells selbst), 4 Request-Slots und 0,93 Speicherbudget: +6,5 % Decode, KV-Pool 238.938 -> 339.823 Token (1,70x bei 200k).`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
