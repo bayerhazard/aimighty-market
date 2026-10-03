@@ -646,7 +646,7 @@ CPU: 4-16 cores`,
   {
     metadata: {
       name: "wings",
-      version: "26.10.1",
+      version: "26.10.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/wings-for-hermes/main/icon.png",
       title: { en: "Wings" },
       description: {
@@ -654,8 +654,8 @@ CPU: 4-16 cores`,
         de: "KI-Agent-Web-UI für Hermes — Chat, Sessions, Memory, Skills, Cron",
       },
       upgradeDescription: {
-        en: "v26.10.1: Initial Release for AImighty Analyst",
-        de: "v26.10.1: Initial Release für AImighty Analyst",
+        en: "v26.10.3: STT/TTS moved from the retired LiteLLM proxy to the Olares Router (default-stt / default-tts); audio endpoints now editable in the app settings.",
+        de: "v26.10.3: STT/TTS vom stillgelegten LiteLLM-Proxy auf den Olares Router umgestellt (default-stt / default-tts); Audio-Endpunkte jetzt in den App-Einstellungen änderbar.",
       },
       fullDescription: {
         en: `**Wings** — AI Agent Web UI with premium redesign, curated skins, and auto-detection of Hermes Agent home.
@@ -721,6 +721,8 @@ Findet beim Start automatisch dein Hermes-Agent-Home-Verzeichnis — keine manue
       envs: [
         { envName: "HERMES_WEBUI_PASSWORD", required: false, type: "password", editable: true, applyOnChange: true, description: "Optional app-level password for the Web UI (in addition to Olares SSO). Recommended when exposing beyond LAN." },
         { envName: "HERMES_WEBUI_DEFAULT_MODEL", required: false, default: "Agent", type: "string", editable: true, applyOnChange: true, description: "Default model name used for new chats (must match a model your Hermes provider key can access, e.g. 'Agent')." },
+        { envName: "HERMES_WEBUI_STT_MODEL", required: false, default: "default-stt", type: "string", editable: true, applyOnChange: true, description: "Speech-to-text model (Olares Router default category 'default-stt', or a qualified model name)." },
+        { envName: "HERMES_WEBUI_TTS_TRUSTED_HOSTS", required: false, default: "router.aimighty.olares.de", type: "string", editable: true, applyOnChange: true, description: "Comma-separated host allow-list for the OpenAI-compatible TTS endpoint (SSRF guard)." },
       ],
     },
   },
