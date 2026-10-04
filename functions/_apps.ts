@@ -954,7 +954,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -990,8 +990,8 @@ Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
 ~50 GB System-RAM, eine NVIDIA-GPU`,
       },
       upgradeDescription: {
-        en: `26.10.1 First release: Qwen3.8-Flash-Next (125B MoE) on one 24 GB GPU via the Strata engine, 200K context, INT8 KV with KV streaming, vision, OpenAI- and Anthropic-compatible API.`,
-        de: `26.10.1 Erste Veröffentlichung: Qwen3.8-Flash-Next (125B MoE) auf einer 24-GB-GPU über die Strata-Engine, 200K Kontext, INT8-KV mit KV-Streaming, Vision, OpenAI- und Anthropic-kompatible API.`,
+        en: `26.10.2 Stable tuning: 2 concurrent slots (one large + one small context), German draft vocabulary, 200K context, INT8 KV with 96K-cell KV streaming, faster long prompts (32K prefill chunks), calibrated engine flags, learned expert profile. First release was 26.10.1.`,
+        de: `26.10.2 Stabiles Tuning: 2 gleichzeitige Slots (ein grosser + ein kleiner Kontext), deutsches Draft-Vokabular, 200K Kontext, INT8-KV mit 96K-Zellen-KV-Streaming, schnellere lange Prompts (32K-Prefill-Chunks), kalibrierte Engine-Flags, gelerntes Expertenprofil. Erste Version war 26.10.1.`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
@@ -1003,7 +1003,7 @@ Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
       requiredDisk: "50Mi",
       requiredGpu: "1",
       limitedCpu: "16",
-      limitedMemory: "56Gi",
+      limitedMemory: "60Gi",
       apiTimeout: 0,
     },
     spec: {
