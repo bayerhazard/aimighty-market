@@ -953,6 +953,71 @@ OpenAI-kompatible API`,
   },
   {
     metadata: {
+      name: "aimqwen38flash",
+      version: "26.10.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
+      title: { en: "AIM Qwen3.8 Flash Next" },
+      description: {
+        en: "Qwen3.8-Flash-Next (125B MoE) served locally with the Strata engine",
+        de: "Qwen3.8-Flash-Next (125B MoE), lokal mit der Strata-Engine bereitgestellt",
+      },
+      fullDescription: {
+        en: `**Model Overview**
+Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model (512 experts per layer, 10 active per token) with thinking, tool-calling and native image understanding.
+
+**Inference Engine**
+Strata runs the GSQ-RCO IQ3_XXS quantization on one consumer GPU: the experts live in system RAM, the busiest are cached in VRAM, the n-gram table is memory-mapped, and MTP speculative decoding speeds up answers.
+
+**Key Features**
+Strata 0.1.39, IQ3_XXS (3.0 bpw), 200K context, INT8 KV with KV streaming
+Vision (CPU encoder), OpenAI- and Anthropic-compatible API
+Expert cache on the GPU, CPU expert pool on the host
+
+**Resource Usage**
+~50 GB system RAM, one NVIDIA GPU`,
+        de: `**Modellübersicht**
+Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern (512 Experten pro Layer, 10 pro Token aktiv) mit Denken, Tool-Calling und nativem Bildverständnis.
+
+**Inferenz-Engine**
+Strata führt die GSQ-RCO-IQ3_XXS-Quantisierung auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten werden im VRAM gecacht, die N-Gramm-Tabelle wird speichergemappt, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
+
+**Hauptmerkmale**
+Strata 0.1.39, IQ3_XXS (3,0 bpw), 200K Kontext, INT8-KV mit KV-Streaming
+Vision (CPU-Encoder), OpenAI- und Anthropic-kompatible API
+Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
+
+**Ressourcenverbrauch**
+~50 GB System-RAM, eine NVIDIA-GPU`,
+      },
+      upgradeDescription: {
+        en: `26.10.1 First release: Qwen3.8-Flash-Next (125B MoE) on one 24 GB GPU via the Strata engine, 200K context, INT8 KV with KV streaming, vision, OpenAI- and Anthropic-compatible API.`,
+        de: `26.10.1 Erste Veröffentlichung: Qwen3.8-Flash-Next (125B MoE) auf einer 24-GB-GPU über die Strata-Engine, 200K Kontext, INT8-KV mit KV-Streaming, Vision, OpenAI- und Anthropic-kompatible API.`,
+      },
+      categories: ["AI", "Vision"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimqwen38flash",
+      sourceCode: "https://github.com/bayerhazard/aimqwen38flash",
+      supportArch: ["amd64"],
+      requiredCpu: "4",
+      requiredMemory: "8Gi",
+      requiredDisk: "50Mi",
+      requiredGpu: "1",
+      limitedCpu: "16",
+      limitedMemory: "56Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimqwen38flash", title: { en: "AIM Qwen3.8 Flash Next" }, port: 8090, host: "aimqwen38flash", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "4", memory: "8Gi", disk: "50Mi" } },
+    },
+  },
+  {
+    metadata: {
       name: "relay",
       version: "26.10.1",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
