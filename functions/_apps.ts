@@ -890,46 +890,46 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.3",
+      version: "26.10.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
-        en: "Qwen3.8-Flash-Next Uncensored (125B MoE) served locally with the Strata engine",
-        de: "Qwen3.8-Flash-Next Uncensored (125B MoE), lokal mit der Strata-Engine bereitgestellt",
+        en: "Qwen3.8-Flash-Next Uncensored (125B MoE) with parallel-2 slots and vision, via the Strata engine",
+        de: "Qwen3.8-Flash-Next Uncensored (125B MoE) mit Parallel-2-Slots und Vision, via Strata-Engine",
       },
       fullDescription: {
         en: `**Model Overview**
-Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model (512 experts per layer, 10 active per token) with thinking and tool-calling. This build serves the OrcaRouter Uncensored (abliterated) IQ3_XXS fine-tune: a refusal-free assistant tuned for long-horizon agentic and coding work.
+Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model (512 experts per layer, 10 active per token) with thinking, tool-calling and image understanding. This build serves the OrcaRouter Uncensored (abliterated) IQ3_XXS fine-tune: a refusal-free assistant tuned for long-horizon agentic and coding work.
 
 **Inference Engine**
 Strata runs the IQ3_XXS quantization on one consumer GPU: the experts live in system RAM, the busiest are cached in VRAM, and MTP speculative decoding speeds up answers.
 
 **Key Features**
-Strata 0.1.39, Uncensored IQ3_XXS (3.0 bpw), 200K context, INT8 KV
-Text-only, OpenAI- and Anthropic-compatible API
+Strata 0.1.39, Uncensored IQ3_XXS (3.0 bpw), 131K context, INT8 KV
+Parallel 2 (two conversations at once), image encoder (CPU), OpenAI- and Anthropic-compatible API
 Expert cache on the GPU, CPU expert pool on the host
 
 **Resource Usage**
 ~50 GB system RAM, one NVIDIA GPU`,
         de: `**Modellübersicht**
-Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern (512 Experten pro Layer, 10 pro Token aktiv) mit Denken und Tool-Calling. Dieser Build liefert den OrcaRouter-Uncensored-(abliterierten)-IQ3_XXS-Finetune: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit.
+Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern (512 Experten pro Layer, 10 pro Token aktiv) mit Denken, Tool-Calling und Bildverständnis. Dieser Build liefert den OrcaRouter-Uncensored-(abliterierten)-IQ3_XXS-Finetune: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit.
 
 **Inferenz-Engine**
 Strata führt die IQ3_XXS-Quantisierung auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten werden im VRAM gecacht, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
 
 **Hauptmerkmale**
-Strata 0.1.39, Uncensored IQ3_XXS (3,0 bpw), 200K Kontext, INT8-KV
-Text-only, OpenAI- und Anthropic-kompatible API
+Strata 0.1.39, Uncensored IQ3_XXS (3,0 bpw), 131K Kontext, INT8-KV
+Parallel 2 (zwei Unterhaltungen gleichzeitig), Bild-Encoder (CPU), OpenAI- und Anthropic-kompatible API
 Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
 
 **Ressourcenverbrauch**
 ~50 GB System-RAM, eine NVIDIA-GPU`,
       },
       upgradeDescription: {
-        en: `26.10.3 Model switch: OrcaRouter Uncensored (abliterated) IQ3_XXS — refusal-free Hermes/coding agent. 200K context, INT8 KV, MTP speculation, A/B-validated against the GSQ-RCO baseline (decode on par, +6% on prose, needle 25/25, tools 7/7, agentic 30/30). Text-only (no vision).`,
-        de: `26.10.3 Modellwechsel: OrcaRouter Uncensored (abliteriert) IQ3_XXS — verweigerungsfreier Hermes-/Coding-Agent. 200K Kontext, INT8-KV, MTP-Spekulation, A/B-validiert gegen die GSQ-RCO-Baseline (Decode gleichauf, +6 % bei Prosa, Needle 25/25, Tools 7/7, Agentic 30/30). Text-only (kein Vision).`,
+        en: `26.10.4 Concurrency + vision: parallel 2 (two conversations decoded together, no queueing) and the image encoder (CPU), both active at a 131K context within the 60 GiB container. A/B-validated: 112/107 t/s (on par with the 200K baseline), needle 25/25, tools 7/7, agentic 30/30.`,
+        de: `26.10.4 Nebenläufigkeit + Vision: Parallel 2 (zwei Unterhaltungen gleichzeitig, kein Warten) und der Bild-Encoder (CPU), beide aktiv bei 131K Kontext im 60-GiB-Container. A/B-validiert: 112/107 t/s (gleichauf mit der 200K-Baseline), Needle 25/25, Tools 7/7, Agentic 30/30.`,
       },
-      categories: ["AI"],
+      categories: ["AI", "Vision"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimqwen38flash",
       sourceCode: "https://github.com/bayerhazard/aimqwen38flash",
