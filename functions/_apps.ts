@@ -119,7 +119,7 @@ v26.9.1 Initialer Release für den AImighty Assistenten`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.10.3",
+      version: "26.10.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -188,7 +188,7 @@ Disk: 50 GB for model cache`,
   {
     metadata: {
       name: "aimrerqwen3vllm",
-      version: "26.9.10",
+      version: "26.9.11",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-reranker/main/icon.png",
       title: { en: "AIM Qwen3 0.6B Reranker" },
       description: { en: "Qwen3-Reranker-0.6B via vLLM with Qwen3 instruction template proxy (Jina/Cohere compatible, calibrated scores), Router-integrated" },
@@ -339,7 +339,7 @@ Disk: 20 GB (model cache)
   {
     metadata: {
       name: "aimomnivoice",
-      version: "26.10.2",
+      version: "26.10.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimomnivoice/main/icon.png",
       title: { en: "AIM OmniVoice 0.6B TTS" },
       description: { en: "OmniVoice 0.6B TTS — zero-shot voice cloning, voice design, 600+ languages, OpenAI-compatible API, Router-integrated" },
@@ -776,7 +776,7 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.10.5",
+      version: "26.10.6",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
       description: { en: "Qwen3-ASR 1.7B via vLLM + Olares Model Console — 30 languages, noise-robust, OpenAI-compatible transcription" },
