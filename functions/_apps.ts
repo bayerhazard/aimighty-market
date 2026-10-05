@@ -890,12 +890,12 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.7",
+      version: "26.10.8",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
-        en: "Qwen3.8-Flash-Next Uncensored (125B MoE), GSQ-RCO-abliterated with parallel-2 slots and vision, via the Strata engine",
-        de: "Qwen3.8-Flash-Next Uncensored (125B MoE), GSQ-RCO-abliteriert mit Parallel-2-Slots und Vision, via Strata-Engine",
+        en: "Qwen3.8-Flash-Next Uncensored (125B MoE), GSQ-RCO",
+        de: "Qwen3.8-Flash-Next Uncensored (125B MoE), GSQ-RCO",
       },
       fullDescription: {
         en: `**Model Overview**
@@ -908,6 +908,7 @@ Strata runs the model on one consumer GPU: the experts live in system RAM, the b
 - KV cache 200,000 (INT8)
 - Parallel 2 (two conversations at once)
 - Image encoder (CPU)
+- Performance: 100 - 110 t/s
 - OpenAI- and Anthropic-compatible API
 
 **Resource Usage**
@@ -922,16 +923,15 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 - KV-Cache 200.000 (INT8)
 - Parallel 2 (zwei Unterhaltungen gleichzeitig)
 - Bild-Encoder (CPU)
+- Performance: 100 - 110 t/s
 - OpenAI- und Anthropic-kompatible API
 
 **Ressourcenverbrauch**
 ~40 GB System-RAM, eine NVIDIA-GPU (VRAM-Experten-Cache)`,
       },
       upgradeDescription: {
-        en: `26.10.7 Switched to the SC117 GSQ-RCO-abliterated quant: the same refusal-free behaviour (the abliteration is transplanted from the OrcaRouter model), but the GSQ-RCO expert arena needs ~40 GiB instead of ~50 GiB — ~10 GiB less host RAM at the same 200K INT8 KV and throughput. Built for Olares 1.12.6.
-26.10.1 Initial Release for AImighty.`,
-        de: `26.10.7 Wechsel auf die SC117-GSQ-RCO-abliterierte Quantisierung: gleiches verweigerungsfreies Verhalten (die Abliteration ist vom OrcaRouter-Modell übertragen), aber die GSQ-RCO-Experten-Arena braucht ~40 GiB statt ~50 GiB — ~10 GiB weniger Host-RAM bei gleichem 200K-INT8-KV und Durchsatz. Gebaut für Olares 1.12.6.
-26.10.1 Erstveröffentlichung für AImighty.`,
+        en: `26.10.1 Initial Release for AImighty`,
+        de: `26.10.1 Initial Release für AImighty`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
