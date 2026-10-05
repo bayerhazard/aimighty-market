@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.4",
+      version: "26.10.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -939,7 +939,7 @@ Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
       requiredDisk: "50Mi",
       requiredGpu: "1",
       limitedCpu: "16",
-      limitedMemory: "60Gi",
+      limitedMemory: "67Gi",
       apiTimeout: 0,
     },
     spec: {
