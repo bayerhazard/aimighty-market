@@ -998,7 +998,7 @@ Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
   {
     metadata: {
       name: "insilo",
-      version: "0.1.104",
+      version: "0.1.105",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: {
@@ -1066,7 +1066,17 @@ Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
 GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
       },
       upgradeDescription: {
-        en: `v0.1.104: Templates in your language.
+        en: `v0.1.105: Insilo as an app on your device.
+
+**Insilo can now be installed as an app** on phone, tablet and computer — with its own icon on the home screen and its own window, without the browser bar. Under Settings → "As an app" Insilo shows how this works in your browser, with a button where the browser allows it.
+
+**Installing also works when you reach the box from outside** (with Olares sign-in).
+
+**On iPhone and iPad, Insilo opens from the home screen in its own window** instead of Safari. On tablets the app now rotates.
+
+**Fixed:** on some boxes the interface did not start, because the setting "not as root" turned away helper containers of the platform.
+
+v0.1.104: Templates in your language.
 
 **The five built-in templates now carry their name in every interface language** — for example "Client meeting" in English or "Entretien client" in French — with a translated description. Until now they were German everywhere.
 
@@ -1109,7 +1119,17 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
-        de: `v0.1.104: Vorlagen in Ihrer Sprache.
+        de: `v0.1.105: Insilo als App auf dem Gerät.
+
+**Insilo lässt sich jetzt als App installieren** — auf Telefon, Tablet und Rechner, mit eigenem Symbol auf dem Startbildschirm und eigenem Fenster, ohne Browserleiste. Unter Einstellungen → „Als App" zeigt Insilo, wie das in Ihrem Browser geht, wo der Browser es zulässt mit einem Knopf.
+
+**Auch beim Zugriff von unterwegs** (mit Olares-Anmeldung) klappt die Installation jetzt.
+
+**Auf iPhone und iPad öffnet Insilo vom Home-Bildschirm im eigenen Fenster** statt in Safari. Auf Tablets dreht die App jetzt mit.
+
+**Behoben:** Auf manchen Boxen startete die Oberfläche nicht, weil die Einstellung „nicht als root“ Hilfscontainer der Plattform abwies.
+
+v0.1.104: Vorlagen in Ihrer Sprache.
 
 **Die fünf Werksvorlagen heißen jetzt in jeder Sprache der Oberfläche richtig** — etwa „Client meeting" auf Englisch oder „Entretien client" auf Französisch —, mit übersetzter Beschreibung. Bisher standen sie überall auf Deutsch.
 
