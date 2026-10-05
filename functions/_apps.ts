@@ -890,46 +890,46 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.2",
+      version: "26.10.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
-        en: "Qwen3.8-Flash-Next (125B MoE) served locally with the Strata engine",
-        de: "Qwen3.8-Flash-Next (125B MoE), lokal mit der Strata-Engine bereitgestellt",
+        en: "Qwen3.8-Flash-Next Uncensored (125B MoE) served locally with the Strata engine",
+        de: "Qwen3.8-Flash-Next Uncensored (125B MoE), lokal mit der Strata-Engine bereitgestellt",
       },
       fullDescription: {
         en: `**Model Overview**
-Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model (512 experts per layer, 10 active per token) with thinking, tool-calling and native image understanding.
+Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model (512 experts per layer, 10 active per token) with thinking and tool-calling. This build serves the OrcaRouter Uncensored (abliterated) IQ3_XXS fine-tune: a refusal-free assistant tuned for long-horizon agentic and coding work.
 
 **Inference Engine**
-Strata runs the GSQ-RCO IQ3_XXS quantization on one consumer GPU: the experts live in system RAM, the busiest are cached in VRAM, the n-gram table is memory-mapped, and MTP speculative decoding speeds up answers.
+Strata runs the IQ3_XXS quantization on one consumer GPU: the experts live in system RAM, the busiest are cached in VRAM, and MTP speculative decoding speeds up answers.
 
 **Key Features**
-Strata 0.1.39, IQ3_XXS (3.0 bpw), 200K context, INT8 KV with KV streaming
-Vision (CPU encoder), OpenAI- and Anthropic-compatible API
+Strata 0.1.39, Uncensored IQ3_XXS (3.0 bpw), 200K context, INT8 KV
+Text-only, OpenAI- and Anthropic-compatible API
 Expert cache on the GPU, CPU expert pool on the host
 
 **Resource Usage**
 ~50 GB system RAM, one NVIDIA GPU`,
         de: `**Modellübersicht**
-Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern (512 Experten pro Layer, 10 pro Token aktiv) mit Denken, Tool-Calling und nativem Bildverständnis.
+Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern (512 Experten pro Layer, 10 pro Token aktiv) mit Denken und Tool-Calling. Dieser Build liefert den OrcaRouter-Uncensored-(abliterierten)-IQ3_XXS-Finetune: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit.
 
 **Inferenz-Engine**
-Strata führt die GSQ-RCO-IQ3_XXS-Quantisierung auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten werden im VRAM gecacht, die N-Gramm-Tabelle wird speichergemappt, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
+Strata führt die IQ3_XXS-Quantisierung auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten werden im VRAM gecacht, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
 
 **Hauptmerkmale**
-Strata 0.1.39, IQ3_XXS (3,0 bpw), 200K Kontext, INT8-KV mit KV-Streaming
-Vision (CPU-Encoder), OpenAI- und Anthropic-kompatible API
+Strata 0.1.39, Uncensored IQ3_XXS (3,0 bpw), 200K Kontext, INT8-KV
+Text-only, OpenAI- und Anthropic-kompatible API
 Experten-Cache auf der GPU, CPU-Experten-Pool auf dem Host
 
 **Ressourcenverbrauch**
 ~50 GB System-RAM, eine NVIDIA-GPU`,
       },
       upgradeDescription: {
-        en: `26.10.2 Stable tuning: 2 concurrent slots (one large + one small context), German draft vocabulary, 200K context, INT8 KV with 96K-cell KV streaming, faster long prompts (32K prefill chunks), calibrated engine flags, learned expert profile. First release was 26.10.1.`,
-        de: `26.10.2 Stabiles Tuning: 2 gleichzeitige Slots (ein grosser + ein kleiner Kontext), deutsches Draft-Vokabular, 200K Kontext, INT8-KV mit 96K-Zellen-KV-Streaming, schnellere lange Prompts (32K-Prefill-Chunks), kalibrierte Engine-Flags, gelerntes Expertenprofil. Erste Version war 26.10.1.`,
+        en: `26.10.3 Model switch: OrcaRouter Uncensored (abliterated) IQ3_XXS — refusal-free Hermes/coding agent. 200K context, INT8 KV, MTP speculation, A/B-validated against the GSQ-RCO baseline (decode on par, +6% on prose, needle 25/25, tools 7/7, agentic 30/30). Text-only (no vision).`,
+        de: `26.10.3 Modellwechsel: OrcaRouter Uncensored (abliteriert) IQ3_XXS — verweigerungsfreier Hermes-/Coding-Agent. 200K Kontext, INT8-KV, MTP-Spekulation, A/B-validiert gegen die GSQ-RCO-Baseline (Decode gleichauf, +6 % bei Prosa, Needle 25/25, Tools 7/7, Agentic 30/30). Text-only (kein Vision).`,
       },
-      categories: ["AI", "Vision"],
+      categories: ["AI"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimqwen38flash",
       sourceCode: "https://github.com/bayerhazard/aimqwen38flash",
