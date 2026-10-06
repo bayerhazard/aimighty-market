@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.11",
+      version: "26.10.12",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -930,8 +930,12 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 ~40 GB System-RAM, eine NVIDIA-GPU (VRAM-Experten-Cache)`,
       },
       upgradeDescription: {
-        en: `26.10.1 Initial Release for AImighty`,
-        de: `26.10.1 Initial Release für AImighty`,
+        en: `26.10.12: RAM request aligned to actual usage (8Gi -> 44Gi); the scheduler reserves real headroom. No engine change. Built for Olares 1.12.6.
+26.10.11: Single stream with MTP speculative decoding.
+26.10.1 Initial Release for AImighty`,
+        de: `26.10.12: RAM-Anforderung an den tatsächlichen Verbrauch angeglichen (8Gi -> 44Gi); der Scheduler reserviert jetzt echten Spielraum. Keine Engine-Änderung. Gebaut für Olares 1.12.6.
+26.10.11: Einzelstrom mit MTP-spekulativem Dekodieren.
+26.10.1 Erste Veröffentlichung für AImighty`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
@@ -939,7 +943,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
       sourceCode: "https://github.com/bayerhazard/aimqwen38flash",
       supportArch: ["amd64"],
       requiredCpu: "4",
-      requiredMemory: "8Gi",
+      requiredMemory: "44Gi",
       requiredDisk: "50Mi",
       requiredGpu: "1",
       limitedCpu: "16",
@@ -953,7 +957,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
       ],
       permission: [],
       middleware: [],
-      options: { resources: { cpu: "4", memory: "8Gi", disk: "50Mi" } },
+      options: { resources: { cpu: "4", memory: "44Gi", disk: "50Mi" } },
     },
   },
   {
