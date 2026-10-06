@@ -963,7 +963,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
   {
     metadata: {
       name: "relay",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
       title: { en: "Relay" },
       description: {
@@ -981,8 +981,8 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 - **Lokal & sicher** – volle Datenhoheit; E-Mails und KI-Modelle bleiben ausschließlich lokal auf deinem Gerät.`,
       },
       upgradeDescription: {
-        en: "v26.10.1: Initial Release for AImighty",
-        de: "v26.10.1: Initial Release für AImighty",
+        en: "v26.10.2: Relay now defaults to the Olares Router. Chat, speech-to-text and text-to-speech are served automatically through the system models default-chat, default-stt and default-tts — no manual endpoint setup. A custom endpoint stays available per capability in Settings. Requires Olares 1.12.7+; older versions keep the manual configuration.\nv26.10.1: Initial Release for AImighty",
+        de: "v26.10.2: Relay nutzt jetzt standardmäßig den Olares Router. Chat, Speech-to-Text und Text-to-Speech laufen automatisch über die System-Modelle default-chat, default-stt und default-tts — ohne manuelle Endpunkt-Einrichtung. Ein eigener Endpunkt bleibt pro Fähigkeit in den Einstellungen verfügbar. Erfordert Olares 1.12.7+; ältere Versionen behalten die manuelle Konfiguration.\nv26.10.1: Initial Release für AImighty",
       },
       categories: ["Applications"],
       developer: "bayerhazard",
