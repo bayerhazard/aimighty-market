@@ -1006,7 +1006,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
   {
     metadata: {
       name: "insilo",
-      version: "0.1.105",
+      version: "0.1.106",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: {
@@ -1074,7 +1074,15 @@ Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
 GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
       },
       upgradeDescription: {
-        en: `v0.1.105: Insilo as an app on your device.
+        en: `v0.1.106: Your profile at the top right.
+
+**At the top right there is now a circle with your initials** — on computer and phone in the same place. It holds Settings, Appearance (light, dark, like the system) and Language.
+
+**The footer below the navigation is gone.** The privacy proof and the origin now sit on the "About Insilo" page.
+
+**On the phone the menu opens as a sheet across the full width.**
+
+v0.1.105: Insilo as an app on your device.
 
 **Insilo can now be installed as an app** on phone, tablet and computer — with its own icon on the home screen and its own window, without the browser bar. Under Settings → "As an app" Insilo shows how this works in your browser, with a button where the browser allows it.
 
@@ -1127,7 +1135,15 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
-        de: `v0.1.105: Insilo als App auf dem Gerät.
+        de: `v0.1.106: Ihr Profil oben rechts.
+
+**Oben rechts steht jetzt ein Kreis mit Ihren Initialen** — am Rechner und am Telefon an derselben Stelle. Darin: Einstellungen, Darstellung (hell, dunkel, wie das System) und Sprache.
+
+**Der Fuß unter der Navigation entfällt.** Der Datenschutz-Nachweis und die Herkunft stehen jetzt auf der Seite „Über Insilo“.
+
+**Am Telefon öffnet das Menü als Blatt über die ganze Breite.**
+
+v0.1.105: Insilo als App auf dem Gerät.
 
 **Insilo lässt sich jetzt als App installieren** — auf Telefon, Tablet und Rechner, mit eigenem Symbol auf dem Startbildschirm und eigenem Fenster, ohne Browserleiste. Unter Einstellungen → „Als App" zeigt Insilo, wie das in Ihrem Browser geht, wo der Browser es zulässt mit einem Knopf.
 
