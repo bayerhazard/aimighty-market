@@ -290,7 +290,7 @@ export function getHash(): string {
 // The 1.12.7 syncer probes <base>/api/v2/catalog, then pulls /api/v2/taxonomy,
 // /api/v2/applications and the ranking step. schema_version/source_id are
 // validated against the local source binding, so they must match this source.
-export const SOURCE_ID = "market.AImighty";
+export const SOURCE_ID = "market.aimighty";
 export const SOURCE_DISPLAY = "AImighty";
 export const SCHEMA_VERSION = "v2";
 
@@ -305,7 +305,7 @@ export const SCHEMA_VERSION = "v2";
 // across apps (e.g. relay 26.9.183 vs aimqwen38llama 26.9.21), so a
 // version-scaled value can sit *below* the global high-water mark and the app
 // would be skipped by the incremental sync.
-const CANONICAL_EPOCH_MS = 4603000000000; // bump (strictly above the current water mark) on every deploy
+const CANONICAL_EPOCH_MS = 4604000000000; // bump (strictly above the current water mark) on every deploy
 function appModifyTime(name: string, version: string): number {
   // Every app carries the SAME deploy epoch: the syncer's high-water mark is
   // global (max_last_modify_time), so any per-app jitter could push one app
