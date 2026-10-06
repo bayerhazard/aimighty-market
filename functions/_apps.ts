@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.10",
+      version: "26.10.11",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -899,14 +899,14 @@ OpenAI-kompatible API`,
       },
       fullDescription: {
         en: `**Model Overview**
-AImighty flagship stack. Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model with thinking and tool-calling. This build serves GSQ-RCO-abliterated: a refusal-free assistant tuned for long-horizon agentic and coding work, with image understanding and two concurrent conversation slots.
+AImighty flagship stack. Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model with thinking and tool-calling. This build serves GSQ-RCO-abliterated: a refusal-free assistant tuned for long-horizon agentic and coding work, with image understanding.
 
 **Inference Engine**
 Strata runs the model on one consumer GPU: the experts live in system RAM, the busiest few thousand are cached in VRAM, and MTP speculative decoding speeds up answers.
 
 **Key Features**
 - KV cache 200,000 (INT8)
-- Parallel 2 (two conversations at once)
+- Single stream with MTP speculative decoding
 - Image encoder (CPU)
 - Performance: 100 - 120 t/s
 - OpenAI- and Anthropic-compatible API
@@ -914,14 +914,14 @@ Strata runs the model on one consumer GPU: the experts live in system RAM, the b
 **Resource Usage**
 ~40 GB system RAM, one NVIDIA GPU (VRAM expert cache)`,
         de: `**Modellübersicht**
-AImighty-Flaggschiff-Stack. Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern, Denken und Tool-Calling. Dieser Build liefert GSQ-RCO-abliteriert: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit, mit Bildverständnis und zwei gleichzeitigen Unterhaltungs-Slots.
+AImighty-Flaggschiff-Stack. Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern, Denken und Tool-Calling. Dieser Build liefert GSQ-RCO-abliteriert: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit, mit Bildverständnis.
 
 **Inferenz-Engine**
 Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten Tausenden werden im VRAM gecacht, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
 
 **Hauptmerkmale**
 - KV-Cache 200.000 (INT8)
-- Parallel 2 (zwei Unterhaltungen gleichzeitig)
+- Einzelstream mit MTP-spekulativem Dekodieren
 - Bild-Encoder (CPU)
 - Performance: 100 - 120 t/s
 - OpenAI- und Anthropic-kompatible API
