@@ -1006,7 +1006,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
   {
     metadata: {
       name: "insilo",
-      version: "0.1.106",
+      version: "0.1.107",
       icon: "https://raw.githubusercontent.com/ska1walker/insilo/main/icon.png",
       title: { en: "Insilo" },
       description: {
@@ -1074,7 +1074,11 @@ Speicher: 30 GB (Ton, Whisper- und BGE-M3-Modelle ~3 GB, Datenbankanteil)
 GPU: keine — Whisper läuft auf der CPU, das Sprachmodell ist extern`,
       },
       upgradeDescription: {
-        en: `v0.1.106: Your profile at the top right.
+        en: `v0.1.107: Settings only through the profile.
+
+**Settings and "About Insilo" left the navigation.** They now open from the profile at the top right — the same on computer and phone. The navigation shows only Record, Meetings, Archive and Idea.
+
+v0.1.106: Your profile at the top right.
 
 **At the top right there is now a circle with your initials** — on computer and phone in the same place. It holds Settings, Appearance (light, dark, like the system) and Language.
 
@@ -1135,7 +1139,11 @@ v0.1.101: long meetings get through.
 **Short recordings get their speaker names back.** With only a few segments, speaker separation failed silently and the transcript came back with no attribution.
 
 **Still true since 0.1.93:** where the shared app folder is available, Insilo writes every meeting summary there, with no switch. Every app with access to that folder can read them. They do not leave the box, but they do leave Insilo. The transcript stays in Insilo.`,
-        de: `v0.1.106: Ihr Profil oben rechts.
+        de: `v0.1.107: Einstellungen nur über das Profil.
+
+**Einstellungen und „Über Insilo“ stehen nicht mehr in der Navigation.** Sie öffnen sich jetzt über das Profil oben rechts — am Rechner und am Telefon gleich. Die Navigation zeigt nur noch Aufnahme, Besprechungen, Archiv und Idee.
+
+v0.1.106: Ihr Profil oben rechts.
 
 **Oben rechts steht jetzt ein Kreis mit Ihren Initialen** — am Rechner und am Telefon an derselben Stelle. Darin: Einstellungen, Darstellung (hell, dunkel, wie das System) und Sprache.
 
