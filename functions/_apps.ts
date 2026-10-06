@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.8",
+      version: "26.10.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -908,7 +908,7 @@ Strata runs the model on one consumer GPU: the experts live in system RAM, the b
 - KV cache 200,000 (INT8)
 - Parallel 2 (two conversations at once)
 - Image encoder (CPU)
-- Performance: 100 - 110 t/s
+- Performance: 100 - 120 t/s
 - OpenAI- and Anthropic-compatible API
 
 **Resource Usage**
@@ -923,7 +923,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 - KV-Cache 200.000 (INT8)
 - Parallel 2 (zwei Unterhaltungen gleichzeitig)
 - Bild-Encoder (CPU)
-- Performance: 100 - 110 t/s
+- Performance: 100 - 120 t/s
 - OpenAI- und Anthropic-kompatible API
 
 **Ressourcenverbrauch**
