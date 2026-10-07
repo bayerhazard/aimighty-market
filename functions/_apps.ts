@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.13",
+      version: "26.10.14",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -930,11 +930,13 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 ~50 GB System-RAM, eine NVIDIA-GPU (VRAM-Experten-Cache)`,
       },
       upgradeDescription: {
-        en: `26.10.13: Model upgraded to GSQ-RCO IQ3_S with a 480 KB Huihui refusal-direction control vector applied at runtime by Strata's experimental-speed-projection (no weight repack; byte-identical ISTA weights). Quality up (Wings 39/40 -> 40/40), fully uncensored (0/10 refusals). Engine 0.1.39 -> 0.1.40.1 (portable AVX2 build). KV stays int8. Built for Olares 1.12.6.
+        en: `26.10.14: Engine 0.1.40.1 -> 0.1.40.2 (portable AVX2 build, engine + vision). New prefill CPU-share scheduling (STRATA_PREFILL_CPU_SHARE=auto): short prompts ~20% faster, long prompts unchanged. 0.1.40.2 also brings 2-4-token verify windows (~1-4% faster decode on RTX 30+), lower peak host RAM, an EXIF-correct image path and a server watchdog. Built for Olares 1.12.6.
+26.10.13: Model upgraded to GSQ-RCO IQ3_S with a 480 KB Huihui refusal-direction control vector applied at runtime by Strata's experimental-speed-projection (no weight repack; byte-identical ISTA weights). Quality up (Wings 39/40 -> 40/40), fully uncensored (0/10 refusals). Engine 0.1.39 -> 0.1.40.1 (portable AVX2 build). KV stays int8. Built for Olares 1.12.6.
 26.10.12: RAM request aligned to actual usage (8Gi -> 44Gi); the scheduler reserves real headroom. No engine change. Built for Olares 1.12.6.
 26.10.11: Single stream with MTP speculative decoding.
 26.10.1 Initial Release for AImighty`,
-        de: `26.10.13: Modell auf GSQ-RCO IQ3_S umgestellt, mit einem 480-KB-Huihui-Kontrollvektor gegen die Verweigerungsrichtung, der zur Laufzeit durch Stratas experimental-speed-projection angewandt wird (kein Gewichts-Repack; byte-identische ISTA-Gewichte). Qualität besser (Wings 39/40 -> 40/40), voll verweigerungsfrei (0/10). Engine 0.1.39 -> 0.1.40.1 (portable AVX2-Build). KV bleibt int8. Gebaut für Olares 1.12.6.
+        de: `26.10.14: Engine 0.1.40.1 -> 0.1.40.2 (portable AVX2-Build, Engine + Vision). Neue Prefill-CPU-Share-Planung (STRATA_PREFILL_CPU_SHARE=auto): kurze Prompts ~20% schneller, lange unverändert. 0.1.40.2 bringt zudem 2-4-Token-Verify-Fenster (~1-4% schnelleres Dekodieren auf RTX 30+), geringeren Spitzen-RAM, einen EXIF-korrekten Bildpfad und einen Server-Watchdog. Gebaut für Olares 1.12.6.
+26.10.13: Modell auf GSQ-RCO IQ3_S umgestellt, mit einem 480-KB-Huihui-Kontrollvektor gegen die Verweigerungsrichtung, der zur Laufzeit durch Stratas experimental-speed-projection angewandt wird (kein Gewichts-Repack; byte-identische ISTA-Gewichte). Qualität besser (Wings 39/40 -> 40/40), voll verweigerungsfrei (0/10). Engine 0.1.39 -> 0.1.40.1 (portable AVX2-Build). KV bleibt int8. Gebaut für Olares 1.12.6.
 26.10.12: RAM-Anforderung an den tatsächlichen Verbrauch angeglichen (8Gi -> 44Gi); der Scheduler reserviert jetzt echten Spielraum. Keine Engine-Änderung. Gebaut für Olares 1.12.6.
 26.10.11: Einzelstrom mit MTP-spekulativem Dekodieren.
 26.10.1 Erste Veröffentlichung für AImighty`,
