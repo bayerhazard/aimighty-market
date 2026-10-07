@@ -963,32 +963,36 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
   {
     metadata: {
       name: "relay",
-      version: "26.10.2",
-      icon: "https://raw.githubusercontent.com/bayerhazard/relay-one/main/icon.png",
+      version: "26.10.3",
+      icon: "https://github.com/bayerhazard/relay-one/releases/download/v26.10.3/icon.png",
       title: { en: "Relay" },
       description: {
         en: "Relay — the intelligent, local email client",
         de: "Relay — der intelligente, lokale E-Mail-Client",
       },
       fullDescription: {
-        en: `- **AI Email Generation** – quickly draft precise emails and replies in your individual tone. It learns automatically to adapt generated email texts for different recipient groups (work, private) and even for individual recipients.
-- **Voice-to-Mail** – voice input that automatically becomes a finished email. It recognizes recipients and subject lines to generate complete templates.
-- **AI Monitoring** – smart inbox analysis for critical content, phishing warnings, priority rating, and automatic summaries.
-- **Local & Secure** – full data sovereignty; emails and AI models remain exclusively local on your device.`,
-        de: `- **KI-E-Mail-Erstellung** – verfasse präzise E-Mails und Antworten in deinem eigenen Ton. Relay lernt automatisch und passt formulierte Texte an verschiedene Empfängergruppen (beruflich, privat) und sogar an einzelne Empfänger an.
-- **Voice-to-Mail** – Spracheingabe, die automatisch zu einer fertigen E-Mail wird. Empfänger und Betreff werden erkannt, um vollständige Vorlagen zu erstellen.
-- **KI-Überwachung** – intelligente Postfach-Analyse auf kritische Inhalte, Phishing-Warnungen, Prioritätseinstufung und automatische Zusammenfassungen.
-- **Lokal & sicher** – volle Datenhoheit; E-Mails und KI-Modelle bleiben ausschließlich lokal auf deinem Gerät.`,
+        en: `- **AI email drafting** – write precise emails and replies in your own tone. Relay learns to adapt its drafts to groups of recipients (work, private) and even to single recipients.
+- **Voice to mail** – speak, and Relay turns it into a finished email, with recipients and subject recognised.
+- **AI watch over the inbox** – critical content, phishing warnings, priorities and short summaries.
+- **Mail, contacts, calendar and tasks in one place** – IMAP and SMTP, CardDAV and CalDAV, meetings from Insilo.
+- **Local and secure** – your mail and the AI stay on your own box.`,
+        de: `- **E-Mails mit AI entwerfen** – präzise E-Mails und Antworten in Ihrem eigenen Ton. Relay lernt, seine Entwürfe an Empfängergruppen (beruflich, privat) und sogar an einzelne Empfänger anzupassen.
+- **Sprache zu Mail** – Sie sprechen, Relay macht daraus eine fertige E-Mail und erkennt Empfänger und Betreff.
+- **AI wacht über das Postfach** – kritische Inhalte, Phishing-Warnungen, Prioritäten und kurze Zusammenfassungen.
+- **Mail, Kontakte, Kalender und Aufgaben an einem Ort** – IMAP und SMTP, CardDAV und CalDAV, Besprechungen aus Insilo.
+- **Lokal und sicher** – Ihre Mails und die AI bleiben auf Ihrer eigenen Box.`,
       },
       upgradeDescription: {
-        en: "v26.10.2: Relay now defaults to the Olares Router. Chat, speech-to-text and text-to-speech are served automatically through the system models default-chat, default-stt and default-tts — no manual endpoint setup. A custom endpoint stays available per capability in Settings. Requires Olares 1.12.7+; older versions keep the manual configuration.\nv26.10.1: Initial Release for AImighty",
-        de: "v26.10.2: Relay nutzt jetzt standardmäßig den Olares Router. Chat, Speech-to-Text und Text-to-Speech laufen automatisch über die System-Modelle default-chat, default-stt und default-tts — ohne manuelle Endpunkt-Einrichtung. Ein eigener Endpunkt bleibt pro Fähigkeit in den Einstellungen verfügbar. Erfordert Olares 1.12.7+; ältere Versionen behalten die manuelle Konfiguration.\nv26.10.1: Initial Release für AImighty",
+        en: `v26.10.3: Relay now looks and works like the other AImighty apps. The five areas sit as icons in the header next to the search, the column holds folders, views and settings sections, and the profile at the top right leads to the settings. Dark mode follows the system. Buttons, dialogs, icons and colours come from the AImighty design system; deleting something for good always asks first, moving mail to the trash can be undone. The assistant opens from the shield at the bottom right. Above each mail a compact row of icons replies, forwards, archives, marks as spam, trashes, moves and flags, each with its name as a tooltip, and "New email" sits at the top of the column. Calendar and contacts now also connect to servers that use Basic sign-in, and new mail arrives reliably on quiet inboxes. Newsletters that offer it can be ended with "Unsubscribe" next to the sender. Several mails can be archived, moved to spam or trashed at once and taken back, and an optional "Clean up" area lists who writes to you most and lets you go through mail one by one. v26.10.2: Relay now defaults to the Olares Router. Chat, speech-to-text and text-to-speech are served automatically through the system models default-chat, default-stt and default-tts — no manual endpoint setup. A custom endpoint stays available per capability in Settings. Requires Olares 1.12.7+; older versions keep the manual configuration.
+v26.10.1: Initial Release for AImighty`,
+        de: `v26.10.3: Relay sieht jetzt aus und arbeitet wie die anderen AImighty-Apps. Die fünf Bereiche stehen als Zeichen in der Kopfleiste neben der Suche, die Spalte zeigt Ordner, Ansichten und Abschnitte der Einstellungen, und das Profil oben rechts führt zu den Einstellungen. Der Dunkelmodus folgt dem System. Knöpfe, Dialoge, Zeichen und Farben kommen aus dem AImighty-Designsystem; was endgültig gelöscht wird, fragt vorher nach, Mails in den Papierkorb lassen sich rückgängig machen. Der Assistent öffnet sich über das Schild unten rechts. Über jeder Mail steht eine schlanke Zeichenleiste zum Antworten, Weiterleiten, Archivieren, für Spam, Papierkorb, Verschieben und Markieren, jedes Zeichen mit seinem Namen als Tooltip, und „Neue E-Mail“ steht oben in der Spalte. Kalender und Kontakte verbinden sich jetzt auch mit Servern, die eine Basic-Anmeldung verlangen, und neue Mails kommen auch in ruhigen Postfächern zuverlässig an. Newsletter, die es anbieten, lassen sich mit „Abo beenden“ neben dem Absender abbestellen. Mehrere Mails lassen sich auf einmal archivieren, in den Spam oder in den Papierkorb verschieben und zurückholen, und der zuschaltbare Bereich „Aufräumen“ zeigt, wer Ihnen am meisten schreibt, und geht Mails eine nach der anderen durch. v26.10.2: Relay nutzt jetzt standardmäßig den Olares Router. Chat, Speech-to-Text und Text-to-Speech laufen automatisch über die System-Modelle default-chat, default-stt und default-tts — ohne manuelle Endpunkt-Einrichtung. Ein eigener Endpunkt bleibt pro Fähigkeit in den Einstellungen verfügbar. Erfordert Olares 1.12.7+; ältere Versionen behalten die manuelle Konfiguration.
+v26.10.1: Initial Release für AImighty`,
       },
       categories: ["Applications"],
       developer: "bayerhazard",
       website: "https://github.com/bayerhazard/relay-one",
       sourceCode: "https://github.com/bayerhazard/relay-one",
-      supportArch: ["amd64", "arm64"],
+      supportArch: ["amd64"],
       requiredCpu: "500m",
       requiredMemory: "1Gi",
       requiredDisk: "10Gi",
@@ -997,7 +1001,7 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
     },
     spec: {
       type: "app",
-      entrance: [{ name: "relay", title: { en: "Relay" }, port: 3000, host: "relay", authLevel: "public", openMethod: "window" }],
+      entrance: [{ name: "relay", title: { en: "Relay" }, port: 3000, host: "relay", authLevel: "internal", openMethod: "window" }],
       permission: [],
       middleware: [],
       options: { resources: { cpu: "4", memory: "8Gi", disk: "200Gi" } },
