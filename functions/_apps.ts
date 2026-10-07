@@ -890,7 +890,7 @@ OpenAI-kompatible API`,
   {
     metadata: {
       name: "aimqwen38flash",
-      version: "26.10.12",
+      version: "26.10.13",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38flash/main/icon.png",
       title: { en: "AIM Qwen3.8 Flash Next" },
       description: {
@@ -899,7 +899,7 @@ OpenAI-kompatible API`,
       },
       fullDescription: {
         en: `**Model Overview**
-AImighty flagship stack. Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model with thinking and tool-calling. This build serves GSQ-RCO-abliterated: a refusal-free assistant tuned for long-horizon agentic and coding work, with image understanding.
+AImighty flagship stack. Qwen3.8-Flash-Next is a 125B-parameter sparse Mixture-of-Experts model with thinking and tool-calling. This build serves GSQ-RCO (IQ3_S) with a runtime refusal-direction control vector: a refusal-free assistant tuned for long-horizon agentic and coding work, with image understanding.
 
 **Inference Engine**
 Strata runs the model on one consumer GPU: the experts live in system RAM, the busiest few thousand are cached in VRAM, and MTP speculative decoding speeds up answers.
@@ -908,13 +908,13 @@ Strata runs the model on one consumer GPU: the experts live in system RAM, the b
 - KV cache 200,000 (INT8)
 - Single stream with MTP speculative decoding
 - Image encoder (CPU)
-- Performance: 100 - 120 t/s
+- Performance: 90 - 120 t/s
 - OpenAI- and Anthropic-compatible API
 
 **Resource Usage**
-~40 GB system RAM, one NVIDIA GPU (VRAM expert cache)`,
+~50 GB system RAM, one NVIDIA GPU (VRAM expert cache)`,
         de: `**Modellübersicht**
-AImighty-Flaggschiff-Stack. Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern, Denken und Tool-Calling. Dieser Build liefert GSQ-RCO-abliteriert: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit, mit Bildverständnis.
+AImighty-Flaggschiff-Stack. Qwen3.8-Flash-Next ist ein dünn besetztes Mixture-of-Experts-Modell mit 125 Mrd. Parametern, Denken und Tool-Calling. Dieser Build liefert GSQ-RCO (IQ3_S) mit einem Laufzeit-Kontrollvektor gegen die Verweigerungsrichtung: ein verweigerungsfreier Assistent für langfristige Agenten- und Coding-Arbeit, mit Bildverständnis.
 
 **Inferenz-Engine**
 Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im System-RAM, die meistgenutzten Tausenden werden im VRAM gecacht, und MTP-spekulatives Dekodieren beschleunigt die Antworten.
@@ -923,17 +923,19 @@ Strata führt das Modell auf einer Consumer-GPU aus: Die Experten liegen im Syst
 - KV-Cache 200.000 (INT8)
 - Einzelstream mit MTP-spekulativem Dekodieren
 - Bild-Encoder (CPU)
-- Performance: 100 - 120 t/s
+- Performance: 90 - 120 t/s
 - OpenAI- und Anthropic-kompatible API
 
 **Ressourcenverbrauch**
-~40 GB System-RAM, eine NVIDIA-GPU (VRAM-Experten-Cache)`,
+~50 GB System-RAM, eine NVIDIA-GPU (VRAM-Experten-Cache)`,
       },
       upgradeDescription: {
-        en: `26.10.12: RAM request aligned to actual usage (8Gi -> 44Gi); the scheduler reserves real headroom. No engine change. Built for Olares 1.12.6.
+        en: `26.10.13: Model upgraded to GSQ-RCO IQ3_S with a 480 KB Huihui refusal-direction control vector applied at runtime by Strata's experimental-speed-projection (no weight repack; byte-identical ISTA weights). Quality up (Wings 39/40 -> 40/40), fully uncensored (0/10 refusals). Engine 0.1.39 -> 0.1.40.1 (portable AVX2 build). KV stays int8. Built for Olares 1.12.6.
+26.10.12: RAM request aligned to actual usage (8Gi -> 44Gi); the scheduler reserves real headroom. No engine change. Built for Olares 1.12.6.
 26.10.11: Single stream with MTP speculative decoding.
 26.10.1 Initial Release for AImighty`,
-        de: `26.10.12: RAM-Anforderung an den tatsächlichen Verbrauch angeglichen (8Gi -> 44Gi); der Scheduler reserviert jetzt echten Spielraum. Keine Engine-Änderung. Gebaut für Olares 1.12.6.
+        de: `26.10.13: Modell auf GSQ-RCO IQ3_S umgestellt, mit einem 480-KB-Huihui-Kontrollvektor gegen die Verweigerungsrichtung, der zur Laufzeit durch Stratas experimental-speed-projection angewandt wird (kein Gewichts-Repack; byte-identische ISTA-Gewichte). Qualität besser (Wings 39/40 -> 40/40), voll verweigerungsfrei (0/10). Engine 0.1.39 -> 0.1.40.1 (portable AVX2-Build). KV bleibt int8. Gebaut für Olares 1.12.6.
+26.10.12: RAM-Anforderung an den tatsächlichen Verbrauch angeglichen (8Gi -> 44Gi); der Scheduler reserviert jetzt echten Spielraum. Keine Engine-Änderung. Gebaut für Olares 1.12.6.
 26.10.11: Einzelstrom mit MTP-spekulativem Dekodieren.
 26.10.1 Erste Veröffentlichung für AImighty`,
       },
