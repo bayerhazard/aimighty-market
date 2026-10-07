@@ -290,7 +290,7 @@ export function getHash(): string {
 // The 1.12.7 syncer probes <base>/api/v2/catalog, then pulls /api/v2/taxonomy,
 // /api/v2/applications and the ranking step. schema_version/source_id are
 // validated against the local source binding, so they must match this source.
-export const SOURCE_ID = "market.AImighty";
+export const SOURCE_ID = "market.aimighty";
 export const SOURCE_DISPLAY = "AImighty";
 export const SCHEMA_VERSION = "v2";
 
