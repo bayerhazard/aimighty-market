@@ -831,7 +831,7 @@ Disk: model cache in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimqwen38vllm",
-      version: "26.10.3",
+      version: "26.10.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38vllm/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: {
@@ -844,9 +844,9 @@ Qwen3.8-27B supports thinking, tool-calling, and native image understanding.
 
 **Key Features**
 Speculative decoding: MTP, int4 GPTQ head
-KV cache: 200k with k4v2_g128
+KV cache: 200k KVarN k4v2 + fp16 dequant (412k-token pool)
 MAX_SEQS=4
-Performance: 95 - 117 t/s code, 70 - 99 t/s prose
+Performance: 95 - 118 t/s code, 70 - 99 t/s prose
 Vision: Tower is offloaded to host RAM
 OpenAI-compatible API`,
         de: `**Modellübersicht**
@@ -854,15 +854,15 @@ Qwen3.8-27B unterstützt Denken, Tool-Calling und natives Bildverständnis.
 
 **Hauptmerkmale**
 Spekulative Dekodierung: MTP, int4-GPTQ-Kopf
-KV-Cache: 200k mit k4v2_g128
+KV-Cache: 200k KVarN k4v2 + fp16-Dequant (412k-Token-Pool)
 MAX_SEQS=4
-Leistung: 95 - 117 t/s Code, 70 - 99 t/s Prosa
+Leistung: 95 - 118 t/s Code, 70 - 99 t/s Prosa
 Vision: Der Tower wird in den Host-RAM ausgelagert
 OpenAI-kompatible API`,
       },
       upgradeDescription: {
-        en: `26.10.3 Engine refresh. HyperQwen 2026-10-08 (vLLM 0.30.0, 22 commits past the previous pin) adds patch-integrity checks and launcher diagnostics; the serving profile is unchanged (AutoRound fast variant, 4 request slots, 0.93 memory budget, 200k KVarN k4v2 KV cache).`,
-        de: `26.10.3 Engine-Refresh. HyperQwen 2026-10-08 (vLLM 0.30.0, 22 Commits über dem vorherigen Pin) bringt Patch-Integritätsprüfungen und Launcher-Diagnostik; das Serving-Profil bleibt unverändert (AutoRound-Fast-Variante, 4 Request-Slots, 0,93 Speicherbudget, 200k KVarN-k4v2-KV-Cache).`,
+        en: `26.10.4 Engine refresh to HyperQwen 2026-10-08 (vLLM 0.30.0) plus two measured opt-ins: KVarN fp16 dequant (identical prefill, +16% decode at 100k, +24% at 188k) and a host-pinned quantized embedding. KV pool 339,823 -> 412,389 tokens (1.21x; 2.06x at 200k), quality unchanged (needle 25/25).`,
+        de: `26.10.4 Engine-Refresh auf HyperQwen 2026-10-08 (vLLM 0.30.0) plus zwei gemessene Opt-ins: KVarN-fp16-Dequant (gleicher Prefill, +16 % Decode bei 100k, +24 % bei 188k) und ein host-gepinntes quantisiertes Embedding. KV-Pool 339.823 -> 412.389 Token (1,21x; 2,06x bei 200k), Qualität unverändert (Needle 25/25).`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
