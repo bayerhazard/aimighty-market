@@ -1369,7 +1369,7 @@ GPU: keine — das Sprachmodell läuft extern`,
   {
     metadata: {
       name: "aimragflow",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://app.cdn.olares.com/appstore/ragflow/icon.png",
       title: { en: "AIM RAGFlow" },
       description: {
@@ -1423,8 +1423,8 @@ RAM: 8-12 GiB (zusätzlich Elasticsearch / MinIO / Valkey)
 Disk: appData-Volumes`,
       },
       upgradeDescription: {
-        en: "v26.10.1: Initial Release for AImighty Analyst",
-        de: "v26.10.1: Initial Release für AImighty Analyst",
+        en: "v26.10.2: Entrance auth level public, so API-key clients (Hermes ragflow-kb plugin) reach /api/v1 without the SSO redirect.\nv26.10.1: Initial Release for AImighty Analyst",
+        de: "v26.10.2: Entrance-Auth-Level public, damit API-Key-Clients (Hermes-Plugin ragflow-kb) /api/v1 ohne SSO-Redirect erreichen.\nv26.10.1: Initial Release für AImighty Analyst",
       },
       categories: ["Applications"],
       developer: "Aimighty",
@@ -1442,7 +1442,7 @@ Disk: appData-Volumes`,
     spec: {
       type: "app",
       entrance: [
-        { name: "aimragflow", title: { en: "AIM RAGFlow" }, port: 80, host: "aimragflow", authLevel: "private", openMethod: "window" },
+        { name: "aimragflow", title: { en: "AIM RAGFlow" }, port: 80, host: "aimragflow", authLevel: "public", openMethod: "window" },
       ],
       permission: [],
       middleware: { mysql: { username: "aimragflow", databases: [{ name: "aimragflow" }] } },
