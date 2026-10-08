@@ -831,7 +831,7 @@ Disk: model cache in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimqwen38vllm",
-      version: "26.10.2",
+      version: "26.10.3",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimqwen38vllm/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: {
@@ -861,8 +861,8 @@ Vision: Der Tower wird in den Host-RAM ausgelagert
 OpenAI-kompatible API`,
       },
       upgradeDescription: {
-        en: `26.10.2 Serving tuning. AutoRound fast variant (GPTQ-int4 lm_head + MTP with a draft vocabulary counted over the model's own outputs), 4 request slots and a 0.93 memory budget: +6.5% decode, KV pool 238,938 -> 339,823 tokens (1.70x at 200k).`,
-        de: `26.10.2 Serving-Feinschliff. AutoRound-Fast-Variante (GPTQ-int4 lm_head + MTP mit einem Draft-Vokabular aus den Ausgaben des Modells selbst), 4 Request-Slots und 0,93 Speicherbudget: +6,5 % Decode, KV-Pool 238.938 -> 339.823 Token (1,70x bei 200k).`,
+        en: `26.10.3 Engine refresh. HyperQwen 2026-10-08 (vLLM 0.30.0, 22 commits past the previous pin) adds patch-integrity checks and launcher diagnostics; the serving profile is unchanged (AutoRound fast variant, 4 request slots, 0.93 memory budget, 200k KVarN k4v2 KV cache).`,
+        de: `26.10.3 Engine-Refresh. HyperQwen 2026-10-08 (vLLM 0.30.0, 22 Commits über dem vorherigen Pin) bringt Patch-Integritätsprüfungen und Launcher-Diagnostik; das Serving-Profil bleibt unverändert (AutoRound-Fast-Variante, 4 Request-Slots, 0,93 Speicherbudget, 200k KVarN-k4v2-KV-Cache).`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
