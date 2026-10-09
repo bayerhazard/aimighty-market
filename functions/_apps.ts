@@ -448,7 +448,7 @@ RAM: 4-40 GB, CPU: 2-16 cores, Disk: 15 GB (first-boot model download ~7 GB).`,
   {
     metadata: {
       name: "aimqwen38llama",
-      version: "26.10.1",
+      version: "26.10.2",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-llmqwen38llama/main/icon.png",
       title: { en: "AIM Qwen3.8 27B" },
       description: {
@@ -467,7 +467,7 @@ Model Console:
 - beclab/llm-init v1.3.5 downloads the weights into the shared appCommon HF cache, publishes the model card on /api/model-spec, serves the console UI and the OpenAI-compatible API on port 8090, and reverse-proxies the engine on llamacpp:8081 — so Router can discover and manage the model.
 
 Inference Engine:
-- buun-llama-cpp ab22bc53 (llama.cpp upstream merge + fork sync: FWHT F16 CUDA for Turbo KV, RMS_NORM+SCALE fusion, argsort fix, AVX2 Q4_K/Q6_K; CUDA 13.1 sm_120 custom build)
+- buun-llama-cpp d2407c33 (rebuilt on the llama.cpp 0.6.0 base + fork sync: VBR/turbo KV, DFlash2, CUDA 13.1 sm_120 custom build)
 - Dynamic VBR KV cache (f16 entry, turbo8 8.125 bpv floor, 1024 MiB quality anchor)
 - DFlash2 speculative decoding (draft-dflash, Q4_K_M draft, --spec-draft-n-max 7)
 - Warm-restart resume (--resume, slot-only via --resume-no-host-cache)
@@ -488,7 +488,7 @@ Model Console:
 - beclab/llm-init v1.3.5 lädt die Gewichte in den geteilten appCommon-HF-Cache, veröffentlicht die Modellkarte auf /api/model-spec, liefert die Console-UI und die OpenAI-kompatible API auf Port 8090 und proxyt die Engine auf llamacpp:8081 — so kann Router das Modell entdecken und verwalten.
 
 Inference-Engine:
-- buun-llama-cpp ab22bc53 (llama.cpp-Upstream-Merge + Fork-Sync: FWHT-F16-CUDA für Turbo-KV, RMS_NORM+SCALE-Fusion, argsort-Fix, AVX2 Q4_K/Q6_K; CUDA-13.1-sm_120-Custom-Build)
+- buun-llama-cpp d2407c33 (neu gebaut auf der llama.cpp-0.6.0-Basis + Fork-Sync: VBR/Turbo-KV, DFlash2, CUDA-13.1-sm_120-Custom-Build)
 - Dynamischer VBR-KV-Cache (f16-Entry, turbo8 8,125 bpv-Floor, 1024-MiB-Quality-Anchor)
 - DFlash2-Spekulationsdekodierung (draft-dflash, Q4_K_M-Draft, --spec-draft-n-max 7)
 - Warm-Restart-Resume (--resume, nur Slot via --resume-no-host-cache)
@@ -500,8 +500,8 @@ Creative Writing: 82 t/s
 OpenAI-kompatibel: /v1/chat/completions, /v1/models, /health (Port 8090)`,
       },
       upgradeDescription: {
-        en: `v26.10.1 Initial Release for AImighty Expert`,
-        de: `v26.10.1 Initialer Release für den AImighty Experte`,
+        en: `v26.10.2: engine rebuilt on the llama.cpp 0.6.0 base (buun-llama-cpp d2407c33) — VBR KV, DFlash2 and 256K context retained. Built for Olares 1.12.7.`,
+        de: `v26.10.2: Engine neu gebaut auf der llama.cpp-0.6.0-Basis (buun-llama-cpp d2407c33) — VBR-KV, DFlash2 und 256K-Kontext bleiben. Gebaut für Olares 1.12.7.`,
       },
       categories: ["AI", "Vision"],
       developer: "Aimighty",
