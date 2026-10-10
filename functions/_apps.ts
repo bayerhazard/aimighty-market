@@ -372,7 +372,7 @@ Disk: 20 GB (model cache)
 
 **Note:** Apache-2.0 — free for personal and commercial use. Only clone voices you have the rights and consent to clone.`,
       upgradeDescription:
-        `v26.10.4: GPU slice aligned to the measured need — HAMi nvidia.com/gpumem 5120 -> 4096 and CUDA cap 5120m -> 4096m (real usage ~2.2 GiB). Consistent worker-5090 slice accounting with the co-resident ASR/Reranker/PaddleOCR/ComfyUI. No behavior/quality change. Built for Olares 1.12.7. v26.10.1: Formatbewusster TTS-Proxy. mp3 und opus kann die Engine nicht selbst und antwortete bisher mit WAV-Bytes unter Content-Type audio/mpeg; der Proxy re-encodiert diese per ffmpeg, wav/flac/ogg gehen unveraendert durch. Der Model-Console-Proxy zeigt jetzt auf nginx statt direkt auf die API, damit Format und Content-Type fuer alle Aufrufer (Router, Rocket, Open WebUI, Wings) stimmen; /openapi.json und /docs bleiben ueber nginx als JSON erreichbar. Built for Olares 1.12.7. v26.9.5: mp3/opus kamen bisher als WAV mit falschem Content-Type aus der Engine. Der Model-Console-Proxy zeigte direkt auf die API (apiPort 8880) und umging damit den Format-Proxy; er zeigt jetzt auf nginx (dashboardPort 8080), der /v1/audio/speech an den Format-Proxy und alles andere an die API leitet. Der Format-Proxy ist formatbewusst: mp3/opus werden per ffmpeg encodiert, wav/flac/ogg gehen unveraendert durch. Damit stimmen Format und Content-Type fuer alle Aufrufer (Router, Rocket, Open WebUI, Wings). v26.9.4: Olares Router integration. A beclab/llm-init sidecar now fronts the app (ENGINE_KIND=audio, MODEL_MODE=tts, MODEL_SUPPORTS=supports_tts,supports_tts_clone,supports_tts_design,supports_tts_custom) and serves the Model Console contract (/api/model-spec) on the shared entrance, so Router auto-discovers the model and fills the default-tts categories. Inference path and voice quality are unchanged. Built for Olares 1.12.7. v26.9.3: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 5 GiB. v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
+        `v26.10.9: Forced alignment in the same engine: MODEL_SUPPORTS now stt,stt_stream,align and MODEL_SOURCE carries Qwen3-ForcedAligner-0.6B as the second checkpoint. The engine fork (audio-qwen:multi-v1) serves both in one process; the vLLM reserve drops 0.92 -> 0.60 so the aligner fits the 8 GiB slice, ALIGN_DEVICE=cpu by default. Router gains default-align. Reinstall required (env values are fixed at install time). Built for Olares 1.12.7. v26.10.4: GPU slice aligned to the measured need — HAMi nvidia.com/gpumem 5120 -> 4096 and CUDA cap 5120m -> 4096m (real usage ~2.2 GiB). Consistent worker-5090 slice accounting with the co-resident ASR/Reranker/PaddleOCR/ComfyUI. No behavior/quality change. Built for Olares 1.12.7. v26.10.1: Formatbewusster TTS-Proxy. mp3 und opus kann die Engine nicht selbst und antwortete bisher mit WAV-Bytes unter Content-Type audio/mpeg; der Proxy re-encodiert diese per ffmpeg, wav/flac/ogg gehen unveraendert durch. Der Model-Console-Proxy zeigt jetzt auf nginx statt direkt auf die API, damit Format und Content-Type fuer alle Aufrufer (Router, Rocket, Open WebUI, Wings) stimmen; /openapi.json und /docs bleiben ueber nginx als JSON erreichbar. Built for Olares 1.12.7. v26.9.5: mp3/opus kamen bisher als WAV mit falschem Content-Type aus der Engine. Der Model-Console-Proxy zeigte direkt auf die API (apiPort 8880) und umging damit den Format-Proxy; er zeigt jetzt auf nginx (dashboardPort 8080), der /v1/audio/speech an den Format-Proxy und alles andere an die API leitet. Der Format-Proxy ist formatbewusst: mp3/opus werden per ffmpeg encodiert, wav/flac/ogg gehen unveraendert durch. Damit stimmen Format und Content-Type fuer alle Aufrufer (Router, Rocket, Open WebUI, Wings). v26.9.4: Olares Router integration. A beclab/llm-init sidecar now fronts the app (ENGINE_KIND=audio, MODEL_MODE=tts, MODEL_SUPPORTS=supports_tts,supports_tts_clone,supports_tts_design,supports_tts_custom) and serves the Model Console contract (/api/model-spec) on the shared entrance, so Router auto-discovers the model and fills the default-tts categories. Inference path and voice quality are unchanged. Built for Olares 1.12.7. v26.9.3: GPU resources + CUDA cap hardcoded in the template (dodges the Olares values-freeze on upgrade) - HAMi memory slice 5 GiB. v26.9.2: HAMi memory-slice pinned to 5 GiB (nvidia.com/gpumem) and the CUDA soft cap aligned to 5120m so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
       developer: "Aimighty",
       website: "https://github.com/bayerhazard/aimomnivoice",
@@ -776,10 +776,10 @@ Disk: 20 GB (model cache, HF_HOME)`,
   {
     metadata: {
       name: "aimqwen3asr",
-      version: "26.10.8",
+      version: "26.10.9",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-qwen3asr/main/icon.png",
       title: { en: "AIM Qwen3 1.7B ASR" },
-      description: { en: "Qwen3-ASR 1.7B via vLLM + Olares Model Console — 30 languages, noise-robust, OpenAI-compatible transcription" },
+      description: { en: "Qwen3-ASR 1.7B via vLLM + Qwen3-ForcedAligner + Olares Model Console — transcription, streaming ASR and word-level forced alignment" },
       fullDescription:
         `**Qwen3-ASR-1.7B** — Alibaba's state-of-the-art open automatic speech recognition model, served through the Olares Model Console so the Router registers it under default-stt.
 
@@ -794,15 +794,17 @@ Official Olares audio engine (vLLM-based) behind beclab/llm-init (ENGINE_KIND=au
 - Automatic language detection (or force e.g. "German")
 - Robust under noise, accents and challenging text patterns
 - Offline transcription and streaming recognition (stt, stt_stream)
-- Advertised to the Router as default-stt
+- Word-level forced alignment (align) for click-to-seek and follow-along
+- Advertised to the Router as default-stt and default-align
 
 **API Example**
 curl -X POST http://<entrance>/v1/audio/transcriptions -F "file=@audio.wav" -F "model=Qwen/Qwen3-ASR-1.7B"
+curl -X POST http://<entrance>/v1/audio/align -F "file=@audio.wav" -F "text=…"
 
 **Resource Usage**
-GPU: 1× NVIDIA (8 GiB HAMi memory slice, co-resident with OmniVoice TTS, PaddleOCR and ComfyUI on the olares-worker RTX 5090)
-RAM: 4-16 GB, CPU: 0.7-7 cores
-Disk: model cache in the shared appCommon HF cache`,
+GPU: 1× NVIDIA (8 GiB HAMi memory slice, co-resident with OmniVoice TTS, PaddleOCR and ComfyUI on the olares-worker RTX 5090; vLLM reserve lowered to 0.60 for the aligner)
+RAM: 4-20 GB, CPU: 0.7-7 cores (forced aligner on CPU by default)
+Disk: model caches in the shared appCommon HF cache`,
       upgradeDescription:
         `v26.10.4: Bake the working engine args for the 8 GiB slice: --max-model-len 4096 --gpu-memory-utilization 0.92. The 1.7B encoder profiles ~3 GiB of activations under --enforce-eager, so a 8192 ctx left 0 GiB KV; the wrapper's own 0.85 reserve also under-booked the slice. With 4096 ctx + pinned util the KV cache has ~0.56 GiB and the engine reaches ready=True. Built for Olares 1.12.7. v26.10.3: Pin CUDA_DEVICE_MEMORY_LIMIT_0 to the 8 GiB HAMi slice in the engine container. HAMi time-slicing injects CUDA_DEVICE_MEMORY_LIMIT_0=0m (whole card) when the app declares no cap, so vLLM derived gpu_memory_utilization = 8 GiB / 24 GiB = 0.29 and starved the KV cache (negative KV memory -> engine stayed up but served 503). With the explicit cap the engine sees exactly 8 GiB (8/8 = 1.0) and the KV cache has ~3 GiB headroom. No architecture change. Built for Olares 1.12.7. v26.10.2: Rebuilt on the Olares Model Console (beclab/llm-init, ENGINE_KIND=audio) with MODEL_MODE=audio and MODEL_SUPPORTS=stt,stt_stream - the Router now auto-registers the model under default-stt. Replaces the raw vLLM container with the official audio-engine + llm-init architecture (download-svc entrance :8090, shared entrance for in-cluster callers); GPU memory slice 8 GiB. Reinstall required (architecture change). Built for Olares 1.12.7. v26.10.1: Published as a shared model app (Olares Model Console / Router) - sharedEntrances + LLMGatewaySupported, so the ASR model is discovered by the Router and registered under the default-stt category for Hermes / Open WebUI. App switches to the shared namespace (one-time reinstall). Built for Olares 1.12.6. v26.9.14: HAMi memory slice back to the proven 6 GiB (nvidia.com/gpumem + CUDA cap 6144m) - 5 GiB OOMs at KV-cache init (only 0.01 GiB KV free). Stability-first worker-GPU layout. Built for Olares 1.12.6. v26.9.10: HAMi memory-slice pinned to 6 GiB (nvidia.com/gpumem) so the RTX 5090 on olares-worker can host OmniVoice TTS, Qwen3-ASR, PaddleOCR and the Qwen3 Reranker co-resident. Initial Release for AImighty Olares One`,
       categories: ["Audio"],
@@ -815,13 +817,65 @@ Disk: model cache in the shared appCommon HF cache`,
       requiredDisk: "20Gi",
       requiredGpu: "1",
       limitedCpu: "8",
-      limitedMemory: "16Gi",
+      limitedMemory: "24Gi",
       apiTimeout: 0,
     },
     spec: {
       type: "app",
       entrance: [
         { name: "aimqwen3asr", title: { en: "AIM Qwen3 1.7B ASR" }, port: 8090, host: "aimqwen3asr", authLevel: "internal", openMethod: "window" },
+      ],
+      permission: [],
+      middleware: [],
+      options: { resources: { cpu: "2", memory: "8Gi", disk: "20Gi" } },
+    },
+  },
+  {
+    metadata: {
+      name: "aimpyannote",
+      version: "26.10.1",
+      icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-pyannote/main/icon.png",
+      title: { en: "AIM Pyannote Audio" },
+      description: { en: "Pyannote community-1 diarization + Silero VAD + speaker embeddings via Olares Model Console — CPU-only, OpenAI-compatible audio analysis" },
+      fullDescription:
+        `**AIM Pyannote Audio** analyzes recordings on the CPU: who spoke when (diarization), where speech is (voice activity detection) and a voice embedding per clip (voiceprints). Served through the Olares Model Console so the Router registers it under default-diar, default-vad and default-speaker-embed.
+
+**Models**
+- pyannote/speaker-diarization-community-1 (CC-BY-4.0) — self-contained diarization pipeline
+- Silero VAD V5 (MIT) — ships inside the engine image
+- Speaker embeddings via pyannote/embedding (beclab mirror)
+
+**Inference Engine**
+Official Olares pyannote audio engine behind beclab/llm-init, with a fork that serves three modules in one process (vad + diar + speaker_embed). Weights land in the shared appCommon HF cache, the model card is published on /api/model-spec and /v1/audio/* is reverse-proxied. Runs entirely on CPU — no GPU slice, no accelerator binding.
+
+**Key Features**
+- OpenAI-compatible API: /v1/audio/diarization, /v1/audio/vad, /v1/audio/embeddings, /v1/models
+- Exclusive diarization (non-overlapping turns) for evidence-based consumers
+- Advertised to the Router as default-diar, default-vad, default-speaker-embed
+
+**API Example**
+curl -X POST http://<entrance>/v1/audio/diarization -F "file=@audio.wav"
+
+**Resource Usage**
+CPU: 0.5-8 cores (diarization is the heavy stage), RAM: 1-8 GB, no GPU. The pyannote repo is gated on HuggingFace — accept its conditions for the HuggingFace account connected in Olares Settings.`,
+      upgradeDescription:
+        `v26.10.1: First release. Pyannote community-1 diarization + Silero VAD + speaker embeddings in one CPU-only app; engine fork audio-pyannote:multi-v1; MODEL_SOURCE lists the gated pipeline first and the embedding model second; ENGINE_ARGS pins CPU batches and --exclusive. Router categories default-diar, default-vad, default-speaker-embed. Built for Olares 1.12.7.`,
+      categories: ["Audio"],
+      developer: "Aimighty",
+      website: "https://github.com/bayerhazard/aimighty-pyannote",
+      sourceCode: "https://github.com/bayerhazard/aimighty-pyannote",
+      supportArch: ["amd64"],
+      requiredCpu: "700m",
+      requiredMemory: "1280Mi",
+      requiredDisk: "20Gi",
+      limitedCpu: "9",
+      limitedMemory: "12Gi",
+      apiTimeout: 0,
+    },
+    spec: {
+      type: "app",
+      entrance: [
+        { name: "aimpyannote", title: { en: "AIM Pyannote Audio" }, port: 8090, host: "aimpyannote", authLevel: "internal", openMethod: "window" },
       ],
       permission: [],
       middleware: [],
