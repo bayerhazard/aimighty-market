@@ -119,7 +119,7 @@ v26.9.1 Initialer Release für den AImighty Assistenten`,
   {
     metadata: {
       name: "aimembqwen3vino",
-      version: "26.10.5",
+      version: "26.10.4",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-embedder/main/icon.png",
       title: { en: "AIM Qwen3 4B Embedding" },
       description: { en: "Qwen3-Embedding-4B via OpenVINO on CPU — batched throughput, instruction support, Matryoshka dims" },
@@ -833,7 +833,7 @@ Disk: model caches in the shared appCommon HF cache`,
   {
     metadata: {
       name: "aimpyannote",
-      version: "26.10.4",
+      version: "26.10.5",
       icon: "https://raw.githubusercontent.com/bayerhazard/aimighty-pyannote/main/icon.png",
       title: { en: "AIM Pyannote Audio" },
       description: { en: "Pyannote community-1 diarization + Silero VAD + speaker embeddings via Olares Model Console — CPU-only, OpenAI-compatible audio analysis" },
